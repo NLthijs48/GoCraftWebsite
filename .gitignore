@@ -1,0 +1,4 @@
+dist/
+ts-build/
+node_modules/
+.idea/
