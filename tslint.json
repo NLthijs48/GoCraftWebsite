@@ -1,5 +1,5 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "extends": ["tslint:latest", "tslint-react"],
     "jsRules": {},
     "rules": {
@@ -7,8 +7,12 @@
       "semicolon": [true, "never"],
       "interface-name": [true, "never-prefix"],
       "object-literal-sort-keys": false,
+      "max-line-length": [],
       "jsx-no-multiline-js": false,
-      "max-line-length": []
+      "jsx-boolean-value": false,
+      "ordered-imports": false,
+      "whitespace": [],
+      "no-console": false
     },
     "rulesDirectory": []
 }

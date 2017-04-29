@@ -1,16 +1,17 @@
 import React from 'react'
-import NavBar from './NavBar'
-import Footer from './Footer'
-import Servers from './Servers'
+import {
+    BrowserRouter as Router,
+} from 'react-router-dom'
+import NavBar from './navigation/NavBar'
+import Routes from './navigation/Routes'
 
-export default class Site extends React.Component<{}, {}> {
-    public render() {
-        return (
-            <div>
+export default function Site() {
+    return (
+        <Router>
+            <div className="d-flex flex-column" style={{minHeight: '100%'}}>
                 <NavBar/>
-                <Servers/>
-                <Footer/>
+                <Routes/>
             </div>
-        )
-    }
+        </Router>
+    )
 }

@@ -25,12 +25,30 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     modules: ['src', 'node_modules'],
   },
   module: {
     loaders: [
-      { test: /\.tsx?$/, loaders: ['babel-loader', 'ts-loader'], include: path.resolve('src') }
+      {
+        test: /\.tsx?$/,
+        loaders: ['babel-loader', 'ts-loader'],
+        include: path.resolve('src')
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'},
+      {
+        test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+        loader: 'url-loader'
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
+      }
     ]
   },
   plugins: [
