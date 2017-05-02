@@ -6,7 +6,8 @@
   "license": "All rights reserved",
   "scripts": {
     "start": "webpack-dev-server --hot",
-    "lint": "tslint --project tsconfig.json"
+    "lint": "tslint --project tsconfig.json",
+    "build": "webpack -p"
   },
   "dependencies": {
     "@types/react": "^15.0.22",
