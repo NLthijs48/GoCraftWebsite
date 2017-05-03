@@ -15,6 +15,7 @@ export default class NavBar extends React.Component<{}, {}> {
                     aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon"/>
+                    <span style={{marginLeft: 10}}>Menu</span>
                 </button>
 
                 <a className="navbar-brand" href="/">
