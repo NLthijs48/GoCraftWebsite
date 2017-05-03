@@ -5,6 +5,9 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 module.exports = {
   devtool: 'eval',
   entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:3000', // WebpackDevServer host and port
+    'webpack/hot/only-dev-server',
     'index.tsx'
   ],
   output: {
@@ -16,6 +19,7 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
     inline: true,
+    hot: true,
     stats: {
       modules: false,
       chunks: false,
@@ -32,7 +36,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loaders: ['babel-loader', 'ts-loader'],
+        loaders: ['babel-loader', 'awesome-typescript-loader'],
         include: path.resolve('src')
       },
       {
@@ -52,6 +56,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new WebpackNotifierPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
+      new WebpackNotifierPlugin()
   ]
 };
