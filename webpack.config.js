@@ -36,7 +36,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loaders: ['babel-loader', 'awesome-typescript-loader'],
+        loaders: ['babel-loader', 'ts-loader'],
         include: path.resolve('src')
       },
       {
