@@ -8,7 +8,7 @@ const commonConfig = {
     output: {
         filename: 'app.js',
         sourceMapFilename: '[name].map',
-        publicPath: 'dist/',
+        publicPath: '/dist/',
         path: path.resolve('dist')
     },
     resolve: {
