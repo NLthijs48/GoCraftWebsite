@@ -14,7 +14,7 @@
     "outDir": "ts-build/"
   },
   "files": [
-    "./node_modules/@types/webpack-env/index.d.ts"
+    "types.d.ts"
   ],
   "exclude": [
     "node_modules"
