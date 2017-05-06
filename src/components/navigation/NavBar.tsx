@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 
 const logo = require('images/logo.png')
 
@@ -20,9 +20,9 @@ export default class NavBar extends React.Component<{}, {}> {
                     <span style={{marginLeft: 10}}>Menu</span>
                 </button>
 
-                <a className="navbar-brand" href="/">
+                <Link to="/" className="navbar-brand">
                     <img src={logo} alt="logo" style={{height: 40}}/>
-                </a>
+                </Link>
 
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
@@ -30,28 +30,28 @@ export default class NavBar extends React.Component<{}, {}> {
                             <NavLink exact to="/" className="nav-link" >Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Shop</a>
+                            <NavLink to="/shop" className="nav-link">Shop</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Vote</a>
+                            <NavLink className="nav-link" to="vote">Vote</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink to="/map" className="nav-link">Map</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Servers</a>
+                            <NavLink className="nav-link" to="servers">Servers</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Tickets</a>
+                            <NavLink className="nav-link" to="tickets">Tickets</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Applications</a>
+                            <NavLink className="nav-link" to="applications">Applications</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Media</a>
+                            <NavLink className="nav-link" to="media">Media</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Staff</a>
+                            <NavLink className="nav-link" to="staff">Staff</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink to="/bans" className="nav-link">Ban list</NavLink>
