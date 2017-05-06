@@ -1,6 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
+const logo = require('images/logo.png')
+
 export default class NavBar extends React.Component<{}, {}> {
     public render() {
         return (
@@ -19,7 +21,7 @@ export default class NavBar extends React.Component<{}, {}> {
                 </button>
 
                 <a className="navbar-brand" href="/">
-                    <img src="wrong" alt="logo" />
+                    <img src={logo} alt="logo" style={{height: 40}}/>
                 </a>
 
                 <div className="collapse navbar-collapse" id="navbarNav">
