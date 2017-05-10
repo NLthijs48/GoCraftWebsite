@@ -36,5 +36,10 @@ module.exports = {
             comments: false,
             sourceMap: true,
         }),
+
+        // Copy .htaccess file to dist
+        new CopyWebpackPlugin([
+            {from: '.htaccess'}
+        ]),
     ]
 };

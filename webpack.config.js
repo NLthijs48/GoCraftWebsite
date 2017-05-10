@@ -3,7 +3,7 @@
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Configuration shared by production and developement
 const commonConfig = {
@@ -33,7 +33,7 @@ const commonConfig = {
                     {
                         loader: 'file-loader',
                         query: {
-                            name: '[path][name].[ext]?[sha512:hash:base64:10]'
+                            name: '[path][name].[ext]?[sha512:hash:base36:10]'
                         }
                     },
                     {
@@ -77,10 +77,6 @@ const commonConfig = {
             template: 'src/index.html',
             chunksSortMode: 'dependency'
         }),
-        // Copy .htaccess file to dist
-        new CopyWebpackPlugin([
-            {from: '.htaccess'}
-        ]),
     ]
 };
 
