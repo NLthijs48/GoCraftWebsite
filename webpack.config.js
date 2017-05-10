@@ -1,14 +1,15 @@
 // This cofnig merges common and environment depending configurations
 
-const Merge = require('webpack-merge');
 const path = require('path');
+const Merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Configuration shared by production and developement
 const commonConfig = {
     output: {
         filename: 'app.js',
         sourceMapFilename: '[name].map',
-        publicPath: '/dist/',
+        publicPath: '/',
         path: path.resolve('dist')
     },
     resolve: {
@@ -39,16 +40,17 @@ const commonConfig = {
                         query: {
                             mozjpeg: {
                                 progressive: true,
+                                quality: 75,
                             },
                             gifsicle: {
                                 interlaced: false,
                             },
                             optipng: {
-                                optimizationLevel: 4,
+                                optimizationLevel: 7,
                             },
                             pngquant: {
                                 quality: '75-90',
-                                speed: 3,
+                                speed: 4,
                             },
                         },
                     }
@@ -69,12 +71,10 @@ const commonConfig = {
         ]
     },
     plugins: [
-        /* Add this some time
          new HtmlWebpackPlugin({
-         template: 'src/index.html',
-         chunksSortMode: 'dependency'
+             template: 'src/index.html',
+             chunksSortMode: 'dependency'
          })
-         */
     ]
 };
 
