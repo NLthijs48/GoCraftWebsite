@@ -3,6 +3,7 @@
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Configuration shared by production and developement
 const commonConfig = {
@@ -71,10 +72,15 @@ const commonConfig = {
         ]
     },
     plugins: [
-         new HtmlWebpackPlugin({
-             template: 'src/index.html',
-             chunksSortMode: 'dependency'
-         })
+        // Build index.html (insert bundles into template)
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            chunksSortMode: 'dependency'
+        }),
+        // Copy .htaccess file to dist
+        new CopyWebpackPlugin([
+            {from: '.htaccess'}
+        ]),
     ]
 };
 
