@@ -57,6 +57,9 @@ export default class NavBar extends React.Component<{}, {}> {
                             <NavLink to="/bans" className="nav-link">Ban list</NavLink>
                         </li>
                     </ul>
+                    <ul className="nav navbar-nav ml-auto">
+                        <button type="button" className="nav-btn btn pull-xs-right" data-target="#modal">Login</button>
+                    </ul>
                 </div>
             </nav>
         )
