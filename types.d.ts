@@ -1,4 +1,8 @@
-declare function require(string: string): string;
+declare function require(path: string): any;
+declare interface Process {
+    env: any;
+}
+declare var process: Process;
 
 // Type definitions for webpack (module API) 1.13
 // Project: https://github.com/webpack/webpack

@@ -1,9 +1,9 @@
 import React from 'react'
 import {Route, Switch} from 'react-router'
-import BanList from '../pages/BanList'
-import Home from '../pages/Home'
-import Map from '../pages/Map'
-import NotFound from '../NotFound'
+import BanList from '../../../components/pages/BanList'
+import Home from '../../../components/pages/Home'
+import Map from '../../../components/pages/Map'
+import NotFound from '../../../components/NotFound'
 
 export default function Routes() {
     return (

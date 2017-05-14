@@ -2,8 +2,8 @@ import React from 'react'
 import {
     BrowserRouter as Router,
 } from 'react-router-dom'
-import NavBar from './navigation/NavBar'
-import Routes from './navigation/Routes'
+import NavBar from '../modules/menus/components/NavBar'
+import Routes from '../modules/menus/components/Routes'
 
 export default function Site() {
     return (

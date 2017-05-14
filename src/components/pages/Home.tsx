@@ -1,5 +1,5 @@
 import React from 'react'
-import Servers from '../Servers'
+import Servers from '../../modules/servers/components/Servers'
 
 export default function Home() {
     return <Servers/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {ServerData} from './Servers'
+import {ServerData} from '../model'
 
 interface ServerProps {
     server: ServerData
