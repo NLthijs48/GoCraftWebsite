@@ -1,6 +1,7 @@
 import * as t from './actionTypes'
 import {Dispatch} from 'react-redux'
 import {AppState} from '../../reducer'
+import {getData} from '../../utils'
 
 export function fetchServers() {
     return (dispatch: Dispatch<any>, getState: () => AppState) => {
@@ -10,14 +11,11 @@ export function fetchServers() {
         }
 
         dispatch({
-            type: t.REQUEST,
+            type: t.FETCH,
         })
 
-        return fetch('http://mc.go-craft.com/wordpress/wp-json/wp/v2/servers')
-            .then((response) => response.json(), (error) => console.log('fetch failed:', error))
-            .then((servers) => dispatch({type: t.REQUEST_SUCCESS, servers}), (error) => {
-                console.log('using server fetch result failed:', error)
-                dispatch({type: t.REQUEST_FAILURE})
-            })
+        return getData('/servers')
+            .then((data) => dispatch({type: t.FETCH_SUCCESS, data}))
+            .catch(() => dispatch({type: t.FETCH_FAILURE}))
     }
 }

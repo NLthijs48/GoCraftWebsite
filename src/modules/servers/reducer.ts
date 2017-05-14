@@ -6,10 +6,10 @@ import * as t from './actionTypes'
 // Server data reducer
 const data = (state: ServersData = [], action: t.ServersAction) => {
     switch(action.type) {
-        case t.REQUEST_SUCCESS:
+        case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress data
             const servers = []
-            for(const rawServer of action.servers) {
+            for(const rawServer of action.data) {
                 const slug = get(rawServer, 'slug')
                 if(typeof slug !== 'string') {
                     console.error('Server has no slug:', rawServer)
@@ -32,10 +32,10 @@ const data = (state: ServersData = [], action: t.ServersAction) => {
 // Fetching state reducer
 const isFetching = (state: boolean = false, action: t.ServersAction) => {
     switch(action.type) {
-        case t.REQUEST:
+        case t.FETCH:
             return true
-        case t.REQUEST_SUCCESS:
-        case t.REQUEST_FAILURE:
+        case t.FETCH_SUCCESS:
+        case t.FETCH_FAILURE:
             return false
         default:
             return state

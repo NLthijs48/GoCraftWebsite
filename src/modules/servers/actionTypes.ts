@@ -2,27 +2,27 @@ import {ServersData} from './model'
 import {OtherAction} from '../../types'
 
 // Start getting servers information
-export const REQUEST = 'servers/REQUEST'
-interface FetchServersAction {
-    type: 'servers/REQUEST',
+export const FETCH = 'servers/FETCH'
+interface Fetch {
+    type: 'servers/FETCH',
 }
 
 // Got servers information
-export const REQUEST_SUCCESS = 'servers/REQUEST_SUCCESS'
-interface FetchServersSuccessAction {
-    type: 'servers/REQUEST_SUCCESS',
-    servers: ServersData,
+export const FETCH_SUCCESS = 'servers/FETCH_SUCCESS'
+interface FetchSuccess {
+    type: 'servers/FETCH_SUCCESS',
+    data: ServersData,
 }
 
 // Failed to get server information
-export const REQUEST_FAILURE = 'servers/REQUEST_FAILURE'
-interface FetchServersSuccessFailure {
-    type: 'servers/REQUEST_FAILURE',
+export const FETCH_FAILURE = 'servers/FETCH_FAILURE'
+interface FetchFailure {
+    type: 'servers/FETCH_FAILURE',
 }
 
 // All server actions
 export type ServersAction =
-    FetchServersAction |
-    FetchServersSuccessAction |
-    FetchServersSuccessFailure |
+    Fetch |
+    FetchSuccess |
+    FetchFailure |
     OtherAction

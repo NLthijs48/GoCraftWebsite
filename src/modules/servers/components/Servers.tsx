@@ -16,7 +16,7 @@ class Servers extends React.Component<ServersProps, {}> {
     }
 
     public render() {
-        if(this.props.servers.isFetching) {
+        if(this.props.servers.isFetching && !this.props.servers.data.length) {
             // TODO pretty loading indicator
             return <div>Loading...</div>
         }
