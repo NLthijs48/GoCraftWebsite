@@ -2,12 +2,12 @@ import React from 'react'
 import Server from './Server'
 import {connect, Dispatch} from 'react-redux'
 import {fetchServers} from '../actions'
-import {State} from '../model'
+import {ServersState} from '../model'
 import {AppState} from '../../../reducer'
 
 interface ServersProps {
     fetchServers: () => void
-    servers: State
+    servers: ServersState
 }
 
 class Servers extends React.Component<ServersProps, {}> {

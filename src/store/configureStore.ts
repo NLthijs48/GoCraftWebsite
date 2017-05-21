@@ -3,6 +3,7 @@ import {createLogger} from 'redux-logger'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import reducer from 'reducer'
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 // TODO use localstorage to keep most state
 export default function configureStore() {
@@ -15,6 +16,8 @@ export default function configureStore() {
     return createStore(
         reducer,
         {}, // Persisted state
-        applyMiddleware(...middlewares),
+        composeWithDevTools(
+            applyMiddleware(...middlewares),
+        ),
     )
 }

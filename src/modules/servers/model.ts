@@ -10,6 +10,6 @@ export interface ServerData {
 
 export type ServersData = ServerData[]
 
-export interface State extends RemoteState {
+export interface ServersState extends RemoteState {
     data: ServersData
 }

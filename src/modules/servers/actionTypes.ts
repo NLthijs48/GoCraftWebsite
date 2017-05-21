@@ -1,4 +1,3 @@
-import {ServersData} from './model'
 import {OtherAction} from '../../types'
 
 // Start getting servers information
@@ -11,7 +10,7 @@ interface Fetch {
 export const FETCH_SUCCESS = 'servers/FETCH_SUCCESS'
 interface FetchSuccess {
     type: 'servers/FETCH_SUCCESS',
-    data: ServersData,
+    data: object[],
 }
 
 // Failed to get server information

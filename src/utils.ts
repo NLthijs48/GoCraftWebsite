@@ -13,7 +13,7 @@ export function get(data: any, ...paths: string[]): any {
     return data
 }
 
-const wordPressAPI = 'http://mc.go-craft.com/wordpress/wp-json/wp/v2'
+const wordPressAPI = 'http://mc.go-craft.com/wordpress/wp-json'
 export function getData(path: string): Promise<any> {
     return new Promise((resolve, reject) => {
         fetch(wordPressAPI+path)

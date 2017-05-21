@@ -14,7 +14,7 @@ export function fetchServers() {
             type: t.FETCH,
         })
 
-        return getData('/servers')
+        return getData('/wp/v2/servers')
             .then((data) => dispatch({type: t.FETCH_SUCCESS, data}))
             .catch(() => dispatch({type: t.FETCH_FAILURE}))
     }
