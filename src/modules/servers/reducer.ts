@@ -42,4 +42,4 @@ const isFetching = (state: boolean = false, action: t.ServersAction) => {
     }
 }
 
-export default combineReducers({data, isFetching})
+export const servers = combineReducers({data, isFetching})

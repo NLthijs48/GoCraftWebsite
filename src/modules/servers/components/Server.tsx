@@ -4,7 +4,7 @@ import {ServerData} from '../model'
 interface ServerProps {
     server: ServerData
 }
-export default class Server extends React.Component<ServerProps, {}> {
+export class Server extends React.Component<ServerProps, {}> {
     public render() {
         const server = this.props.server
         return (

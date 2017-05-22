@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Map() {
+// TODO render based on the Dynmap urls configured the servers
+export function Maps() {
     return (
         <div style={{position: 'absolute', top: 0, right: 0, bottom: 0, left: 0}}>
             <iframe

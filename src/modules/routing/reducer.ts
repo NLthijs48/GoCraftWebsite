@@ -1,11 +1,10 @@
 import {combineReducers} from 'redux'
 import {get} from '../../utils'
 import * as t from './actionTypes'
-import {MenuData, MenuItems, Menus} from './model'
+import {Menu, MenuItems, Menus} from './model'
 
-// MenuData data reducer
-function menuData(state: MenuData = {}, action: t.MenusAction): MenuData {
-    console.log('menus reducer:', state, action)
+// Menu data reducer
+function menuData(state: Menu = {}, action: t.MenusAction): Menu {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             return menuDataToLookup(action.data, {})
@@ -15,7 +14,7 @@ function menuData(state: MenuData = {}, action: t.MenusAction): MenuData {
 }
 
 // Build a lookup table from menu data
-function menuDataToLookup(rawData: object[], result: MenuData): MenuData {
+function menuDataToLookup(rawData: object[], result: Menu): Menu {
     for(const rawMenuEntry of rawData) {
         const id = get(rawMenuEntry, 'ID')
         result[id] = {
@@ -63,9 +62,9 @@ function isFetching(state: boolean = false, action: t.MenusAction) {
     }
 }
 
-export const remoteMenu = combineReducers({byId: menuData, items: menuItems, isFetching})
+const remoteMenu = combineReducers({byId: menuData, items: menuItems, isFetching})
 
-export default function menus(state: Menus = {}, action: t.MenusAction) {
+export function menus(state: Menus = {}, action: t.MenusAction) {
     switch(action.type) {
         case t.FETCH:
         case t.FETCH_FAILURE:

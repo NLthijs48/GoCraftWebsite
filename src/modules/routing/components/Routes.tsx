@@ -1,30 +1,19 @@
 import React from 'react'
 import {Route, Switch} from 'react-router'
-import BanList from '../../../components/pages/BanList'
-import Home from '../../../components/pages/Home'
-import Map from '../../../components/pages/Map'
-import NotFound from '../../../components/NotFound'
+import {Home} from '../../pages/components/Home'
+import {NotFound} from '../../pages/components/NotFound'
+import {MenuRoutes} from './MenuRoutes'
 
-export default function Routes() {
+export function Routes() {
     return (
         <div style={{flex: 1, position: 'relative'}}>
             <Switch>
-                <Route key="/" exact path="/" component={HomeRoute}/>
-                <Route key="/map" path="/map" component={MapRoute}/>
-                <Route key="/bans" path="/bans" component={BanListRoute}/>
+                <Route key="/" exact path="/" component={Home}/>
+
+                <MenuRoutes source="header-menu" />
 
                 <Route component={NotFound}/>
             </Switch>
         </div>
     )
 }
-
-const HomeRoute = () => (
-    <Home/>
-)
-const MapRoute = () => (
-    <Map/>
-)
-const BanListRoute = () => (
-    <BanList/>
-)

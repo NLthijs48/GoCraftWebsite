@@ -1,24 +1,19 @@
 import React from 'react'
-import Server from './Server'
 import {connect, Dispatch} from 'react-redux'
 import {fetchServers} from '../actions'
 import {ServersState} from '../model'
 import {AppState} from '../../../reducer'
+import {Server} from './Server'
+import {Loading} from '../../pages/components/Loading'
 
-interface ServersProps {
-    fetchServers: () => void
-    servers: ServersState
-}
-
-class Servers extends React.Component<ServersProps, {}> {
+class ServersDisplay extends React.Component<DispatchToProps & StateToProps, {}> {
     public componentDidMount() {
         this.props.fetchServers()
     }
 
     public render() {
         if(this.props.servers.isFetching && !this.props.servers.data.length) {
-            // TODO pretty loading indicator
-            return <div>Loading...</div>
+            return <Loading />
         }
 
         return (
@@ -29,21 +24,17 @@ class Servers extends React.Component<ServersProps, {}> {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-    return {
-        fetchServers: () => {
-            dispatch(fetchServers())
-        },
-    }
+interface StateToProps {
+    servers: ServersState
 }
-
-const mapStateToProps = (state: AppState) => {
-    return {
+interface DispatchToProps {
+    fetchServers: () => void
+}
+export const Servers = connect<StateToProps, DispatchToProps, {}>(
+    (state: AppState): StateToProps => ({
         servers: state.servers,
-    }
-}
-
-export default connect<{}, {}, {}>(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Servers)
+    }),
+    (dispatch: Dispatch<any>): DispatchToProps => ({
+        fetchServers: () => dispatch(fetchServers()),
+    }),
+)(ServersDisplay)

@@ -1,5 +1,6 @@
-// Information about a menu entry
 import {RemoteState} from '../../types'
+
+// Information about a menu entry
 export interface MenuEntry {
     title: string
     order: number
@@ -9,13 +10,13 @@ export interface MenuEntry {
 
 export type MenuItems = string[]
 
-// MenuData, MenuEntry's mapped by ID
-export interface MenuData {
+// Menu, MenuEntry's mapped by ID
+export interface Menu {
     [s: string]: MenuEntry
 }
 
 export interface MenuState extends RemoteState {
-    byId: MenuData
+    byId: Menu
     items: MenuItems
 }
 
@@ -23,10 +24,3 @@ export interface MenuState extends RemoteState {
 export interface Menus {
     [s: string]: MenuState
 }
-
-// Page
-export interface Page {
-    title: string
-    // TODO detailed information
-}
-

@@ -1,22 +1,22 @@
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
-import {connect, Dispatch} from 'react-redux'
+import {connect} from 'react-redux'
 import {AppState} from '../../../reducer'
 import {fetchMenu} from '../actions'
 import {MenuEntry, MenuItems, MenuState} from '../model'
+import {Dispatch} from 'redux'
 
 const logo = require('images/logo.png')
 
 interface MenuProps {
-    fetchMenu: () => void
     source: string
-    menu: MenuState
 }
-class Menu extends React.Component<MenuProps, {}> {
+class MenuDisplay extends React.Component<MenuProps & DispatchToProps & StateToProps, {}> {
     public componentWillMount() {
         this.props.fetchMenu()
     }
 
+    // TODO cleanup child menu code (and possibly allow infinite nesting)
     public render() {
         const items = this.props.menu.items
         const byId = this.props.menu.byId
@@ -97,23 +97,17 @@ class Menu extends React.Component<MenuProps, {}> {
     }
 }
 
-// TODO get rid of any
-const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any) => {
-    return {
-        fetchMenu: () => {
-            dispatch(fetchMenu(ownProps.source))
-        },
-    }
+interface StateToProps {
+    menu: MenuState
 }
-
-// TODO get rid of any
-const mapStateToProps = (state: AppState, ownProps: MenuProps) => {
-    return {
+interface DispatchToProps {
+    fetchMenu: () => void
+}
+export const Menu = connect<StateToProps, DispatchToProps, MenuProps>(
+    (state: AppState, ownProps: MenuProps): StateToProps => ({
         menu: state.menus[ownProps.source] || {},
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Menu)
+    }),
+    (dispatch: Dispatch<any>, ownProps: MenuProps): DispatchToProps => ({
+        fetchMenu: () => dispatch(fetchMenu(ownProps.source)),
+    }),
+)(MenuDisplay)

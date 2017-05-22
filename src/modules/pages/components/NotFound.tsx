@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function NotFound() {
+export function NotFound() {
     return (
         <div className="container" style={{textAlign: 'center'}}>
             <div style={{fontSize: '30px', color: '#777', marginTop: '30px'}}>Page not found</div>
