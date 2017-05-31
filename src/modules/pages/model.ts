@@ -5,7 +5,8 @@ export type Page =
     HomePage |
     MapsPage |
     HTMLPage |
-    EmbeddedPage
+    EmbeddedPage |
+    ServersPage
 export interface HomePage {
     type: 'home',
 }
@@ -19,6 +20,9 @@ export interface HTMLPage {
 export interface EmbeddedPage {
     type: 'frame'
     url: string
+}
+export interface ServersPage {
+    type: 'servers'
 }
 
 // ID -> Page

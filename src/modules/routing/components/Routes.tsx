@@ -6,7 +6,10 @@ import {MenuRoutes} from './MenuRoutes'
 
 export function Routes() {
     return (
-        <div style={{flex: 1, position: 'relative'}}>
+        <div style={{
+            flex: 1,
+            position: 'relative',
+        }}>
             <Switch>
                 <Route key="/" exact path="/" component={Home}/>
 

@@ -5,6 +5,7 @@ import {AppState} from '../../../reducer'
 import {fetchMenu} from '../actions'
 import {MenuEntry, MenuItems, MenuState} from '../model'
 import {Dispatch} from 'redux'
+import {withRouter} from 'react-router'
 
 const logo = require('images/logo.png')
 
@@ -103,11 +104,11 @@ interface StateToProps {
 interface DispatchToProps {
     fetchMenu: () => void
 }
-export const Menu = connect<StateToProps, DispatchToProps, MenuProps>(
+export const Menu = withRouter<any>(connect<StateToProps, DispatchToProps, MenuProps>(
     (state: AppState, ownProps: MenuProps): StateToProps => ({
         menu: state.menus[ownProps.source] || {},
     }),
     (dispatch: Dispatch<any>, ownProps: MenuProps): DispatchToProps => ({
         fetchMenu: () => dispatch(fetchMenu(ownProps.source)),
     }),
-)(MenuDisplay)
+)(MenuDisplay))

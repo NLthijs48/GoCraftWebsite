@@ -3,7 +3,7 @@ import {connect, Dispatch} from 'react-redux'
 import {fetchMenu} from '../actions'
 import {AppState} from '../../../reducer'
 import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
-import {Route} from 'react-router'
+import {Route, withRouter} from 'react-router'
 import {MenuItemPage} from './MenuItemPage'
 
 interface MenuRoutesProps {
@@ -23,11 +23,11 @@ function getMenuItemPageFunction(itemInfo: MenuEntry) {
     return () => <MenuItemPage item={itemInfo} />
 }
 
-function menuToRoutes(byId: Menu, items: MenuItems, base: string) {
+function menuToRoutes(byId: Menu, items: MenuItems, base: string): Array<React.ReactElement<any>> {
     const result: Array<React.ReactElement<any>> = []
     items.map((item) => {
         const itemInfo: MenuEntry = byId[item]
-        const path = base + itemInfo.title.toLowerCase()
+        const path = base + itemInfo.title.toLowerCase() + '/:one?/:two?/:three?'
         result.push(<Route key={path} path={path} render={getMenuItemPageFunction(itemInfo)} />)
         if(itemInfo.children.length) {
             result.push(...menuToRoutes(byId, itemInfo.children, path + '/'))
@@ -42,11 +42,11 @@ interface StateToProps {
 interface DispatchToProps {
     fetchMenu: () => void
 }
-export const MenuRoutes =  connect<StateToProps, DispatchToProps, MenuRoutesProps>(
+export const MenuRoutes = withRouter<any>(connect<StateToProps, DispatchToProps, MenuRoutesProps>(
     (state: AppState, ownProps: MenuRoutesProps): StateToProps => ({
         menu: state.menus[ownProps.source] || {},
     }),
     (dispatch: Dispatch<any>, ownProps: MenuRoutesProps): DispatchToProps => ({
         fetchMenu: () => dispatch(fetchMenu(ownProps.source)),
     }),
-)(MenuRoutesDisplay)
+)(MenuRoutesDisplay))
