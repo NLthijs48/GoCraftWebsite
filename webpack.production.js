@@ -29,10 +29,11 @@ module.exports = {
             beautify: false,
             mangle: {
                 screw_ie8: true,
-                keep_fnames: true
+                keep_fnames: true,
             },
             compress: {
-                screw_ie8: true
+                screw_ie8: true,
+                warnings: false,
             },
             comments: false,
             sourceMap: true,

@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface AbsoluteScrollerProps {
-    children: JSX.Element
+    children?: JSX.Element
 }
 export function AbsoluteScroller({children}: AbsoluteScrollerProps) {
     return (

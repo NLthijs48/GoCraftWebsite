@@ -43,7 +43,6 @@ function getServerOverviewFunction({servers, location}: CombinedServersDisplayPr
     }
 }
 
-
 function getServerDetailsFunction(server: ServerData) {
     return () => <ServerDetails server={server}/>
 }
