@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Site} from './components/Site'
+import {Site} from 'components/Site'
 import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
-import {configureStore} from './store/configureStore'
+import {configureStore} from 'store/configureStore'
 
 const store = configureStore()
 

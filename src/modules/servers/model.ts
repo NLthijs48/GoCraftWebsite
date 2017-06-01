@@ -1,5 +1,5 @@
 // Information about a server
-import {RemoteState} from '../../types'
+import {RemoteState} from 'types'
 export interface ServerData {
     slug: string
     name: string

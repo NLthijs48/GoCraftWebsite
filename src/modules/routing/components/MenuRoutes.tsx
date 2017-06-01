@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {fetchMenu} from '../actions'
-import {AppState} from '../../../reducer'
+import {AppState} from 'reducer'
 import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
 import {Route, withRouter} from 'react-router'
 import {MenuItemPage} from './MenuItemPage'

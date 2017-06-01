@@ -3,7 +3,6 @@
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Configuration shared by production and developement
 const commonConfig = {

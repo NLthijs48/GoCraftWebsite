@@ -1,4 +1,4 @@
-import {OtherAction} from '../../types'
+import {OtherAction} from 'types'
 
 // Start getting pages information
 export const FETCH = 'pages/FETCH'

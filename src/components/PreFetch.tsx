@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect, Dispatch} from 'react-redux'
-import {fetchPages} from '../modules/pages/actions'
-import {fetchServers} from '../modules/servers/actions'
+import {fetchPages} from 'modules/pages/actions'
+import {fetchServers} from 'modules/servers/actions'
 import {withRouter} from 'react-router'
 
 class PreFetchComponent extends React.Component<DispatchToProps, {}> {

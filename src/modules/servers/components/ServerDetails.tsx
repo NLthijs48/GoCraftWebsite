@@ -1,6 +1,6 @@
 import React from 'react'
 import {ServerData} from '../model'
-import {RawContent} from '../../../components/RawContent'
+import {RawContent} from 'components/RawContent'
 
 interface ServerProps {
     server: ServerData

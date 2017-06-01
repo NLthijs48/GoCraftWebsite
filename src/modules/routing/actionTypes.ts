@@ -1,4 +1,4 @@
-import {OtherAction} from '../../types'
+import {OtherAction} from 'types'
 
 // Start getting menu information
 export const FETCH = 'menus/FETCH'

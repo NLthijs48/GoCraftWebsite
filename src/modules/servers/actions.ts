@@ -1,7 +1,7 @@
 import * as t from './actionTypes'
 import {Dispatch} from 'react-redux'
-import {AppState} from '../../reducer'
-import {getData} from '../../utils'
+import {AppState} from 'reducer'
+import {getData} from 'utils'
 
 export function fetchServers() {
     return (dispatch: Dispatch<any>, getState: () => AppState) => {

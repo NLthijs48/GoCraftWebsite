@@ -1,4 +1,4 @@
-import {OtherAction} from '../../types'
+import {OtherAction} from 'types'
 
 // Start getting servers information
 export const FETCH = 'servers/FETCH'

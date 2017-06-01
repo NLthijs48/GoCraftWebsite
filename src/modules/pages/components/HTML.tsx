@@ -1,6 +1,6 @@
 import React from 'react'
 import {HTMLPage} from '../model'
-import {RawContent} from '../../../components/RawContent'
+import {RawContent} from 'components/RawContent'
 
 interface HTMLProps {
     page: HTMLPage

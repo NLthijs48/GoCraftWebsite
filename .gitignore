@@ -5,4 +5,3 @@ dist/
 .awcache/
 *.jsx
 *.map
-src/components/*.js

@@ -1,16 +1,16 @@
 import React from 'react'
 import {MenuEntry} from '../model'
 import {connect} from 'react-redux'
-import {AppState} from '../../../reducer'
-import {Page, PagesState} from '../../pages/model'
-import {Home} from '../../pages/components/Home'
-import {HTML} from '../../pages/components/HTML'
-import {NotFound} from '../../pages/components/NotFound'
-import {Maps} from '../../pages/components/Maps'
-import {Embedded} from '../../pages/components/Embedded'
-import {Loading} from '../../pages/components/Loading'
-import {Servers} from '../../servers/components/Servers'
-import {AbsoluteScroller} from '../../../components/AbsoluteScroller'
+import {AppState} from 'reducer'
+import {Page, PagesState} from 'modules/pages/model'
+import {Home} from 'modules/pages/components/Home'
+import {HTML} from 'modules/pages/components/HTML'
+import {NotFound} from 'modules/pages/components/NotFound'
+import {Maps} from 'modules/pages/components/Maps'
+import {Embedded} from 'modules/pages/components/Embedded'
+import {Loading} from 'modules/pages/components/Loading'
+import {Servers} from 'modules/servers/components/Servers'
+import {AbsoluteScroller} from 'components/AbsoluteScroller'
 import {withRouter} from 'react-router'
 
 interface MenuItemPageProps {
@@ -45,7 +45,7 @@ function renderPage(page: Page, item: MenuEntry): React.ReactElement<any> {
         case 'frame':
             return <Embedded page={page}/>
         case 'servers':
-            return <Servers basePath={'/'+item.title.toLowerCase()} />
+            return <Servers basePath={'/' + item.title.toLowerCase()}/>
         default:
             console.error('unknown page type:', page, 'menu item:', item)
             return <NotFound />

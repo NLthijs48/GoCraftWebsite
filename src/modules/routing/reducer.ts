@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {get} from '../../utils'
+import {get} from 'utils'
 import * as t from './actionTypes'
 import {Menu, MenuItems, Menus} from './model'
 

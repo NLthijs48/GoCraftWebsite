@@ -1,4 +1,4 @@
-import {RemoteState} from '../../types'
+import {RemoteState} from 'types'
 
 // Information about a page
 export type Page =
