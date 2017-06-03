@@ -1,19 +1,13 @@
+import {SiteConfiguration} from 'components/SiteConfiguration'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Site} from 'components/Site'
-import {AppContainer} from 'react-hot-loader'
-import {Provider} from 'react-redux'
-import {configureStore} from 'store/configureStore'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
-const store = configureStore()
+injectTapEventPlugin()
 
 const render = () => {
     ReactDOM.render(
-        <AppContainer>
-            <Provider store={store}>
-                <Site />
-            </Provider>
-        </AppContainer>,
+        <SiteConfiguration />,
         document.getElementById('site'),
     )
 }
@@ -21,7 +15,7 @@ const render = () => {
 render()
 
 if(module.hot) {
-    module.hot.accept('./components/Site', () => {
+    module.hot.accept('./components/SiteConfiguration', () => {
         render()
     })
 }

@@ -29,3 +29,12 @@ export function getData(path: string): Promise<any> {
             })
     })
 }
+
+/**
+ * Translate a name to a path suitable for the url bar
+ * @param name The name to translate
+ * @returns {string} Converted name
+ */
+export function nameToPath(name: string): string {
+    return name.toLowerCase().replace(' ', '-')
+}

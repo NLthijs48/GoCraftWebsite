@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect, Dispatch} from 'react-redux'
-import {fetchMenu} from '../actions'
-import {AppState} from 'reducer'
-import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
 import {Route, withRouter} from 'react-router'
+import {AppState} from 'reducer'
+import {nameToPath} from 'utils'
+import {fetchMenu} from '../actions'
+import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
 import {MenuItemPage} from './MenuItemPage'
 
 interface MenuRoutesProps {
@@ -27,7 +28,7 @@ function menuToRoutes(byId: Menu, items: MenuItems, base: string): Array<React.R
     const result: Array<React.ReactElement<any>> = []
     items.map((item) => {
         const itemInfo: MenuEntry = byId[item]
-        const path = base + itemInfo.title.toLowerCase() + '/:one?/:two?/:three?'
+        const path = base + nameToPath(itemInfo.title) + '/:one?/:two?/:three?'
         result.push(<Route key={path} path={path} render={getMenuItemPageFunction(itemInfo)} />)
         if(itemInfo.children.length) {
             result.push(...menuToRoutes(byId, itemInfo.children, path + '/'))

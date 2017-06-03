@@ -1,17 +1,18 @@
-import React from 'react'
-import {MenuEntry} from '../model'
-import {connect} from 'react-redux'
-import {AppState} from 'reducer'
-import {Page, PagesState} from 'modules/pages/model'
+import {AbsoluteScroller} from 'components/AbsoluteScroller'
+import {Embedded} from 'modules/pages/components/Embedded'
 import {Home} from 'modules/pages/components/Home'
 import {HTML} from 'modules/pages/components/HTML'
-import {NotFound} from 'modules/pages/components/NotFound'
-import {Maps} from 'modules/pages/components/Maps'
-import {Embedded} from 'modules/pages/components/Embedded'
 import {Loading} from 'modules/pages/components/Loading'
+import {Maps} from 'modules/pages/components/Maps'
+import {NotFound} from 'modules/pages/components/NotFound'
+import {Page, PagesState} from 'modules/pages/model'
 import {Servers} from 'modules/servers/components/Servers'
-import {AbsoluteScroller} from 'components/AbsoluteScroller'
+import React from 'react'
+import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import {AppState} from 'reducer'
+import {nameToPath} from 'utils'
+import {MenuEntry} from '../model'
 
 interface MenuItemPageProps {
     item: MenuEntry
@@ -26,6 +27,10 @@ class MenuItemPageDisplay extends React.Component<MenuItemPageProps & StateToPro
         }
 
         const page: Page = pages.byId[item.page]
+        if(!page) {
+            return <NotFound />
+        }
+
         return (
             <AbsoluteScroller>
                 {renderPage(page, item)}
@@ -45,7 +50,7 @@ function renderPage(page: Page, item: MenuEntry): React.ReactElement<any> {
         case 'frame':
             return <Embedded page={page}/>
         case 'servers':
-            return <Servers basePath={'/' + item.title.toLowerCase()}/>
+            return <Servers basePath={'/' + nameToPath(item.title)}/>
         default:
             console.error('unknown page type:', page, 'menu item:', item)
             return <NotFound />

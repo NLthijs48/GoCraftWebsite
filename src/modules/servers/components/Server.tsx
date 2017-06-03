@@ -1,6 +1,7 @@
 import React from 'react'
-import {ServerData} from '../model'
 import {NavLink} from 'react-router-dom'
+import {nameToPath} from 'utils'
+import {ServerData} from '../model'
 
 interface ServerProps {
     server: ServerData
@@ -11,7 +12,7 @@ export class Server extends React.Component<ServerProps, {}> {
         const {server, path} = this.props
         return (
             <NavLink
-                to={path+'/'+server.name.toLowerCase()}
+                to={path+'/'+nameToPath(server.name)}
                 style={{
                     width: '100%',
                     padding: '0.5em 1em',

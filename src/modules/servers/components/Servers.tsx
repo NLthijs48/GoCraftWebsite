@@ -1,11 +1,12 @@
+import {Loading} from 'modules/pages/components/Loading'
 import React from 'react'
 import {connect, Dispatch} from 'react-redux'
+import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
+import {AppState} from 'reducer'
+import {nameToPath} from 'utils'
 import {fetchServers} from '../actions'
 import {ServerData, ServersState} from '../model'
-import {AppState} from 'reducer'
 import {Server} from './Server'
-import {Loading} from 'modules/pages/components/Loading'
-import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {ServerDetails} from './ServerDetails'
 
 interface ServersDisplayProps {
@@ -23,7 +24,7 @@ class ServersDisplay extends React.Component<CombinedServersDisplayProps, {}> {
         return (
             <Switch>
                 {servers.data.map((server) => {
-                    const path = basePath+'/'+server.name.toLowerCase()
+                    const path = basePath+'/'+nameToPath(server.name)
                     return <Route key={path} path={path} render={getServerDetailsFunction(server)}/>
                 })}
                 <Route render={getServerOverviewFunction(this.props)}/>
@@ -33,11 +34,11 @@ class ServersDisplay extends React.Component<CombinedServersDisplayProps, {}> {
 }
 
 // Get a render function for the server overview
-function getServerOverviewFunction({servers, location}: CombinedServersDisplayProps) {
+function getServerOverviewFunction({servers, basePath}: CombinedServersDisplayProps) {
     return () => {
         return (
             <div style={{marginTop: '2em'}}>
-                {servers.data.map((server) => <Server key={server.slug} server={server} path={location.pathname} />)}
+                {servers.data.map((server) => <Server key={server.slug} server={server} path={basePath} />)}
             </div>
         )
     }
