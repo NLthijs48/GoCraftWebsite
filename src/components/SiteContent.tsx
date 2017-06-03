@@ -6,6 +6,7 @@ import {Routes} from 'modules/routing/components/Routes'
 import {VerticalMenu} from 'modules/routing/components/VerticalMenu'
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import MenuProps = __MaterialUI.Menus.MenuProps
 
@@ -36,8 +37,8 @@ class SiteContentDisplay extends React.Component<StateToProps, {}> {
 interface StateToProps {
     drawer: DrawerState
 }
-export const SiteContent = connect<StateToProps, {}, {}>(
+export const SiteContent = withRouter<any>(connect<StateToProps, {}, {}>(
     (state: AppState): StateToProps => ({
         drawer: state.drawer,
     }),
-)(SiteContentDisplay)
+)(SiteContentDisplay))

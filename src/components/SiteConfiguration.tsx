@@ -19,9 +19,6 @@ export function SiteConfiguration() {
                         palette: {
                             primary1Color: green700,
                         },
-                        appBar: {
-                            height: 50,
-                        },
                     })}
                 >
                     <Router>
