@@ -11,7 +11,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {nameToPath} from 'utils'
+import {nameToPath} from 'utils/utils'
 import {MenuEntry} from '../model'
 
 interface MenuItemPageProps {

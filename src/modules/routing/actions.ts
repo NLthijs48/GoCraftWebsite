@@ -1,7 +1,7 @@
-import * as t from './actionTypes'
 import {Dispatch} from 'react-redux'
 import {AppState} from 'reducer'
-import {getData} from 'utils'
+import {getData} from 'utils/utils'
+import * as t from './actionTypes'
 
 export function fetchMenu(name: string) {
     return (dispatch: Dispatch<any>, getState: () => AppState) => {

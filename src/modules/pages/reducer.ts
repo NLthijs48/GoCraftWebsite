@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
-import {get} from 'utils'
-import {Pages} from './model'
+import {get} from 'utils/utils'
 import * as t from './actionTypes'
+import {Pages} from './model'
 
 // Server data reducer
 const byId = (state: Pages = {}, action: t.PagesAction) => {

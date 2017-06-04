@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import {nameToPath} from 'utils'
+import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
 
 interface ServerProps {

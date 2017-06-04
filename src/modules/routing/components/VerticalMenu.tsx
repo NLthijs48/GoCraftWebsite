@@ -2,12 +2,13 @@ import List from 'material-ui/List'
 import ListItem from 'material-ui/List/ListItem'
 import {makeSelectable} from 'material-ui/List/makeSelectable'
 import {updateDrawerOpen} from 'modules/drawer/actions'
+import {DrawerState} from 'modules/drawer/model'
 import React, {ReactElement} from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
-import {nameToPath} from 'utils'
+import {nameToPath} from 'utils/utils'
 import {fetchMenu} from '../actions'
 import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
 
@@ -44,7 +45,9 @@ class MenuDisplay extends React.Component<AllMenuProps, {}> {
 
     private handleRequestChange = (event: any, to: any) => {
         this.props.history.push({pathname: to})
-        this.props.closeDrawer()
+        if(!this.props.drawer.docked) {
+            this.props.closeDrawer()
+        }
     }
 }
 
@@ -60,7 +63,6 @@ function menuToListItems(items: MenuItems, byId: Menu, basePath: string): Array<
     items.map((item) => {
         const info: MenuEntry = byId[item]
         const path = basePath+nameToPath(info.title)
-        console.log('path:', path)
         const children = info.children
         result.push(
             <ListItem
@@ -76,6 +78,7 @@ function menuToListItems(items: MenuItems, byId: Menu, basePath: string): Array<
 
 interface StateToProps {
     menu: MenuState
+    drawer: DrawerState
 }
 interface DispatchToProps {
     fetchMenu: () => void
@@ -84,6 +87,7 @@ interface DispatchToProps {
 export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProps, MenuProps>(
     (state: AppState, ownProps: MenuProps): StateToProps => ({
         menu: state.menus[ownProps.source] || {},
+        drawer: state.drawer,
     }),
     (dispatch: Dispatch<any>, ownProps: MenuProps): DispatchToProps => ({
         fetchMenu: () => dispatch(fetchMenu(ownProps.source)),

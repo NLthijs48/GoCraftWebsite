@@ -23,9 +23,11 @@
     "build": "webpack --env=production --progress --profile --colors"
   },
   "dependencies": {
+    "@types/gsap": "^1.19.1",
     "@types/isomorphic-fetch": "^0.0.34",
     "@types/material-ui": "^0.17.10",
     "@types/react-tap-event-plugin": "^0.0.30",
+    "gsap": "^1.19.1",
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "^0.18.1",
     "react": "^15.5.4",

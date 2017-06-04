@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
-import {get} from 'utils'
-import {ServersData} from './model'
+import {get} from 'utils/utils'
 import * as t from './actionTypes'
+import {ServersData} from './model'
 
 // Server data reducer
 const data = (state: ServersData = [], action: t.ServersAction) => {
