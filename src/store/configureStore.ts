@@ -21,10 +21,12 @@ export function configureStore() {
         ),
     )
 
-    // Handle hot reducer updates
-    module.hot.accept('../reducer', () => {
-        store.replaceReducer(require('../reducer').rootReducer)
-    })
+    if(module.hot) {
+        // Handle hot reducer updates
+        module.hot.accept('../reducer', () => {
+            store.replaceReducer(require('../reducer').rootReducer)
+        })
+    }
 
     return store
 }
