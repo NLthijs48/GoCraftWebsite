@@ -15,9 +15,23 @@ const logo = require('images/logo.png')
 class SiteContentDisplay extends React.Component<StateToProps, {}> {
     public render() {
         return (
-            <div className="d-flex flex-column" style={{minHeight: '100%', flex: 1}}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: '100%',
+                    flex: 1,
+                }}
+            >
                 {!this.props.drawer.docked && <TopBar />}
-                <div className="d-flex flex-row" style={{height: '100%', flex: 1, position: 'relative'}}>
+                <div
+                    style={{
+                        display: 'flex',
+                        height: '100%',
+                        flex: 1,
+                        position: 'relative',
+                    }}
+                >
                     <LeftDrawer>
                         {this.props.drawer.docked &&
                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px'}}>
