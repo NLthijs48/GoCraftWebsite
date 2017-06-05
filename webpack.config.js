@@ -1,8 +1,9 @@
-// This cofnig merges common and environment depending configurations
+// This config merges common and environment depending configurations
 
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CheckerPlugin} = require('awesome-typescript-loader');
 
 // Configuration shared by production and developement
 const commonConfig = {
@@ -21,7 +22,7 @@ const commonConfig = {
             // Transpile TypeScript and new javascript syntax into older
             {
                 test: /\.tsx?$/,
-                loaders: ['babel-loader', 'ts-loader'],
+                loader: 'awesome-typescript-loader',
                 include: path.resolve('src')
             },
 
@@ -76,16 +77,21 @@ const commonConfig = {
             template: 'src/index.html',
             chunksSortMode: 'dependency'
         }),
+        new CheckerPlugin(),
     ]
 };
 
 module.exports = function (env) {
     // Get environment specific config
     let environmentConfig = {};
-    if(env === 'production') {
+    if(env.target === 'production') {
         environmentConfig = require('./webpack.production.js');
     } else {
         environmentConfig = require('./webpack.development.js');
+    }
+
+    if(typeof environmentConfig === 'function') {
+        environmentConfig = environmentConfig(env)
     }
 
     // Merge and return

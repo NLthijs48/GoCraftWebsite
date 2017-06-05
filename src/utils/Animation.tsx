@@ -1,4 +1,4 @@
-import {TweenMax} from 'gsap'
+import {TweenLite} from 'gsap'
 import React from 'react'
 
 export interface AnimateTo extends React.CSSProperties {
@@ -68,6 +68,6 @@ export class Animate extends React.Component<AnimateProps, {}> {
             fromTo.to.onComplete = done
         }
 
-        TweenMax.fromTo(this.containerE, fromTo.time || 0.2, fromTo.from, fromTo.to)
+        TweenLite.fromTo(this.containerE, fromTo.time || 0.2, fromTo.from, fromTo.to)
     }
 }

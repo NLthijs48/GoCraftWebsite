@@ -14,8 +14,11 @@ const render = () => {
 
 render()
 
+// Hot reload react components, or full reload if something else changes
 if(module.hot) {
     module.hot.accept('./components/SiteConfiguration', () => {
+        // Fix to get components to hot update (https://github.com/gaearon/react-hot-loader/issues/249#issuecomment-249105895)
+        const nextRootLayout = require('./components/SiteConfiguration')
         render()
     })
 }

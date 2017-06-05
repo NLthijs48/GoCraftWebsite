@@ -1,12 +1,10 @@
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
 
-module.exports = {
-    entry: [
-        'index.tsx'
-    ],
-    plugins: [
+module.exports = function(env) {
+    let plugins = [
         // Cleanup 'dist' directory before building new files
         new CleanWebpackPlugin(['dist'], {}),
 
@@ -43,5 +41,20 @@ module.exports = {
         new CopyWebpackPlugin([
             {from: '.htaccess'}
         ]),
-    ]
+    ];
+
+    // Build and generate reports about it
+    if (env.analyze) {
+        plugins.push(
+            // Visualize bundle contents
+            new Visualizer()
+        )
+    }
+
+    return {
+        entry: [
+            'index.tsx'
+        ],
+        plugins: plugins
+    }
 };
