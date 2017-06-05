@@ -36,6 +36,7 @@ class TopBarDisplay extends React.Component<MenuProps & DispatchToProps & StateT
                 }
                 onLeftIconButtonTouchTap={this.onMenuIconTap}
                 showMenuIconButton={!this.props.drawer.docked}
+                iconElementRight={<div style={{width: 56}} />}
             />
         )
     }
