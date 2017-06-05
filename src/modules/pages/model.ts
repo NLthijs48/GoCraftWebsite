@@ -7,21 +7,24 @@ export type Page =
     HTMLPage |
     EmbeddedPage |
     ServersPage
-export interface HomePage {
+interface AbstractPage {
+    urlPath?: string
+}
+export interface HomePage extends AbstractPage {
     type: 'home',
 }
-export interface MapsPage {
+export interface MapsPage extends AbstractPage {
     type: 'maps',
 }
-export interface HTMLPage {
+export interface HTMLPage extends AbstractPage {
     type: 'html'
     content: string
 }
-export interface EmbeddedPage {
+export interface EmbeddedPage extends AbstractPage {
     type: 'frame'
     url: string
 }
-export interface ServersPage {
+export interface ServersPage extends AbstractPage {
     type: 'servers'
 }
 

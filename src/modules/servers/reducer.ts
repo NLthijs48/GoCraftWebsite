@@ -21,6 +21,7 @@ const data = (state: ServersData = [], action: t.ServersAction) => {
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
                     image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium'),
+                    dynmapLink: get(rawServer, 'acf', 'dynmap_link'),
                 })
             }
             return servers

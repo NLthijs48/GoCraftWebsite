@@ -16,10 +16,11 @@ import {MenuEntry} from '../model'
 
 interface MenuItemPageProps {
     item: MenuEntry
+    basePath: string
 }
 class MenuItemPageDisplay extends React.Component<MenuItemPageProps & StateToProps, {}> {
     public render() {
-        const {item, pages} = this.props
+        const {item, pages, basePath} = this.props
 
         // Loading indicator
         if(pages.isFetching && (!pages.byId || !pages.byId[item.page])) {
@@ -33,24 +34,24 @@ class MenuItemPageDisplay extends React.Component<MenuItemPageProps & StateToPro
 
         return (
             <AbsoluteScroller>
-                {renderPage(page, item)}
+                {renderPage(page, item, basePath+nameToPath(page.urlPath || item.title))}
             </AbsoluteScroller>
         )
     }
 }
 
-function renderPage(page: Page, item: MenuEntry): React.ReactElement<any> {
+function renderPage(page: Page, item: MenuEntry, basePath: string): React.ReactElement<any> {
     switch(page.type) {
         case 'home':
             return <Home />
         case 'html':
             return <HTML page={page}/>
         case 'maps':
-            return <Maps />
+            return <Maps basePath={basePath} />
         case 'frame':
             return <Embedded page={page}/>
         case 'servers':
-            return <Servers basePath={'/' + nameToPath(item.title)}/>
+            return <Servers basePath={basePath}/>
         default:
             console.error('unknown page type:', page, 'menu item:', item)
             return <NotFound />

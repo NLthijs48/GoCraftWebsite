@@ -3,6 +3,7 @@ import ListItem from 'material-ui/List/ListItem'
 import {makeSelectable} from 'material-ui/List/makeSelectable'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
+import {PagesState} from 'modules/pages/model'
 import React, {ReactElement} from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -11,8 +12,6 @@ import {Dispatch} from 'redux'
 import {nameToPath} from 'utils/utils'
 import {fetchMenu} from '../actions'
 import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
-
-// TODO make like https://github.com/callemall/material-ui/blob/master/docs/src/app/components/AppNavDrawer.js
 
 const SelectableList = makeSelectable(List)
 
@@ -38,7 +37,7 @@ class MenuDisplay extends React.Component<AllMenuProps, {}> {
                 value={this.props.location.pathname}
                 onChange={this.handleRequestChange}
             >
-                {items && byId && menuToListItems(items, byId, '/')}
+                {items && byId && menuToListItems({items, byId, basePath: '/', pages: this.props.pages})}
             </SelectableList>
         )
     }
@@ -56,20 +55,33 @@ class MenuDisplay extends React.Component<AllMenuProps, {}> {
  * @param items Items to render
  * @param byId Lookup for information about the items
  * @param basePath Path these items are rendered in
+ * @param pages Pages to use for resolving url paths
  * @returns {Array<ReactElement<{}>>} List of elements to be rendered for this menu
  */
-function menuToListItems(items: MenuItems, byId: Menu, basePath: string): Array<ReactElement<{}>> {
+interface MenuToListItemsProps {
+    items: MenuItems
+    byId: Menu
+    basePath: string
+    pages: PagesState
+}
+function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
+    const {byId, items, pages, basePath} = data
     const result: Array<ReactElement<{}>> = []
-    items.map((item) => {
-        const info: MenuEntry = byId[item]
-        const path = basePath+nameToPath(info.title)
-        const children = info.children
+    items.map((menuItemKey) => {
+        const menuItem: MenuEntry = byId[menuItemKey]
+        let path = nameToPath(menuItem.title)
+        if(pages.byId && pages.byId[menuItem.page] && pages.byId[menuItem.page].urlPath) {
+            path = nameToPath(pages.byId[menuItem.page].urlPath + '')
+        }
+        path = basePath + path
+
+        const children = menuItem.children
         result.push(
             <ListItem
                 key={path}
                 value={path}
-                primaryText={info.title}
-                nestedItems={children && children.length ? menuToListItems(children, byId, path+'/') : undefined}
+                primaryText={menuItem.title}
+                nestedItems={children && children.length ? menuToListItems({...data, items: children, basePath: path + '/'}) : undefined}
             />,
         )
     })
@@ -79,6 +91,7 @@ function menuToListItems(items: MenuItems, byId: Menu, basePath: string): Array<
 interface StateToProps {
     menu: MenuState
     drawer: DrawerState
+    pages: PagesState
 }
 interface DispatchToProps {
     fetchMenu: () => void
@@ -88,6 +101,7 @@ export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProp
     (state: AppState, ownProps: MenuProps): StateToProps => ({
         menu: state.menus[ownProps.source] || {},
         drawer: state.drawer,
+        pages: state.pages,
     }),
     (dispatch: Dispatch<any>, ownProps: MenuProps): DispatchToProps => ({
         fetchMenu: () => dispatch(fetchMenu(ownProps.source)),

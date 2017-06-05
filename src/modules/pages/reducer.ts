@@ -14,6 +14,7 @@ const byId = (state: Pages = {}, action: t.PagesAction) => {
                     type: get(rawPage, 'acf', 'page_type'),
                     url: get(rawPage, 'acf', 'website_link'),
                     content: get(rawPage, 'acf', 'content'),
+                    urlPath: get(rawPage, 'acf', 'url_path'),
                 }
             }
             return pages

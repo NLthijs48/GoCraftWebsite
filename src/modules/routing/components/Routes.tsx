@@ -43,7 +43,7 @@ class RoutesComponent extends React.Component<RouteComponentProps<{}>, {}> {
 
                             <MenuRoutes location={location} source="header-menu"/>
 
-                            <Route location={location} key="404" component={NotFound}/>
+                            <Route component={NotFound}/>
                         </Switch>
                     </Animate>
                 </AnimateContainer>

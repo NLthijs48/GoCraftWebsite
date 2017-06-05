@@ -1,18 +1,17 @@
 import {Loading} from 'modules/pages/components/Loading'
 import React from 'react'
-import {connect, Dispatch} from 'react-redux'
+import {connect} from 'react-redux'
 import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
-import {fetchServers} from '../actions'
 import {ServerData, ServersState} from '../model'
 import {Server} from './Server'
 import {ServerDetails} from './ServerDetails'
 
-interface ServersDisplayProps {
+interface ServersProps {
     basePath: string
 }
-type CombinedServersDisplayProps = ServersDisplayProps & DispatchToProps & StateToProps & RouteComponentProps<any>
+type CombinedServersDisplayProps = ServersProps & StateToProps & RouteComponentProps<any>
 class ServersDisplay extends React.Component<CombinedServersDisplayProps, {}> {
     public render() {
         const {servers, basePath} = this.props
@@ -51,14 +50,8 @@ function getServerDetailsFunction(server: ServerData) {
 interface StateToProps {
     servers: ServersState
 }
-interface DispatchToProps {
-    fetchServers: () => void
-}
-export const Servers = withRouter<any>(connect<StateToProps, DispatchToProps, ServersDisplayProps>(
+export const Servers = withRouter<any>(connect<StateToProps, {}, ServersProps>(
     (state: AppState): StateToProps => ({
         servers: state.servers,
-    }),
-    (dispatch: Dispatch<any>): DispatchToProps => ({
-        fetchServers: () => dispatch(fetchServers()),
     }),
 )(ServersDisplay))

@@ -6,6 +6,7 @@ export interface ServerData {
     shortDescription: string
     longDescription: string
     image: string
+    dynmapLink?: string
 }
 
 export type ServersData = ServerData[]
