@@ -1,5 +1,7 @@
 import {DrawerState} from 'modules/drawer/model'
 import {drawer} from 'modules/drawer/reducer'
+import {NewsItemsState} from 'modules/news/model'
+import {newsItems} from 'modules/news/reducer'
 import {PagesState} from 'modules/pages/model'
 import {pages} from 'modules/pages/reducer'
 import {Menus} from 'modules/routing/model'
@@ -13,6 +15,7 @@ export interface AppState {
     menus: Menus
     pages: PagesState
     drawer: DrawerState
+    newsItems: NewsItemsState
 }
 
 export const rootReducer = combineReducers({
@@ -20,4 +23,5 @@ export const rootReducer = combineReducers({
     menus,
     pages,
     drawer,
+    newsItems,
 })

@@ -1,3 +1,4 @@
+import {fetchNewsItems} from 'modules/news/actions'
 import {fetchPages} from 'modules/pages/actions'
 import {fetchMenu} from 'modules/routing/actions'
 import {fetchServers} from 'modules/servers/actions'
@@ -7,9 +8,10 @@ import {withRouter} from 'react-router'
 
 class PreFetchComponent extends React.Component<DispatchToProps, {}> {
     public componentDidMount() {
+        this.props.fetchMenu('header-menu')
         this.props.fetchPages()
         this.props.fetchServers()
-        this.props.fetchMenu('header-menu')
+        this.props.fetchNewsItems()
     }
 
     public render() {
@@ -20,6 +22,7 @@ class PreFetchComponent extends React.Component<DispatchToProps, {}> {
 interface DispatchToProps {
     fetchPages: () => void
     fetchServers: () => void
+    fetchNewsItems: () => void
     fetchMenu: (source: string) => void
 }
 export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
@@ -27,6 +30,7 @@ export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
     (dispatch: Dispatch<any>): DispatchToProps => ({
         fetchPages: () => dispatch(fetchPages()),
         fetchServers: () => dispatch(fetchServers()),
+        fetchNewsItems: () => dispatch(fetchNewsItems()),
         fetchMenu: (source) => dispatch(fetchMenu(source)),
     }),
 )(PreFetchComponent))

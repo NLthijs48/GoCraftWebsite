@@ -1,5 +1,6 @@
-// Information about a server
 import {RemoteState} from 'types'
+
+// Information about a server
 export interface ServerData {
     slug: string
     name: string

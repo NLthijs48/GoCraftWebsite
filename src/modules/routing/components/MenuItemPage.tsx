@@ -43,7 +43,7 @@ class MenuItemPageDisplay extends React.Component<MenuItemPageProps & StateToPro
 function renderPage(page: Page, item: MenuEntry, basePath: string): React.ReactElement<any> {
     switch(page.type) {
         case 'home':
-            return <Home />
+            return <Home basePath={basePath} />
         case 'html':
             return <HTML page={page}/>
         case 'maps':

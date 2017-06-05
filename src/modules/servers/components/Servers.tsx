@@ -11,8 +11,8 @@ import {ServerDetails} from './ServerDetails'
 interface ServersProps {
     basePath: string
 }
-type CombinedServersDisplayProps = ServersProps & StateToProps & RouteComponentProps<any>
-class ServersDisplay extends React.Component<CombinedServersDisplayProps, {}> {
+type CombinedServersProps = ServersProps & StateToProps & RouteComponentProps<any>
+class ServersDisplay extends React.Component<CombinedServersProps, {}> {
     public render() {
         const {servers, basePath} = this.props
 
@@ -33,7 +33,7 @@ class ServersDisplay extends React.Component<CombinedServersDisplayProps, {}> {
 }
 
 // Get a render function for the server overview
-function getServerOverviewFunction({servers, basePath}: CombinedServersDisplayProps) {
+function getServerOverviewFunction({servers, basePath}: CombinedServersProps) {
     return () => {
         return (
             <div style={{marginTop: '2em'}}>
