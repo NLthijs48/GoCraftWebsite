@@ -9,7 +9,7 @@ const {CheckerPlugin} = require('awesome-typescript-loader');
 const commonConfig = {
     output: {
         filename: 'app.js',
-        sourceMapFilename: '[name].map',
+        sourceMapFilename: 'app.js.map',
         publicPath: '/',
         path: path.resolve('dist')
     },

@@ -55,6 +55,7 @@ module.exports = function(env) {
         entry: [
             'index.tsx'
         ],
-        plugins: plugins
+        plugins: plugins,
+        devtool: 'source-map',
     }
 };
