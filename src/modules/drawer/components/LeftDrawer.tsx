@@ -42,7 +42,7 @@ class LeftDrawerDisplay extends React.Component<LeftDrawerProps & DispatchToProp
                 open={docked || open}
                 docked={docked}
                 style={{zIndex: 1}}
-                containerStyle={docked ? {position: 'static'} : {}}
+                containerStyle={{position: docked ? 'static': 'absolute'}}
                 onRequestChange={this.requestChange}
             >
                 {this.props.children}

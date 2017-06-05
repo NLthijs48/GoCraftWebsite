@@ -17,7 +17,7 @@ class SiteContentDisplay extends React.Component<StateToProps, {}> {
         return (
             <div className="d-flex flex-column" style={{minHeight: '100%', flex: 1}}>
                 {!this.props.drawer.docked && <TopBar />}
-                <div className="d-flex flex-row" style={{height: '100%', flex: 1}}>
+                <div className="d-flex flex-row" style={{height: '100%', flex: 1, position: 'relative'}}>
                     <LeftDrawer>
                         {this.props.drawer.docked &&
                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px'}}>
