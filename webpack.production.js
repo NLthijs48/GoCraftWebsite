@@ -44,7 +44,7 @@ module.exports = function(env) {
     ];
 
     // Build and generate reports about it
-    if (env.analyze) {
+    if (env && env.analyze) {
         plugins.push(
             // Visualize bundle contents
             new Visualizer()

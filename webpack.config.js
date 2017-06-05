@@ -84,7 +84,7 @@ const commonConfig = {
 module.exports = function (env) {
     // Get environment specific config
     let environmentConfig = {};
-    if(env.target === 'production') {
+    if(env && env.target === 'production') {
         environmentConfig = require('./webpack.production.js');
     } else {
         environmentConfig = require('./webpack.development.js');
