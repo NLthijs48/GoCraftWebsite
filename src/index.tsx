@@ -2,6 +2,7 @@ import {SiteConfiguration} from 'components/SiteConfiguration'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+require('font-awesome-webpack')
 
 injectTapEventPlugin()
 

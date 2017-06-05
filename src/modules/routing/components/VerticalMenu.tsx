@@ -3,12 +3,13 @@ import ListItem from 'material-ui/List/ListItem'
 import {makeSelectable} from 'material-ui/List/makeSelectable'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
-import {PagesState} from 'modules/pages/model'
+import {Page, PagesState} from 'modules/pages/model'
 import React, {ReactElement} from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
+import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {fetchMenu} from '../actions'
 import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
@@ -70,8 +71,15 @@ function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
     items.map((menuItemKey) => {
         const menuItem: MenuEntry = byId[menuItemKey]
         let path = nameToPath(menuItem.title)
-        if(pages.byId && pages.byId[menuItem.page] && pages.byId[menuItem.page].urlPath) {
-            path = nameToPath(pages.byId[menuItem.page].urlPath + '')
+        let icon = 'bars'
+        if(pages.byId && pages.byId[menuItem.page]) {
+            const page: Page = pages.byId[menuItem.page]
+            if(page.urlPath) {
+                path = nameToPath(page.urlPath)
+            }
+            if(page.menuIcon) {
+                icon = page.menuIcon
+            }
         }
         path = basePath + path
 
@@ -81,6 +89,7 @@ function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
                 key={path}
                 value={path}
                 primaryText={menuItem.title}
+                leftIcon={<Icon name={icon} color="#777777" />}
                 nestedItems={children && children.length ? menuToListItems({...data, items: children, basePath: path + '/'}) : undefined}
             />,
         )

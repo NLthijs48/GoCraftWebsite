@@ -15,6 +15,7 @@ const byId = (state: Pages = {}, action: t.PagesAction) => {
                     url: get(rawPage, 'acf', 'website_link'),
                     content: get(rawPage, 'acf', 'content'),
                     urlPath: get(rawPage, 'acf', 'url_path'),
+                    menuIcon: get(rawPage, 'acf', 'menu_icon'),
                 }
             }
             return pages

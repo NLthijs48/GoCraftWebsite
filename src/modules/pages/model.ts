@@ -9,6 +9,7 @@ export type Page =
     ServersPage
 interface AbstractPage {
     urlPath?: string
+    menuIcon?: string
 }
 export interface HomePage extends AbstractPage {
     type: 'home',
