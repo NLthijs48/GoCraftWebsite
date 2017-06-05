@@ -27,6 +27,9 @@ export function SiteConfiguration() {
                             pickerHeaderColor: '#388e3c',
                             clockCircleColor: 'rgba(0, 0, 0, 0.05)',
                         },
+                        appBar: {
+                            height: 50,
+                        },
                     })}
                 >
                     <Router>

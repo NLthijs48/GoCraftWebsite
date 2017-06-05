@@ -19,7 +19,7 @@ const SelectableList = makeSelectable(List)
 interface MenuProps {
     source: string
 }
-type AllMenuProps = MenuProps & DispatchToProps & StateToProps & RouteComponentProps<{}>
+type AllMenuProps = MenuProps & DispatchToProps & StateToProps & RouteComponentProps<any>
 class MenuDisplay extends React.Component<AllMenuProps, {}> {
     public constructor(props: AllMenuProps) {
         super(props)
@@ -89,7 +89,7 @@ function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
                 key={path}
                 value={path}
                 primaryText={menuItem.title}
-                leftIcon={<Icon name={icon} color="#777777" />}
+                leftIcon={<Icon name={icon} color="#777777" size={24} fixedWidth />}
                 nestedItems={children && children.length ? menuToListItems({...data, items: children, basePath: path + '/'}) : undefined}
             />,
         )

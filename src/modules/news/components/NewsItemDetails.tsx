@@ -1,11 +1,20 @@
 import {RawContent} from 'components/RawContent'
+import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
+import {RouteComponentProps, withRouter} from 'react-router'
+import {Icon} from 'utils/Icon'
 import {NewsItem} from '../model'
 
 interface NewsItemDetailsProps {
     newsItem: NewsItem
 }
-export class NewsItemDetails extends React.Component<NewsItemDetailsProps, {}> {
+type CombinedNewsItemDetailsProps = NewsItemDetailsProps & RouteComponentProps<any>
+export class NewsItemDetailsDisplay extends React.Component<CombinedNewsItemDetailsProps, {}> {
+    public constructor(props: CombinedNewsItemDetailsProps) {
+        super(props)
+        this.goBack = this.goBack.bind(this)
+    }
+
     public render() {
         const newsItem = this.props.newsItem
         return (
@@ -16,6 +25,7 @@ export class NewsItemDetails extends React.Component<NewsItemDetailsProps, {}> {
                     padding: '1em',
                 }}
             >
+                <RaisedButton label="Back" icon={<Icon name="chevron-left" />} onTouchTap={this.goBack} />
                 <h1>{newsItem.title}</h1>
                 <div style={{display: 'flex'}}>
                     <div
@@ -43,4 +53,12 @@ export class NewsItemDetails extends React.Component<NewsItemDetailsProps, {}> {
             </div>
         )
     }
+
+    private goBack() {
+        const pathParts = this.props.location.pathname.split('/')
+        pathParts.pop()
+        this.props.history.push({pathname: pathParts.join('/')})
+    }
 }
+
+export const NewsItemDetails = withRouter<any>(NewsItemDetailsDisplay)

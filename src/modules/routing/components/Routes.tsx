@@ -5,7 +5,7 @@ import {AnimateContainer} from 'utils/AnimateContainer'
 import {Animate} from 'utils/Animation'
 import {MenuRoutes} from './MenuRoutes'
 
-class RoutesComponent extends React.Component<RouteComponentProps<{}>, {}> {
+class RoutesComponent extends React.Component<RouteComponentProps<any>, {}> {
     public render() {
         const {location} = this.props
         return (

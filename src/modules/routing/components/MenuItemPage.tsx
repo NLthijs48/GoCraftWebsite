@@ -33,7 +33,7 @@ class MenuItemPageDisplay extends React.Component<MenuItemPageProps & StateToPro
         }
 
         return (
-            <AbsoluteScroller>
+            <AbsoluteScroller style={{backgroundColor: '#EEEEEE'}}>
                 {renderPage(page, item, basePath+nameToPath(page.urlPath || item.title))}
             </AbsoluteScroller>
         )

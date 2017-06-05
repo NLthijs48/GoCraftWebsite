@@ -1,4 +1,5 @@
 import {RawContent} from 'components/RawContent'
+import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {nameToPath} from 'utils/utils'
@@ -49,6 +50,7 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
                     >
                         <h4>{newsItem.title}</h4>
                         <RawContent content={newsItem.content} />
+                        <RaisedButton label="Details" primary />
                     </div>
                 </div>
             </NavLink>
