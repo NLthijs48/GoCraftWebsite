@@ -23,8 +23,8 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
             }}>
                 <div style={{
                     display: 'flex',
-                    maxWidth: '55rem',
                     minHeight: '11rem',
+                    maxWidth: '65rem',
                     overflow: 'hidden',
                     margin: '0 auto',
                     backgroundColor: '#FFF',
@@ -33,7 +33,8 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
                     position: 'relative', // For fade out alignment
                 }}>
                     <div style={{
-                        width: '30%',
+                        flex: 1,
+                        maxWidth: '25rem',
                         marginRight: '1rem',
                         zIndex: 1, // Put above absolute fade out shadow
                     }}>
@@ -49,7 +50,8 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
                     </div>
 
                     <div style={{
-                        flex: 1,
+                        flex: 2,
+                        maxWidth: '40rem',
                         position: 'relative', // For content and button alignment
                     }}>
                         <NavLink to={detailsPath} style={{
