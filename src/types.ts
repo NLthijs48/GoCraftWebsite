@@ -7,3 +7,11 @@ export interface OtherAction {
 export interface RemoteState {
     isFetching: boolean
 }
+
+// WordPress user
+export interface User {
+    id: number
+    name: string
+    // URL of the avatar
+    avatar: string
+}

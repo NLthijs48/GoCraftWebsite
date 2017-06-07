@@ -37,7 +37,7 @@ class NewsListDisplay extends React.Component<CombinedNewsListProps, {}> {
 function getServerOverviewFunction({newsItems, basePath}: CombinedNewsListProps) {
     return () => {
         return (
-            <div style={{marginTop: '2em'}}>
+            <div style={{marginTop: '1rem'}}>
                 {newsItems.items.map((newsItemKey) => {
                     const newsItem: NewsItem = newsItems.byId[newsItemKey]
                     return (

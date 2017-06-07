@@ -13,47 +13,76 @@ interface NewsItemPreviewProps {
 export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
     public render() {
         const {newsItem, path} = this.props
+        const detailsPath = path + '/' + nameToPath(newsItem.slug)
         return (
-            <NavLink
-                to={path+'/'+nameToPath(newsItem.slug)}
-                style={{
-                    width: '100%',
-                    padding: '0.5em 1em',
-                    display: 'block',
-                    marginBottom: '2em',
-                }}
-            >
-                <div
-                    style={{
-                        display: 'flex',
-                        maxWidth: 1200,
-                        margin: '0 auto',
-                    }}
-                >
-                    <div
-                        style={{
-                            width: '30%',
-                            height: 'auto',
-                            padding: '16% 0 0 0',
+            <div style={{
+                width: '100%',
+                padding: '0.5em 1em',
+                display: 'block',
+                marginBottom: '1rem',
+            }}>
+                <div style={{
+                    display: 'flex',
+                    maxWidth: '55rem',
+                    minHeight: '11rem',
+                    overflow: 'hidden',
+                    margin: '0 auto',
+                    backgroundColor: '#FFF',
+                    borderBottom: '0.5rem solid #34B067',
+                    padding: '1rem',
+                    position: 'relative', // For fade out alignment
+                }}>
+                    <div style={{
+                        width: '30%',
+                        marginRight: '1rem',
+                        zIndex: 1, // Put above absolute fade out shadow
+                    }}>
+                        <NavLink to={detailsPath} style={{
+                            display: 'block',
+                            width: '100%',
+                            height: '0',
+                            padding: '56% 0 0 0', // 16:9 aspect ratio
                             backgroundImage: 'url(' + newsItem.image + ')',
                             backgroundPosition: '50% 50%',
                             backgroundSize: 'cover',
-                            marginRight: '1em',
-                            borderLeft: '1em solid #34B067',
-                        }}
-                    />
+                        }} />
+                    </div>
 
-                    <div
-                        style={{
-                            flex: 1,
-                        }}
-                    >
-                        <h4>{newsItem.title}</h4>
-                        <RawContent content={newsItem.content} />
-                        <RaisedButton label="Details" primary />
+                    <div style={{
+                        flex: 1,
+                        position: 'relative', // For content and button alignment
+                    }}>
+                        <NavLink to={detailsPath} style={{
+                            lineHeight: '100%',
+                            marginBottom: '0.5rem',
+                            display: 'inline-block',
+                        }}>
+                            <h2>{newsItem.title}</h2>
+                        </NavLink>
+
+                        <RawContent content={newsItem.content} style={{
+                            position: 'absolute', // It should not make the container bigger
+                        }}/>
+
+                        <NavLink to={detailsPath} style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                        }}>
+                            <RaisedButton label="Details" primary />
+                        </NavLink>
+
+                        <div style={{
+                            position: 'absolute',
+                            height: 0,
+                            bottom: 0,
+                            right: '-3rem',
+                            left: '-3rem',
+                            boxShadow: '0 0 4rem 2rem white',
+                        }} />
                     </div>
                 </div>
-            </NavLink>
+            </div>
         )
     }
 }

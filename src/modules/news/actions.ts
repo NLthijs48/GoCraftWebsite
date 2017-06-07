@@ -14,7 +14,8 @@ export function fetchNewsItems() {
             type: t.FETCH,
         })
 
-        return getData('/wp/v2/news?per_page=10')
+        // _embed for author and comment data
+        return getData('/wp/v2/news?per_page=10&_embed')
             .then((data) => dispatch({type: t.FETCH_SUCCESS, data}))
             .catch(() => dispatch({type: t.FETCH_FAILURE}))
     }
