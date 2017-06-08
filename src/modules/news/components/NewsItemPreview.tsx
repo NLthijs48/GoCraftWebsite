@@ -1,7 +1,9 @@
 import {RawContent} from 'components/RawContent'
+import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import {goCraftTheme, ThemeProps} from 'types'
 import {nameToPath} from 'utils/utils'
 import {NewsItem} from '../model'
 
@@ -10,32 +12,31 @@ interface NewsItemPreviewProps {
     newsItem: NewsItem
     path: string
 }
-export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
+export class NewsItemPreview extends React.Component<NewsItemPreviewProps & ThemeProps, {}> {
     public render() {
         const {newsItem, path} = this.props
         const detailsPath = path + '/' + nameToPath(newsItem.slug)
         return (
             <div style={{
                 width: '100%',
-                padding: '0.5em 1em',
+                padding: '1em 1em 0 1em',
                 display: 'block',
-                marginBottom: '1rem',
             }}>
-                <div style={{
+                <Paper zDepth={1} style={{
                     display: 'flex',
-                    minHeight: '11rem',
-                    maxWidth: '65rem',
+                    minHeight: '11em',
+                    maxWidth: '75em',
                     overflow: 'hidden',
                     margin: '0 auto',
                     backgroundColor: '#FFF',
-                    borderBottom: '0.5rem solid #34B067',
-                    padding: '1rem',
+                    borderBottom: '0.5em solid '+goCraftTheme.palette.primary1Color,
+                    padding: '1em',
                     position: 'relative', // For fade out alignment
                 }}>
                     <div style={{
                         flex: 1,
-                        maxWidth: '25rem',
-                        marginRight: '1rem',
+                        maxWidth: '28em',
+                        marginRight: '1em',
                         zIndex: 1, // Put above absolute fade out shadow
                     }}>
                         <NavLink to={detailsPath} style={{
@@ -51,15 +52,20 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
 
                     <div style={{
                         flex: 2,
-                        maxWidth: '40rem',
+                        maxWidth: '45em',
                         position: 'relative', // For content and button alignment
                     }}>
                         <NavLink to={detailsPath} style={{
-                            lineHeight: '100%',
-                            marginBottom: '0.5rem',
+                            marginTop: '-0.25em',
+                            marginBottom: '-0.25em',
+                            lineHeight: '125%',
                             display: 'inline-block',
                         }}>
-                            <h2>{newsItem.title}</h2>
+                            <h2 style={{
+                                lineHeight: '125%',
+                            }}>
+                                {newsItem.title}
+                            </h2>
                         </NavLink>
 
                         <RawContent content={newsItem.content} style={{
@@ -78,12 +84,12 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps, {}> {
                             position: 'absolute',
                             height: 0,
                             bottom: 0,
-                            right: '-3rem',
-                            left: '-3rem',
-                            boxShadow: '0 0 4rem 2rem white',
+                            right: '-3em',
+                            left: '-3em',
+                            boxShadow: '0 0 4em 2em white',
                         }} />
                     </div>
-                </div>
+                </Paper>
             </div>
         )
     }

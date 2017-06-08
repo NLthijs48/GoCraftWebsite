@@ -2,6 +2,7 @@ import {RawContent} from 'components/RawContent'
 import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
 import {RouteComponentProps, withRouter} from 'react-router'
+import {goCraftTheme} from 'types'
 import {Icon} from 'utils/Icon'
 import {NewsItem} from '../model'
 
@@ -37,7 +38,7 @@ export class NewsItemDetailsDisplay extends React.Component<CombinedNewsItemDeta
                             backgroundPosition: '50% 50%',
                             backgroundSize: 'cover',
                             marginRight: '1em',
-                            borderLeft: '1em solid #34B067',
+                            borderLeft: '1em solid '+goCraftTheme.palette.primary1Color,
                             flexShrink: 0,
                         }}
                     />
