@@ -36,6 +36,7 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
                     <div style={{
                         flex: 1,
                         maxWidth: '28em',
+                        minWidth: 0,
                         marginRight: '1em',
                         zIndex: 1, // Put above absolute fade out shadow
                     }}>
@@ -48,11 +49,36 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
                             backgroundPosition: '50% 50%',
                             backgroundSize: 'cover',
                         }} />
+
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            marginTop: '0.5em',
+                        }}>
+                            {newsItem.author.avatar &&
+                                <div style={{
+                                    background: 'url('+newsItem.author.avatar+')',
+                                    backgroundSize: 'contain',
+                                    backgroundRepeat: 'no-repeat',
+                                    width: '1.5em',
+                                    height: '1.5em',
+                                }}/>
+                            }
+
+                            <div className="ellipsis" style={{
+                                marginLeft: '0.5em',
+                                color: '#777',
+                                flex: 1,
+                            }}>
+                                {newsItem.author.name}
+                            </div>
+                        </div>
                     </div>
 
                     <div style={{
                         flex: 2,
                         maxWidth: '45em',
+                        minWidth: 0,
                         position: 'relative', // For content and button alignment
                     }}>
                         <NavLink to={detailsPath} style={{

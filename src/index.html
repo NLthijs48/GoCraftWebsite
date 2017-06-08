@@ -20,6 +20,13 @@
                 max-height: 100%;
             }
 
+            /* Don't wrap, add ellipsis if too much text */
+            .ellipsis {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
             /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
             html {
                 font-family: sans-serif;

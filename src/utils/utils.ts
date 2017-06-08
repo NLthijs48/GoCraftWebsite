@@ -1,14 +1,16 @@
 import fetch from 'isomorphic-fetch'
 
 // Deep get a value from an object
-export function get(data: any, ...paths: string[]): any {
+export function get(data: any, ...paths: Array<string|number>): any {
     let path = paths.shift()
-    while(path) {
-        if(typeof data !== 'object') {
+    while(path !== undefined && path !== null) {
+        // Move into object/array
+        if(typeof data === 'object') {
+            data = data[path]
+            path = paths.shift()
+        } else {
             return undefined
         }
-        data = data[path]
-        path = paths.shift()
     }
     return data
 }

@@ -16,6 +16,11 @@ const byId = (state: NewsItems = {}, action: t.NewsItemsAction) => {
                     slug: get(rawNewsItem, 'slug'),
                     image: get(rawNewsItem, 'acf', 'feature_image', 'sizes', 'medium'),
                     content: get(rawNewsItem, 'content', 'rendered'),
+                    author: {
+                        id: get(rawNewsItem, 'author'),
+                        name: get(rawNewsItem, '_embedded', 'author', 0, 'name'),
+                        avatar: get(rawNewsItem, '_embedded', 'author', 0, 'avatar_urls', '96'),
+                    },
                 }
             }
             return newsItems

@@ -1,4 +1,4 @@
-import {RemoteState} from 'types'
+import {RemoteState, User} from 'types'
 
 // Information about a news item
 export interface NewsItem {
@@ -6,6 +6,7 @@ export interface NewsItem {
     slug: string
     content: string
     image: string
+    author: User
 }
 
 // ID -> NewsItem
