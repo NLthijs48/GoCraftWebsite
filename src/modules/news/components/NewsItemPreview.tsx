@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {goCraftTheme, ThemeProps} from 'types'
+import {Icon} from 'utils/Icon'
+import {LocalDate} from 'utils/LocalDate'
 import {nameToPath} from 'utils/utils'
 import {NewsItem} from '../model'
 
@@ -51,26 +53,41 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
                         }} />
 
                         <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginTop: '0.5em',
+                            color: '#777',
                         }}>
-                            {newsItem.author.avatar &&
-                                <div style={{
-                                    background: 'url('+newsItem.author.avatar+')',
-                                    backgroundSize: 'contain',
-                                    backgroundRepeat: 'no-repeat',
-                                    width: '1.5em',
-                                    height: '1.5em',
-                                }}/>
-                            }
-
-                            <div className="ellipsis" style={{
-                                marginLeft: '0.5em',
-                                color: '#777',
-                                flex: 1,
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                marginTop: '0.5em',
                             }}>
-                                {newsItem.author.name}
+                                {newsItem.author.avatar &&
+                                    <div style={{
+                                        background: 'url('+newsItem.author.avatar+')',
+                                        backgroundSize: 'contain',
+                                        backgroundRepeat: 'no-repeat',
+                                        width: '1.5em',
+                                        height: '1.5em',
+                                        marginRight: '0.5em',
+                                    }}/>
+                                }
+
+                                <div className="ellipsis" style={{
+                                    flex: 1,
+                                }}>
+                                    {newsItem.author.name}
+                                </div>
+                            </div>
+
+                            <div style={{
+                                display: 'flex',
+                                marginTop: '0.5em',
+                                alignItems: 'center',
+                            }}>
+                                <Icon name="calendar-o" size="1.5em" style={{
+                                    marginRight: '0.5rem',
+                                    width: '1.5rem',
+                                }}/>
+                                <LocalDate at={newsItem.date} />
                             </div>
                         </div>
                     </div>

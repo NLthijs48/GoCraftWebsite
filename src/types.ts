@@ -1,4 +1,5 @@
 import {MuiTheme} from 'material-ui/styles'
+
 export interface OtherAction {
     type: '',
 }
@@ -39,3 +40,5 @@ export const goCraftTheme = {
         height: 50,
     },
 }
+
+export type UnixDate = number

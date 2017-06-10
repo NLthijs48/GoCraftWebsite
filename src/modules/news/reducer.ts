@@ -14,6 +14,7 @@ const byId = (state: NewsItems = {}, action: t.NewsItemsAction) => {
                 newsItems[get(rawNewsItem, 'id')] = {
                     title: get(rawNewsItem, 'title', 'rendered'),
                     slug: get(rawNewsItem, 'slug'),
+                    date: Date.parse(get(rawNewsItem, 'date')),
                     image: get(rawNewsItem, 'acf', 'feature_image', 'sizes', 'medium'),
                     content: get(rawNewsItem, 'content', 'rendered'),
                     author: {
