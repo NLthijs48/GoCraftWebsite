@@ -87,7 +87,7 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
                                     marginRight: '0.5rem',
                                     width: '1.5rem',
                                 }}/>
-                                <LocalDate at={newsItem.date} />
+                                <LocalDate className="ellipsis" at={newsItem.date} />
                             </div>
                         </div>
                     </div>

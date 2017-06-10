@@ -3,13 +3,10 @@ import {UnixDate} from 'types'
 
 export interface DateProps {
     at: UnixDate
-    style?: React.CSSProperties
 }
-export function LocalDate({at, style}: DateProps) {
+export function LocalDate({at, ...props}: DateProps) {
     return (
-        <div style={{
-            ...style,
-        }}>
+        <div {...props}>
             {formatDate(at)}
         </div>
     )
