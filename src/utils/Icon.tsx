@@ -31,6 +31,7 @@ export function Icon({name, color, size, style, fixedWidth}: IconProps) {
             className={classes.join(' ')}
             style={{
                 fontSize,
+                transition: 'none',
                 ...style,
                 color,
             }}

@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
+import {goCraftTheme} from 'types'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {fetchMenu} from '../actions'
@@ -37,6 +38,10 @@ class MenuDisplay extends React.Component<AllMenuProps, {}> {
             <SelectableList
                 value={this.props.location.pathname}
                 onChange={this.handleRequestChange}
+                selectedItemStyle={{
+                    backgroundColor: goCraftTheme.palette.primary1Color,
+                    color: '#FFF',
+                }}
             >
                 {items && byId && menuToListItems({items, byId, basePath: '/', pages: this.props.pages})}
             </SelectableList>
@@ -89,8 +94,9 @@ function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
                 key={path}
                 value={path}
                 primaryText={menuItem.title}
-                leftIcon={<Icon name={icon} color="#777777" size={24} fixedWidth />}
+                leftIcon={<Icon name={icon} color="inherit" size={24} fixedWidth />}
                 nestedItems={children && children.length ? menuToListItems({...data, items: children, basePath: path + '/'}) : undefined}
+                style={{color: '#666'}}
             />,
         )
     })
