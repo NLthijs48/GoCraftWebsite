@@ -23,7 +23,8 @@ class SiteContentDisplay extends React.Component<StateToProps, {}> {
                     flex: 1,
                 }}
             >
-                {!this.props.drawer.docked && <TopBar />}
+                <TopBar />
+
                 <div
                     style={{
                         display: 'flex',
@@ -33,11 +34,6 @@ class SiteContentDisplay extends React.Component<StateToProps, {}> {
                     }}
                 >
                     <LeftDrawer>
-                        {this.props.drawer.docked &&
-                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px'}}>
-                                <img src={logo} alt="logo" style={{height: 40}}/>
-                            </div>
-                        }
                         <VerticalMenu source="header-menu"/>
                     </LeftDrawer>
                     <Routes/>

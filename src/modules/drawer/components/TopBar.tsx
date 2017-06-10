@@ -1,4 +1,5 @@
-import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
+import Toolbar from 'material-ui/Toolbar'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import React from 'react'
@@ -6,6 +7,9 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
+import {goCraftTheme} from 'types'
+import {Filler} from 'utils/Filler'
+import {Icon} from 'utils/Icon'
 
 const logo = require('images/logo.png')
 
@@ -21,23 +25,46 @@ class TopBarDisplay extends React.Component<MenuProps & DispatchToProps & StateT
 
     public render() {
         return (
-            <AppBar
-                title={
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '100%',
-                        }}
-                    >
-                        <img src={logo} alt="logo" style={{height: 40}}/>
-                    </div>
+            <Toolbar style={{
+                backgroundColor: goCraftTheme.palette.primary1Color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                zIndex: 11, // Appear above menu bar
+                padding: 0,
+            }}>
+                {!this.props.drawer.docked &&
+                    <IconButton onTouchTap={this.onMenuIconTap} style={{
+                        fontSize: 'inherit',
+                        width: '56px',
+                        height: '56px',
+                    }}>
+                        <Icon
+                            color="#FFF"
+                            size="1.5em"
+                            name="bars"
+                            style={{
+                                display: 'block',
+                                width: '100%',
+                                height: '100%',
+                            }}
+                        />
+                    </IconButton>
                 }
-                onLeftIconButtonTouchTap={this.onMenuIconTap}
-                showMenuIconButton={!this.props.drawer.docked}
-                iconElementRight={<div style={{width: 56}} />}
-            />
+                <Filler />
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
+                    }}
+                >
+                    <img src={logo} alt="logo" style={{height: 40}}/>
+                </div>
+                <Filler />
+                {!this.props.drawer.docked && <div style={{width: '2.8em'}} />}
+            </Toolbar>
         )
     }
 

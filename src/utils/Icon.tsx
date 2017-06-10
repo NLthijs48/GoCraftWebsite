@@ -1,14 +1,15 @@
 import FontIcon from 'material-ui/FontIcon'
 import React from 'react'
 
-export interface IconProps {
+export interface IconProps  {
     name: string
     color?: string
     size?: number|string
     style?: React.CSSProperties
     fixedWidth?: boolean
+    onClick?: () => void
 }
-export function Icon({name, color, size, style, fixedWidth}: IconProps) {
+export function Icon({name, color, size, style, fixedWidth, onClick}: IconProps) {
     // Deal with 'fa-home' and 'home' case
     if(name.substr(0, 3) !== 'fa-') {
         name = 'fa-' + name
@@ -36,6 +37,7 @@ export function Icon({name, color, size, style, fixedWidth}: IconProps) {
                 color,
             }}
             aria-hidden="true"
+            onClick={onClick}
         />
     )
 }
