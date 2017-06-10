@@ -1,5 +1,5 @@
 import {RawContent} from 'components/RawContent'
-import Paper from 'material-ui/Paper'
+import Card from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
 import {NavLink} from 'react-router-dom'
@@ -9,7 +9,6 @@ import {LocalDate} from 'utils/LocalDate'
 import {nameToPath} from 'utils/utils'
 import {NewsItem} from '../model'
 
-// TODO allow different detail and preview content
 interface NewsItemPreviewProps {
     newsItem: NewsItem
     path: string
@@ -22,19 +21,25 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
             <div style={{
                 width: '100%',
                 padding: '1em 1em 0 1em',
+                margin: '0 auto',
                 display: 'block',
+                maxWidth: '75em',
             }}>
-                <Paper zDepth={1} style={{
-                    display: 'flex',
-                    minHeight: '11em',
-                    maxWidth: '75em',
-                    overflow: 'hidden',
-                    margin: '0 auto',
-                    backgroundColor: '#FFF',
-                    borderBottom: '0.5em solid '+goCraftTheme.palette.primary1Color,
-                    padding: '1em',
-                    position: 'relative', // For fade out alignment
-                }}>
+                <Card
+                    style={{
+                        minHeight: '11em',
+                        overflow: 'hidden',
+                        margin: '0 auto',
+                        backgroundColor: '#FFF',
+                        borderBottom: '0.5em solid '+goCraftTheme.palette.primary1Color,
+                        padding: '1em',
+                        position: 'relative', // For fade out alignment
+                    }}
+                    containerStyle={{
+                        display: 'flex',
+                        width: '100%',
+                    }}
+                >
                     <div style={{
                         flex: 1,
                         maxWidth: '28em',
@@ -103,6 +108,7 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
                             marginBottom: '-0.25em',
                             lineHeight: '125%',
                             display: 'inline-block',
+                            color: goCraftTheme.palette.primary1Color,
                         }}>
                             <h2 style={{
                                 lineHeight: '125%',
@@ -127,12 +133,12 @@ export class NewsItemPreview extends React.Component<NewsItemPreviewProps & Them
                             position: 'absolute',
                             height: 0,
                             bottom: 0,
-                            right: '-3em',
-                            left: '-3em',
-                            boxShadow: '0 0 4em 2em white',
+                            right: '-4em',
+                            left: '-4em',
+                            boxShadow: '0 0 4em 4em white',
                         }} />
                     </div>
-                </Paper>
+                </Card>
             </div>
         )
     }
