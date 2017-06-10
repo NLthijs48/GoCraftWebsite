@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {HTMLProps} from 'react'
 import {UnixDate} from 'types'
 
-export interface DateProps {
+export interface DateProps extends HTMLProps<HTMLElement> {
     at: UnixDate
 }
 export function LocalDate({at, ...props}: DateProps) {
