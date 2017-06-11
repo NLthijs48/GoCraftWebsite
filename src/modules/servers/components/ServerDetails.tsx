@@ -1,11 +1,11 @@
+import {RawContent} from 'components/RawContent'
 import React from 'react'
 import {ServerData} from '../model'
-import {RawContent} from 'components/RawContent'
 
 interface ServerProps {
     server: ServerData
 }
-export class ServerDetails extends React.Component<ServerProps, {}> {
+export class ServerDetails extends React.PureComponent<ServerProps, {}> {
     public render() {
         const server = this.props.server
         return (

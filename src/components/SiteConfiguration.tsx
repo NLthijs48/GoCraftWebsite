@@ -6,7 +6,7 @@ import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {configureStore} from 'store/configureStore'
-import {goCraftTheme} from 'types'
+import {THEME} from 'types'
 
 const store = configureStore()
 
@@ -14,7 +14,7 @@ export function SiteConfiguration() {
     return (
         <AppContainer>
             <Provider store={store}>
-                <MuiThemeProvider muiTheme={getMuiTheme(goCraftTheme)}>
+                <MuiThemeProvider muiTheme={getMuiTheme(THEME)}>
                     <Router>
                         <SiteContent />
                     </Router>

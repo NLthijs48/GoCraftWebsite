@@ -19,7 +19,7 @@ export interface AnimateProps {
     className?: string
 }
 
-export class Animate extends React.Component<AnimateProps, {}> {
+export class Animate extends React.PureComponent<AnimateProps, {}> {
     private containerE: HTMLElement
 
     // Animation at initial render of AnimateContainer

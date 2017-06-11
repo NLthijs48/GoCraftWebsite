@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
-import {goCraftTheme} from 'types'
+import {THEME} from 'types'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {fetchMenu} from '../actions'
@@ -21,7 +21,7 @@ interface MenuProps {
     source: string
 }
 type AllMenuProps = MenuProps & DispatchToProps & StateToProps & RouteComponentProps<any>
-class MenuDisplay extends React.Component<AllMenuProps, {}> {
+class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
     public constructor(props: AllMenuProps) {
         super(props)
         this.handleRequestChange = this.handleRequestChange.bind(this)
@@ -39,7 +39,7 @@ class MenuDisplay extends React.Component<AllMenuProps, {}> {
                 value={this.props.location.pathname}
                 onChange={this.handleRequestChange}
                 selectedItemStyle={{
-                    backgroundColor: goCraftTheme.palette.primary1Color,
+                    backgroundColor: THEME.palette.primary1Color,
                     color: '#FFF',
                 }}
             >

@@ -10,7 +10,7 @@ import {Dispatch} from 'redux'
 interface LeftDrawerProps {
     source: string
 }
-class LeftDrawerDisplay extends React.Component<LeftDrawerProps & DispatchToProps & StateToProps, {}> {
+class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchToProps & StateToProps, {}> {
 
     constructor(props: any) {
         super(props)
@@ -29,7 +29,7 @@ class LeftDrawerDisplay extends React.Component<LeftDrawerProps & DispatchToProp
     }
 
     public updateDocked() {
-        const newDocked = window.innerWidth >= 700
+        const newDocked = window.innerWidth >=800
         if(this.props.drawer.docked !== newDocked) {
             this.props.updateDocked(newDocked)
         }

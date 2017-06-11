@@ -6,7 +6,7 @@ import React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
 
-class PreFetchComponent extends React.Component<DispatchToProps, {}> {
+class PreFetchComponent extends React.PureComponent<DispatchToProps, {}> {
     public componentDidMount() {
         this.props.fetchMenu('header-menu')
         this.props.fetchPages()

@@ -8,7 +8,7 @@ import {withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
-import {goCraftTheme} from 'types'
+import {THEME} from 'types'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 
@@ -17,7 +17,7 @@ const logo = require('images/logo.png')
 interface MenuProps {
     source: string
 }
-class TopBarDisplay extends React.Component<MenuProps & DispatchToProps & StateToProps, {}> {
+class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & StateToProps, {}> {
 
     constructor(props: any) {
         super(props)
@@ -27,7 +27,7 @@ class TopBarDisplay extends React.Component<MenuProps & DispatchToProps & StateT
     public render() {
         return (
             <Toolbar style={{
-                backgroundColor: goCraftTheme.palette.primary1Color,
+                backgroundColor: THEME.palette.primary1Color,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-start',

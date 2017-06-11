@@ -12,7 +12,7 @@ interface ServersProps {
     basePath: string
 }
 type CombinedServersDisplayProps = ServersProps & StateToProps & RouteComponentProps<any>
-class ServersDisplay extends React.Component<CombinedServersDisplayProps, {}> {
+class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}> {
     public render() {
         const {servers, basePath} = this.props
 

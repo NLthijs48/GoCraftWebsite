@@ -5,7 +5,7 @@ import {AnimateContainer} from 'utils/AnimateContainer'
 import {Animate} from 'utils/Animation'
 import {MenuRoutes} from './MenuRoutes'
 
-class RoutesComponent extends React.Component<RouteComponentProps<any>, {}> {
+class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> {
     public render() {
         const {location} = this.props
         return (
@@ -28,7 +28,7 @@ class RoutesComponent extends React.Component<RouteComponentProps<any>, {}> {
                             time: 0.3,
                         }}
                         style={{
-                            backgroundColor: 'white',
+                            backgroundColor: '#EEE',
                             position: 'absolute',
                             left: 0,
                             right: 0,

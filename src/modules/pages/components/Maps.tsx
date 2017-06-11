@@ -11,7 +11,7 @@ interface MapsProps {
     basePath: string
 }
 type AllMapsProps = MapsProps & StateToProps & RouteComponentProps<{one: string}>
-class MapsDisplay extends React.Component<AllMapsProps, {}> {
+class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
     public constructor(props: AllMapsProps) {
         super(props)
         this.switchToTab = this.switchToTab.bind(this)

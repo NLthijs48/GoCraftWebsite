@@ -18,7 +18,7 @@ interface MenuItemPageProps {
     item: MenuEntry
     basePath: string
 }
-class MenuItemPageDisplay extends React.Component<MenuItemPageProps & StateToProps, {}> {
+class MenuItemPageDisplay extends React.PureComponent<MenuItemPageProps & StateToProps, {}> {
     public render() {
         const {item, pages, basePath} = this.props
 

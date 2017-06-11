@@ -7,7 +7,7 @@ interface ServerProps {
     server: ServerData
     path: string
 }
-export class Server extends React.Component<ServerProps, {}> {
+export class Server extends React.PureComponent<ServerProps, {}> {
     public render() {
         const {server, path} = this.props
         return (

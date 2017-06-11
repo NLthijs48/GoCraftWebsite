@@ -12,7 +12,7 @@ import MenuProps = __MaterialUI.Menus.MenuProps
 
 const logo = require('images/logo.png')
 
-class SiteContentDisplay extends React.Component<StateToProps, {}> {
+class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
     public render() {
         return (
             <div

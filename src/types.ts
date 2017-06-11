@@ -22,7 +22,7 @@ export interface ThemeProps {
     muiTheme?: MuiTheme
 }
 
-export const goCraftTheme = {
+export const THEME = {
     palette: {
         primary1Color: '#388e3c',
         primary2Color: '#66bb6a',

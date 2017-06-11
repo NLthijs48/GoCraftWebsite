@@ -1,10 +1,10 @@
-import {NewsItemDetails} from 'modules/news/components/NewsItemDetails'
-import {NewsItemPreview} from 'modules/news/components/NewsItemPreview'
+import {NewsItemBlock} from 'modules/news/components/NewsItemBlock'
 import {Loading} from 'modules/pages/components/Loading'
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
+import {CardList} from 'utils/CardList'
 import {nameToPath} from 'utils/utils'
 import {NewsItem, NewsItemsState} from '../model'
 
@@ -12,7 +12,7 @@ interface NewsListProps {
     basePath: string
 }
 type CombinedNewsListProps = NewsListProps & StateToProps & RouteComponentProps<any>
-class NewsListDisplay extends React.Component<CombinedNewsListProps, {}> {
+class NewsListDisplay extends React.PureComponent<CombinedNewsListProps, {}> {
     public render() {
         const {newsItems, basePath} = this.props
 
@@ -37,20 +37,24 @@ class NewsListDisplay extends React.Component<CombinedNewsListProps, {}> {
 function getServerOverviewFunction({newsItems, basePath}: CombinedNewsListProps) {
     return () => {
         return (
-            <div>
+            <CardList>
                 {newsItems.items.map((newsItemKey) => {
                     const newsItem: NewsItem = newsItems.byId[newsItemKey]
                     return (
-                        <NewsItemPreview key={newsItem.slug} newsItem={newsItem} path={basePath}/>
+                        <NewsItemBlock preview key={newsItem.slug} newsItem={newsItem} path={basePath}/>
                     )
                 })}
-            </div>
+            </CardList>
         )
     }
 }
 
 function getNewsItemDetailsFunction(newsItem: NewsItem) {
-    return () => <NewsItemDetails newsItem={newsItem}/>
+    return () => (
+        <CardList>
+            <NewsItemBlock newsItem={newsItem}/>
+        </CardList>
+    )
 }
 
 interface StateToProps {

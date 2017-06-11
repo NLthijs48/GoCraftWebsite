@@ -12,7 +12,7 @@ interface MenuRoutesProps {
     source: string
     location: Location
 }
-class MenuRoutesDisplay extends React.Component<MenuRoutesProps & StateToProps, {}> {
+class MenuRoutesDisplay extends React.PureComponent<MenuRoutesProps & StateToProps, {}> {
     public render() {
         return (
             <div>{menuToRoutes({

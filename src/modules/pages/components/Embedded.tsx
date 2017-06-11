@@ -8,7 +8,7 @@ interface EmbeddedProps {
 interface EmbeddedState {
     loading: boolean
 }
-export class Embedded extends React.Component<EmbeddedProps, EmbeddedState> {
+export class Embedded extends React.PureComponent<EmbeddedProps, EmbeddedState> {
 
     public constructor(props: EmbeddedProps) {
         super(props)
