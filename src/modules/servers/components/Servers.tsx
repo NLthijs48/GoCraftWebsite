@@ -1,11 +1,11 @@
 import {Loading} from 'modules/pages/components/Loading'
+import {ServersOverview} from 'modules/servers/components/ServersOverview'
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
 import {ServerData, ServersState} from '../model'
-import {Server} from './Server'
 import {ServerDetails} from './ServerDetails'
 
 interface ServersProps {
@@ -36,9 +36,7 @@ class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}
 function getServerOverviewFunction({servers, basePath}: CombinedServersDisplayProps) {
     return () => {
         return (
-            <div style={{marginTop: '2em'}}>
-                {servers.data.map((server) => <Server key={server.slug} server={server} path={basePath} />)}
-            </div>
+            <ServersOverview servers={servers} basePath={basePath} />
         )
     }
 }

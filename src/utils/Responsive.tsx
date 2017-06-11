@@ -10,19 +10,17 @@ export class Responsive extends React.PureComponent<ResponsiveProps, {}> {
         const {children, onResize, style, ...otherProps} = this.props
         return (
             <Measure bounds onResize={onResize}>
-                {({measureRef}) =>
-                    <div
-                        {...otherProps}
-                        ref={measureRef}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            ...style,
-                        }}
-                    >
-                        {children}
-                    </div>
-                }
+                {({measureRef}) => <div
+                    {...otherProps}
+                    ref={measureRef}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        ...style,
+                    }}
+                >
+                    {children}
+                </div>}
             </Measure>
         )
     }

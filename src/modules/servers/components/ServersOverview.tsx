@@ -1,0 +1,64 @@
+import {Server} from 'modules/servers/components/Server'
+import {ServerData, ServersState} from 'modules/servers/model'
+import React from 'react'
+import {ContentRect} from 'react-measure'
+import {Responsive} from 'utils/Responsive'
+
+interface ServersOverviewProps {
+    servers: ServersState
+    basePath: string
+}
+export class ServersOverview extends React.PureComponent<ServersOverviewProps, {columns: number}> {
+
+    public constructor(props: ServersOverviewProps) {
+        super(props)
+        this.state = {columns: 1}
+        this.onResize = this.onResize.bind(this)
+    }
+
+    public render() {
+        const {servers, basePath} = this.props
+        const {columns} = this.state
+        // [row][column]
+        const renderLayout: ServerData[][] = []
+
+        // Place servers on the grid
+        for(let i=0; i<servers.data.length; i++) {
+            // Calcuate the position this server should have
+            const rowIndex = Math.floor(i/columns)
+            const columnIndex = i%columns
+            // Get the row
+            const row = renderLayout[rowIndex] || []
+            // Assign the server
+            row[columnIndex] = servers.data[i]
+            // Place row back
+            renderLayout[rowIndex] = row
+        }
+
+        return (
+            <Responsive onResize={this.onResize} style={{margin: '0.5em 0'}}>
+                {renderLayout.map((rowServers) => (
+                    <div style={{
+                        display: 'flex',
+                        padding: '0 0.5em',
+                        // justifyContent: 'center', // Align in the middle?
+                    }}>
+                        {rowServers.map((server) => (
+                            <div style={{
+                                maxWidth: 100/columns+'%',
+                                padding: '0.5em',
+                                flex: 1,
+                            }}>
+                                <Server server={server} path={basePath} />
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </Responsive>
+        )
+    }
+
+    private onResize(contentRect: ContentRect) {
+        this.setState({columns: Math.max(1, Math.floor(contentRect.bounds.width/300))})
+    }
+}

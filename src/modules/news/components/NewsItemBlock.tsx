@@ -41,7 +41,9 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBl
                     />
                 }
 
-                <CardItem>
+                <CardItem style={{
+                    minHeight: '11em',
+                }}>
                     <Responsive
                         onResize={this.onResize}
                         style={{

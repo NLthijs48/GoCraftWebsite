@@ -1,11 +1,21 @@
 import {RawContent} from 'components/RawContent'
+import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
+import {RouteComponentProps, withRouter} from 'react-router'
+import {Icon} from 'utils/Icon'
 import {ServerData} from '../model'
 
 interface ServerProps {
     server: ServerData
 }
-export class ServerDetails extends React.PureComponent<ServerProps, {}> {
+type AllServerDetailsProps = ServerProps & RouteComponentProps<{}>
+export class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}> {
+
+    public constructor(props: AllServerDetailsProps) {
+        super(props)
+        this.goBack = this.goBack.bind(this)
+    }
+
     public render() {
         const server = this.props.server
         return (
@@ -14,6 +24,13 @@ export class ServerDetails extends React.PureComponent<ServerProps, {}> {
                 margin: '0 auto',
                 padding: '1em',
             }}>
+                <RaisedButton
+                    label="Back"
+                    icon={<Icon name="chevron-left"/>}
+                    onTouchTap={this.goBack}
+                    style={{marginBottom: '1em'}}
+                />
+
                 <h1>{server.name}</h1>
                 <div style={{display: 'flex'}}>
                     <div style={{
@@ -37,4 +54,12 @@ export class ServerDetails extends React.PureComponent<ServerProps, {}> {
             </div>
         )
     }
+
+    private goBack() {
+        const pathParts = this.props.location.pathname.split('/')
+        pathParts.pop()
+        this.props.history.push({pathname: pathParts.join('/')})
+    }
 }
+
+export const ServerDetails = withRouter<any>(ServerDetailsDisplay)

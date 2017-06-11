@@ -16,7 +16,6 @@ export class CardItem extends React.Component<CardItemProps, {}> {
         return (
             <Card
                 style={{
-                    minHeight: '11em',
                     overflow: 'hidden',
                     backgroundColor: '#FFF',
                     borderBottom: '0.5em solid ' + THEME.palette.primary1Color,
@@ -28,6 +27,7 @@ export class CardItem extends React.Component<CardItemProps, {}> {
                 containerStyle={{
                     display: 'flex',
                     width: '100%',
+                    height: '100%',
                 }}
             >
                 {children}
