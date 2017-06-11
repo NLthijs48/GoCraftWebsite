@@ -5,6 +5,7 @@ import {DrawerState} from 'modules/drawer/model'
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
 import {goCraftTheme} from 'types'
@@ -52,7 +53,7 @@ class TopBarDisplay extends React.Component<MenuProps & DispatchToProps & StateT
                     </IconButton>
                 }
                 <Filler />
-                <div
+                <NavLink to="/"
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -61,7 +62,7 @@ class TopBarDisplay extends React.Component<MenuProps & DispatchToProps & StateT
                     }}
                 >
                     <img src={logo} alt="logo" style={{height: 40}}/>
-                </div>
+                </NavLink>
                 <Filler />
                 {!this.props.drawer.docked && <div style={{width: '2.8em'}} />}
             </Toolbar>
