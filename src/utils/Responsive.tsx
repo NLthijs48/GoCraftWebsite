@@ -15,7 +15,6 @@ export class Responsive extends React.PureComponent<ResponsiveProps, {}> {
                     ref={measureRef}
                     style={{
                         width: '100%',
-                        height: '100%',
                         ...style,
                     }}
                 >

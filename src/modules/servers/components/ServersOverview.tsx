@@ -19,6 +19,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
     public render() {
         const {servers, basePath} = this.props
         const {columns} = this.state
+        const maxWidth = 100/Math.min(servers.data.length, columns) + '%'
         // [row][column]
         const renderLayout: ServerData[][] = []
 
@@ -45,7 +46,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
                     }}>
                         {rowServers.map((server) => (
                             <div style={{
-                                maxWidth: 100/columns+'%',
+                                maxWidth,
                                 padding: '0.5em',
                                 flex: 1,
                             }}>
