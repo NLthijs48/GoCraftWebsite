@@ -5,6 +5,7 @@ import {THEME} from 'types'
 interface CardItemProps {
     children?: React.ReactNode
     style?: React.CSSProperties
+    containerStyle?: React.CSSProperties
 }
 export class CardItem extends React.Component<CardItemProps, {}> {
     public constructor(props: CardItemProps) {
@@ -12,7 +13,7 @@ export class CardItem extends React.Component<CardItemProps, {}> {
     }
 
     public render() {
-        const {children, style} = this.props
+        const {children, style, containerStyle} = this.props
         return (
             <Card
                 style={{
@@ -28,6 +29,7 @@ export class CardItem extends React.Component<CardItemProps, {}> {
                     display: 'flex',
                     width: '100%',
                     height: '100%',
+                    ...containerStyle,
                 }}
             >
                 {children}

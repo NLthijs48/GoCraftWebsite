@@ -6,7 +6,8 @@ export type Page =
     MapsPage |
     HTMLPage |
     EmbeddedPage |
-    ServersPage
+    ServersPage |
+    VoteSitesPage
 interface AbstractPage {
     urlPath?: string
     menuIcon?: string
@@ -27,6 +28,9 @@ export interface EmbeddedPage extends AbstractPage {
 }
 export interface ServersPage extends AbstractPage {
     type: 'servers'
+}
+export interface VoteSitesPage extends AbstractPage {
+    type: 'vote-sites'
 }
 
 // ID -> Page

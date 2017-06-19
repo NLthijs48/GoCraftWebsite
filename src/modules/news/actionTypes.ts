@@ -13,7 +13,7 @@ interface FetchSuccess {
     data: object[],
 }
 
-// Failed to get server information
+// Failed to get news items information
 export const FETCH_FAILURE = 'newsItems/FETCH_FAILURE'
 interface FetchFailure {
     type: 'newsItems/FETCH_FAILURE',

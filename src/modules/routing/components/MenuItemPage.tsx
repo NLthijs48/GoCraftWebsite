@@ -7,6 +7,7 @@ import {Maps} from 'modules/pages/components/Maps'
 import {NotFound} from 'modules/pages/components/NotFound'
 import {Page, PagesState} from 'modules/pages/model'
 import {Servers} from 'modules/servers/components/Servers'
+import {VoteSitesList} from 'modules/votesites/components/VoteSitesList'
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
@@ -52,6 +53,8 @@ function renderPage(page: Page, item: MenuEntry, basePath: string): React.ReactE
             return <Embedded page={page}/>
         case 'servers':
             return <Servers basePath={basePath}/>
+        case 'vote-sites':
+            return <VoteSitesList basePath={basePath} />
         default:
             console.error('unknown page type:', page, 'menu item:', item)
             return <NotFound />

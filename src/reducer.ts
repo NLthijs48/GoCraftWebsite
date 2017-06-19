@@ -8,6 +8,8 @@ import {Menus} from 'modules/routing/model'
 import {menus} from 'modules/routing/reducer'
 import {ServersState} from 'modules/servers/model'
 import {servers} from 'modules/servers/reducer'
+import {VoteSitesState} from 'modules/votesites/model'
+import {voteSites} from 'modules/votesites/reducer'
 import {combineReducers} from 'redux'
 
 export interface AppState {
@@ -16,6 +18,7 @@ export interface AppState {
     pages: PagesState
     drawer: DrawerState
     newsItems: NewsItemsState
+    voteSites: VoteSitesState
 }
 
 export const rootReducer = combineReducers({
@@ -24,4 +27,5 @@ export const rootReducer = combineReducers({
     pages,
     drawer,
     newsItems,
+    voteSites,
 })

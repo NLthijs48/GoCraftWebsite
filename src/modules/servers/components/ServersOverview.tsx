@@ -38,14 +38,14 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
 
         return (
             <Responsive onResize={this.onResize} style={{margin: '0.5em 0'}}>
-                {renderLayout.map((rowServers) => (
-                    <div style={{
+                {renderLayout.map((rowServers, rowIndex) => (
+                    <div key={rowIndex} style={{
                         display: 'flex',
                         padding: '0 0.5em',
                         // justifyContent: 'center', // Align in the middle?
                     }}>
-                        {rowServers.map((server) => (
-                            <div style={{
+                        {rowServers.map((server, columnIndex) => (
+                            <div key={columnIndex} style={{
                                 maxWidth,
                                 padding: '0.5em',
                                 flex: 1,

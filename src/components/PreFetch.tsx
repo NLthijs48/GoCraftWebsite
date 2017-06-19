@@ -2,16 +2,24 @@ import {fetchNewsItems} from 'modules/news/actions'
 import {fetchPages} from 'modules/pages/actions'
 import {fetchMenu} from 'modules/routing/actions'
 import {fetchServers} from 'modules/servers/actions'
+import {fetchVoteSites} from 'modules/votesites/actions'
 import React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
 
 class PreFetchComponent extends React.PureComponent<DispatchToProps, {}> {
     public componentDidMount() {
+
+        // Crucial resources
         this.props.fetchMenu('header-menu')
         this.props.fetchPages()
         this.props.fetchServers()
-        this.props.fetchNewsItems()
+
+        // Page specific resources
+        setTimeout(() => {
+            this.props.fetchNewsItems()
+            this.props.fetchVoteSites()
+        }, 0)
     }
 
     public render() {
@@ -24,6 +32,7 @@ interface DispatchToProps {
     fetchServers: () => void
     fetchNewsItems: () => void
     fetchMenu: (source: string) => void
+    fetchVoteSites: () => void,
 }
 export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
     () => ({}),
@@ -32,5 +41,6 @@ export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
         fetchServers: () => dispatch(fetchServers()),
         fetchNewsItems: () => dispatch(fetchNewsItems()),
         fetchMenu: (source) => dispatch(fetchMenu(source)),
+        fetchVoteSites: () => dispatch(fetchVoteSites()),
     }),
 )(PreFetchComponent))
