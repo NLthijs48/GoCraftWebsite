@@ -20,7 +20,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "lint": "tslint --project tsconfig.json",
-    "build": "webpack --env.target=production --progress --profile",
+    "build": "webpack --env.target=production --progress --profile --colors",
     "build-analyze": "webpack --env.target=production --progress --profile --colors --env.analyze"
   },
   "dependencies": {
