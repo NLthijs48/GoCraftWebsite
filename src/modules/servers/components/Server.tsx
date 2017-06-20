@@ -1,6 +1,9 @@
+import IconButton from 'material-ui/IconButton'
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {CardItem} from 'utils/CardItem'
+import {Filler} from 'utils/Filler'
+import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
 
@@ -21,7 +24,8 @@ export class Server extends React.PureComponent<ServerProps, {}> {
                     style={{
                         width: '100%',
                         height: '100%',
-                        display: 'block',
+                        display: 'flex',
+                        flexDirection: 'column',
                         color: 'inherit',
                     }}
                 >
@@ -51,9 +55,27 @@ export class Server extends React.PureComponent<ServerProps, {}> {
                     </div>
 
                     <div style={{
-                        padding: '1em',
+                        margin: '1em 1em 0 1em',
                     }}>
                         {server.shortDescription}
+                    </div>
+
+                    <Filler />
+
+                    <div>
+                        {server.dynmapLink &&
+                            <NavLink
+                                to={'/maps/' + nameToPath(server.name)}
+                            >
+                                <IconButton style={{
+                                    fontSize: 'inherit',
+                                    width: '56px',
+                                    height: '56px',
+                                }}>
+                                    <Icon name="map-o"/>
+                                </IconButton>
+                            </NavLink>
+                        }
                     </div>
                 </NavLink>
             </CardItem>
