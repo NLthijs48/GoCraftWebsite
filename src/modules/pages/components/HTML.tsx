@@ -1,6 +1,7 @@
-import React from 'react'
-import {HTMLPage} from '../model'
 import {RawContent} from 'components/RawContent'
+import React from 'react'
+import {CardItem} from 'utils/CardItem'
+import {HTMLPage} from '../model'
 
 interface HTMLProps {
     page: HTMLPage
@@ -14,8 +15,14 @@ export function HTML({page}: HTMLProps) {
     }
 
     return (
-        <div className="container">
-            {content}
+        <div style={{
+            maxWidth: 900,
+            margin: '1em auto',
+            padding: '1em',
+        }}>
+            <CardItem containerStyle={{flexDirection: 'column'}}>
+                {content}
+            </CardItem>
         </div>
     )
 }

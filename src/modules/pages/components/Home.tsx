@@ -7,7 +7,7 @@ interface HomeProps {
 export class Home extends React.PureComponent<HomeProps, {}> {
     public render() {
         return (
-            <div>
+            <div style={{marginTop: '1em'}}>
                 <NewsList basePath={this.props.basePath} />
             </div>
         )

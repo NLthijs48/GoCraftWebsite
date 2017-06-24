@@ -37,7 +37,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
         }
 
         return (
-            <Responsive onResize={this.onResize} style={{margin: '0.5em 0'}}>
+            <Responsive onResize={this.onResize} style={{margin: '1.5em 0 0.5em 0'}}>
                 {renderLayout.map((rowServers, rowIndex) => (
                     <div key={rowIndex} style={{
                         display: 'flex',

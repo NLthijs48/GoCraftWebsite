@@ -30,7 +30,6 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
             <Tabs
                 value={this.props.match.params.one}
                 onChange={this.switchToTab}
-                className="tabs-full-height"
                 style={{
                     height: '100%',
                     width: '100%',
@@ -52,6 +51,9 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
                             label={server.name}
                             key={server.name}
                             value={nameToPath(server.name)}
+                            style={{
+                                paddingTop: '1em', // Room for the logo
+                            }}
                         >
                             <iframe
                                 style={{
