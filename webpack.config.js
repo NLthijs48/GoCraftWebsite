@@ -40,18 +40,19 @@ const commonConfig = {
                         loader: 'image-webpack-loader',
                         query: {
                             mozjpeg: {
-                                progressive: true,
+                                progressive: false,
                                 quality: 75,
+                                bypassOnDebug: true,
                             },
                             gifsicle: {
                                 interlaced: false,
                             },
                             optipng: {
-                                optimizationLevel: 7,
+                                optimizationLevel: 0,
                             },
                             pngquant: {
                                 quality: '75-90',
-                                speed: 4,
+                                speed: 10,
                             },
                         },
                     }

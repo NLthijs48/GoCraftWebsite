@@ -56,6 +56,41 @@ module.exports = function(env) {
             'index.tsx'
         ],
         plugins: plugins,
+        module: {
+            loaders: [
+                // Load and optimize images
+                {
+                    test: /\.(jpe?g|png|gif|svg)$/i,
+                    loaders: [
+                        {
+                            loader: 'file-loader',
+                            query: {
+                                name: '[path][name].[ext]?[sha512:hash:base36:10]'
+                            }
+                        },
+                        {
+                            loader: 'image-webpack-loader',
+                            query: {
+                                mozjpeg: {
+                                    progressive: true,
+                                    quality: 75,
+                                },
+                                gifsicle: {
+                                    interlaced: true,
+                                },
+                                optipng: {
+                                    optimizationLevel: 5,
+                                },
+                                pngquant: {
+                                    quality: '75-90',
+                                    speed: 4,
+                                },
+                            },
+                        }
+                    ]
+                },
+            ],
+        },
         devtool: 'source-map',
     }
 };
