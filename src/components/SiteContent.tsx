@@ -10,8 +10,6 @@ import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import MenuProps = __MaterialUI.Menus.MenuProps
 
-const logo = require('images/logo.png')
-
 class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
     public render() {
         return (
