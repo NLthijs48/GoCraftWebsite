@@ -21,6 +21,8 @@ module.exports = {
             chunkModules: false,
             hash: false,
         },
+        host: '0.0.0.0',
+        disableHostCheck: true,
     },
     plugins: [
         // Setup hot module replacement
