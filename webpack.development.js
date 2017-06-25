@@ -24,6 +24,42 @@ module.exports = {
         host: '0.0.0.0',
         disableHostCheck: true,
     },
+    module: {
+        loaders: [
+            // Load and optimize images
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    {
+                        loader: 'file-loader',
+                        query: {
+                            name: '[path][name].[ext]?[sha512:hash:base36:10]'
+                        }
+                    },
+                    {
+                        loader: 'image-webpack-loader',
+                        query: {
+                            mozjpeg: {
+                                progressive: false,
+                                quality: 75,
+                                bypassOnDebug: true,
+                            },
+                            gifsicle: {
+                                interlaced: false,
+                            },
+                            optipng: {
+                                optimizationLevel: 0,
+                            },
+                            pngquant: {
+                                quality: '75-90',
+                                speed: 10,
+                            },
+                        },
+                    }
+                ]
+            },
+        ]
+    },
     plugins: [
         // Setup hot module replacement
         new webpack.HotModuleReplacementPlugin(),

@@ -79,7 +79,7 @@ module.exports = function(env) {
                                     interlaced: true,
                                 },
                                 optipng: {
-                                    optimizationLevel: 5,
+                                    optimizationLevel: 7,
                                 },
                                 pngquant: {
                                     quality: '75-90',
