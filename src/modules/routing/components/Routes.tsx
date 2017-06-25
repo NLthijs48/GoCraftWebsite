@@ -1,3 +1,4 @@
+import {PageBackground} from 'modules/options/components/PageBackground'
 import {NotFound} from 'modules/pages/components/NotFound'
 import React from 'react'
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router'
@@ -15,6 +16,7 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                     position: 'relative',
                 }}
             >
+                <PageBackground />
                 <AnimateContainer style={{position: 'relative', width: '100%', height: '100%'}}>
                     <Animate
                         enter={{
@@ -28,7 +30,6 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                             time: 0.3,
                         }}
                         style={{
-                            backgroundColor: '#EEE',
                             position: 'absolute',
                             left: 0,
                             right: 0,
@@ -41,7 +42,7 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                             <Route
                                 exact
                                 path="/"
-                                render={() => <Redirect to="/home" />}
+                                render={this.redirectToHome}
                             />
 
                             <MenuRoutes location={location} source="header-menu"/>
@@ -52,6 +53,10 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                 </AnimateContainer>
             </div>
         )
+    }
+
+    private redirectToHome() {
+        return <Redirect to="/home"/>
     }
 }
 

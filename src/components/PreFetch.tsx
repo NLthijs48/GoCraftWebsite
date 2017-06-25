@@ -1,4 +1,5 @@
 import {fetchNewsItems} from 'modules/news/actions'
+import {fetchOptions} from 'modules/options/actions'
 import {fetchPages} from 'modules/pages/actions'
 import {fetchMenu} from 'modules/routing/actions'
 import {fetchServers} from 'modules/servers/actions'
@@ -19,6 +20,7 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps, {}> {
         setTimeout(() => {
             this.props.fetchNewsItems()
             this.props.fetchVoteSites()
+            this.props.fetchOptions()
         }, 0)
     }
 
@@ -33,6 +35,7 @@ interface DispatchToProps {
     fetchNewsItems: () => void
     fetchMenu: (source: string) => void
     fetchVoteSites: () => void,
+    fetchOptions: () => void,
 }
 export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
     () => ({}),
@@ -42,5 +45,6 @@ export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
         fetchNewsItems: () => dispatch(fetchNewsItems()),
         fetchMenu: (source) => dispatch(fetchMenu(source)),
         fetchVoteSites: () => dispatch(fetchVoteSites()),
+        fetchOptions: () => dispatch(fetchOptions()),
     }),
 )(PreFetchComponent))
