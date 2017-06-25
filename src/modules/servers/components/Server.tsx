@@ -24,9 +24,8 @@ export class Server extends React.PureComponent<ServerProps, {}> {
                     style={{
                         width: '100%',
                         height: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
                         color: 'inherit',
+                        flex: 1,
                     }}
                 >
                     <div style={{
@@ -59,25 +58,23 @@ export class Server extends React.PureComponent<ServerProps, {}> {
                     }}>
                         {server.shortDescription}
                     </div>
-
-                    <Filler />
-
-                    <div>
-                        {server.dynmapLink &&
-                            <NavLink
-                                to={'/maps/' + nameToPath(server.name)}
-                            >
-                                <IconButton style={{
-                                    fontSize: 'inherit',
-                                    width: '56px',
-                                    height: '56px',
-                                }}>
-                                    <Icon name="map-o"/>
-                                </IconButton>
-                            </NavLink>
-                        }
-                    </div>
                 </NavLink>
+                <Filler />
+                <div>
+                    {server.dynmapLink &&
+                    <NavLink
+                        to={'/maps/' + nameToPath(server.name)}
+                    >
+                        <IconButton style={{
+                            fontSize: 'inherit',
+                            width: '56px',
+                            height: '56px',
+                        }}>
+                            <Icon name="map-o"/>
+                        </IconButton>
+                    </NavLink>
+                    }
+                </div>
             </CardItem>
         )
     }

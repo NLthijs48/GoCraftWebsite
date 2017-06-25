@@ -20,7 +20,7 @@ export function HTML({page}: HTMLProps) {
             margin: '1em auto',
             padding: '1em',
         }}>
-            <CardItem containerStyle={{flexDirection: 'column'}}>
+            <CardItem>
                 {content}
             </CardItem>
         </div>

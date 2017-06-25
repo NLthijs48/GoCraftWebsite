@@ -17,7 +17,7 @@ class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    minHeight: '100%',
+                    height: '100%',
                     flex: 1,
                 }}
             >

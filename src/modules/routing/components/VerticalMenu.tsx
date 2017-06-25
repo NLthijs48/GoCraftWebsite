@@ -5,10 +5,9 @@ import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import {Page, PagesState} from 'modules/pages/model'
 import React, {ReactElement} from 'react'
-import {connect} from 'react-redux'
+import {connect, Dispatch} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {Dispatch} from 'redux'
 import {THEME} from 'types'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
@@ -95,7 +94,7 @@ function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
                 value={path}
                 primaryText={menuItem.title}
                 leftIcon={<Icon name={icon} color="inherit" size={24} fixedWidth />}
-                nestedItems={children && children.length ? menuToListItems({...data, items: children, basePath: path + '/'}) : undefined}
+                nestedItems={children && children.length ? menuToListItems({byId, pages, items: children, basePath: path + '/'}) : undefined}
                 style={{color: '#666'}}
             />,
         )

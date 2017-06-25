@@ -17,7 +17,7 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedVoteSiteBl
         return (
             <CardItem style={{
                 margin: 0,
-            }} containerStyle={{flexDirection: 'column'}}>
+            }}>
                 <h2>{voteSite.name}</h2>
                 <Filler />
                 <div style={{

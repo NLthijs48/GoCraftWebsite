@@ -2,8 +2,13 @@ import {RawContent} from 'components/RawContent'
 import RaisedButton from 'material-ui/RaisedButton'
 import React from 'react'
 import {RouteComponentProps, withRouter} from 'react-router'
+import {NavLink} from 'react-router-dom'
+import {CardItem} from 'utils/CardItem'
 import {Icon} from 'utils/Icon'
+import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
+
+// TODO use <Responsive> to go to single column layout
 
 interface ServerProps {
     server: ServerData
@@ -31,25 +36,43 @@ export class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsPr
                     style={{marginBottom: '1em'}}
                 />
 
-                <h1>{server.name}</h1>
-                <div style={{display: 'flex'}}>
-                    <div style={{
-                        width: '30%',
-                        height: '30%',
-                        padding: '16% 0 0 0',
-                        backgroundImage: 'url(' + server.image + ')',
-                        backgroundPosition: '50% 50%',
-                        backgroundSize: 'cover',
-                        marginRight: '1em',
-                        borderLeft: '1em solid #34B067',
-                        flexShrink: 0,
-                    }}/>
-
-                    <div style={{
-                        flex: 1,
-                    }}>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'flex-start', // Don't stretch items to 100% height
+                }}>
+                    <CardItem style={{flex: 1}}>
+                        <h1>{server.name}</h1>
                         <RawContent content={server.longDescription} />
-                    </div>
+                    </CardItem>
+
+                    {server.dynmapLink &&
+                        <CardItem style={{
+                            width: '30%',
+                            marginLeft: '1em',
+                        }}>
+                            <NavLink
+                                to={'/maps/' + nameToPath(server.name)}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    color: 'inherit',
+                                }}
+                            >
+                                <h2>View world map</h2>
+                                <div style={{
+                                    width: '100%',
+                                    padding: '56% 0 0 0',
+                                    backgroundImage: 'url(http://map.go-craft.com:8128/tiles/world/flat/3_-1/zzzz_112_-32.jpg)',
+                                    backgroundPosition: '50% 50%',
+                                    backgroundSize: 'cover',
+                                    position: 'relative',
+                                    flexShrink: 0,
+                                }}/>
+                            </NavLink>
+                        </CardItem>
+                    }
                 </div>
             </div>
         )

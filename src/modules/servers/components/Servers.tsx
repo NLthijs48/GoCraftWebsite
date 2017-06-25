@@ -42,7 +42,7 @@ function getServerOverviewFunction({servers, basePath}: CombinedServersDisplayPr
 }
 
 function getServerDetailsFunction(server: ServerData) {
-    return () => <ServerDetails server={server}/>
+    return () => <ServerDetails server={server} />
 }
 
 interface StateToProps {

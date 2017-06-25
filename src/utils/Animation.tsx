@@ -5,11 +5,11 @@ export interface AnimateTo extends React.CSSProperties {
     onComplete?: () => void
 }
 export interface AnimateFromTo {
-    from: React.CSSProperties,
+    from: React.CSSProperties
     to: AnimateTo
     time?: number
 }
-type CalculateAnimateFromTo = (element: HTMLElement) => AnimateFromTo
+type CalculateAnimateFromTo = (element: HTMLDivElement | null) => AnimateFromTo
 export interface AnimateProps {
     enter?: AnimateFromTo | CalculateAnimateFromTo
     leave?: AnimateFromTo | CalculateAnimateFromTo
@@ -20,7 +20,7 @@ export interface AnimateProps {
 }
 
 export class Animate extends React.PureComponent<AnimateProps, {}> {
-    private containerE: HTMLElement
+    private containerE: HTMLDivElement|null
 
     // Animation at initial render of AnimateContainer
     public componentWillAppear(done: () => void) {
