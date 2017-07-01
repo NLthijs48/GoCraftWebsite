@@ -1,5 +1,5 @@
 import FontIcon from 'material-ui/FontIcon'
-import React from 'react'
+import * as React from 'react'
 
 export interface IconProps  {
     name: string

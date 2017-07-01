@@ -2,7 +2,7 @@ import IconButton from 'material-ui/IconButton'
 import Toolbar from 'material-ui/Toolbar'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
-import React from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
@@ -33,6 +33,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 justifyContent: 'flex-start',
                 zIndex: 11, // Appear above menu bar
                 padding: 0,
+                boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
             }}>
                 {!this.props.drawer.docked &&
                     <IconButton onTouchTap={this.onMenuIconTap} style={{

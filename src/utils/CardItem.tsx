@@ -1,5 +1,5 @@
 import Card from 'material-ui/Card/Card'
-import React from 'react'
+import * as React from 'react'
 import {THEME} from 'types'
 
 interface CardItemProps {

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 type CardListProps = React.HTMLProps<HTMLDivElement>
 export function CardList({children, style, ...otherProps}: CardListProps) {

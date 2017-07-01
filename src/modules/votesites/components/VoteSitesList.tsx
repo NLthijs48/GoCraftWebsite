@@ -1,6 +1,6 @@
 import {Loading} from 'modules/pages/components/Loading'
 import {VoteSiteBlock} from 'modules/votesites/components/VoteSiteBlock'
-import React from 'react'
+import * as React from 'react'
 import {ContentRect} from 'react-measure'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'

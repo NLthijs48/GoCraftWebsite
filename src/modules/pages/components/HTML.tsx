@@ -1,5 +1,5 @@
 import {RawContent} from 'components/RawContent'
-import React from 'react'
+import * as React from 'react'
 import {CardItem} from 'utils/CardItem'
 import {HTMLPage} from '../model'
 

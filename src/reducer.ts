@@ -6,6 +6,8 @@ import {OptionsState} from 'modules/options/model'
 import {options} from 'modules/options/reducer'
 import {PagesState} from 'modules/pages/model'
 import {pages} from 'modules/pages/reducer'
+import {PlayersState} from 'modules/players/model'
+import {players} from 'modules/players/reducer'
 import {Menus} from 'modules/routing/model'
 import {menus} from 'modules/routing/reducer'
 import {ServersState} from 'modules/servers/model'
@@ -22,6 +24,7 @@ export interface AppState {
     newsItems: NewsItemsState
     voteSites: VoteSitesState
     options: OptionsState
+    players: PlayersState
 }
 
 export const rootReducer = combineReducers({
@@ -32,4 +35,5 @@ export const rootReducer = combineReducers({
     newsItems,
     voteSites,
     options,
+    players,
 })

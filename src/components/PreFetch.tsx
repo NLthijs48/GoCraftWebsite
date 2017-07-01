@@ -4,7 +4,7 @@ import {fetchPages} from 'modules/pages/actions'
 import {fetchMenu} from 'modules/routing/actions'
 import {fetchServers} from 'modules/servers/actions'
 import {fetchVoteSites} from 'modules/votesites/actions'
-import React from 'react'
+import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
 

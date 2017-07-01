@@ -1,6 +1,6 @@
 import {RawContent} from 'components/RawContent'
 import RaisedButton from 'material-ui/RaisedButton'
-import React from 'react'
+import * as React from 'react'
 import {ContentRect} from 'react-measure'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {THEME} from 'types'

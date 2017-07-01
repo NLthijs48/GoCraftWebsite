@@ -40,3 +40,7 @@ export function getData(path: string): Promise<any> {
 export function nameToPath(name: string): string {
     return name.toLowerCase().replace(' ', '-')
 }
+
+export function isLocalhost(): boolean {
+    return window && window.location && window.location.hostname==='localhost'
+}

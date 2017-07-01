@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 // TODO use a pretty loading indicator and animation
 export function Loading() {

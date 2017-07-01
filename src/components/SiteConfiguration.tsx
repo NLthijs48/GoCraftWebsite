@@ -1,7 +1,7 @@
 import {SiteContent} from 'components/SiteContent'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import React from 'react'
+import * as React from 'react'
 import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
 import {BrowserRouter as Router} from 'react-router-dom'

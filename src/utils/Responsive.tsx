@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Measure, {ContentRect} from 'react-measure'
 
 interface ResponsiveProps extends React.HTMLProps<HTMLDivElement> {

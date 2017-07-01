@@ -1,6 +1,6 @@
-import {Server} from 'modules/servers/components/Server'
+import {ServerCard} from 'modules/servers/components/ServerCard'
 import {ServerData, ServersState} from 'modules/servers/model'
-import React from 'react'
+import * as React from 'react'
 import {ContentRect} from 'react-measure'
 import {Responsive} from 'utils/Responsive'
 
@@ -50,7 +50,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
                                 padding: '0.5em',
                                 flex: 1,
                             }}>
-                                <Server server={server} path={basePath} />
+                                <ServerCard server={server} path={basePath} />
                             </div>
                         ))}
                     </div>

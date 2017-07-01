@@ -1,6 +1,10 @@
 import IconButton from 'material-ui/IconButton'
-import React from 'react'
+import {PlayerInfo, PlayersState} from 'modules/players/model'
+import * as React from 'react'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
+import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
@@ -11,9 +15,11 @@ interface ServerProps {
     server: ServerData
     path: string
 }
-export class Server extends React.PureComponent<ServerProps, {}> {
+export class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps, {}> {
     public render() {
-        const {server, path} = this.props
+        const {server, path, players} = this.props
+
+        const myPlayers: PlayerInfo[] = players[server.slug] || []
         return (
             <CardItem style={{
                 height: '100%',
@@ -60,7 +66,10 @@ export class Server extends React.PureComponent<ServerProps, {}> {
                     </div>
                 </NavLink>
                 <Filler />
-                <div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                }}>
                     {server.dynmapLink &&
                     <NavLink
                         to={'/maps/' + nameToPath(server.name)}
@@ -74,8 +83,21 @@ export class Server extends React.PureComponent<ServerProps, {}> {
                         </IconButton>
                     </NavLink>
                     }
+
+                    {myPlayers.length > 0 &&
+                    <div>{myPlayers.length} online</div>
+                    }
                 </div>
             </CardItem>
         )
     }
 }
+
+interface StateToProps {
+    players: PlayersState
+}
+export const ServerCard = withRouter<any>(connect<StateToProps, {}, ServerProps>(
+    (state: AppState): StateToProps => ({
+        players: state.players,
+    }),
+)(ServerCardDisplay))

@@ -1,7 +1,7 @@
 import Drawer from 'material-ui/Drawer'
 import {updateDrawerDocked, updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
-import React from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'

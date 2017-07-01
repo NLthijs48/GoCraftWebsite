@@ -1,5 +1,5 @@
 import RaisedButton from 'material-ui/RaisedButton'
-import React from 'react'
+import * as React from 'react'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'

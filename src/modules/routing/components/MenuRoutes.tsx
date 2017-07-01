@@ -1,6 +1,6 @@
 import {Location} from 'history'
 import {PagesState} from 'modules/pages/model'
-import React from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {Route} from 'react-router'
 import {AppState} from 'reducer'

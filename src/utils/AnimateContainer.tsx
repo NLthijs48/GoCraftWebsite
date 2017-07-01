@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 
 export class AnimateContainer extends React.PureComponent<any, {}> {

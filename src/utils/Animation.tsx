@@ -1,5 +1,5 @@
 import {TweenLite} from 'gsap'
-import React from 'react'
+import * as React from 'react'
 
 export interface AnimateTo extends React.CSSProperties {
     onComplete?: () => void

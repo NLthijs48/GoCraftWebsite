@@ -1,5 +1,5 @@
 import {NewsList} from 'modules/news/components/NewsList'
-import React from 'react'
+import * as React from 'react'
 
 interface HomeProps {
     basePath: string

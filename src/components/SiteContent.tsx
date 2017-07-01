@@ -4,10 +4,11 @@ import {TopBar} from 'modules/drawer/components/TopBar'
 import {DrawerState} from 'modules/drawer/model'
 import {Routes} from 'modules/routing/components/Routes'
 import {VerticalMenu} from 'modules/routing/components/VerticalMenu'
-import React from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
+import {Websocket} from 'websocket/websocket'
 import MenuProps = __MaterialUI.Menus.MenuProps
 
 class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
@@ -21,6 +22,7 @@ class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
                     flex: 1,
                 }}
             >
+                <Websocket />
                 <TopBar />
 
                 <div
