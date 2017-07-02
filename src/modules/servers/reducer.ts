@@ -22,8 +22,10 @@ const data = (state: ServersData = [], action: t.ServersAction) => {
                     longDescription: get(rawServer, 'acf', 'details'),
                     image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap_link'),
+                    order: get(rawServer, 'menu_order'),
                 })
             }
+            servers.sort((a, b) => a.order-b.order)
             return servers
         default:
             return state

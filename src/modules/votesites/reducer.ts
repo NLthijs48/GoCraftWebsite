@@ -23,12 +23,13 @@ const byId = (state: VoteSites = {}, action: t.VoteSitesAction) => {
     }
 }
 
-// Build array of menu items
+// Build array of vote sites
 function items(state: VoteSiteIds = [], action: t.VoteSitesAction): MenuItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
-            // Order as given by WordPress is sorted correctly, newest first
-            return action.data.map((rawVoteSite) => get(rawVoteSite, 'id'))
+            return action.data
+                .sort((a, b) => get(a, 'menu_order')-get(b, 'menu_order'))
+                .map((rawVoteSite) => get(rawVoteSite, 'id'))
         default:
             return state
     }

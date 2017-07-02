@@ -8,6 +8,7 @@ export interface ServerData {
     longDescription: string
     image: string
     dynmapLink?: string
+    order: number
 }
 
 export type ServersData = ServerData[]
