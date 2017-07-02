@@ -19,7 +19,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
     public render() {
         const {server, path, players} = this.props
 
-        const myPlayers: PlayerInfo[] = players[server.slug] || []
+        const myPlayers: PlayerInfo[] = players[server.bungeeID] || []
         return (
             <CardItem style={{
                 height: '100%',
@@ -69,6 +69,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
+                    height: 56,
                 }}>
                     {server.dynmapLink &&
                     <NavLink
@@ -85,7 +86,26 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                     }
 
                     {myPlayers.length > 0 &&
-                    <div>{myPlayers.length} online</div>
+                    <NavLink
+                        to={path+'/'+nameToPath(server.name)}
+                        style={{
+                            color: 'inherit',
+                            display: 'flex',
+                            alignItems: 'center',
+                            padding: '0 1em',
+                            height: '100%',
+                            fontSize: '120%',
+                        }}
+                    >
+                        <div style={{
+                            display: 'inline-block',
+                            marginRight: 10,
+                        }}>
+                            {myPlayers.length}
+                        </div>
+                        <Icon name={myPlayers.length>1 ? 'users' : 'user'}/>
+                    </NavLink>
+
                     }
                 </div>
             </CardItem>

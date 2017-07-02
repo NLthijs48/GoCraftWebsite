@@ -27,7 +27,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
 
     public render() {
         const {server, players} = this.props
-        const myPlayers: PlayerInfo[] = players[server.slug] || []
+        const myPlayers: PlayerInfo[] = players[server.bungeeID] || []
         return (
             <div style={{
                 maxWidth: 1200,

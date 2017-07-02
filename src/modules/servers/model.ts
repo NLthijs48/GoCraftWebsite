@@ -9,6 +9,7 @@ export interface ServerData {
     image: string
     dynmapLink?: string
     order: number
+    bungeeID: string
 }
 
 export type ServersData = ServerData[]

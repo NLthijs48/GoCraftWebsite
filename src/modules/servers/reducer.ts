@@ -23,6 +23,7 @@ const data = (state: ServersData = [], action: t.ServersAction) => {
                     image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap_link'),
                     order: get(rawServer, 'menu_order'),
+                    bungeeID: get(rawServer, 'acf', 'bungee_id'),
                 })
             }
             servers.sort((a, b) => a.order-b.order)
