@@ -25,6 +25,7 @@ export function configureStore() {
         // Handle hot reducer updates
         module.hot.accept('../reducer', () => {
             store.replaceReducer(require('../reducer').rootReducer)
+            store.dispatch({type: 'REDUCER_UPDATED'})
         })
     }
 

@@ -25,6 +25,16 @@ export interface AppState {
     voteSites: VoteSitesState
     options: OptionsState
     players: PlayersState
+    reducerVersion: number
+}
+
+const reducerVersion = (state: number = 0, action: { type: string }) => {
+    switch(action.type) {
+        case 'REDUCER_UPDATED':
+            return state + 1
+        default:
+            return state
+    }
 }
 
 export const rootReducer = combineReducers({
@@ -36,4 +46,5 @@ export const rootReducer = combineReducers({
     voteSites,
     options,
     players,
+    reducerVersion,
 })

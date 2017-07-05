@@ -7,10 +7,25 @@ import {fetchVoteSites} from 'modules/votesites/actions'
 import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
+import {AppState} from 'reducer'
 
-class PreFetchComponent extends React.PureComponent<DispatchToProps, {}> {
+class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToProps, {}> {
     public componentDidMount() {
+        this.doFetching()
+    }
 
+    public render() {
+        return null
+    }
+
+    public componentWillReceiveProps(nextProps: DispatchToProps & StateToProps) {
+        if(this.props.reducerVersion < nextProps.reducerVersion) {
+            console.log('New reducer version, fetching all data:', nextProps.reducerVersion)
+            this.doFetching()
+        }
+    }
+
+    private doFetching() {
         // Crucial resources
         this.props.fetchMenu('header-menu')
         this.props.fetchPages()
@@ -23,12 +38,11 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps, {}> {
             this.props.fetchOptions()
         }, 0)
     }
-
-    public render() {
-        return null
-    }
 }
 
+interface StateToProps {
+    reducerVersion: number
+}
 interface DispatchToProps {
     fetchPages: () => void
     fetchServers: () => void
@@ -38,7 +52,9 @@ interface DispatchToProps {
     fetchOptions: () => void,
 }
 export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
-    () => ({}),
+    (state: AppState) => ({
+        reducerVersion: state.reducerVersion,
+    }),
     (dispatch: Dispatch<any>): DispatchToProps => ({
         fetchPages: () => dispatch(fetchPages()),
         fetchServers: () => dispatch(fetchServers()),
