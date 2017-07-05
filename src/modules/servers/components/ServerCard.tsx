@@ -69,17 +69,19 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
-                    height: 56,
                 }}>
                     {server.dynmapLink &&
                     <NavLink
                         to={'/maps/' + nameToPath(server.name)}
                     >
-                        <IconButton style={{
-                            fontSize: 'inherit',
-                            width: '56px',
-                            height: '56px',
-                        }}>
+                        <IconButton
+                            style={{
+                                fontSize: 'inherit',
+                                width: '56px',
+                                height: '56px',
+                            }}
+                            tooltip="View online map"
+                        >
                             <Icon name="map-o"/>
                         </IconButton>
                     </NavLink>
@@ -92,18 +94,32 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                             color: 'inherit',
                             display: 'flex',
                             alignItems: 'center',
-                            padding: '0 1em',
                             height: '100%',
                             fontSize: '120%',
+                            padding: '0 1em',
                         }}
+                        activeStyle={{textDecoration: 'none'}}
                     >
-                        <div style={{
-                            display: 'inline-block',
-                            marginRight: 10,
-                        }}>
-                            {myPlayers.length}
-                        </div>
-                        <Icon name={myPlayers.length>1 ? 'users' : 'user'}/>
+                        <IconButton
+                            style={{
+                                fontSize: 'inherit',
+                                width: 'auto',
+                                padding: 0,
+                            }}
+                            tooltip="Online players"
+                        >
+                            <div>
+                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <div style={{
+                                        marginRight: 10,
+                                        textDecoration: 'none',
+                                    }}>
+                                        {myPlayers.length}
+                                    </div>
+                                    <Icon name={myPlayers.length>1 ? 'users' : 'user'} style={{display: 'block'}}/>
+                                </div>
+                            </div>
+                        </IconButton>
                     </NavLink>
 
                     }

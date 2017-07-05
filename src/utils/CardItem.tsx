@@ -17,7 +17,6 @@ export class CardItem extends React.Component<CardItemProps, {}> {
         return (
             <Card
                 style={{
-                    overflow: 'hidden',
                     backgroundColor: '#FFF',
                     borderBottom: '0.5em solid ' + THEME.palette.primary1Color,
                     padding: '1em',

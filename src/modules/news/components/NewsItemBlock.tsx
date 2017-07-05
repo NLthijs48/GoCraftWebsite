@@ -43,6 +43,7 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBl
 
                 <CardItem style={{
                     minHeight: '11em',
+                    overflow: 'hidden',
                 }}>
                     <Responsive
                         onResize={this.onResize}
@@ -116,6 +117,8 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBl
                                     content={newsItem.content}
                                     style={{
                                         position: preview ? 'absolute' : 'static', // As preview we don't want it to expand the parent container
+                                        right: 0,
+                                        left: 0,
                                     }}
                                 />
                             </div>

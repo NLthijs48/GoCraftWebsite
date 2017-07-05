@@ -20,7 +20,7 @@ const data = (state: ServersData = [], action: t.ServersAction) => {
                     name: get(rawServer, 'title', 'rendered'),
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
-                    image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium'),
+                    image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium_large'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap_link'),
                     order: get(rawServer, 'menu_order'),
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
