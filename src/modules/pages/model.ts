@@ -11,6 +11,7 @@ export type Page =
 interface AbstractPage {
     urlPath?: string
     menuIcon?: string
+    children: number[]
 }
 export interface HomePage extends AbstractPage {
     type: 'home',
@@ -35,8 +36,10 @@ export interface VoteSitesPage extends AbstractPage {
 
 // ID -> Page
 export interface Pages {
-    [k: string]: Page
+    [k: number]: Page
 }
+
+export type PageItems = string[]
 
 export interface PagesState extends RemoteState {
     byId: Pages
