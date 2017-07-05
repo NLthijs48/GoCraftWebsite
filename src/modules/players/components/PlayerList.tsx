@@ -14,7 +14,7 @@ export function PlayersList({players}: PlayersListProps) {
         }}>
             <h2>{players.length} online player{players.length>1 ? 's': ''}</h2>
             {players.map((player) =>
-                <Player player={player} style={{marginBottom: '0.5em'}} />)
+                <Player key={player.name} player={player} style={{marginBottom: '0.5em'}} />)
             }
         </div>
     )
