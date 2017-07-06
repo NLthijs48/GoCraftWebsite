@@ -60,6 +60,6 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
     }
 
     private onResize(contentRect: ContentRect) {
-        this.setState({columns: Math.max(1, Math.floor(contentRect.bounds.width/300))})
+        this.setState({columns: Math.max(1, Math.floor(contentRect.bounds.width/400))})
     }
 }
