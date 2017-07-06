@@ -69,6 +69,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
+                    height: 56,
                 }}>
                     {server.dynmapLink &&
                     <NavLink
