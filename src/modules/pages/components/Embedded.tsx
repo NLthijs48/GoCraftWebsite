@@ -20,7 +20,7 @@ export class Embedded extends React.PureComponent<EmbeddedProps, EmbeddedState> 
         const {page} = this.props
         return (
             <div style={{position: 'absolute', top: 0, right: 0, bottom: 0, left: 0}}>
-                {this.state.loading && <Loading />}
+                {this.state.loading && <Loading size={80} />}
                 <iframe
                     style={{
                         display: 'flex',

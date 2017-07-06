@@ -1,7 +1,11 @@
+import CircularProgress from 'material-ui/CircularProgress'
 import * as React from 'react'
 
-// TODO use a pretty loading indicator and animation
-export function Loading() {
+interface LoadingProps {
+    size?: number
+}
+export function Loading({size}: LoadingProps) {
+    size = size || 50
     return (
         <div style={{
             position: 'absolute',
@@ -14,7 +18,7 @@ export function Loading() {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
-            <h1>loading...</h1>
+            <CircularProgress size={size} thickness={Math.floor(size/10)} />
         </div>
     )
 }
