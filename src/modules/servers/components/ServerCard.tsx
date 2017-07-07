@@ -1,4 +1,4 @@
-import IconButton from 'material-ui/IconButton'
+import FlatButton from 'material-ui/FlatButton'
 import {PlayerInfo, PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -65,62 +65,33 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                         {server.shortDescription}
                     </div>
                 </NavLink>
+
                 <Filler />
+
                 <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    height: 56,
+                    marginTop: '-0.6em', // Reduce the room between tagline and actions
+                    paddingLeft: '0.4em',
+                    paddingBottom: '0.4em',
                 }}>
                     {server.dynmapLink &&
                     <NavLink
                         to={'/maps/' + nameToPath(server.name)}
                     >
-                        <IconButton
-                            style={{
-                                fontSize: 'inherit',
-                                width: '56px',
-                                height: '56px',
-                            }}
-                            tooltip="View online map"
-                        >
-                            <Icon name="map-o"/>
-                        </IconButton>
+                        <FlatButton
+                            label="View map"
+                            icon={<Icon name="map-o"/>}
+                        />
                     </NavLink>
                     }
 
                     {myPlayers.length > 0 &&
                     <NavLink
                         to={path+'/'+nameToPath(server.name)}
-                        style={{
-                            color: 'inherit',
-                            display: 'flex',
-                            alignItems: 'center',
-                            height: '100%',
-                            fontSize: '120%',
-                            padding: '0 1em',
-                        }}
-                        activeStyle={{textDecoration: 'none'}}
                     >
-                        <IconButton
-                            style={{
-                                fontSize: 'inherit',
-                                width: 'auto',
-                                padding: 0,
-                            }}
-                            tooltip="Online players"
-                        >
-                            <div>
-                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                    <div style={{
-                                        marginRight: 10,
-                                        textDecoration: 'none',
-                                    }}>
-                                        {myPlayers.length}
-                                    </div>
-                                    <Icon name={myPlayers.length>1 ? 'users' : 'user'} style={{display: 'block'}}/>
-                                </div>
-                            </div>
-                        </IconButton>
+                        <FlatButton
+                            label={myPlayers.length+' online'}
+                            icon={<Icon name={myPlayers.length > 1 ? 'users' : 'user'} />}
+                        />
                     </NavLink>
 
                     }
