@@ -21,6 +21,12 @@
     "@types/react" "*"
     "@types/react-addons-linked-state-mixin" "*"
 
+"@types/raven-js@^3.10.0":
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@types/raven-js/-/raven-js-3.10.0.tgz#d0832162ebea7671eafff08a324b56adde5bf9c3"
+  dependencies:
+    raven-js "*"
+
 "@types/react-addons-linked-state-mixin@*":
   version "0.14.17"
   resolved "https://registry.yarnpkg.com/@types/react-addons-linked-state-mixin/-/react-addons-linked-state-mixin-0.14.17.tgz#2e82b5b0882410279a7ab6b675e6f49eb3de8419"
@@ -3715,9 +3721,9 @@ marked@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
-material-ui@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.1.tgz#1c8a47d7e930ff0b07064dd8633035984a5a3569"
+material-ui@^0.18.3:
+  version "0.18.6"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.6.tgz#29b8ef78952872c821e8599e5edd9ae276dcdaae"
   dependencies:
     babel-runtime "^6.23.0"
     inline-style-prefixer "^3.0.2"
@@ -4657,6 +4663,10 @@ randombytes@^2.0.0, randombytes@^2.0.1:
 range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
+
+raven-js@*, raven-js@^3.16.1:
+  version "3.16.1"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.16.1.tgz#4aab8ba7c57bc261604db970c41c49137340c450"
 
 rc@^1.1.2, rc@^1.1.7:
   version "1.2.1"
