@@ -56,8 +56,9 @@ function menuToRoutes(data: MenuToRoutesProps): Array<React.ReactElement<any>> {
             <Route
                 location={location}
                 key={path}
-                path={path+'/:one?/:two?/:three?'}
+                path={path+(menuItem.children.length>0 ? '' : '/:one?/:two?/:three?')}
                 render={getMenuItemPageFunction(menuItem, basePath)}
+                exact={true}
             />,
         )
 
