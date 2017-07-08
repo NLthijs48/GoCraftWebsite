@@ -72,6 +72,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                     marginTop: '-0.6em', // Reduce the room between tagline and actions
                     paddingLeft: '0.4em',
                     paddingBottom: '0.4em',
+                    height: 42,
                 }}>
                     {server.dynmapLink &&
                     <NavLink

@@ -1,16 +1,18 @@
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
-import {PageItems, Pages} from './model'
+import {PageItems, Pages, PagesState} from './model'
 
 // Server data reducer
-const byId = (state: Pages = {}, action: t.PagesAction) => {
+function byId(state: Pages = {}, action: t.PagesAction): Pages {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
             const pages: Pages = {...state}
             for(const rawPage of action.data) {
                 pages[get(rawPage, 'id')] = {
+                    title: get(rawPage, 'title', 'rendered'),
+                    status: get(rawPage, 'status'),
                     type: get(rawPage, 'acf', 'page_type'),
                     url: get(rawPage, 'acf', 'website_link'),
                     content: get(rawPage, 'acf', 'content'),
@@ -52,7 +54,7 @@ function rootItems(state: PageItems = [], action: t.PagesAction): PageItems {
 }
 
 // Fetching state reducer
-const isFetching = (state: boolean = false, action: t.PagesAction) => {
+function isFetching(state: boolean = false, action: t.PagesAction): boolean {
     switch(action.type) {
         case t.FETCH:
             return true
@@ -64,4 +66,4 @@ const isFetching = (state: boolean = false, action: t.PagesAction) => {
     }
 }
 
-export const pages = combineReducers({byId, isFetching, rootItems})
+export const pages = combineReducers<PagesState>({byId, isFetching, rootItems})

@@ -3,7 +3,8 @@ import ListItem from 'material-ui/List/ListItem'
 import {makeSelectable} from 'material-ui/List/makeSelectable'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
-import {Page, PagesState} from 'modules/pages/model'
+import {Loading} from 'modules/pages/components/Loading'
+import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
 import React, {ReactElement} from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -11,28 +12,22 @@ import {AppState} from 'reducer'
 import {THEME} from 'types'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
-import {fetchMenu} from '../actions'
-import {Menu, MenuEntry, MenuItems, MenuState} from '../model'
 
 const SelectableList = makeSelectable(List)
 
-interface MenuProps {
-    source: string
-}
-type AllMenuProps = MenuProps & DispatchToProps & StateToProps & RouteComponentProps<any>
+type AllMenuProps = DispatchToProps & StateToProps & RouteComponentProps<any>
 class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
     public constructor(props: AllMenuProps) {
         super(props)
         this.handleRequestChange = this.handleRequestChange.bind(this)
     }
 
-    public componentWillMount() {
-        this.props.fetchMenu()
-    }
-
     public render() {
-        const items = this.props.menu.items
-        const byId = this.props.menu.byId
+        const pages = this.props.pages
+        if(pages.isFetching && (!pages || !pages.byId || !pages.rootItems)) {
+            return <Loading />
+        }
+
         return (
             <SelectableList
                 value={this.props.location.pathname}
@@ -42,7 +37,7 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
                     color: '#FFF',
                 }}
             >
-                {items && byId && menuToListItems({items, byId, basePath: '/', pages: this.props.pages})}
+                {pagesToListItems({pages: pages.rootItems, byId: pages.byId, basePath: '/'})}
             </SelectableList>
         )
     }
@@ -63,38 +58,25 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
  * @param pages Pages to use for resolving url paths
  * @returns {Array<ReactElement<{}>>} List of elements to be rendered for this menu
  */
-interface MenuToListItemsProps {
-    items: MenuItems
-    byId: Menu
+interface PagesToListItemsProps {
+    pages: PageItems
+    byId: Pages
     basePath: string
-    pages: PagesState
 }
-function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
-    const {byId, items, pages, basePath} = data
+function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<{}>> {
+    const {byId, pages, basePath} = data
     const result: Array<ReactElement<{}>> = []
-    items.map((menuItemKey) => {
-        const menuItem: MenuEntry = byId[menuItemKey]
-        let path = nameToPath(menuItem.title)
-        let icon = 'bars'
-        if(pages.byId && pages.byId[menuItem.page]) {
-            const page: Page = pages.byId[menuItem.page]
-            if(page.urlPath) {
-                path = nameToPath(page.urlPath)
-            }
-            if(page.menuIcon) {
-                icon = page.menuIcon
-            }
-        }
-        path = basePath + path
-
-        const children = menuItem.children
+    pages.map((pageKey) => {
+        const page: Page = byId[pageKey]
+        const path = basePath + nameToPath(page.urlPath || page.title)
+        const children = page.children
         result.push(
             <ListItem
                 key={path}
                 value={path}
-                primaryText={menuItem.title}
-                leftIcon={<Icon name={icon} color="inherit" size={24} fixedWidth />}
-                nestedItems={children && children.length ? menuToListItems({byId, pages, items: children, basePath: path + '/'}) : undefined}
+                primaryText={page.title}
+                leftIcon={<Icon name={page.menuIcon||'bars'} color="inherit" size={24} fixedWidth />}
+                nestedItems={children && children.length ? pagesToListItems({byId, pages: children, basePath: path + '/'}) : undefined}
                 style={{color: '#666'}}
             />,
         )
@@ -103,22 +85,18 @@ function menuToListItems(data: MenuToListItemsProps): Array<ReactElement<{}>> {
 }
 
 interface StateToProps {
-    menu: MenuState
     drawer: DrawerState
     pages: PagesState
 }
 interface DispatchToProps {
-    fetchMenu: () => void
     closeDrawer: () => void
 }
-export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProps, MenuProps>(
-    (state: AppState, ownProps: MenuProps): StateToProps => ({
-        menu: state.menus[ownProps.source] || {},
+export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProps, {}>(
+    (state: AppState): StateToProps => ({
         drawer: state.drawer,
         pages: state.pages,
     }),
-    (dispatch: Dispatch<any>, ownProps: MenuProps): DispatchToProps => ({
-        fetchMenu: () => dispatch(fetchMenu(ownProps.source)),
+    (dispatch: Dispatch<any>): DispatchToProps => ({
         closeDrawer: () => dispatch(updateDrawerOpen(false)),
     }),
 )(MenuDisplay))

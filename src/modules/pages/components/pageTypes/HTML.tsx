@@ -1,7 +1,7 @@
 import {RawContent} from 'components/RawContent'
 import * as React from 'react'
 import {CardItem} from 'utils/CardItem'
-import {HTMLPage} from '../model'
+import {HTMLPage} from '../../model'
 
 interface HTMLProps {
     page: HTMLPage

@@ -1,10 +1,10 @@
 import {AbsoluteScroller} from 'components/AbsoluteScroller'
-import {Embedded} from 'modules/pages/components/Embedded'
-import {Home} from 'modules/pages/components/Home'
-import {HTML} from 'modules/pages/components/HTML'
 import {Loading} from 'modules/pages/components/Loading'
-import {Maps} from 'modules/pages/components/Maps'
-import {NotFound} from 'modules/pages/components/NotFound'
+import {Embedded} from 'modules/pages/components/pageTypes/Embedded'
+import {Home} from 'modules/pages/components/pageTypes/Home'
+import {HTML} from 'modules/pages/components/pageTypes/HTML'
+import {Maps} from 'modules/pages/components/pageTypes/Maps'
+import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Page, PagesState} from 'modules/pages/model'
 import {Servers} from 'modules/servers/components/Servers'
 import {VoteSitesList} from 'modules/votesites/components/VoteSitesList'
@@ -13,35 +13,33 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
-import {MenuEntry} from '../model'
 
 interface MenuItemPageProps {
-    item: MenuEntry
+    page: Page
     basePath: string
 }
 class MenuItemPageDisplay extends React.PureComponent<MenuItemPageProps & StateToProps, {}> {
     public render() {
-        const {item, pages, basePath} = this.props
+        const {page, pages, basePath} = this.props
 
         // Loading indicator
-        if(pages.isFetching && (!pages.byId || !pages.byId[item.page])) {
+        if(pages.isFetching && (!page || !pages.byId)) {
             return <Loading />
         }
 
-        const page: Page = pages.byId[item.page]
         if(!page) {
             return <NotFound />
         }
 
         return (
             <AbsoluteScroller>
-                {renderPage(page, item, basePath+nameToPath(page.urlPath || item.title))}
+                {renderPage(page, basePath+nameToPath(page.urlPath || page.title))}
             </AbsoluteScroller>
         )
     }
 }
 
-function renderPage(page: Page, item: MenuEntry, basePath: string): React.ReactElement<any> {
+function renderPage(page: Page, basePath: string): React.ReactElement<any> {
     switch(page.type) {
         case 'home':
             return <Home basePath={basePath} />
@@ -56,7 +54,7 @@ function renderPage(page: Page, item: MenuEntry, basePath: string): React.ReactE
         case 'vote-sites':
             return <VoteSitesList basePath={basePath} />
         default:
-            console.error('unknown page type:', page, 'menu item:', item)
+            console.error('unknown page type:', page, 'at basePath:', basePath)
             return <NotFound />
     }
 }

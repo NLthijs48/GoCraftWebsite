@@ -1,11 +1,10 @@
-import {MenuItems} from 'modules/routing/model'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
-import {NewsItemIds, NewsItems} from './model'
+import {NewsItemIds, NewsItems, NewsItemsState} from './model'
 
 // Server data reducer
-const byId = (state: NewsItems = {}, action: t.NewsItemsAction) => {
+function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
@@ -31,7 +30,7 @@ const byId = (state: NewsItems = {}, action: t.NewsItemsAction) => {
 }
 
 // Build array of menu items
-function items(state: NewsItemIds = [], action: t.NewsItemsAction): MenuItems {
+function items(state: NewsItemIds = [], action: t.NewsItemsAction): NewsItemIds {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Order as given by WordPress is sorted correctly, newest first
@@ -42,7 +41,7 @@ function items(state: NewsItemIds = [], action: t.NewsItemsAction): MenuItems {
 }
 
 // Fetching state reducer
-const isFetching = (state: boolean = false, action: t.NewsItemsAction) => {
+function isFetching(state: boolean = false, action: t.NewsItemsAction): boolean {
     switch(action.type) {
         case t.FETCH:
             return true
@@ -54,4 +53,4 @@ const isFetching = (state: boolean = false, action: t.NewsItemsAction) => {
     }
 }
 
-export const newsItems = combineReducers({byId, items, isFetching})
+export const newsItems = combineReducers<NewsItemsState>({byId, items, isFetching})

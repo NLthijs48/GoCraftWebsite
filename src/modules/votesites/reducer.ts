@@ -1,11 +1,10 @@
-import {MenuItems} from 'modules/routing/model'
-import {VoteSiteIds, VoteSites} from 'modules/votesites/model'
+import {VoteSiteIds, VoteSites, VoteSitesState} from 'modules/votesites/model'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
 
 // Server data reducer
-const byId = (state: VoteSites = {}, action: t.VoteSitesAction) => {
+function byId(state: VoteSites = {}, action: t.VoteSitesAction): VoteSites {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
@@ -24,7 +23,7 @@ const byId = (state: VoteSites = {}, action: t.VoteSitesAction) => {
 }
 
 // Build array of vote sites
-function items(state: VoteSiteIds = [], action: t.VoteSitesAction): MenuItems {
+function items(state: VoteSiteIds = [], action: t.VoteSitesAction): VoteSiteIds {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             return action.data
@@ -36,7 +35,7 @@ function items(state: VoteSiteIds = [], action: t.VoteSitesAction): MenuItems {
 }
 
 // Fetching state reducer
-const isFetching = (state: boolean = false, action: t.VoteSitesAction) => {
+function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean {
     switch(action.type) {
         case t.FETCH:
             return true
@@ -48,4 +47,4 @@ const isFetching = (state: boolean = false, action: t.VoteSitesAction) => {
     }
 }
 
-export const voteSites = combineReducers({byId, items, isFetching})
+export const voteSites = combineReducers<VoteSitesState>({byId, items, isFetching})

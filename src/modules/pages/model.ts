@@ -9,6 +9,8 @@ export type Page =
     ServersPage |
     VoteSitesPage
 interface AbstractPage {
+    title: string
+    status: 'publish'
     urlPath?: string
     menuIcon?: string
     children: number[]
@@ -39,8 +41,9 @@ export interface Pages {
     [k: number]: Page
 }
 
-export type PageItems = string[]
+export type PageItems = number[]
 
 export interface PagesState extends RemoteState {
     byId: Pages
+    rootItems: PageItems
 }

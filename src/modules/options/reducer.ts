@@ -3,7 +3,7 @@ import {get} from 'utils/utils'
 import * as t from './actionTypes'
 
 // Server data reducer
-export const options = (state: OptionsState = {}, action: t.OptionsActions) => {
+export function options(state: OptionsState = {}, action: t.OptionsActions): OptionsState {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Merge the options

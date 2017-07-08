@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {EmbeddedPage} from '../model'
-import {Loading} from './Loading'
+import {EmbeddedPage} from '../../model'
+import {Loading} from '../Loading'
 
 interface EmbeddedProps {
     page: EmbeddedPage

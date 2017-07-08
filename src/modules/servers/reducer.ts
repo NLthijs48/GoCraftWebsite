@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
-import {ServersData} from './model'
+import {ServersData, ServersState} from './model'
 
 // Server data reducer
-const data = (state: ServersData = [], action: t.ServersAction) => {
+function data(state: ServersData = [], action: t.ServersAction): ServersData {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress data
@@ -34,7 +34,7 @@ const data = (state: ServersData = [], action: t.ServersAction) => {
 }
 
 // Fetching state reducer
-const isFetching = (state: boolean = false, action: t.ServersAction) => {
+function isFetching(state: boolean = false, action: t.ServersAction): boolean {
     switch(action.type) {
         case t.FETCH:
             return true
@@ -46,4 +46,4 @@ const isFetching = (state: boolean = false, action: t.ServersAction) => {
     }
 }
 
-export const servers = combineReducers({data, isFetching})
+export const servers = combineReducers<ServersState>({data, isFetching})

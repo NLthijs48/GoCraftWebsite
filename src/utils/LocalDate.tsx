@@ -4,7 +4,7 @@ import {UnixDate} from 'types'
 export interface DateProps extends HTMLProps<HTMLElement> {
     at: UnixDate
 }
-export function LocalDate({at, ...otherProps}: DateProps) {
+export function LocalDate({at, children, ...otherProps}: DateProps) {
     return (
         <div {...otherProps}>
             {formatDate(at)}

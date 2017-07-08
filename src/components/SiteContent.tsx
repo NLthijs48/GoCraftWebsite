@@ -2,16 +2,15 @@ import {PreFetch} from 'components/PreFetch'
 import {LeftDrawer} from 'modules/drawer/components/LeftDrawer'
 import {TopBar} from 'modules/drawer/components/TopBar'
 import {DrawerState} from 'modules/drawer/model'
-import {Routes} from 'modules/routing/components/Routes'
-import {VerticalMenu} from 'modules/routing/components/VerticalMenu'
+import {Routes} from 'modules/pages/components/routing/Routes'
+import {VerticalMenu} from 'modules/pages/components/routing/VerticalMenuNew'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Websocket} from 'websocket/websocket'
-import MenuProps = __MaterialUI.Menus.MenuProps
 
-class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
+class SiteContentDisplay extends React.Component<StateToProps, {}> {
     public render() {
         return (
             <div
@@ -34,7 +33,7 @@ class SiteContentDisplay extends React.PureComponent<StateToProps, {}> {
                     }}
                 >
                     <LeftDrawer>
-                        <VerticalMenu source="header-menu"/>
+                        <VerticalMenu />
                     </LeftDrawer>
                     <Routes/>
                     <PreFetch />

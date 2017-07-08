@@ -1,5 +1,5 @@
 import {PageBackground} from 'modules/options/components/PageBackground'
-import {NotFound} from 'modules/pages/components/NotFound'
+import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import * as React from 'react'
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AnimateContainer} from 'utils/AnimateContainer'
@@ -45,7 +45,7 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                                 render={this.redirectToHome}
                             />
 
-                            <MenuRoutes location={location} source="header-menu"/>
+                            <MenuRoutes location={location}/>
 
                             <Route component={NotFound}/>
                         </Switch>
