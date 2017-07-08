@@ -24,6 +24,7 @@ function data(state: ServersData = [], action: t.ServersAction): ServersData {
                     dynmapLink: get(rawServer, 'acf', 'dynmap_link'),
                     order: get(rawServer, 'menu_order'),
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
+                    gameType: get(rawServer, 'acf', 'game_type', 'value'),
                 })
             }
             servers.sort((a, b) => a.order-b.order)

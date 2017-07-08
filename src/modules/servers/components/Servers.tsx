@@ -23,7 +23,7 @@ class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}
         return (
             <Switch>
                 {servers.data.map((server) => {
-                    const path = basePath+'/'+nameToPath(server.name)
+                    const path = basePath+'/'+nameToPath(server.slug)
                     return <Route key={path} path={path} render={getServerDetailsFunction(server)}/>
                 })}
                 <Route render={getServerOverviewFunction(this.props)}/>

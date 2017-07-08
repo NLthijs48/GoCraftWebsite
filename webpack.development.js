@@ -51,7 +51,6 @@ module.exports = {
                                 optimizationLevel: 0,
                             },
                             pngquant: {
-                                quality: '75-90',
                                 speed: 10,
                             },
                         },

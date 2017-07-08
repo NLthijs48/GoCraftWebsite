@@ -21,10 +21,10 @@ export function Icon({name, color, size, style, fixedWidth, onClick}: IconProps)
     }
 
     let fontSize = 'inherit'
-    if(typeof size === 'number') {
+    if(size && !isNaN(+size)) {
         fontSize = size+'px'
     } else if(size) {
-        fontSize = size
+        fontSize = size+''
     }
 
     return (

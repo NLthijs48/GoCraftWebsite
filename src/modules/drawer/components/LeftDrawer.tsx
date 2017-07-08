@@ -44,6 +44,7 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
                 style={{zIndex: 10}}
                 containerStyle={{position: docked ? 'static': 'absolute', paddingTop: '1.5em'}}
                 onRequestChange={this.requestChange}
+                className="Drawer"
             >
                 {this.props.children}
             </Drawer>

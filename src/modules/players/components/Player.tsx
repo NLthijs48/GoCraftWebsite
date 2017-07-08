@@ -18,11 +18,12 @@ export function Player({player, style}: PlayerProps) {
                 backgroundSize: 'cover',
                 backgroundPosition: '50% 50%',
                 filter: 'drop-shadow(0px 0px 1px rgba(0,0,0,0.5))',
-                height: 50,
-                width: 44,
+                height: 40,
+                width: 35,
+                flexShrink: 0,
             }} />
 
-            <div style={{
+            <div className="ellipsis" style={{
                 flex: 1,
                 marginLeft: '1em',
             }}>
