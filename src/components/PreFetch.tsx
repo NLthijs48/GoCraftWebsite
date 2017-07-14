@@ -48,8 +48,8 @@ interface DispatchToProps {
     fetchVoteSites: () => void,
     fetchOptions: () => void,
 }
-export const PreFetch = withRouter<any>(connect<{}, DispatchToProps, {}>(
-    (state: AppState) => ({
+export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {}>(
+    (state: AppState): StateToProps => ({
         reducerVersion: state.reducerVersion,
     }),
     (dispatch: Dispatch<any>): DispatchToProps => ({

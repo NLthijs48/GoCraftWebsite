@@ -17,9 +17,16 @@ export function get(data: any, ...paths: Array<string|number>): any {
 
 const wordPressAPI = 'http://mc.go-craft.com/wordpress/wp-json'
 export function getData(path: string): Promise<any> {
+    if(path.substr(0, 4) !== 'http') {
+        path = wordPressAPI + path
+    }
+
     return new Promise((resolve, reject) => {
-        fetch(wordPressAPI+path)
-            .then((response) => response.json())
+        fetch(path, {method: 'GET'})
+            .then((response) => {
+                console.log('response:', response)
+                return response.json()
+            })
             .catch((error) => {
                 console.log('Fetch of', path, 'failed:', error)
                 reject()

@@ -25,10 +25,7 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
             for(const rawPage of action.data) {
                 const parent = get(rawPage, 'parent')
                 if(parent !== 0) {
-                    pages[parent] = {
-                        ...pages[parent],
-                        children: [...pages[parent].children, get(rawPage, 'id')],
-                    }
+                    pages[parent].children.push(get(rawPage, 'id'))
                 }
             }
             return pages

@@ -5,7 +5,7 @@ import {OtherAction} from 'types'
 export const UPDATE = 'players/UPDATE'
 interface Update {
     type: 'players/UPDATE',
-    to: PlayersState,
+    players: PlayersState,
 }
 
 // All server actions

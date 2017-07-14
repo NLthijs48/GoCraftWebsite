@@ -10,6 +10,8 @@ import {PlayersState} from 'modules/players/model'
 import {players} from 'modules/players/reducer'
 import {ServersState} from 'modules/servers/model'
 import {servers} from 'modules/servers/reducer'
+import {ShopLayoutState} from 'modules/shop/model'
+import {shopLayout} from 'modules/shop/reducer'
 import {VoteSitesState} from 'modules/votesites/model'
 import {voteSites} from 'modules/votesites/reducer'
 import {combineReducers} from 'redux'
@@ -22,6 +24,7 @@ export interface AppState {
     voteSites: VoteSitesState
     options: OptionsState
     players: PlayersState
+    shopLayout: ShopLayoutState
     reducerVersion: number
 }
 
@@ -42,5 +45,6 @@ export const rootReducer = combineReducers<AppState>({
     voteSites,
     options,
     players,
+    shopLayout,
     reducerVersion,
 })

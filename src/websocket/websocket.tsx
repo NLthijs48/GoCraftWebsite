@@ -1,4 +1,3 @@
-import {updateOnlinePlayers} from 'modules/players/actions'
 import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
@@ -6,8 +5,9 @@ import {AppState} from 'reducer'
 import {isLocalhost} from 'utils/utils'
 import {WebsocketMessage} from 'websocket/model'
 
-const USE_LOCAL_WEBSOCKET = false
+const USE_LOCAL_WEBSOCKET = true
 
+// TODO way to send messages
 class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 
     private socket?: WebSocket
@@ -91,39 +91,30 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
     private onMessage(message: MessageEvent) {
         const response: WebsocketMessage = JSON.parse(message.data)
         if(!response) {
-            console.error('received empty message or invalid json:', message.data)
+            console.error('received empty message or invalid json:', message)
             return
         }
         const responseType: string = response.type
 
         if(!responseType) {
-            console.error('[Websocket] message has no type')
+            console.error('[Websocket] message has no type', response)
             return
         }
+
         // Handle message
-
         console.log('[Websocket] message', response)
-        switch(responseType) {
-            case 'onlinePlayers': {
-                this.props.updateOnlinePlayers(response.players)
-                break
-            }
-            default: {
-                console.error('[Websocket] unknown message type:', responseType)
-            }
-        }
-
+        this.props.dispatch(response)
     }
 }
 
 interface DispatchToProps {
-    updateOnlinePlayers: (to: {}) => void
+    dispatch: Dispatch<any>
 }
 export const Websocket = withRouter<any>(connect<{}, DispatchToProps, {}>(
     (state: AppState): {} => ({
     }),
     (dispatch: Dispatch<any>): DispatchToProps => ({
-        updateOnlinePlayers: (to) => dispatch(updateOnlinePlayers(to)),
+        dispatch,
     }),
 )(WebsocketInternal))
 

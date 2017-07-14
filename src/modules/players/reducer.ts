@@ -5,7 +5,7 @@ import {PlayersState} from './model'
 export function players(state: PlayersState = {}, action: t.PlayersAction): PlayersState {
     switch(action.type) {
         case t.UPDATE:
-            return action.to
+            return action.players
         default:
             return state
     }
