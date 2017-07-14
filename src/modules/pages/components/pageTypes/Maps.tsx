@@ -65,6 +65,7 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
 
                             {nameToPath(server.name) === this.props.match.params.one &&
                                 <iframe
+                                    sandbox="allow-scripts allow-forms allow-pointer-lock allow-same-origin"
                                     style={{
                                         display: 'flex',
                                         width: '100%',
