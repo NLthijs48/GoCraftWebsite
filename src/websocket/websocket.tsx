@@ -5,7 +5,7 @@ import {AppState} from 'reducer'
 import {isLocalhost} from 'utils/utils'
 import {WebsocketMessage} from 'websocket/model'
 
-const USE_LOCAL_WEBSOCKET = true
+const USE_LOCAL_WEBSOCKET = false
 
 // TODO way to send messages
 class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
@@ -54,7 +54,7 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
             console.error('[Websocket] connect() called while there is still a socket!')
             return
         }
-        this.socket = new WebSocket(USE_LOCAL_WEBSOCKET ? 'ws://localhost:9192' : 'ws://mc.go-craft.com:9192')
+        this.socket = new WebSocket((USE_LOCAL_WEBSOCKET&&isLocalhost()) ? 'ws://localhost:9192' : 'ws://mc.go-craft.com:9192')
         this.socket.onopen = this.onOpen
         this.socket.onclose = this.onClose
         this.socket.onerror = this.onError
