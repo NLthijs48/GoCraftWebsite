@@ -3,10 +3,14 @@ import Raven from 'raven-js'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import {isLocalhost} from 'utils/utils'
 
-Raven
-    .config('https://a79017f727aa428e8f44e3763453e505@sentry.io/188788')
-    .install()
+if(!isLocalhost()) {
+    Raven
+        .config('https://a79017f727aa428e8f44e3763453e505@sentry.io/188788')
+        .install()
+}
+
 require('font-awesome-webpack')
 
 injectTapEventPlugin()
