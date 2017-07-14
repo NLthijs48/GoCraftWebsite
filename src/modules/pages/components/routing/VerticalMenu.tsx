@@ -3,6 +3,7 @@ import ListItem from 'material-ui/List/ListItem'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import {Loading} from 'modules/pages/components/Loading'
+import {mapsListItems} from 'modules/pages/components/submenus/MapsSubMenu'
 import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
 import {PlayersState} from 'modules/players/model'
 import {serverListItems} from 'modules/servers/components/ServersSubMenu'
@@ -87,6 +88,8 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                     )
                 }
             }
+        } else if(page.type === 'maps') {
+            nested = mapsListItems({servers, basePath: path+'/'})
         } else if(page.children && page.children.length) {
             nested = pagesToListItems({
                 ...data,

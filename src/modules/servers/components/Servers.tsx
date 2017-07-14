@@ -8,6 +8,15 @@ import {nameToPath} from 'utils/utils'
 import {ServerData, ServersState} from '../model'
 import {ServerDetails} from './ServerDetails'
 
+const minecraft = require('images/minecraft-iconx64.png')
+const ark = require('images/ark-iconx64.png')
+export function getServerTypeIcon(server: ServerData): string {
+    return {
+        minecraft,
+        ark,
+    }[server.gameType]
+}
+
 interface ServersProps {
     basePath: string
 }

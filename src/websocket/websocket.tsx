@@ -89,27 +89,27 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
     }
 
     private onMessage(message: MessageEvent) {
-        console.log('[Websocket] message', message)
         const response: WebsocketMessage = JSON.parse(message.data)
         if(!response) {
-            console.error('received empty message or invalid json')
+            console.error('received empty message or invalid json:', message.data)
             return
         }
-
         const responseType: string = response.type
+
         if(!responseType) {
             console.error('[Websocket] message has no type')
             return
         }
-
         // Handle message
+
+        console.log('[Websocket] message', response)
         switch(responseType) {
             case 'onlinePlayers': {
                 this.props.updateOnlinePlayers(response.players)
                 break
             }
             default: {
-                console.error('unknown message type:', responseType)
+                console.error('[Websocket] unknown message type:', responseType)
             }
         }
 

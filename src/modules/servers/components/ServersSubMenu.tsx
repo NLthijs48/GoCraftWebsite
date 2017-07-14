@@ -1,13 +1,12 @@
 import ListItem from 'material-ui/List/ListItem'
+import {LeftIconImage} from 'modules/pages/components/LeftIconImage'
 import {PlayersState} from 'modules/players/model'
+import {getServerTypeIcon} from 'modules/servers/components/Servers'
 import * as React from 'react'
 import {NavLink} from 'react-router-dom'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {ServersState} from '../model'
-
-const minecraft = require('images/minecraft-iconx64.png')
-const ark = require('images/ark-iconx64.png')
 
 interface ServersListItemProps {
     servers: ServersState
@@ -15,15 +14,10 @@ interface ServersListItemProps {
     basePath: string
 }
 export function serverListItems({servers, basePath, players}: ServersListItemProps) {
-    const result: Array<React.ReactElement<ListItem>> = []
-    servers.data.map((server) => {
+    return servers.data.map((server) => {
         const path = basePath + nameToPath(server.slug)
-        const icon = {
-            minecraft,
-            ark,
-        }[server.gameType]
         const playerCount = (((players||{})[server.bungeeID])||[]).length
-        result.push(
+        return (
             <ListItem
                 key={path}
                 primaryText={server.name}
@@ -34,23 +28,7 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
                     />
                 }
                 style={{color: '#666'}}
-                leftIcon={
-                    <div style={{
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: 'auto',
-                        margin: '0 0 0 12px',
-                    }}>
-                        <div style={{
-                            backgroundImage: 'url('+icon+')',
-                            backgroundSize: 'contain',
-                            backgroundRepeat: 'no-repeat',
-                            width: 30,
-                            height: 30,
-                        }}/>
-                    </div>
-                }
+                leftIcon={<LeftIconImage image={getServerTypeIcon(server)}/>}
                 rightIcon={playerCount > 0 ?
                     <div style={{
                         backgroundColor: '#BBB',
@@ -68,8 +46,7 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
                     </div>
                     : undefined
                 }
-            />,
+            />
         )
     })
-    return result
 }
