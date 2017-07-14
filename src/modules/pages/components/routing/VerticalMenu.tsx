@@ -67,7 +67,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
             if(players) {
                 const playerCount = Object.keys(players) // ['survival', 'kitpvp']
                     .map((playersKey) => players[playersKey].length) // [5, 2]
-                    .reduce((prev, current) => prev + current) // 7
+                    .reduce((prev, current) => prev + current, 0) // 7
                 if(playerCount > 0) {
                     rightIcon = (
                         <div style={{
