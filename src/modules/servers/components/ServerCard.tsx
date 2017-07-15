@@ -26,7 +26,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                 padding: 0,
             }}>
                 <NavLink
-                    to={path+'/'+nameToPath(server.name)}
+                    to={path+'/'+nameToPath(server.slug)}
                     style={{
                         width: '100%',
                         height: '100%',
@@ -76,7 +76,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                 }}>
                     {server.dynmapLink &&
                     <NavLink
-                        to={'/maps/' + nameToPath(server.name)}
+                        to={'/maps/' + nameToPath(server.slug)}
                     >
                         <FlatButton
                             label="View map"
@@ -87,11 +87,11 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
 
                     {myPlayers.length > 0 &&
                     <NavLink
-                        to={path+'/'+nameToPath(server.name)}
+                        to={path+'/'+nameToPath(server.slug)}
                     >
                         <FlatButton
                             label={myPlayers.length+' online'}
-                            icon={<Icon name={myPlayers.length > 1 ? 'users' : 'user'} />}
+                            icon={<Icon name={myPlayers.length > 1 ? 'users' : 'user'} fixedWidth />}
                         />
                     </NavLink>
 

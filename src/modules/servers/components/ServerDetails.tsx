@@ -57,7 +57,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                         {server.dynmapLink &&
                             <CardItem>
                                 <NavLink
-                                    to={'/maps/' + nameToPath(server.name)}
+                                    to={'/maps/' + nameToPath(server.slug)}
                                     style={{
                                         width: '100%',
                                         height: '100%',
