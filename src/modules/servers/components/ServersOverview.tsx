@@ -19,7 +19,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
     public render() {
         const {servers, basePath} = this.props
         const {columns} = this.state
-        const maxWidth = 100/Math.min(servers.data.length, columns) + '%'
+        const maxWidth = 100 / columns + '%'
         // [row][column]
         const renderLayout: ServerData[][] = []
 

@@ -7,7 +7,8 @@ export type Page =
     HTMLPage |
     EmbeddedPage |
     ServersPage |
-    VoteSitesPage
+    VoteSitesPage |
+    ShopPage
 interface AbstractPage {
     title: string
     status: 'publish'
@@ -34,6 +35,9 @@ export interface ServersPage extends AbstractPage {
 }
 export interface VoteSitesPage extends AbstractPage {
     type: 'vote-sites'
+}
+export interface ShopPage extends AbstractPage {
+    type: 'shop'
 }
 
 // ID -> Page
