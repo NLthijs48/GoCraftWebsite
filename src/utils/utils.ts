@@ -23,10 +23,7 @@ export function getData(path: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
         fetch(path, {method: 'GET'})
-            .then((response) => {
-                console.log('response:', response)
-                return response.json()
-            })
+            .then((response) => response.json())
             .catch((error) => {
                 console.log('Fetch of', path, 'failed:', error)
                 reject()

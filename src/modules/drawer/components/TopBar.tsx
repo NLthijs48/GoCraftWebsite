@@ -59,7 +59,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                         height: '100%',
                     }}
                 >
-                    <img src={logo} alt="logo" style={{height: 75, marginTop: '-0.1em'}}/>
+                    <img src={logo} alt="logo" style={{maxHeight: 75, marginTop: '-0.1em'}}/>
                 </NavLink>
                 <Filler />
                 {!this.props.drawer.docked && <div style={{width: '2.8em'}} />}
