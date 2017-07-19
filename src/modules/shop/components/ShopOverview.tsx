@@ -82,7 +82,7 @@ export class ShopOverviewDisplay extends React.PureComponent<StateToProps, {colu
     }
 
     private onResize(contentRect: ContentRect) {
-        this.setState({columns: Math.floor(contentRect.bounds.width/400)})
+        this.setState({columns: Math.max(1, Math.floor(contentRect.bounds.width/400))})
     }
 }
 
