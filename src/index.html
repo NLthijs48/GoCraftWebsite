@@ -43,6 +43,38 @@
                 -webkit-overflow-scrolling: touch;
             }
 
+            /* Style scrollbar */
+            ::-webkit-scrollbar {
+                width: 4px;
+                height: 8px;
+            }
+            ::-webkit-scrollbar-button {
+                height: 0;
+                width: 0;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, .2);
+                border-radius: 2px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(0, 0, 0, .3);
+            }
+            ::-webkit-scrollbar-thumb:active {
+                background: rgba(0, 0, 0, .3);
+            }
+            ::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0);
+                background-color: transparent;
+                border-radius: 2px;
+            }
+            ::-webkit-scrollbar-track:hover {
+                background: rgba(255, 255, 255, .4);
+            }
+            ::-webkit-scrollbar-track:active {
+                background: rgba(255, 255, 255, .4);
+            }
+
+
 
             /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
             html {
