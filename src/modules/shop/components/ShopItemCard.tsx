@@ -2,6 +2,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
@@ -10,10 +11,11 @@ import {ShopItem} from '../model'
 
 interface ShopItemProps {
     id: number
+    basePath: string
 }
 export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps, {}> {
     public render() {
-        const {shopItem} = this.props
+        const {shopItem, id} = this.props
 
         return (
             <CardItem style={{
@@ -78,15 +80,20 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <RaisedButton
-                        label="Buy now"
-                        labelPosition="before"
-                        primary
-                        fullWidth
-                        target="_blank"
-                        href={shopItem.buyUrl}
-                        icon={<Icon name="shopping-cart" style={{marginTop: '-0.2em'}}/>}
-                    />
+                    <NavLink
+                        to={'/shop/'+id}
+                        style={{
+                            width: '100%',
+                        }}
+                    >
+                        <RaisedButton
+                            label="Buy now"
+                            labelPosition="before"
+                            primary
+                            fullWidth
+                            icon={<Icon name="shopping-cart" style={{marginTop: '-0.2em'}}/>}
+                        />
+                    </NavLink>
                 </div>
             </CardItem>
         )

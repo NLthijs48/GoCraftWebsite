@@ -7,7 +7,7 @@ import {Maps} from 'modules/pages/components/pageTypes/Maps'
 import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Page, PagesState} from 'modules/pages/model'
 import {Servers} from 'modules/servers/components/Servers'
-import {ShopOverview} from 'modules/shop/components/ShopOverview'
+import {Shop} from 'modules/shop/components/Shop'
 import {VoteSitesList} from 'modules/votesites/components/VoteSitesList'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -55,7 +55,7 @@ function renderPage(page: Page, basePath: string): React.ReactElement<any> {
         case 'vote-sites':
             return <VoteSitesList basePath={basePath} />
         case 'shop':
-            return <ShopOverview />
+            return <Shop basePath={basePath} />
         default:
             console.error('unknown page type:', page, 'at basePath:', basePath)
             return <NotFound />

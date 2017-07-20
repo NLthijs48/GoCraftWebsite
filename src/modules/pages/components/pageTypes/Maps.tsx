@@ -1,3 +1,4 @@
+import {WebsiteFrame} from 'components/WebsiteFrame'
 import {Loading} from 'modules/pages/components/Loading'
 import {ServersState} from 'modules/servers/model'
 import * as React from 'react'
@@ -34,18 +35,7 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
                 continue
             }
 
-            return (
-                <iframe
-                    sandbox="allow-scripts allow-forms allow-pointer-lock allow-same-origin"
-                    style={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100%',
-                        border: '0 none',
-                    }}
-                    src={server.dynmapLink}
-                />
-            )
+            return <WebsiteFrame src={server.dynmapLink} />
         }
 
         return <Redirect to={this.props.basePath} />
