@@ -15,6 +15,7 @@ interface AbstractPage {
     urlPath?: string
     menuIcon?: string
     children: number[]
+    adminOnly?: boolean
 }
 export interface HomePage extends AbstractPage {
     type: 'home',

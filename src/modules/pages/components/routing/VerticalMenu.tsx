@@ -14,7 +14,7 @@ import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Icon} from 'utils/Icon'
-import {nameToPath} from 'utils/utils'
+import {isAdmin, nameToPath} from 'utils/utils'
 
 type AllMenuProps = DispatchToProps & StateToProps & RouteComponentProps<any>
 class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
@@ -60,6 +60,10 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
     const result: Array<ReactElement<ListItem>> = []
     pages.map((pageKey) => {
         const page: Page = byId[pageKey]
+        if(!isAdmin && page.adminOnly) {
+            return
+        }
+
         const path = basePath + nameToPath(page.urlPath || page.title)
         let nested: Array<React.ReactElement<ListItem>>|undefined
         let rightIcon: React.ReactElement<any>|undefined

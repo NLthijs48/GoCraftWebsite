@@ -18,6 +18,7 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
                     content: get(rawPage, 'acf', 'content'),
                     urlPath: get(rawPage, 'acf', 'url_path'),
                     menuIcon: get(rawPage, 'acf', 'menu_icon'),
+                    adminOnly: get(rawPage, 'acf', 'admin_only'),
                     children: [],
                 }
             }
