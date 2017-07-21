@@ -68,10 +68,13 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
         let nested: Array<React.ReactElement<ListItem>>|undefined
         let rightIcon: React.ReactElement<any>|undefined
         if(page.type === 'servers') {
-            nested = serverListItems({servers, basePath: path + '/', players})
+            nested = serverListItems({servers, basePath: path + '/', players: players})
             if(players) {
-                const playerCount = Object.keys(players) // ['survival', 'kitpvp']
-                    .map((playersKey) => players[playersKey].length) // [5, 2]
+                const playerCount = Object.keys(players.minecraft) // ['survival', 'kitpvp']
+                    .map((serverKey) => players.minecraft[serverKey].length) // [5, 2]
+                    .reduce((prev, current) => prev + current, 0) // 7
+                + Object.keys(players.ark) // [SteamID]
+                    .map((serverKey) => players.ark[serverKey].length) // [5, 2]
                     .reduce((prev, current) => prev + current, 0) // 7
                 if(playerCount > 0) {
                     rightIcon = (

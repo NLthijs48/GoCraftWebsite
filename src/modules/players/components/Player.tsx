@@ -5,6 +5,8 @@ interface PlayerProps {
     player: PlayerInfo
     style?: React.CSSProperties
 }
+
+// TODO ark specific rendering
 export function Player({player, style}: PlayerProps) {
     return (
         <div style={{

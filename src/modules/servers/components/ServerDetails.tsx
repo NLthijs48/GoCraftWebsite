@@ -1,7 +1,7 @@
 import {RawContent} from 'components/RawContent'
 import RaisedButton from 'material-ui/RaisedButton'
 import {PlayersList} from 'modules/players/components/PlayerList'
-import {PlayerInfo, PlayersState} from 'modules/players/model'
+import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -27,7 +27,12 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
 
     public render() {
         const {server, players} = this.props
-        const myPlayers: PlayerInfo[] = players[server.bungeeID] || []
+
+        const myPlayers = ({
+            minecraft: players.minecraft[server.bungeeID || ''],
+            ark: players.ark[server.steamID || ''],
+        }[server.gameType] || [])
+
         return (
             <div style={{
                 maxWidth: 1200,

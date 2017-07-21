@@ -16,7 +16,10 @@ interface ServersListItemProps {
 export function serverListItems({servers, basePath, players}: ServersListItemProps) {
     return servers.data.map((server) => {
         const path = basePath + nameToPath(server.slug)
-        const playerCount = (((players||{})[server.bungeeID])||[]).length
+        const playerCount = ({
+            minecraft: players.minecraft[server.bungeeID || ''],
+            ark: players.ark[server.steamID || ''],
+        }[server.gameType] || []).length
         return (
             <ListItem
                 key={path}

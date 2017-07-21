@@ -9,8 +9,9 @@ export interface ServerData {
     image: string
     dynmapLink?: string
     order: number
-    bungeeID: string
     gameType: 'minecraft'|'ark'
+    bungeeID?: string
+    steamID?: string
 }
 
 export type ServersData = ServerData[]

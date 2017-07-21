@@ -1,6 +1,7 @@
 import {fetchNewsItems} from 'modules/news/actions'
 import {fetchOptions} from 'modules/options/actions'
 import {fetchPages} from 'modules/pages/actions'
+import {fetchArkPlayers} from 'modules/players/actions'
 import {fetchServers} from 'modules/servers/actions'
 import {fetchVoteSites} from 'modules/votesites/actions'
 import * as React from 'react'
@@ -9,6 +10,8 @@ import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 
 class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToProps, {}> {
+    private interval: number
+
     public componentDidMount() {
         this.doFetching()
     }
@@ -24,6 +27,10 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
         }
     }
 
+    public componentWillUnmount() {
+        clearInterval(this.interval)
+    }
+
     private doFetching() {
         // Crucial resources
         this.props.fetchPages()
@@ -34,7 +41,11 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
             this.props.fetchNewsItems()
             this.props.fetchVoteSites()
             this.props.fetchOptions()
-        }, 0)
+        }, 10)
+
+        this.interval = setInterval(() => {
+            this.props.fetchArkPlayers()
+        }, 30*1000)
     }
 }
 
@@ -47,6 +58,7 @@ interface DispatchToProps {
     fetchNewsItems: () => void
     fetchVoteSites: () => void,
     fetchOptions: () => void,
+    fetchArkPlayers: () => void,
 }
 export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {}>(
     (state: AppState): StateToProps => ({
@@ -58,5 +70,6 @@ export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {
         fetchNewsItems: () => dispatch(fetchNewsItems()),
         fetchVoteSites: () => dispatch(fetchVoteSites()),
         fetchOptions: () => dispatch(fetchOptions()),
+        fetchArkPlayers: () => dispatch(fetchArkPlayers()),
     }),
 )(PreFetchComponent))

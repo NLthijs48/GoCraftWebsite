@@ -1,5 +1,5 @@
 import FlatButton from 'material-ui/FlatButton'
-import {PlayerInfo, PlayersState} from 'modules/players/model'
+import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
@@ -19,7 +19,11 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
     public render() {
         const {server, path, players} = this.props
 
-        const myPlayers: PlayerInfo[] = players[server.bungeeID] || []
+        const myPlayerCount = ({
+            minecraft: players.minecraft[server.bungeeID||''],
+            ark: players.ark[server.steamID||''],
+        }[server.gameType] || []).length
+
         return (
             <CardItem style={{
                 height: '100%',
@@ -85,13 +89,13 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                     </NavLink>
                     }
 
-                    {myPlayers.length > 0 &&
+                    {myPlayerCount > 0 &&
                     <NavLink
                         to={path+'/'+nameToPath(server.slug)}
                     >
                         <FlatButton
-                            label={myPlayers.length+' online'}
-                            icon={<Icon name={myPlayers.length > 1 ? 'users' : 'user'} fixedWidth />}
+                            label={myPlayerCount+' online'}
+                            icon={<Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth />}
                         />
                     </NavLink>
 
