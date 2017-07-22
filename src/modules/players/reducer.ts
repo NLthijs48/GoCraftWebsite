@@ -19,7 +19,11 @@ export function ark(state: ArkPlayers = {}, action: t.PlayersAction): ArkPlayers
         case t.FETCH_ARK_SUCCESS:
             return {
                 ...state,
-                [get(action.data, 'info', 'SteamID')]: get(action.data, 'players'),
+                [get(action.data, 'info', 'SteamID')]: (get(action.data, 'players')||[]).map((player: object) => ({
+                    game: 'ark',
+                    name: get(player, 'Name'),
+                    time: get(player, 'Time'),
+                })),
             }
         default:
             return state

@@ -15,6 +15,7 @@ export interface MinecraftPlayers {
 export interface ArkPlayer {
     game: 'ark'
     name: string
+    time: number
 }
 export interface ArkPlayers {
     // Server SteamID -> players
