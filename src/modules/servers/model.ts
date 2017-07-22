@@ -11,7 +11,6 @@ export interface ServerData {
     order: number
     gameType: 'minecraft'|'ark'
     bungeeID?: string
-    steamID?: string
 }
 
 export type ServersData = ServerData[]

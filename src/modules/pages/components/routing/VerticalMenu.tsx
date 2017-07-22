@@ -73,7 +73,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                 const playerCount = Object.keys(players.minecraft) // ['survival', 'kitpvp']
                     .map((serverKey) => players.minecraft[serverKey].length) // [5, 2]
                     .reduce((prev, current) => prev + current, 0) // 7
-                + Object.keys(players.ark) // [SteamID]
+                + Object.keys(players.ark) // [key]
                     .map((serverKey) => players.ark[serverKey].length) // [5, 2]
                     .reduce((prev, current) => prev + current, 0) // 7
                 if(playerCount > 0) {

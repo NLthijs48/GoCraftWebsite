@@ -18,7 +18,7 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
         const path = basePath + nameToPath(server.slug)
         const playerCount = ({
             minecraft: players.minecraft[server.bungeeID || ''],
-            ark: players.ark[server.steamID || ''],
+            ark: players.ark.default,
         }[server.gameType] || []).length
         return (
             <ListItem

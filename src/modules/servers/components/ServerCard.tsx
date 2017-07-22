@@ -21,7 +21,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
 
         const myPlayerCount = ({
             minecraft: players.minecraft[server.bungeeID||''],
-            ark: players.ark[server.steamID||''],
+            ark: players.ark.default,
         }[server.gameType] || []).length
 
         return (

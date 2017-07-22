@@ -30,7 +30,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
 
         const myPlayers = ({
             minecraft: players.minecraft[server.bungeeID || ''],
-            ark: players.ark[server.steamID || ''],
+            ark: players.ark.default,
         }[server.gameType] || [])
 
         return (

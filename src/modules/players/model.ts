@@ -18,7 +18,7 @@ export interface ArkPlayer {
     time: number
 }
 export interface ArkPlayers {
-    // Server SteamID -> players
+    // Server id -> players
     [k: string]: ArkPlayer[]
 }
 

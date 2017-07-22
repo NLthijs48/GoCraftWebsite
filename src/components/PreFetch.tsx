@@ -45,7 +45,7 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
 
         this.interval = setInterval(() => {
             this.props.fetchArkPlayers()
-        }, 30*1000)
+        }, 10*1000)
     }
 }
 
