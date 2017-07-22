@@ -41,6 +41,7 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
             this.props.fetchNewsItems()
             this.props.fetchVoteSites()
             this.props.fetchOptions()
+            this.props.fetchArkPlayers()
         }, 10)
 
         this.interval = setInterval(() => {
