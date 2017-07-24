@@ -15,6 +15,7 @@ import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Icon} from 'utils/Icon'
 import {isAdmin, nameToPath} from 'utils/utils'
+import ListItemProps = __MaterialUI.List.ListItemProps
 
 type AllMenuProps = DispatchToProps & StateToProps & RouteComponentProps<any>
 class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
@@ -55,9 +56,9 @@ interface PagesToListItemsProps {
     currentPath: string
     players: PlayersState
 }
-function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListItem>> {
+function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListItemProps>> {
     const {byId, pages, basePath, servers, currentPath, players} = data
-    const result: Array<ReactElement<ListItem>> = []
+    const result: Array<ReactElement<ListItemProps>> = []
     pages.map((pageKey) => {
         const page: Page = byId[pageKey]
         if(!isAdmin && page.adminOnly) {
@@ -65,10 +66,10 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
         }
 
         const path = basePath + nameToPath(page.urlPath || page.title)
-        let nested: Array<React.ReactElement<ListItem>>|undefined
+        let nested: Array<React.ReactElement<ListItemProps>>|undefined
         let rightIcon: React.ReactElement<any>|undefined
         if(page.type === 'servers') {
-            nested = serverListItems({servers, basePath: path + '/', players: players})
+            nested = serverListItems({servers, basePath: path + '/', players})
             if(players) {
                 const playerCount = Object.keys(players.minecraft) // ['survival', 'kitpvp']
                     .map((serverKey) => players.minecraft[serverKey].length) // [5, 2]

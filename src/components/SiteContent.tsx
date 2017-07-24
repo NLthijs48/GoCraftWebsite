@@ -7,11 +7,14 @@ import {DrawerState} from 'modules/drawer/model'
 import {Routes} from 'modules/pages/components/routing/Routes'
 import {VerticalMenu} from 'modules/pages/components/routing/VerticalMenu'
 import * as React from 'react'
+import * as ReactGA from 'react-ga'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Dispatch} from 'redux'
 import {Websocket} from 'websocket/websocket'
+
+ReactGA.initialize('UA-72556535-1')
 
 type AllSiteContentProps = StateToProps & DispatchToProps & RouteComponentProps<any>
 class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
@@ -24,6 +27,7 @@ class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
 
     public componentDidMount() {
         this.unlisten = this.props.history.listen(this.onNavigate)
+        this.trackPage(this.props.location.pathname)
     }
 
     public componentWillUnmount() {
@@ -67,6 +71,15 @@ class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
         if(this.props.drawer.open && !this.props.drawer.docked) {
             this.props.closeDrawer()
         }
+
+        this.trackPage(location.pathname)
+    }
+
+    private trackPage(page: string) {
+        ReactGA.set({
+            page,
+        })
+        ReactGA.pageview(page)
     }
 }
 
