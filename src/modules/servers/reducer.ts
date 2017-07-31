@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
-import {ServersData, ServersState} from './model'
+import {Feature, ServersData, ServersState} from './model'
 
 // Server data reducer
 function data(state: ServersData = [], action: t.ServersAction): ServersData {
@@ -21,10 +21,12 @@ function data(state: ServersData = [], action: t.ServersAction): ServersData {
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
                     image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium_large'),
-                    dynmapLink: get(rawServer, 'acf', 'dynmap_link'),
+                    dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
+                    dynmapPreview: get(rawServer, 'acf', 'dynmap', 'preview', 'sizes', 'medium_large'),
                     order: get(rawServer, 'menu_order'),
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
                     gameType: get(rawServer, 'acf', 'game_type', 'value'),
+                    features: features(get(rawServer, 'acf', 'content')),
                 })
             }
             servers.sort((a, b) => a.order-b.order)
@@ -32,6 +34,38 @@ function data(state: ServersData = [], action: t.ServersAction): ServersData {
         default:
             return state
     }
+}
+
+function features(rawFeatures: any): Feature[] {
+    if(!rawFeatures) {
+        return []
+    }
+
+    return rawFeatures.map(({acf_fc_layout: type, ...details}: {acf_fc_layout: string, [key: string]: any}) => {
+        if(!type || !details) {
+            return undefined
+        }
+        switch(type) {
+            case 'simple_feature':
+                return {
+                    type,
+                    title: details.title,
+                    image: get(details.image, 'sizes', 'large'),
+                }
+            case 'slider_feature':
+                return {
+                    type,
+                    header: details.header,
+                    slides: (details.feature_list||[]).map((slide: any) => ({
+                        title: get(slide, 'title'),
+                        image: get(slide, 'image', 'sizes', 'large'),
+                    })),
+                }
+            default:
+                console.error('unknown server feature type:', type, 'details:', details)
+                return undefined
+        }
+    })
 }
 
 // Fetching state reducer

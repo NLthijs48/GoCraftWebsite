@@ -8,10 +8,27 @@ export interface ServerData {
     longDescription: string
     image: string
     dynmapLink?: string
+    dynmapPreview?: string
     order: number
     gameType: 'minecraft'|'ark'
     bungeeID?: string
+    features: Feature[]
 }
+
+// Features
+interface SimpleFeature {
+    type: 'simple_feature'
+    title: string
+    image: string
+}
+interface SliderFeature {
+    type: 'slider_feature'
+    header: string
+    slides: SimpleFeature[]
+}
+export type Feature =
+    SimpleFeature |
+    SliderFeature
 
 export type ServersData = ServerData[]
 

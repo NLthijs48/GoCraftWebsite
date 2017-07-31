@@ -67,27 +67,44 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                         marginLeft: singleColumn ? 0 : '1em',
                     }}>
                         {server.dynmapLink &&
-                            <CardItem>
+                            <CardItem
+                                style={{padding: 0}}
+                            >
                                 <NavLink
                                     to={'/maps/' + nameToPath(server.slug)}
                                     style={{
                                         width: '100%',
                                         height: '100%',
-                                        display: 'flex',
-                                        flexDirection: 'column',
                                         color: 'inherit',
+                                        flex: 1,
                                     }}
                                 >
-                                    <h2>View world map</h2>
                                     <div style={{
                                         width: '100%',
                                         padding: '56% 0 0 0',
-                                        backgroundImage: 'url(http://map.go-craft.com:8128/tiles/world/flat/3_-1/zzzz_112_-32.jpg)',
+                                        backgroundImage: server.dynmapPreview ? 'url('+server.dynmapPreview+')' : 'url(http://map.go-craft.com:8128/tiles/world/flat/3_-1/zzzz_112_-32.jpg)',
+                                        backgroundColor: '#888',
                                         backgroundPosition: '50% 50%',
                                         backgroundSize: 'cover',
                                         position: 'relative',
-                                        flexShrink: 0,
-                                    }}/>
+                                    }}>
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            right: 0,
+                                            left: 0,
+                                            background: 'rgba(0,0,0,0.5)',
+                                            color: '#FFF',
+                                            padding: '1em',
+                                            display: 'flex',
+                                        }}>
+                                            <div style={{
+                                                fontSize: '1.25em',
+                                            }}>
+                                                View world map
+                                            </div>
+                                        </div>
+                                    </div>
                                 </NavLink>
                             </CardItem>
                         }
@@ -122,4 +139,3 @@ export const ServerDetails = withRouter<any>(connect<StateToProps, {}, {}>(
         players: state.players,
     }),
 )(ServerDetailsDisplay))
-
