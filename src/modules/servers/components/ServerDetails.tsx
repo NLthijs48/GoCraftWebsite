@@ -57,7 +57,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     alignItems: 'flex-start', // Don't stretch items to 100% height
                     flexDirection: singleColumn ? 'column' : 'row',
                 }}>
-                    <CardItem style={{flex: 1}}>
+                    <CardItem style={{flex: 1, width: '100%'}}>
                         <h1>{server.name}</h1>
                         <RawContent content={server.longDescription} />
                     </CardItem>
