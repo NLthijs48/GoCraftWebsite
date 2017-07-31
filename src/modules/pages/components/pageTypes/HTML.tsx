@@ -7,13 +7,6 @@ interface HTMLProps {
     page: HTMLPage
 }
 export function HTML({page}: HTMLProps) {
-    let content
-    if(!page.content) {
-        content = <div>Empty page content, add some in WordPress</div>
-    } else {
-        content = <RawContent content={page.content} />
-    }
-
     return (
         <div style={{
             maxWidth: 900,
@@ -21,7 +14,10 @@ export function HTML({page}: HTMLProps) {
             padding: '1em',
         }}>
             <CardItem>
-                {content}
+                {page.content ?
+                    <RawContent content={page.content} /> :
+                    <div>Empty page content, add some in WordPress</div>
+                }
             </CardItem>
         </div>
     )

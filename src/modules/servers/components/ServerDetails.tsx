@@ -3,30 +3,33 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {PlayersList} from 'modules/players/components/PlayerList'
 import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
+import {ContentRect} from 'react-measure'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
 import {Icon} from 'utils/Icon'
+import {Responsive} from 'utils/Responsive'
 import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
-
-// TODO use <Responsive> to go to single column layout
 
 interface ServerProps {
     server: ServerData
 }
 type AllServerDetailsProps = ServerProps & RouteComponentProps<{}> & StateToProps
-class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}> {
+class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {singleColumn: boolean}> {
 
     public constructor(props: AllServerDetailsProps) {
         super(props)
         this.goBack = this.goBack.bind(this)
+        this.state = {singleColumn: false}
+        this.onResize = this.onResize.bind(this)
     }
 
     public render() {
         const {server, players} = this.props
+        const {singleColumn} = this.state
 
         const myPlayers = ({
             minecraft: players.minecraft[server.bungeeID || ''],
@@ -34,11 +37,14 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
         }[server.gameType] || [])
 
         return (
-            <div style={{
-                maxWidth: 1200,
-                margin: '0 auto',
-                padding: '1em',
-            }}>
+            <Responsive
+                onResize={this.onResize}
+                style={{
+                    maxWidth: 1200,
+                    margin: '0 auto',
+                    padding: '1em',
+                }}
+            >
                 <RaisedButton
                     label="Back"
                     icon={<Icon name="chevron-left"/>}
@@ -49,6 +55,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                 <div style={{
                     display: 'flex',
                     alignItems: 'flex-start', // Don't stretch items to 100% height
+                    flexDirection: singleColumn ? 'column' : 'row',
                 }}>
                     <CardItem style={{flex: 1}}>
                         <h1>{server.name}</h1>
@@ -56,8 +63,8 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                     </CardItem>
 
                     <div style={{
-                        width: '30%',
-                        marginLeft: '1em',
+                        width: singleColumn ? '100%' : '30%',
+                        marginLeft: singleColumn ? 0 : '1em',
                     }}>
                         {server.dynmapLink &&
                             <CardItem>
@@ -92,7 +99,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                         }
                     </div>
                 </div>
-            </div>
+            </Responsive>
         )
     }
 
@@ -100,6 +107,10 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
         const pathParts = this.props.location.pathname.split('/')
         pathParts.pop()
         this.props.history.push({pathname: pathParts.join('/')})
+    }
+
+    private onResize(contentRect: ContentRect) {
+        this.setState({singleColumn: contentRect.bounds.width < 800})
     }
 }
 
