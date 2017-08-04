@@ -8,7 +8,7 @@ module.exports = {
         'webpack/hot/only-dev-server',
         'index.tsx'
     ],
-    devtool: 'eval',
+    devtool: 'cheap-module-eval-source-map',
     devServer: {
         port: 3000,
         historyApiFallback: true,
@@ -23,6 +23,9 @@ module.exports = {
         },
         host: '0.0.0.0',
         disableHostCheck: true,
+        watchOptions: {
+            ignored: /node_modules/,
+        },
     },
     module: {
         loaders: [
