@@ -31,9 +31,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
     }
 
     public render() {
-        const {server, players, drawer} = this.props
-        const {singleColumn} = this.state
-
+        const {server, players} = this.props
         const myPlayers = ({
             minecraft: players.minecraft[server.bungeeID || ''],
             ark: players.ark.default,
@@ -56,6 +54,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     left: 0,
                     right: 0,
                     height: '70vh',
+                    pointerEvents: 'none',
                 }} />
 
                 <div style={{
