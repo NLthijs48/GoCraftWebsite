@@ -4,6 +4,7 @@ import {PlayersState} from 'modules/players/model'
 import {getServerTypeIcon} from 'modules/servers/components/Servers'
 import * as React from 'react'
 import {NavLink} from 'react-router-dom'
+import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {ServersState} from '../model'
@@ -41,10 +42,11 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
                         borderRadius: '1em',
                         color: 'white',
                         fontSize: '80%',
-                        width: 'auto',
+                        width: '3em',
                         padding: '0 0.5em',
                     }}>
-                        <Icon name="user" style={{marginRight: 5}} size={12}/>
+                        <Icon name="user" size={12}/>
+                        <Filler />
                         {playerCount}
                     </div>
                     : undefined

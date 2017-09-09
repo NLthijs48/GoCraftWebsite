@@ -25,6 +25,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
     }
 
     public render() {
+        const {drawer} = this.props
         return (
             <Toolbar style={{
                 backgroundColor: THEME.palette.primary1Color,
@@ -35,7 +36,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 padding: 0,
                 boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
             }}>
-                {!this.props.drawer.docked &&
+                {!drawer.docked &&
                     <IconButton onTouchTap={this.onMenuIconTap} style={{
                         fontSize: 'inherit',
                         width: '56px',
@@ -57,12 +58,13 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 <NavLink to="/"
                     style={{
                         height: '100%',
+                        marginLeft: drawer.docked ? '256px' : 0,
                     }}
                 >
                     <img src={logo} alt="logo" style={{maxHeight: 75, marginTop: '-0.1em'}}/>
                 </NavLink>
                 <Filler />
-                {!this.props.drawer.docked && <div style={{width: '2.8em'}} />}
+                {!drawer.docked && <div style={{width: '2.8em'}} />}
             </Toolbar>
         )
     }

@@ -12,7 +12,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
 
     public constructor(props: ServersOverviewProps) {
         super(props)
-        this.state = {columns: 1}
+        this.state = {columns: 0}
         this.onResize = this.onResize.bind(this)
     }
 
@@ -38,23 +38,25 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
 
         return (
             <Responsive onResize={this.onResize} style={{margin: '1.5em 0 0.5em 0'}}>
-                {renderLayout.map((rowServers, rowIndex) => (
-                    <div key={rowIndex} style={{
-                        display: 'flex',
-                        padding: '0 0.5em',
-                        // justifyContent: 'center', // Align in the middle?
-                    }}>
-                        {rowServers.map((server, columnIndex) => (
-                            <div key={columnIndex} style={{
-                                maxWidth,
-                                padding: '0.5em',
-                                flex: 1,
-                            }}>
-                                <ServerCard server={server} path={basePath} />
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                {!columns ? null :
+                    renderLayout.map((rowServers, rowIndex) => (
+                        <div key={rowIndex} style={{
+                            display: 'flex',
+                            padding: '0 0.5em',
+                            // justifyContent: 'center', // Align in the middle?
+                        }}>
+                            {rowServers.map((server, columnIndex) => (
+                                <div key={columnIndex} style={{
+                                    maxWidth,
+                                    padding: '0.5em',
+                                    flex: 1,
+                                }}>
+                                    <ServerCard server={server} path={basePath}/>
+                                </div>
+                            ))}
+                        </div>
+                    ))
+                }
             </Responsive>
         )
     }

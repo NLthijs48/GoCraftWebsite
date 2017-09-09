@@ -13,6 +13,7 @@ export function Player({player, style}: PlayerProps) {
         <div style={{
             display: 'flex',
             alignItems: 'center',
+            filter: 'drop-shadow(0px 0px 2px rgba(0,0,0,0.5))',
             ...style,
         }}>
             <div style={{
@@ -20,7 +21,6 @@ export function Player({player, style}: PlayerProps) {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: '50% 50%',
-                filter: 'drop-shadow(0px 0px 1px rgba(0,0,0,0.5))',
                 height: 40,
                 width: 35,
                 flexShrink: 0,

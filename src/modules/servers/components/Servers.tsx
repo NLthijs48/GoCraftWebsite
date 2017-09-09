@@ -6,7 +6,7 @@ import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
 import {ServerData, ServersState} from '../model'
-import {ServerDetails} from './ServerDetails'
+import {ServerDetails} from './serverpage/ServerDetails'
 
 const minecraft = require('images/minecraft-iconx64.png')
 const ark = require('images/ark-iconx64.png')

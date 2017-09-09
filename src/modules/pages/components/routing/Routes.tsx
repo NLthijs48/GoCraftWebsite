@@ -14,6 +14,7 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                 style={{
                     flex: 1,
                     position: 'relative',
+                    backgroundColor: '#EEE',
                 }}
             >
                 <PageBackground />

@@ -18,7 +18,7 @@
     "url": "https://github.com/NLthijs48/GoCraftWebsite/issues"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --progress",
     "lint": "tslint --project tsconfig.json",
     "build": "webpack --env.target=production --progress --profile --colors",
     "build-analyze": "webpack --env.target=production --progress --profile --colors --env.analyze"

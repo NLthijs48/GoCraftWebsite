@@ -7,6 +7,7 @@ export interface ServerData {
     shortDescription: string
     longDescription: string
     image: string
+    heroImage?: string
     dynmapLink?: string
     dynmapPreview?: string
     order: number
@@ -16,12 +17,12 @@ export interface ServerData {
 }
 
 // Features
-interface SimpleFeature {
+export interface SimpleFeature {
     type: 'simple_feature'
     title: string
     image: string
 }
-interface SliderFeature {
+export interface SliderFeature {
     type: 'slider_feature'
     header: string
     slides: SimpleFeature[]

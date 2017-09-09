@@ -87,7 +87,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                             borderRadius: '1em',
                             color: 'white',
                             fontSize: '80%',
-                            width: 'auto',
+                            width: '3em',
                             padding: '0 0.5em',
                         }}>
                             <Icon name="user" style={{marginRight: 5}} size={12}/>

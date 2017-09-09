@@ -21,6 +21,7 @@ function data(state: ServersData = [], action: t.ServersAction): ServersData {
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
                     image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium_large'),
+                    heroImage: get(rawServer, 'acf', 'hero_image', 'url'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
                     dynmapPreview: get(rawServer, 'acf', 'dynmap', 'preview', 'sizes', 'medium_large'),
                     order: get(rawServer, 'menu_order'),
