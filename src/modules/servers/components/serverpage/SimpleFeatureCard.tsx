@@ -24,11 +24,14 @@ export class SimpleFeatureCard extends React.Component<SimpleFeatureProps, {}> {
                     }}>
                         {feature.title}
                     </div>
-                    <div style={{
-                        marginTop: '0.5em',
-                    }}>
-                        Some detail text to describe the image.
-                    </div>
+
+                    {!!feature.description &&
+                        <div style={{
+                            marginTop: '0.5em',
+                        }}>
+                            {feature.description}
+                        </div>
+                    }
                 </div>
 
                 <img

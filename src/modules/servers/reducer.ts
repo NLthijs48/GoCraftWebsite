@@ -51,6 +51,7 @@ function features(rawFeatures: any): Feature[] {
                 return {
                     type,
                     title: details.title,
+                    description: details.description,
                     image: get(details.image, 'sizes', 'large'),
                 }
             case 'slider_feature':

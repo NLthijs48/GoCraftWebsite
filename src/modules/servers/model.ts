@@ -20,6 +20,7 @@ export interface ServerData {
 export interface SimpleFeature {
     type: 'simple_feature'
     title: string
+    description?: string
     image: string
 }
 export interface SliderFeature {

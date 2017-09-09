@@ -34,11 +34,11 @@ export function PlayersRow({players}: PlayersRowProps) {
             }
 
             <div style={{
-                'flex': 1,
-                'overflow': 'auto',
-                'display': 'flex',
-                '-webkitMaskImage': '-webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2%, rgb(0, 0, 0) 90%, rgba(0, 0, 0, 0) 100%)',
-                'paddingLeft': '1em',
+                flex: 1,
+                overflow: 'auto',
+                display: 'flex',
+                WebkitMaskImage: '-webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2%, rgb(0, 0, 0) 90%, rgba(0, 0, 0, 0) 100%)',
+                paddingLeft: '1em',
             }}>
                 {players.map((player) =>
                     <Player key={player.name} player={player} style={{marginRight: '2em', color: '#EEE', fontWeight: 'bold'}} />)
