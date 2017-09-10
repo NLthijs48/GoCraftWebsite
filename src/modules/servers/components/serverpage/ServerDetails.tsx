@@ -5,7 +5,6 @@ import {PlayersRow} from 'modules/players/components/PlayersRow'
 import {PlayersState} from 'modules/players/model'
 import {FeatureCardList} from 'modules/servers/components/serverpage/FeatureCardList'
 import * as React from 'react'
-import {ContentRect} from 'react-measure'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
@@ -13,7 +12,6 @@ import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
-import {Responsive} from 'utils/Responsive'
 import {nameToPath} from 'utils/utils'
 import {ServerData} from '../../model'
 
@@ -21,17 +19,28 @@ interface ServerProps {
     server: ServerData
 }
 type AllServerDetailsProps = ServerProps & RouteComponentProps<{}> & StateToProps
-class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {singleColumn: boolean}> {
+class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {scrolled: number}> {
+
+    private scroller: HTMLElement
 
     public constructor(props: AllServerDetailsProps) {
         super(props)
         this.goBack = this.goBack.bind(this)
-        this.state = {singleColumn: false}
-        this.onResize = this.onResize.bind(this)
+        this.state = {scrolled: 0}
+        this.onScroll = this.onScroll.bind(this)
+    }
+
+    public componentDidMount() {
+        this.scroller.addEventListener('scroll', this.onScroll, {passive: true} as any)
+    }
+
+    public componentWillUnmount() {
+        this.scroller.removeEventListener('scroll', this.onScroll, {passive: true} as any)
     }
 
     public render() {
         const {server, players} = this.props
+        const {scrolled} = this.state
         const myPlayers = ({
             minecraft: players.minecraft[server.bungeeID || ''],
             ark: players.ark.default,
@@ -43,7 +52,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                 height: '100%',
                 overflow: 'overlay',
                 background: '#EEE',
-            } as any}>
+            } as any} ref={(e) => this.scroller = e}>
                 <div style={{
                     backgroundImage: 'url('+server.heroImage+')',
                     backgroundSize: 'cover',
@@ -55,6 +64,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     right: 0,
                     height: '70vh',
                     pointerEvents: 'none',
+                    transform: 'translate3d(0,'+(-scrolled/2)+'px,0)',
                 }} />
 
                 <div style={{
@@ -122,8 +132,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     </div>
                 </div>
 
-                <Responsive
-                    onResize={this.onResize}
+                <div
                     style={{
                         maxWidth: 1200,
                         margin: '0 auto',
@@ -146,7 +155,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                             }
                         </div>
                     </div>
-                </Responsive>
+                </div>
             </div>
         )
     }
@@ -157,8 +166,8 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
         this.props.history.push({pathname: pathParts.join('/')})
     }
 
-    private onResize(contentRect: ContentRect) {
-        this.setState({singleColumn: contentRect.bounds.width < 800})
+    private onScroll() {
+        this.setState({scrolled: this.scroller.scrollTop})
     }
 }
 
