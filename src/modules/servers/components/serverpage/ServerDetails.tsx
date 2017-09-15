@@ -47,12 +47,11 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
         }[server.gameType] || [])
 
         return (
-            <div style={{
+            <div className="overflow" style={{
                 width: '100%',
                 height: '100%',
-                overflow: 'overlay',
                 background: '#EEE',
-            } as any} ref={(e) => this.scroller = e}>
+            }} ref={(e) => this.scroller = e}>
                 <div style={{
                     backgroundImage: 'url('+server.heroImage+')',
                     backgroundSize: 'cover',
@@ -64,7 +63,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     right: 0,
                     height: '70vh',
                     pointerEvents: 'none',
-                    transform: 'translate3d(0,'+(-scrolled/2)+'px,0)',
+                    transform: 'translate3d(0,'+(-Math.round(scrolled/2))+'px,0)',
                 }} />
 
                 <div style={{
@@ -167,6 +166,11 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
     }
 
     private onScroll() {
+        const scrolled = this.scroller.scrollTop
+        // Skip if not required anymore
+        if(window.innerHeight && scrolled/2 > window.innerHeight) {
+            return
+        }
         this.setState({scrolled: this.scroller.scrollTop})
     }
 }
