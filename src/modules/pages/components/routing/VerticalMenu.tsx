@@ -13,6 +13,7 @@ import {connect, Dispatch} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
+import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {isAdmin, nameToPath} from 'utils/utils'
 import ListItemProps = __MaterialUI.List.ListItemProps
@@ -91,6 +92,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                             padding: '0 0.5em',
                         }}>
                             <Icon name="user" style={{marginRight: 5}} size={12}/>
+                            <Filler />
                             {playerCount}
                         </div>
                     )
