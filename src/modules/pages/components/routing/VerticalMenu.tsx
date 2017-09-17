@@ -120,7 +120,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                 nestedItems={nested}
                 style={{color: '#666'}}
                 initiallyOpen={currentPath.indexOf(path) === 0}
-                open={currentPath.indexOf(path) === 0 ? true : undefined}
+                open={(currentPath.indexOf(path) === 0 || path==='/servers') ? true : undefined}
             />,
         )
     })
