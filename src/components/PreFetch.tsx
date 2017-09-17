@@ -3,6 +3,7 @@ import {fetchOptions} from 'modules/options/actions'
 import {fetchPages} from 'modules/pages/actions'
 import {fetchArkPlayers} from 'modules/players/actions'
 import {fetchServers} from 'modules/servers/actions'
+import {fetchShopInfo} from 'modules/shop/actions'
 import {fetchVoteSites} from 'modules/votesites/actions'
 import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
@@ -42,8 +43,10 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
             this.props.fetchVoteSites()
             this.props.fetchOptions()
             this.props.fetchArkPlayers()
+            this.props.fetchShopInfo()
         }, 10)
 
+        // TODO: replace this by getting updates from the websocket (and let the server poll)
         this.interval = setInterval(() => {
             this.props.fetchArkPlayers()
         }, 10*1000)
@@ -60,6 +63,7 @@ interface DispatchToProps {
     fetchVoteSites: () => void,
     fetchOptions: () => void,
     fetchArkPlayers: () => void,
+    fetchShopInfo: () => void,
 }
 export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {}>(
     (state: AppState): StateToProps => ({
@@ -72,5 +76,6 @@ export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {
         fetchVoteSites: () => dispatch(fetchVoteSites()),
         fetchOptions: () => dispatch(fetchOptions()),
         fetchArkPlayers: () => dispatch(fetchArkPlayers()),
+        fetchShopInfo: () => dispatch(fetchShopInfo()),
     }),
 )(PreFetchComponent))

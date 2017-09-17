@@ -6,6 +6,7 @@ export interface ShopItem {
     requiredItems: string[]
     iconBlockId: string
     description: string
+    image: string
 }
 
 export interface ShopItems {

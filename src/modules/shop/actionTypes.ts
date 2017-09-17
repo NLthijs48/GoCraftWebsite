@@ -11,7 +11,14 @@ interface FetchSuccess {
     },
 }
 
+export const FETCH_INFO_SUCCESS = 'shopLayout/INFO_UPDATE'
+interface FetchInfoSuccess {
+    type: 'shopLayout/INFO_UPDATE',
+    data: object[],
+}
+
 // All server actions
 export type ShopLayoutAction =
     FetchSuccess |
+    FetchInfoSuccess |
     OtherAction

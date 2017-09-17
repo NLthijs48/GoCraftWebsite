@@ -24,8 +24,8 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
             }}>
                 <div style={{
                     width: '100%',
-                    padding: '56% 0 0 0',
-                    backgroundImage: 'url()', // TODO image
+                    padding: '100% 0 0 0',
+                    backgroundImage: shopItem.image ? 'url('+shopItem.image+')' : '',
                     backgroundColor: '#888',
                     backgroundPosition: '50% 50%',
                     backgroundSize: 'cover',

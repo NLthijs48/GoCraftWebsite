@@ -34,7 +34,8 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
             // Get the properties we need from the WordPress byId
             const shopItems: ShopItems = {...state}
             for(const rawShopItem of action.shopLayout.result) {
-                shopItems[get(rawShopItem, 'id')] = {
+                const id = get(rawShopItem, 'id')
+                shopItems[id] = {
                     name: get(rawShopItem, 'name'),
                     buyUrl: get(rawShopItem, 'url'),
                     price: +get(rawShopItem, 'price'),
@@ -42,10 +43,21 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
                     requiredItems: get(rawShopItem, 'required'),
                     iconBlockId: get(rawShopItem, 'iconid'),
                     description: get(rawShopItem, 'description'),
+                    ...shopItems[id],
                 }
             }
 
             return shopItems
+        case t.FETCH_INFO_SUCCESS:
+            const shopItemsInfo: ShopItems = {...state}
+            for(const rawShopInfo of action.data) {
+                const id = get(rawShopInfo, 'acf', 'minecraftmarket_shop_item_number')
+                shopItemsInfo[id] = {
+                    image: get(rawShopInfo, 'acf', 'image', 'sizes', 'large'),
+                    ...shopItemsInfo[id],
+                }
+            }
+            return shopItemsInfo
         default:
             return state
     }
