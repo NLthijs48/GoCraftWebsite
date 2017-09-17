@@ -106,6 +106,9 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                             {server.dynmapLink &&
                                 <NavLink
                                     to={'/maps/' + nameToPath(server.slug)}
+                                    style={{
+                                        marginRight: '-1em', // Align with feature blocks
+                                    }}
                                 >
                                     <FlatButton
                                         style={{color: '#EEE'}}
