@@ -63,7 +63,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     right: 0,
                     height: '70vh',
                     pointerEvents: 'none',
-                    transform: 'translate3d(0,'+(-Math.round(scrolled/2))+'px,0)',
+                    transform: 'translate3d(0,'+(Math.round(scrolled/2))+'px,0)',
                 }} />
 
                 <div style={{
