@@ -4,7 +4,8 @@ import {RemoteState} from 'types'
 export interface VoteSite {
     name: string
     vote_url: string
-    identifier: string
+    identifiers: string[]
+    cooldown: number
 }
 
 // ID -> VoteSite
@@ -14,7 +15,15 @@ export interface VoteSites {
 
 export type VoteSiteIds = string[]
 
+export interface VoteStatus {
+    [k: string]: VoteIdentifierStatus
+}
+export interface VoteIdentifierStatus {
+    lastVoted: number
+}
+
 export interface VoteSitesState extends RemoteState {
     byId: VoteSites
     items: VoteSiteIds
+    voteStatus: VoteStatus
 }

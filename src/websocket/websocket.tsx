@@ -80,7 +80,6 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
             clearTimeout(this.reconnectScheduled)
             this.reconnectScheduled = setTimeout(this.connect, this.reconnectTime*1000)
             this.reconnectTime = Math.min(isLocalhost() ? 10 : 60, this.reconnectTime*2)
-            console.log('reconnecttime:', this.reconnectTime)
         }
     }
 

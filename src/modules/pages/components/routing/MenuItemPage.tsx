@@ -8,7 +8,7 @@ import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Page, PagesState} from 'modules/pages/model'
 import {Servers} from 'modules/servers/components/Servers'
 import {Shop} from 'modules/shop/components/Shop'
-import {VoteSitesList} from 'modules/votesites/components/VoteSitesList'
+import {VotePage} from 'modules/votesites/components/VotePage'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
@@ -53,7 +53,7 @@ function renderPage(page: Page, basePath: string): React.ReactElement<any> {
         case 'servers':
             return <Servers basePath={basePath}/>
         case 'vote-sites':
-            return <VoteSitesList basePath={basePath} />
+            return <VotePage basePath={basePath} />
         case 'shop':
             return <Shop basePath={basePath} />
         default:

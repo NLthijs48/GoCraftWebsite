@@ -8,6 +8,7 @@ import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
 import {PlayersState} from 'modules/players/model'
 import {serverListItems} from 'modules/servers/components/ServersSubMenu'
 import {ServersState} from 'modules/servers/model'
+import {VoteSitesState} from 'modules/votesites/model'
 import React, {ReactElement} from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -26,14 +27,14 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
     }
 
     public render() {
-        const {pages, servers, players} = this.props
+        const {pages, servers, players, voteSites} = this.props
         if(pages.isFetching && (!pages || !pages.byId || !pages.rootItems)) {
             return <Loading />
         }
 
         return (
             <List>
-                {pagesToListItems({pages: pages.rootItems, byId: pages.byId, basePath: '/', servers, currentPath: this.props.location.pathname, players})}
+                {pagesToListItems({pages: pages.rootItems, byId: pages.byId, basePath: '/', servers, currentPath: this.props.location.pathname, players, voteSites})}
             </List>
         )
     }
@@ -56,9 +57,10 @@ interface PagesToListItemsProps {
     servers: ServersState
     currentPath: string
     players: PlayersState
+    voteSites: VoteSitesState
 }
 function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListItemProps>> {
-    const {byId, pages, basePath, servers, currentPath, players} = data
+    const {byId, pages, basePath, servers, currentPath, players, voteSites} = data
     const result: Array<ReactElement<ListItemProps>> = []
     pages.map((pageKey) => {
         const page: Page = byId[pageKey]
@@ -99,7 +101,12 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                 }
             }
         } else if(page.type === 'maps') {
-            nested = mapsListItems({servers, basePath: path+'/'})
+            nested = mapsListItems({servers, basePath: path + '/'})
+        } else if(page.type === 'vote-sites') {
+            // TODO consider adding vote sites into the menu instead:
+            // - Subtitles and icons can be used for extra info
+            // - Probably not possible to preload the next vote site (maybe simply dispatch on submenu click instead of router link?)
+            // nested = voteSitesToListItems({voteSites, basePath: path + '/'})
         } else if(page.children && page.children.length) {
             nested = pagesToListItems({
                 ...data,
@@ -134,6 +141,7 @@ interface StateToProps {
     pages: PagesState
     servers: ServersState
     players: PlayersState
+    voteSites: VoteSitesState
 }
 interface DispatchToProps {
     closeDrawer: () => void
@@ -144,6 +152,7 @@ export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProp
         pages: state.pages,
         servers: state.servers,
         players: state.players,
+        voteSites: state.voteSites,
     }),
     (dispatch: Dispatch<any>): DispatchToProps => ({
         closeDrawer: () => dispatch(updateDrawerOpen(false)),

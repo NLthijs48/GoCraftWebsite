@@ -1,4 +1,4 @@
-import {VoteSiteIds, VoteSites, VoteSitesState} from 'modules/votesites/model'
+import {VoteSiteIds, VoteSites, VoteSitesState, VoteStatus} from 'modules/votesites/model'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -13,7 +13,8 @@ function byId(state: VoteSites = {}, action: t.VoteSitesAction): VoteSites {
                 voteSites[get(rawVoteSite, 'id')] = {
                     name: get(rawVoteSite, 'title', 'rendered'),
                     vote_url: get(rawVoteSite, 'acf', 'vote_url'),
-                    identifier: get(rawVoteSite, 'acf', 'identifier'),
+                    identifiers: get(rawVoteSite, 'acf', 'identifier').split(/, ?/),
+                    cooldown: (+get(rawVoteSite, 'acf', 'cooldown')) || 0,
                 }
             }
             return voteSites
@@ -28,7 +29,7 @@ function items(state: VoteSiteIds = [], action: t.VoteSitesAction): VoteSiteIds 
         case t.FETCH_SUCCESS:
             return action.data
                 .sort((a, b) => get(a, 'menu_order')-get(b, 'menu_order'))
-                .map((rawVoteSite) => get(rawVoteSite, 'id'))
+                .map((rawVoteSite) => ''+get(rawVoteSite, 'id'))
         default:
             return state
     }
@@ -47,4 +48,14 @@ function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean 
     }
 }
 
-export const voteSites = combineReducers<VoteSitesState>({byId, items, isFetching})
+// Vote status of the user
+function voteStatus(state: VoteStatus = {}, action: t.VoteSitesAction): VoteStatus {
+    switch(action.type) {
+        case t.UPDATE_STATUS:
+            return action.status
+        default:
+            return state
+    }
+}
+
+export const voteSites = combineReducers<VoteSitesState>({byId, items, isFetching, voteStatus})

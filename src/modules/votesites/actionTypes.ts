@@ -1,3 +1,4 @@
+import {VoteStatus} from 'modules/votesites/model'
 import {OtherAction} from 'types'
 
 // Start getting vote site information
@@ -19,9 +20,16 @@ interface FetchFailure {
     type: 'voteSites/FETCH_FAILURE',
 }
 
+export const UPDATE_STATUS = 'voteSites/STATUS_UPDATE'
+interface StatusUpdate {
+    type: 'voteSites/STATUS_UPDATE'
+    status: VoteStatus
+}
+
 // All server actions
 export type VoteSitesAction =
     Fetch |
     FetchSuccess |
     FetchFailure |
+    StatusUpdate |
     OtherAction

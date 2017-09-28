@@ -2,7 +2,6 @@ import {SiteConfiguration} from 'components/SiteConfiguration'
 import Raven from 'raven-js'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import {isLocalhost} from 'utils/utils'
 
 if(!isLocalhost()) {
@@ -12,8 +11,6 @@ if(!isLocalhost()) {
 }
 
 require('font-awesome-webpack')
-
-injectTapEventPlugin()
 
 const render = () => {
     ReactDOM.render(
