@@ -1,4 +1,4 @@
-import {ShopCategories, ShopCategoryItems, ShopItems, ShopLayoutState} from 'modules/shop/model'
+import {Perk, ShopCategories, ShopCategoryItems, ShopItems, ShopLayoutState} from 'modules/shop/model'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -54,6 +54,7 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
                 const id = get(rawShopInfo, 'acf', 'minecraftmarket_shop_item_number')
                 shopItemsInfo[id] = {
                     image: get(rawShopInfo, 'acf', 'image', 'sizes', 'large'),
+                    perks: perksReducer(get(rawShopInfo, 'acf', 'perks')),
                     ...shopItemsInfo[id],
                 }
             }
@@ -61,6 +62,18 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
         default:
             return state
     }
+}
+
+function perksReducer(rawPerks: any): Perk[] {
+    if(!rawPerks) {
+        return []
+    }
+
+    return rawPerks.map((rawPerk: object) => ({
+        text: get(rawPerk, 'perk'),
+        servers: (get(rawPerk, 'servers')||[]).map((rawServer: object) => get(rawServer, 'post_title')),
+        sub: get(rawPerk, 'subperk'),
+    }))
 }
 
 // Build array of menu items

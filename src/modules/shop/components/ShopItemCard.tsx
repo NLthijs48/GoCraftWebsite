@@ -57,18 +57,29 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
                     </div>
                 </div>
 
-                <div style={{
-                    margin: '1em 1em 0 1em',
+                <ul style={{
+                    margin: '1em 0 0 0',
+                    padding: '0 2em',
+                    listStyleType: 'circle',
                 }}>
-                    <pre style={{
-                        fontFamily: 'inherit',
-                        whiteSpace: 'pre-wrap', // Keep line breaks and spacing, but do line-wrap
-                        lineHeight: 'inherit',
-                        overflow: 'unset',
-                    }}>
-                        {shopItem.description}
-                    </pre>
-                </div>
+                    {shopItem.perks.map((perk, index) => (
+                        <li key={index} style={{
+                            margin: 0,
+                            marginLeft: perk.sub ? '1.5em' : 0,
+                            padding: 0,
+                        }}>
+                            <div style={{flex: 1}}>
+                                {perk.text}
+                            </div>
+                            {perk.servers.length >= 1 && <div style={{
+                                fontSize: '80%',
+                            }}>
+                                Only on {perk.servers.join(', ')}
+                            </div>}
+                        </li>
+                    ))}
+                </ul>
+
 
                 <Filler />
 

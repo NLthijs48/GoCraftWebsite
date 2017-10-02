@@ -7,6 +7,13 @@ export interface ShopItem {
     iconBlockId: string
     description: string
     image: string
+    perks: Perk[]
+}
+
+export interface Perk {
+    text: string
+    servers: string[]
+    sub: boolean
 }
 
 export interface ShopItems {
