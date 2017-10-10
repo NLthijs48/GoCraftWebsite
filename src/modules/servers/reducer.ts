@@ -1,3 +1,4 @@
+import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -20,10 +21,10 @@ function data(state: ServersData = [], action: t.ServersAction): ServersData {
                     name: get(rawServer, 'title', 'rendered'),
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
-                    image: get(rawServer, 'acf', 'feature_image', 'sizes', 'medium_large'),
+                    image: parseImage(800, get(rawServer, 'acf', 'feature_image', 'sizes')),
                     heroImage: get(rawServer, 'acf', 'hero_image', 'url'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
-                    dynmapPreview: get(rawServer, 'acf', 'dynmap', 'preview', 'sizes', 'medium_large'),
+                    dynmapPreview: parseImage(800, get(rawServer, 'acf', 'dynmap', 'preview', 'sizes')),
                     order: get(rawServer, 'menu_order'),
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
                     gameType: get(rawServer, 'acf', 'game_type', 'value'),
@@ -52,7 +53,7 @@ function features(rawFeatures: any): Feature[] {
                     type,
                     title: details.title,
                     description: details.description,
-                    image: get(details.image, 'sizes', 'large'),
+                    image: parseImage(1600, get(details.image, 'sizes')),
                 }
             case 'slider_feature':
                 return {
@@ -60,7 +61,7 @@ function features(rawFeatures: any): Feature[] {
                     header: details.header,
                     slides: (details.feature_list||[]).map((slide: any) => ({
                         title: get(slide, 'title'),
-                        image: get(slide, 'image', 'sizes', 'large'),
+                        image: parseImage(1600, get(slide, 'image', 'sizes')),
                     })),
                 }
             default:

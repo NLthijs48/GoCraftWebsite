@@ -22,7 +22,7 @@ export class WebsiteFrame extends React.PureComponent<EmbeddedProps, EmbeddedSta
                 {this.state.loading && <Loading size={80} />}
                 {src &&
                 <iframe
-                    sandbox="allow-scripts allow-forms allow-pointer-lock allow-same-origin"
+                    sandbox="allow-scripts allow-forms allow-pointer-lock allow-same-origin allow-presentation"
                     style={{
                         display: 'flex',
                         width: '100%',

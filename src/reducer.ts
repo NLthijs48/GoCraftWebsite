@@ -37,6 +37,24 @@ const reducerVersion = (state: number = 0, action: { type: string }) => {
     }
 }
 
+export const parseImage = (target: number, sizes: {[key: string]: string|{source_url: string}}): string|null => {
+    if(!sizes) {
+        return null
+    }
+
+    let pickSize = 50
+    while(pickSize < target) {
+        pickSize *= 2
+    }
+
+    const pickedImage = sizes['x'+pickSize] || sizes.full
+    if(typeof pickedImage === 'string') {
+        return pickedImage
+    } else {
+        return pickedImage.source_url
+    }
+}
+
 export const rootReducer = combineReducers<AppState>({
     servers,
     pages,

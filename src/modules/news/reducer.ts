@@ -1,3 +1,4 @@
+import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -14,7 +15,7 @@ function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
                     title: get(rawNewsItem, 'title', 'rendered'),
                     slug: get(rawNewsItem, 'slug'),
                     date: Date.parse(get(rawNewsItem, 'date')),
-                    image: get(rawNewsItem, 'acf', 'feature_image', 'sizes', 'medium_large'),
+                    image: parseImage(800, get(rawNewsItem, 'acf', 'feature_image', 'sizes')),
                     content: get(rawNewsItem, 'content', 'rendered'),
                     author: {
                         id: get(rawNewsItem, 'author'),

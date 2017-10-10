@@ -1,4 +1,5 @@
 import {Perk, ShopCategories, ShopCategoryItems, ShopItems, ShopLayoutState} from 'modules/shop/model'
+import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -53,7 +54,7 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
             for(const rawShopInfo of action.data) {
                 const id = get(rawShopInfo, 'acf', 'minecraftmarket_shop_item_number')
                 shopItemsInfo[id] = {
-                    image: get(rawShopInfo, 'acf', 'image', 'sizes', 'large'),
+                    image: parseImage(800, get(rawShopInfo, 'acf', 'image', 'sizes')),
                     perks: perksReducer(get(rawShopInfo, 'acf', 'perks')),
                     ...shopItemsInfo[id],
                 }
