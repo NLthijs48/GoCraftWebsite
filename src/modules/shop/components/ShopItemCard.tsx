@@ -62,7 +62,7 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
                     padding: '0 2em',
                     listStyleType: 'circle',
                 }}>
-                    {shopItem.perks.map((perk, index) => (
+                    {!!shopItem.perks && shopItem.perks.map((perk, index) => (
                         <li key={index} style={{
                             margin: 0,
                             marginLeft: perk.sub ? '1.5em' : 0,

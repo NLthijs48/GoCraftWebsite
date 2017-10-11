@@ -6,16 +6,19 @@ import ReactDOM from 'react-dom'
 import {isLocalhost} from 'utils/utils'
 
 if(!isLocalhost()) {
+    // Sentry setup
     Raven
         .config('https://a79017f727aa428e8f44e3763453e505@sentry.io/188788')
         .install()
+
+    // ServiceWorker and AppCache setup
+    OfflinePluginRuntime.install({
+        onUpdateReady: () => {
+            OfflinePluginRuntime.applyUpdate()
+        },
+    })
 }
 
-OfflinePluginRuntime.install({
-    onUpdateReady: () => {
-        OfflinePluginRuntime.applyUpdate()
-    },
-})
 require('font-awesome-webpack')
 
 const render = () => {
