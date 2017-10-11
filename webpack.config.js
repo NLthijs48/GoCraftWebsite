@@ -4,6 +4,7 @@ const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CheckerPlugin} = require('awesome-typescript-loader');
+const OfflinePlugin = require('offline-plugin');
 
 // Configuration shared by production and developement
 const commonConfig = {
@@ -80,5 +81,14 @@ module.exports = function (env) {
     }
 
     // Merge and return
-    return Merge(commonConfig, environmentConfig);
+    const merged = Merge(commonConfig, environmentConfig);
+    merged.plugins.push(
+        // ServiceWorker and AppCache for offline use (should be last...)
+        new OfflinePlugin({
+            externals: [
+                '**/*'
+            ]
+        })
+    );
+    return merged;
 };

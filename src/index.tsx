@@ -1,4 +1,5 @@
 import {SiteConfiguration} from 'components/SiteConfiguration'
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import Raven from 'raven-js'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
@@ -10,6 +11,11 @@ if(!isLocalhost()) {
         .install()
 }
 
+OfflinePluginRuntime.install({
+    onUpdateReady: () => {
+        OfflinePluginRuntime.applyUpdate()
+    },
+})
 require('font-awesome-webpack')
 
 const render = () => {
