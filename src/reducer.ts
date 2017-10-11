@@ -37,9 +37,9 @@ const reducerVersion = (state: number = 0, action: { type: string }) => {
     }
 }
 
-export const parseImage = (target: number, sizes: {[key: string]: string|{source_url: string}}): string|null => {
+export const parseImage = (target: number, sizes: {[key: string]: string|{source_url: string}}): string => {
     if(!sizes) {
-        return null
+        return ''
     }
 
     let pickSize = 50
