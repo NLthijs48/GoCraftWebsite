@@ -11,7 +11,6 @@ import * as ReactGA from 'react-ga'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {Dispatch} from 'redux'
 import {Websocket} from 'websocket/websocket'
 
 ReactGA.initialize('UA-72556535-1')
@@ -89,11 +88,11 @@ interface StateToProps {
 interface DispatchToProps {
     closeDrawer: () => void
 }
-export const SiteContent = withRouter<any>(connect<StateToProps, {}, {}>(
-    (state: AppState): StateToProps => ({
+export const SiteContent = withRouter<any>(connect<StateToProps, DispatchToProps, {}, AppState>(
+    (state) => ({
         drawer: state.drawer,
     }),
-    (dispatch: Dispatch<any>): DispatchToProps => ({
+    (dispatch) => ({
         closeDrawer: () => dispatch(updateDrawerOpen(false)),
     }),
 )(SiteContentDisplay))

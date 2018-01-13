@@ -17,8 +17,6 @@ export function configureStore(): Store<AppState|undefined> {
     const store = createStore(
         rootReducer,
 
-        undefined,
-
         composeWithDevTools(
             applyMiddleware(...middlewares),
             autoRehydrate(),

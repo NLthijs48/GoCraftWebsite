@@ -14,7 +14,9 @@
       "whitespace": [],
       "no-console": false,
       "no-var-requires": false,
-      "jsx-alignment": false
+      "jsx-alignment": false,
+      "no-submodule-imports": false,
+      "no-implicit-dependencies": false
     },
     "rulesDirectory": []
 }

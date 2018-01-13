@@ -89,9 +89,8 @@ export class ShopOverviewDisplay extends React.PureComponent<StateToProps, {colu
 interface StateToProps {
     shopLayout: ShopLayoutState
 }
-
-export const ShopOverview = withRouter<any>(connect<StateToProps, {}, {}>(
-    (state: AppState): StateToProps => ({
+export const ShopOverview = withRouter<any>(connect<StateToProps, {}, {}, AppState>(
+    (state) => ({
         shopLayout: state.shopLayout,
     }),
 )(ShopOverviewDisplay))

@@ -9,9 +9,10 @@ import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
+import Timer = NodeJS.Timer
 
 class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToProps, {}> {
-    private interval: number
+    private interval: Timer
 
     public componentDidMount() {
         this.doFetching()
@@ -65,8 +66,8 @@ interface DispatchToProps {
     fetchArkPlayers: () => void,
     fetchShopInfo: () => void,
 }
-export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {}>(
-    (state: AppState): StateToProps => ({
+export const PreFetch = withRouter<any>(connect<StateToProps, DispatchToProps, {}, AppState>(
+    (state) => ({
         reducerVersion: state.reducerVersion,
     }),
     (dispatch: Dispatch<any>): DispatchToProps => ({

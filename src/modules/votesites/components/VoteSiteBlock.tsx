@@ -1,4 +1,4 @@
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 import * as React from 'react'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {CardItem} from 'utils/CardItem'
@@ -25,11 +25,10 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedVoteSiteBl
                     alignItems: 'flex-end',
                 }}>
                     <a target="_blank" href={voteSite.vote_url}>
-                        <RaisedButton
-                            primary
-                            label="Vote Now"
-                            icon={<Icon name="thumbs-o-up"/>}
-                        />
+                        <Button raised>
+                            <Icon name="thumbs-o-up"/>
+                            Vote Now
+                        </Button>
                     </a>
                 </div>
             </CardItem>
@@ -38,4 +37,4 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedVoteSiteBl
 
 }
 
-export const VoteSiteBlock = withRouter<any>(NewsItemBlockDisplay)
+export const VoteSiteBlock = withRouter<CombinedVoteSiteBlockProps>(NewsItemBlockDisplay)

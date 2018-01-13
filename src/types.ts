@@ -1,5 +1,3 @@
-import {MuiTheme} from 'material-ui/styles'
-
 export interface OtherAction {
     type: '',
 }
@@ -18,9 +16,11 @@ export interface User {
     avatar: string
 }
 
+/* TODO reapply
 export interface ThemeProps {
     muiTheme?: MuiTheme
 }
+*/
 
 export const THEME = {
     palette: {

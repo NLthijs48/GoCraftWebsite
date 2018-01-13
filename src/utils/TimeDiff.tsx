@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Timer = NodeJS.Timer
 
 interface TimeDiffProps {
     time: number|string // Milliseconds or Date string
@@ -6,7 +7,7 @@ interface TimeDiffProps {
 }
 
 export class TimeDiff extends React.PureComponent<TimeDiffProps, {}> {
-    private timer: number
+    private timer: Timer
 
     public componentWillUnmount() {
         clearTimeout(this.timer)
@@ -41,7 +42,7 @@ export class TimeDiff extends React.PureComponent<TimeDiffProps, {}> {
 
         // Set timer to automaticlly update the text
         clearTimeout(this.timer)
-        this.timer = setTimeout( () => {
+        this.timer = setTimeout(() => {
             this.forceUpdate()
         }, update * 1000)
         return <span>{text}</span>

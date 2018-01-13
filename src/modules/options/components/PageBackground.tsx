@@ -25,8 +25,8 @@ export function PageBackgroundDisplay({background}: StateToProps) {
 interface StateToProps {
     background?: string
 }
-export const PageBackground = connect<StateToProps, {}, {}>(
-    (state: AppState): StateToProps => ({
+export const PageBackground = connect<StateToProps, {}, {}, AppState>(
+    (state) => ({
         background: state.options.background,
     }),
 )(PageBackgroundDisplay)

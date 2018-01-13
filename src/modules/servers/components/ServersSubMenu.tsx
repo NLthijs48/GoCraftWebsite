@@ -1,3 +1,4 @@
+import {ListItemText} from 'material-ui'
 import ListItem from 'material-ui/List/ListItem'
 import {LeftIconImage} from 'modules/pages/components/LeftIconImage'
 import {PlayersState} from 'modules/players/model'
@@ -23,15 +24,15 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
         }[server.gameType] || []).length
         return (
             <ListItem
+                button
                 key={path}
-                primaryText={server.name}
                 containerElement={
                     <NavLink
                         to={path}
                         activeStyle={{color: '#000', display: 'block'}}
                     />
                 }
-                style={{color: '#666'}}
+                style={{color: '#666', paddingLeft: '4em'}}
                 leftIcon={<LeftIconImage image={getServerTypeIcon(server)}/>}
                 rightIcon={playerCount > 0 ?
                     <div style={{
@@ -51,7 +52,9 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
                     </div>
                     : undefined
                 }
-            />
+            >
+                <ListItemText inset primary={server.name}/>
+            </ListItem>
         )
     })
 }

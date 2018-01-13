@@ -80,8 +80,8 @@ class NewsListDisplay extends React.PureComponent<CombinedNewsListProps, {column
 interface StateToProps {
     voteSites: VoteSitesState
 }
-export const VoteSitesList = withRouter<any>(connect<StateToProps, {}, NewsListProps>(
-    (state: AppState): StateToProps => ({
+export const VoteSitesList = withRouter<any>(connect<StateToProps, {}, NewsListProps, AppState>(
+    (state) => ({
         voteSites: state.voteSites,
     }),
 )(NewsListDisplay))

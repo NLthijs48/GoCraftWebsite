@@ -57,8 +57,8 @@ function getServerDetailsFunction(server: ServerData) {
 interface StateToProps {
     servers: ServersState
 }
-export const Servers = withRouter<any>(connect<StateToProps, {}, ServersProps>(
-    (state: AppState): StateToProps => ({
+export const Servers = withRouter<ServersProps & RouteComponentProps<any>>(connect<StateToProps, {}, ServersProps, AppState>(
+    (state) => ({
         servers: state.servers,
     }),
 )(ServersDisplay))

@@ -72,8 +72,8 @@ function pagesToRoutes(data: PagesToRoutesProps): Array<React.ReactElement<any>>
 interface StateToProps {
     pages: PagesState
 }
-export const MenuRoutes = connect<StateToProps, {}, MenuRoutesProps>(
-    (state: AppState, ownProps: MenuRoutesProps): StateToProps => ({
+export const MenuRoutes = connect<StateToProps, {}, MenuRoutesProps, AppState>(
+    (state) => ({
         pages: state.pages,
     }),
 )(MenuRoutesDisplay)

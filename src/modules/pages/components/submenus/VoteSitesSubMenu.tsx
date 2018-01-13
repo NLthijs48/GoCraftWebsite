@@ -1,3 +1,4 @@
+import {ListItemText} from 'material-ui'
 import ListItem from 'material-ui/List/ListItem'
 import {VoteSitesState} from 'modules/votesites/model'
 import * as React from 'react'
@@ -15,8 +16,8 @@ export function voteSitesToListItems({voteSites, basePath}: VoteSitesItemsProps)
             const path = basePath + nameToPath(voteSite.name)
             return (
                 <ListItem
+                    button
                     key={path}
-                    primaryText={voteSite.name}
                     containerElement={
                         <NavLink
                             to={path}
@@ -24,7 +25,9 @@ export function voteSitesToListItems({voteSites, basePath}: VoteSitesItemsProps)
                         />
                     }
                     style={{color: '#666'}}
-                />
+                >
+                    <ListItemText inset primary={voteSite.name} />
+                </ListItem>
             )
         })
 }

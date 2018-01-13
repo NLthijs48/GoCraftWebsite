@@ -53,8 +53,8 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
 interface StateToProps {
     servers: ServersState
 }
-export const Maps = withRouter<any>(connect<StateToProps, {}, {}>(
-    (state: AppState): StateToProps => ({
+export const Maps = withRouter<MapsProps & RouteComponentProps<any>>(connect<StateToProps, {}, MapsProps, AppState>(
+    (state) => ({
         servers: state.servers,
     }),
 )(MapsDisplay))

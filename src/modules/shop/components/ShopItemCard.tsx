@@ -1,7 +1,7 @@
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
@@ -11,9 +11,8 @@ import {ShopItem} from '../model'
 
 interface ShopItemProps {
     id: number
-    basePath: string
 }
-export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps, {}> {
+export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {
         const {shopItem, id} = this.props
 
@@ -80,7 +79,6 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
                     ))}
                 </ul>
 
-
                 <Filler />
 
                 <div style={{
@@ -97,13 +95,10 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
                             width: '100%',
                         }}
                     >
-                        <RaisedButton
-                            label="Buy now"
-                            labelPosition="before"
-                            primary
-                            fullWidth
-                            icon={<Icon name="shopping-cart" style={{marginTop: '-0.2em'}}/>}
-                        />
+                        <Button raised color="primary" style={{width: '100%'}}>
+                            Buy now
+                            <Icon name="shopping-cart" style={{marginTop: '-0.2em'}}/>
+                        </Button>
                     </NavLink>
                 </div>
             </CardItem>
@@ -114,8 +109,8 @@ export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & Sta
 interface StateToProps {
     shopItem: ShopItem
 }
-export const ShopItemCard = withRouter<any>(connect<StateToProps, {}, ShopItemProps>(
-    (state: AppState, props: ShopItemProps): StateToProps => ({
-        shopItem: state.shopLayout.itemsById[props.id],
+export const ShopItemCard = withRouter<ShopItemProps & RouteComponentProps<any>>(connect<StateToProps, {}, ShopItemProps, AppState>(
+    (state, ownProps) => ({
+        shopItem: state.shopLayout.itemsById[ownProps.id],
     }),
 )(ShopItemCardDisplay))

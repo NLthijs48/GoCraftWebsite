@@ -1,4 +1,4 @@
-import FontIcon from 'material-ui/FontIcon'
+import MaterialIcon from 'material-ui/Icon'
 import * as React from 'react'
 
 export interface IconProps  {
@@ -28,7 +28,7 @@ export function Icon({name, color, size, style, fixedWidth, onClick}: IconProps)
     }
 
     return (
-        <FontIcon
+        <MaterialIcon
             className={classes.join(' ')}
             style={{
                 fontSize,

@@ -1,5 +1,7 @@
-import List from 'material-ui/List'
+import {ListItemText} from 'material-ui'
+import List, {ListItemProps} from 'material-ui/List'
 import ListItem from 'material-ui/List/ListItem'
+import Collapse from 'material-ui/transitions/Collapse'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import {Loading} from 'modules/pages/components/Loading'
@@ -10,14 +12,13 @@ import {serverListItems} from 'modules/servers/components/ServersSubMenu'
 import {ServersState} from 'modules/servers/model'
 import {VoteSitesState} from 'modules/votesites/model'
 import React, {ReactElement} from 'react'
-import {connect, Dispatch} from 'react-redux'
+import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {isAdmin, nameToPath} from 'utils/utils'
-import ListItemProps = __MaterialUI.List.ListItemProps
 
 type AllMenuProps = DispatchToProps & StateToProps & RouteComponentProps<any>
 class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
@@ -116,8 +117,8 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
         }
         result.push(
             <ListItem
+                button
                 key={path}
-                primaryText={page.title}
                 containerElement={
                     <NavLink
                         to={path}
@@ -126,12 +127,21 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                 }
                 leftIcon={<Icon name={page.menuIcon||'bars'} color="inherit" size={24} fixedWidth />}
                 rightIcon={rightIcon}
-                nestedItems={nested}
                 style={{color: '#666'}}
                 initiallyOpen={currentPath.indexOf(path) === 0}
                 open={(currentPath.indexOf(path) === 0 || path==='/servers') ? true : undefined}
-            />,
+            >
+                <ListItemText inset primary={page.title} />
+            </ListItem>,
         )
+
+        if(nested) {
+            result.push(
+                <Collapse in={true} transitionDuration="auto" unmountOnExit>
+                    {nested}
+                </Collapse>,
+            )
+        }
     })
     return result
 }
@@ -146,15 +156,15 @@ interface StateToProps {
 interface DispatchToProps {
     closeDrawer: () => void
 }
-export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProps, {}>(
-    (state: AppState): StateToProps => ({
+export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProps, {}, AppState>(
+    (state) => ({
         drawer: state.drawer,
         pages: state.pages,
         servers: state.servers,
         players: state.players,
         voteSites: state.voteSites,
     }),
-    (dispatch: Dispatch<any>): DispatchToProps => ({
+    (dispatch) => ({
         closeDrawer: () => dispatch(updateDrawerOpen(false)),
     }),
 )(MenuDisplay))

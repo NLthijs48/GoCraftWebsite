@@ -11,7 +11,7 @@ import {Shop} from 'modules/shop/components/Shop'
 import {VotePage} from 'modules/votesites/components/VotePage'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
 
@@ -19,7 +19,7 @@ interface MenuItemPageProps {
     page: Page
     basePath: string
 }
-class MenuItemPageDisplay extends React.PureComponent<MenuItemPageProps & StateToProps, {}> {
+class MenuItemPageDisplay extends React.PureComponent<MenuItemPageProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {
         const {page, pages, basePath} = this.props
 
@@ -65,8 +65,8 @@ function renderPage(page: Page, basePath: string): React.ReactElement<any> {
 interface StateToProps {
     pages: PagesState
 }
-export const MenuItemPage = withRouter<any>(connect<StateToProps, {}, MenuItemPageProps>(
-    (state: AppState): StateToProps => ({
+export const MenuItemPage = withRouter<MenuItemPageProps & RouteComponentProps<any>>(connect<StateToProps, {}, MenuItemPageProps, AppState>(
+    (state) => ({
         pages: state.pages,
     }),
 )(MenuItemPageDisplay))

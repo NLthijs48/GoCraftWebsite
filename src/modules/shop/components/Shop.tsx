@@ -12,14 +12,6 @@ interface ShopProps {
 }
 type CombinedServersDisplayProps = ShopProps & StateToProps & RouteComponentProps<any>
 class ShopDisplay extends React.PureComponent<CombinedServersDisplayProps, {}> {
-    private static shopOverview() {
-        return <ShopOverview/>
-    }
-
-    private static shopDetails() {
-        return <ShopItemDetails/>
-    }
-
     public render() {
         const {shopLayout, basePath} = this.props
 
@@ -29,18 +21,26 @@ class ShopDisplay extends React.PureComponent<CombinedServersDisplayProps, {}> {
 
         return (
             <Switch>
-                <Route path={basePath+'/:shopItemId'} render={ShopDisplay.shopDetails}/>
-                <Route render={ShopDisplay.shopOverview} />
+                <Route path={basePath+'/:shopItemId'} render={this.shopDetails}/>
+                <Route render={this.shopOverview} />
             </Switch>
         )
+    }
+
+    private shopOverview() {
+        return <ShopOverview/>
+    }
+
+    private shopDetails() {
+        return <ShopItemDetails/>
     }
 }
 
 interface StateToProps {
     shopLayout: ShopLayoutState
 }
-export const Shop = withRouter<any>(connect<StateToProps, {}, ShopProps>(
-    (state: AppState): StateToProps => ({
+export const Shop = withRouter<ShopProps & RouteComponentProps<any>>(connect<StateToProps, {}, ShopProps, AppState>(
+    (state) => ({
         shopLayout: state.shopLayout,
     }),
 )(ShopDisplay))

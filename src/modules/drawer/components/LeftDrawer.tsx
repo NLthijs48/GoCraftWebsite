@@ -5,7 +5,6 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {Dispatch} from 'redux'
 
 interface LeftDrawerProps {
     source: string
@@ -20,7 +19,7 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
     }
 
     public componentDidMount() {
-        this.updateDocked();
+        this.updateDocked()
         window.addEventListener('resize', this.updateDocked)
     }
 
@@ -39,11 +38,9 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
         const {docked, open} = this.props.drawer
         return (
             <Drawer
+                type={docked ? 'permanent' : undefined}
                 open={docked || open}
-                docked={docked}
                 style={{zIndex: 10}}
-                containerStyle={{position: docked ? 'static': 'absolute', paddingTop: '1.5em'}}
-                containerClassName="overflow"
                 onRequestChange={this.requestChange}
                 className="Drawer"
             >
@@ -64,11 +61,11 @@ interface DispatchToProps {
     updateOpen: (to: boolean, reason: string) => void
     updateDocked: (to: boolean) => void
 }
-export const LeftDrawer = withRouter<any>(connect<StateToProps, DispatchToProps, LeftDrawerProps>(
-    (state: AppState, ownProps: LeftDrawerProps): StateToProps => ({
+export const LeftDrawer = withRouter<any>(connect<StateToProps, DispatchToProps, LeftDrawerProps, AppState>(
+    (state) => ({
         drawer: state.drawer,
     }),
-    (dispatch: Dispatch<any>, ownProps: LeftDrawerProps): DispatchToProps => ({
+    (dispatch) => ({
         updateOpen: (to, reason) => dispatch(updateDrawerOpen(to, reason)),
         updateDocked: (to) => dispatch(updateDrawerDocked(to)),
     }),

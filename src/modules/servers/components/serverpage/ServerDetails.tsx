@@ -1,5 +1,5 @@
 import {RawContent} from 'components/RawContent'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import {DrawerState} from 'modules/drawer/model'
 import {PlayersRow} from 'modules/players/components/PlayersRow'
 import {PlayersState} from 'modules/players/model'
@@ -21,7 +21,7 @@ interface ServerProps {
 type AllServerDetailsProps = ServerProps & RouteComponentProps<{}> & StateToProps
 class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {scrolled: number}> {
 
-    private scroller: HTMLElement
+    private scroller: HTMLElement|null
 
     public constructor(props: AllServerDetailsProps) {
         super(props)
@@ -31,11 +31,17 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
     }
 
     public componentDidMount() {
-        this.scroller.addEventListener('scroll', this.onScroll, {passive: true} as any)
+        if(this.scroller === null) {
+            return
+        }
+        this.scroller.addEventListener('scroll', this.onScroll, {passive: true})
     }
 
     public componentWillUnmount() {
-        this.scroller.removeEventListener('scroll', this.onScroll, {passive: true} as any)
+        if(this.scroller === null) {
+            return
+        }
+        this.scroller.removeEventListener('scroll', this.onScroll)
     }
 
     public render() {
@@ -110,11 +116,10 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                                         marginRight: '-1em', // Align with feature blocks
                                     }}
                                 >
-                                    <FlatButton
-                                        style={{color: '#EEE'}}
-                                        label="View map"
-                                        icon={<Icon name="map-o"/>}
-                                    />
+                                    <Button style={{color: '#EEE'}}>
+                                        <Icon name="map-o" style={{marginRight: '0.5em'}}/>
+                                        View map
+                                    </Button>
                                 </NavLink>
                             }
                         </div>
@@ -169,6 +174,9 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
     }
 
     private onScroll() {
+        if(this.scroller === null) {
+            return
+        }
         const scrolled = this.scroller.scrollTop
         // Skip if not required anymore
         if(window.innerHeight && scrolled/2 > window.innerHeight) {
@@ -182,8 +190,8 @@ interface StateToProps {
     players: PlayersState
     drawer: DrawerState
 }
-export const ServerDetails = withRouter<any>(connect<StateToProps, {}, {}>(
-    (state: AppState): StateToProps => ({
+export const ServerDetails = withRouter<ServerProps & RouteComponentProps<any>>(connect<StateToProps, {}, ServerProps, AppState>(
+    (state) => ({
         players: state.players,
         drawer: state.drawer,
     }),

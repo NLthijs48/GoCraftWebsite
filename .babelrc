@@ -1,11 +1,19 @@
 {
   "presets": [
-    ["es2015", {"modules": false}],
-    "stage-0",
-    "react"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "safari >= 7"
+          ]
+        }
+      }
+    ],
+    "@babel/preset-react"
   ],
   "plugins": [
-    "react-hot-loader/babel",
-    "transform-object-rest-spread"
-  ],
+    "react-hot-loader/babel"
+  ]
 }

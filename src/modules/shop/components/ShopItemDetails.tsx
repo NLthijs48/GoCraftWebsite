@@ -22,8 +22,8 @@ export class ShopItemDetailsDisplay extends React.PureComponent<StateToProps & R
 interface StateToProps {
     shopItem: ShopItem
 }
-export const ShopItemDetails = withRouter<any>(connect<StateToProps, {}, {}>(
-    (state: AppState, props: RouteComponentProps<any>): StateToProps => ({
-        shopItem: state.shopLayout.itemsById[props.match.params.shopItemId],
+export const ShopItemDetails = withRouter<any>(connect<StateToProps, {}, RouteComponentProps<any>, AppState>(
+    (state, ownProps) => ({
+        shopItem: state.shopLayout.itemsById[ownProps.match.params.shopItemId],
     }),
 )(ShopItemDetailsDisplay))

@@ -1,8 +1,8 @@
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
@@ -15,7 +15,7 @@ interface ServerProps {
     server: ServerData
     path: string
 }
-export class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps, {}> {
+export class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {
         const {server, path, players} = this.props
 
@@ -82,10 +82,10 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                     <NavLink
                         to={'/maps/' + nameToPath(server.slug)}
                     >
-                        <FlatButton
-                            label="View map"
-                            icon={<Icon name="map-o"/>}
-                        />
+                        <Button>
+                            <Icon name="map-o"/>
+                            View map
+                        </Button>
                     </NavLink>
                     }
 
@@ -93,10 +93,10 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                     <NavLink
                         to={path+'/'+nameToPath(server.slug)}
                     >
-                        <FlatButton
-                            label={myPlayerCount+' online'}
-                            icon={<Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth />}
-                        />
+                        <Button>
+                            <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth/>
+                            {myPlayerCount + ' online'}
+                        </Button>
                     </NavLink>
 
                     }
@@ -109,8 +109,8 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
 interface StateToProps {
     players: PlayersState
 }
-export const ServerCard = withRouter<any>(connect<StateToProps, {}, ServerProps>(
-    (state: AppState): StateToProps => ({
+export const ServerCard = withRouter<ServerProps & RouteComponentProps<any>>(connect<StateToProps, {}, ServerProps, AppState>(
+    (state) => ({
         players: state.players,
     }),
 )(ServerCardDisplay))

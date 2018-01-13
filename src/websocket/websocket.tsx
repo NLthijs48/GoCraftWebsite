@@ -4,6 +4,7 @@ import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {isLocalhost} from 'utils/utils'
 import {WebsocketMessage} from 'websocket/model'
+import Timer = NodeJS.Timer
 
 const USE_LOCAL_WEBSOCKET = false
 
@@ -12,14 +13,14 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 
     private socket?: WebSocket
     // Scheduled reconnect timer
-    private reconnectScheduled: number
+    private reconnectScheduled: Timer
     // Time before attempting reconnect in seconds
     private reconnectTime: number
     // Indicate if connecting should be tried, same as mounted
     private shouldBeOpen: boolean
 
-    public constructor() {
-        super()
+    public constructor(props: DispatchToProps) {
+        super(props)
 
         this.reconnectTime = 1
         this.connect = this.connect.bind(this)
@@ -109,11 +110,9 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 interface DispatchToProps {
     dispatch: Dispatch<any>
 }
-export const Websocket = withRouter<any>(connect<{}, DispatchToProps, {}>(
-    (state: AppState): {} => ({
-    }),
-    (dispatch: Dispatch<any>): DispatchToProps => ({
+export const Websocket = withRouter<any>(connect<{}, DispatchToProps, {}, AppState>(
+    () => ({}),
+    (dispatch) => ({
         dispatch,
     }),
 )(WebsocketInternal))
-

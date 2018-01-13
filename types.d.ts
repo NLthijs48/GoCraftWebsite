@@ -1,3 +1,6 @@
+declare module 'is-retina'
+declare module 'is-client'
+
 declare function require(path: string): any
 declare interface Process {
     env: any

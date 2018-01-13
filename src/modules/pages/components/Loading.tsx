@@ -1,4 +1,4 @@
-import CircularProgress from 'material-ui/CircularProgress'
+import {CircularProgress} from 'material-ui/Progress'
 import * as React from 'react'
 
 interface LoadingProps {

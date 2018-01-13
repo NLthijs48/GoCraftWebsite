@@ -160,8 +160,8 @@ class VoteTool extends React.PureComponent<CombinedNewsListProps, {selectedTab?:
 interface StateToProps {
     voteSites: VoteSitesState
 }
-export const VotePage = withRouter<any>(connect<StateToProps, {}, VoteToolProps>(
-    (state: AppState): StateToProps => ({
+export const VotePage = withRouter<VoteToolProps & RouteComponentProps<any>>(connect<StateToProps, {}, VoteToolProps, AppState>(
+    (state) => ({
         voteSites: state.voteSites,
     }),
 )(VoteTool))

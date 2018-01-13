@@ -14,16 +14,15 @@
     "outDir": "ts-build/"
   },
   "files": [
-    "types.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "./src/**/*"
+    "types.d.ts",
+    "src/index.tsx"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
-    "useCache": true
+    "useCache": true,
+    "babelCore": "@babel/core",
+    "reportFiles": [
+      "src/**/*.{ts,tsx}"
+    ]
   }
 }

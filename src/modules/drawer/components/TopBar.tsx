@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
-import {Dispatch} from 'redux'
 import {THEME} from 'types'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
@@ -35,9 +34,10 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 zIndex: 11, // Appear above menu bar
                 padding: 0,
                 boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
+                maxHeight: '48px', // TODO fix
             }}>
                 {!drawer.docked &&
-                    <IconButton onTouchTap={this.onMenuIconTap} style={{
+                    <IconButton onClick={this.onMenuIconTap} style={{
                         fontSize: 'inherit',
                         width: '56px',
                         height: '56px',
@@ -80,11 +80,11 @@ interface StateToProps {
 interface DispatchToProps {
     updateOpen: (to: boolean) => void
 }
-export const TopBar = withRouter<any>(connect<StateToProps, DispatchToProps, MenuProps>(
-    (state: AppState, ownProps: MenuProps): StateToProps => ({
+export const TopBar = withRouter<any>(connect<StateToProps, DispatchToProps, MenuProps, AppState>(
+    (state) => ({
         drawer: state.drawer,
     }),
-    (dispatch: Dispatch<any>, ownProps: MenuProps): DispatchToProps => ({
+    (dispatch) => ({
         updateOpen: (to) => dispatch(updateDrawerOpen(to)),
     }),
 )(TopBarDisplay))

@@ -1,3 +1,4 @@
+import {ListItemText} from 'material-ui'
 import ListItem from 'material-ui/List/ListItem'
 import {LeftIconImage} from 'modules/pages/components/LeftIconImage'
 import {getServerTypeIcon} from 'modules/servers/components/Servers'
@@ -17,8 +18,8 @@ export function mapsListItems({servers, basePath}: MapsListItemsProps) {
             const path = basePath + nameToPath(server.slug)
             return (
                 <ListItem
+                    button
                     key={path}
-                    primaryText={server.name}
                     containerElement={
                         <NavLink
                             to={path}
@@ -27,7 +28,9 @@ export function mapsListItems({servers, basePath}: MapsListItemsProps) {
                     }
                     style={{color: '#666'}}
                     leftIcon={<LeftIconImage image={getServerTypeIcon(server)}/>}
-                />
+                >
+                    <ListItemText inset primary={server.name} />
+                </ListItem>
             )
         })
 }

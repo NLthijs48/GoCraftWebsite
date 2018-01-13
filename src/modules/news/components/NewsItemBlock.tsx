@@ -1,5 +1,5 @@
 import {RawContent} from 'components/RawContent'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 import * as React from 'react'
 import {ContentRect} from 'react-measure'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -14,7 +14,7 @@ import {NewsItem} from '../model'
 
 interface NewsItemBlockProps {
     newsItem: NewsItem
-    preview: boolean
+    preview?: boolean
     path?: string
 }
 type CombinedNewsItemBlockProps = NewsItemBlockProps & RouteComponentProps<any>
@@ -33,12 +33,14 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBl
         return (
             <div>
                 {!preview &&
-                    <RaisedButton
-                        label="Back"
-                        icon={<Icon name="chevron-left"/>}
-                        onTouchTap={this.goBack}
-                        style={{marginBottom: '1em'}}
-                    />
+                    <Button
+                        raised
+                        onClick={this.goBack}
+                        style={{marginBottom: '1em', backgroundColor: 'white'}}
+                    >
+                        <Icon name="chevron-left" style={{paddingRight: '0.5em'}} />
+                        Back
+                    </Button>
                 }
 
                 <CardItem style={{
@@ -129,7 +131,9 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBl
                                     bottom: 0,
                                     left: 0,
                                 }}>
-                                    <RaisedButton label="Details" primary/>
+                                    <Button raised color="primary">
+                                        Details
+                                    </Button>
                                 </Navigator>
                             }
 
@@ -162,7 +166,7 @@ export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBl
 
 }
 
-export const NewsItemBlock = withRouter<any>(NewsItemBlockDisplay)
+export const NewsItemBlock = withRouter<NewsItemBlockProps & RouteComponentProps<any>>(NewsItemBlockDisplay)
 
 function NewsTitle({title, to}: {title: string, to?: string}) {
     return (
