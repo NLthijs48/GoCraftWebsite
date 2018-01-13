@@ -38,25 +38,26 @@ class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
             <div
                 style={{
                     display: 'flex',
-                    flexDirection: 'column',
                     height: '100%',
                     flex: 1,
                 }}
             >
                 <Websocket />
-                <TopBar />
+
+                <LeftDrawer>
+                    <VerticalMenu/>
+                </LeftDrawer>
 
                 <div
                     style={{
                         display: 'flex',
+                        flexDirection: 'column',
                         height: '100%',
                         flex: 1,
                         position: 'relative',
                     }}
                 >
-                    <LeftDrawer>
-                        <VerticalMenu />
-                    </LeftDrawer>
+                    <TopBar/>
                     <Routes/>
                     <PreFetch />
                 </div>

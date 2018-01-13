@@ -7,10 +7,3 @@ export function updateDrawerOpen(to: boolean, reason?: string): t.DrawerUpdateOp
         reason,
     }
 }
-
-export function updateDrawerDocked(to: boolean): t.DrawerUpdateDocked {
-    return {
-        type: 'drawer/UPDATE_DOCKED',
-        to,
-    }
-}

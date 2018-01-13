@@ -4,7 +4,6 @@ import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {isLocalhost} from 'utils/utils'
 import {WebsocketMessage} from 'websocket/model'
-import Timer = NodeJS.Timer
 
 const USE_LOCAL_WEBSOCKET = false
 
@@ -13,7 +12,7 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 
     private socket?: WebSocket
     // Scheduled reconnect timer
-    private reconnectScheduled: Timer
+    private reconnectScheduled: number
     // Time before attempting reconnect in seconds
     private reconnectTime: number
     // Indicate if connecting should be tried, same as mounted
@@ -79,7 +78,7 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
         if(this.shouldBeOpen) {
             // Schedule reconnect
             clearTimeout(this.reconnectScheduled)
-            this.reconnectScheduled = setTimeout(this.connect, this.reconnectTime*1000)
+            this.reconnectScheduled = window.setTimeout(this.connect, this.reconnectTime*1000)
             this.reconnectTime = Math.min(isLocalhost() ? 10 : 60, this.reconnectTime*2)
         }
     }

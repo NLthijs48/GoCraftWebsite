@@ -1,3 +1,4 @@
+import Hidden from 'material-ui/Hidden'
 import IconButton from 'material-ui/IconButton'
 import Toolbar from 'material-ui/Toolbar'
 import {updateDrawerOpen} from 'modules/drawer/actions'
@@ -24,19 +25,18 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
     }
 
     public render() {
-        const {drawer} = this.props
         return (
             <Toolbar style={{
                 backgroundColor: THEME.palette.primary1Color,
                 display: 'flex',
-                alignItems: 'center',
                 justifyContent: 'flex-start',
                 zIndex: 11, // Appear above menu bar
                 padding: 0,
                 boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
-                maxHeight: '48px', // TODO fix
+                maxHeight: '56px',
+                minHeight: 0,
             }}>
-                {!drawer.docked &&
+                <Hidden mdUp>
                     <IconButton onClick={this.onMenuIconTap} style={{
                         fontSize: 'inherit',
                         width: '56px',
@@ -53,24 +53,25 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                             }}
                         />
                     </IconButton>
-                }
+                </Hidden>
+
                 <Filler />
-                <NavLink to="/"
-                    style={{
-                        height: '100%',
-                        marginLeft: drawer.docked ? '256px' : 0,
-                    }}
-                >
-                    <img src={logo} alt="logo" style={{maxHeight: 75, marginTop: '-0.1em'}}/>
+
+                <NavLink to="/" style={{height: '100%'}}>
+                    <img src={logo} alt="logo" style={{maxHeight: 75}}/>
                 </NavLink>
+
                 <Filler />
-                {!drawer.docked && <div style={{width: '2.8em'}} />}
+
+                <Hidden mdUp>
+                    <div style={{width: '2.8em'}} />
+                </Hidden>
             </Toolbar>
         )
     }
 
     private onMenuIconTap() {
-        this.props.updateOpen(!this.props.drawer.open)
+        this.props.updateOpen(!this.props.drawer.open, 'button')
     }
 }
 
@@ -78,13 +79,13 @@ interface StateToProps {
     drawer: DrawerState
 }
 interface DispatchToProps {
-    updateOpen: (to: boolean) => void
+    updateOpen: (to: boolean, reason?: string) => void
 }
 export const TopBar = withRouter<any>(connect<StateToProps, DispatchToProps, MenuProps, AppState>(
     (state) => ({
         drawer: state.drawer,
     }),
     (dispatch) => ({
-        updateOpen: (to) => dispatch(updateDrawerOpen(to)),
+        updateOpen: (to, reason) => dispatch(updateDrawerOpen(to, reason)),
     }),
 )(TopBarDisplay))

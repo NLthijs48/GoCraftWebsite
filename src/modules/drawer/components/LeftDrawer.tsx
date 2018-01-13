@@ -1,57 +1,78 @@
+import {WithStyles} from 'material-ui'
 import Drawer from 'material-ui/Drawer'
-import {updateDrawerDocked, updateDrawerOpen} from 'modules/drawer/actions'
+import Hidden from 'material-ui/Hidden'
+import {Theme} from 'material-ui/styles'
+import withStyles from 'material-ui/styles/withStyles'
+import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
+import {THEME} from 'types'
+
+const styles = (theme: Theme) => ({
+    paper: {
+        width: 260,
+        [theme.breakpoints.up('md')]: {
+            position: 'relative',
+            height: '100%',
+        },
+    },
+})
 
 interface LeftDrawerProps {
     source: string
 }
-class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchToProps & StateToProps, {}> {
-
-    constructor(props: any) {
-        super(props)
-        this.state = {width: 0, height: 0}
-        this.updateDocked = this.updateDocked.bind(this)
-        this.requestChange = this.requestChange.bind(this)
-    }
-
-    public componentDidMount() {
-        this.updateDocked()
-        window.addEventListener('resize', this.updateDocked)
-    }
-
-    public componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDocked)
-    }
-
-    public updateDocked() {
-        const newDocked = window.innerWidth >=800
-        if(this.props.drawer.docked !== newDocked) {
-            this.props.updateDocked(newDocked)
-        }
-    }
+class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchToProps & StateToProps & WithStyles, {}> {
 
     public render() {
-        const {docked, open} = this.props.drawer
+        const {classes, drawer, children} = this.props
         return (
-            <Drawer
-                type={docked ? 'permanent' : undefined}
-                open={docked || open}
-                style={{zIndex: 10}}
-                onRequestChange={this.requestChange}
-                className="Drawer"
-            >
-                {this.props.children}
-            </Drawer>
+            <div style={{display: 'flex'}}>
+                <Hidden mdUp>
+                    <Drawer
+                        type="temporary"
+                        anchor="left"
+                        open={drawer.open}
+                        classes={classes}
+                        onClose={this.toggleDrawerSelect}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                    >
+                        {children}
+                    </Drawer>
+                </Hidden>
+                <Hidden smDown implementation="css">
+                    <div style={{height: '100%', position: 'relative'}}>
+                        <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: '-1px',
+                            height: '56px',
+                            backgroundColor: THEME.palette.primary1Color,
+                            zIndex: 12, // Higher than <Toolbar>
+                        }}/>
+                        <Drawer
+                            type="permanent"
+                            open
+                            classes={classes}
+                            style={{height: '100%', paddingTop: '56px'}}
+                        >
+                            {children}
+                    </Drawer>
+                    </div>
+                </Hidden>
+            </div>
         )
     }
 
-    private requestChange(open: boolean, reason: string) {
-        this.props.updateOpen(open, reason)
+    private toggleDrawerSelect = () => {
+        this.props.updateOpen(!this.props.drawer.open, 'select')
     }
+
 }
 
 interface StateToProps {
@@ -59,7 +80,6 @@ interface StateToProps {
 }
 interface DispatchToProps {
     updateOpen: (to: boolean, reason: string) => void
-    updateDocked: (to: boolean) => void
 }
 export const LeftDrawer = withRouter<any>(connect<StateToProps, DispatchToProps, LeftDrawerProps, AppState>(
     (state) => ({
@@ -67,6 +87,5 @@ export const LeftDrawer = withRouter<any>(connect<StateToProps, DispatchToProps,
     }),
     (dispatch) => ({
         updateOpen: (to, reason) => dispatch(updateDrawerOpen(to, reason)),
-        updateDocked: (to) => dispatch(updateDrawerDocked(to)),
     }),
-)(LeftDrawerDisplay))
+)(withStyles(styles as any, {withTheme: true})(LeftDrawerDisplay)))

@@ -9,10 +9,9 @@ import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import Timer = NodeJS.Timer
 
 class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToProps, {}> {
-    private interval: Timer
+    private interval: number
 
     public componentDidMount() {
         this.doFetching()
@@ -48,7 +47,7 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
         }, 10)
 
         // TODO: replace this by getting updates from the websocket (and let the server poll)
-        this.interval = setInterval(() => {
+        this.interval = window.setInterval(() => {
             this.props.fetchArkPlayers()
         }, 10*1000)
     }
