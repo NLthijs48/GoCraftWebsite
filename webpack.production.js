@@ -81,12 +81,12 @@ module.exports = function(env) {
                                 optipng: {
                                     optimizationLevel: 7,
                                 },
-                                /* Currenlty breaks on Ubuntu
                                 pngquant: {
-                                    speed: 4,
+									// Currenlty breaks on Ubuntu
+                                    enabled: false,
+									speed: 4,
                                     quality: '65-80',
                                 },
-                                */
                             },
                         }
                     ]
