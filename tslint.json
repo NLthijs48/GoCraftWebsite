@@ -15,7 +15,8 @@
       "no-var-requires": false,
       "jsx-alignment": false,
       "no-submodule-imports": false,
-      "no-implicit-dependencies": false
+      "no-implicit-dependencies": false,
+      "indent": [true, "spaces", 4]
     },
     "rulesDirectory": []
 }

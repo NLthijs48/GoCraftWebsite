@@ -1,10 +1,9 @@
-import {ListItemText} from 'material-ui'
-import ListItem from 'material-ui/List/ListItem'
+import List, {ListItemText} from 'material-ui/List'
 import {LeftIconImage} from 'modules/pages/components/LeftIconImage'
+import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {PlayersState} from 'modules/players/model'
 import {getServerTypeIcon} from 'modules/servers/components/Servers'
 import * as React from 'react'
-import {NavLink} from 'react-router-dom'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
@@ -16,45 +15,39 @@ interface ServersListItemProps {
     basePath: string
 }
 export function serverListItems({servers, basePath, players}: ServersListItemProps) {
-    return servers.data.map((server) => {
-        const path = basePath + nameToPath(server.slug)
-        const playerCount = ({
-            minecraft: players.minecraft[server.bungeeID || ''],
-            ark: players.ark.default,
-        }[server.gameType] || []).length
-        return (
-            <ListItem
-                button
-                key={path}
-                containerElement={
-                    <NavLink
-                        to={path}
-                        activeStyle={{color: '#000', display: 'block'}}
-                    />
-                }
-                style={{color: '#666', paddingLeft: '4em'}}
-                leftIcon={<LeftIconImage image={getServerTypeIcon(server)}/>}
-                rightIcon={playerCount > 0 ?
-                    <div style={{
-                        backgroundColor: '#BBB',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: '1em',
-                        color: 'white',
-                        fontSize: '80%',
-                        width: '3em',
-                        padding: '0 0.5em',
-                    }}>
-                        <Icon name="user" size={12}/>
-                        <Filler />
-                        {playerCount}
-                    </div>
-                    : undefined
-                }
-            >
-                <ListItemText inset primary={server.name}/>
-            </ListItem>
-        )
-    })
+    return (
+        <List>
+            {servers.data.map((server) => {
+                const path = basePath + nameToPath(server.slug)
+                const playerCount = ({
+                    minecraft: players.minecraft[server.bungeeID || ''],
+                    ark: players.ark.default,
+                }[server.gameType] || []).length
+                return (
+                    <MenuItem key={path} path={path}>
+                        <LeftIconImage image={getServerTypeIcon(server)}/>
+                        <ListItemText primary={server.name} style={{color: 'inherit'}}/>
+                        {playerCount > 0 &&
+                            <div style={{
+                                backgroundColor: '#BBB',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: '1em',
+                                color: 'white',
+                                fontSize: '80%',
+                                width: '3em',
+                                height: '1.8em',
+                                padding: '0 0.5em',
+                            }}>
+                                <Icon name="user" size={12}/>
+                                <Filler/>
+                                {playerCount}
+                            </div>
+                        }
+                    </MenuItem>
+                )
+            })}
+        </List>
+    )
 }

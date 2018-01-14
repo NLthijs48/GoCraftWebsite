@@ -36,6 +36,7 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
                         height: '100%',
                         color: 'inherit',
                         flex: 1,
+                        textDecoration: 'none',
                     }}
                 >
                     <div style={{
@@ -74,16 +75,17 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
 
                 <div style={{
                     marginTop: '-0.6em', // Reduce the room between tagline and actions
-                    paddingLeft: '0.4em',
+                    paddingLeft: '0',
                     paddingBottom: '0.4em',
                     minHeight: 42,
                 }}>
                     {server.dynmapLink &&
                     <NavLink
+                        style={{textDecoration: 'none'}}
                         to={'/maps/' + nameToPath(server.slug)}
                     >
                         <Button>
-                            <Icon name="map-o"/>
+                            <Icon name="map-o" fixedWidth style={{marginRight: '0.5em'}}/>
                             View map
                         </Button>
                     </NavLink>
@@ -91,10 +93,11 @@ export class ServerCardDisplay extends React.PureComponent<ServerProps & StateTo
 
                     {myPlayerCount > 0 &&
                     <NavLink
+                        style={{textDecoration: 'none'}}
                         to={path+'/'+nameToPath(server.slug)}
                     >
                         <Button>
-                            <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth/>
+                            <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth style={{marginRight: '0.5em'}}/>
                             {myPlayerCount + ' online'}
                         </Button>
                     </NavLink>

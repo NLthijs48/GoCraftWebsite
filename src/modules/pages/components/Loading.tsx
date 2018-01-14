@@ -18,7 +18,7 @@ export function Loading({size}: LoadingProps) {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
-            <CircularProgress size={size} thickness={Math.floor(size/10)} />
+            <CircularProgress size={size} thickness={Math.floor(size/20)} />
         </div>
     )
 }

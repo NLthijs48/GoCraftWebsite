@@ -8,9 +8,6 @@ export function LeftIconImage({image}: LoadingProps) {
         <div style={{
             height: '100%',
             display: 'flex',
-            position: 'absolute',
-            top: 0,
-            left: 4,
             alignItems: 'center',
             width: 'auto',
             margin: '0 0 0 12px',

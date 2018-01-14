@@ -1,10 +1,10 @@
 import {ListItemText} from 'material-ui'
 import List, {ListItemProps} from 'material-ui/List'
-import ListItem from 'material-ui/List/ListItem'
 import Collapse from 'material-ui/transitions/Collapse'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import {Loading} from 'modules/pages/components/Loading'
+import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {mapsListItems} from 'modules/pages/components/submenus/MapsSubMenu'
 import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
 import {PlayersState} from 'modules/players/model'
@@ -14,7 +14,6 @@ import {VoteSitesState} from 'modules/votesites/model'
 import React, {ReactElement} from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
@@ -33,11 +32,7 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
             return <Loading />
         }
 
-        return (
-            <List>
-                {pagesToListItems({pages: pages.rootItems, byId: pages.byId, basePath: '/', servers, currentPath: this.props.location.pathname, players, voteSites})}
-            </List>
-        )
+        return pagesToListItems({pages: pages.rootItems, byId: pages.byId, basePath: '/', servers, currentPath: this.props.location.pathname, players, voteSites})
     }
 
     private handleRequestChange = (event: any, to: any) => {
@@ -60,7 +55,7 @@ interface PagesToListItemsProps {
     players: PlayersState
     voteSites: VoteSitesState
 }
-function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListItemProps>> {
+function pagesToListItems(data: PagesToListItemsProps): ReactElement<ListItemProps> {
     const {byId, pages, basePath, servers, currentPath, players, voteSites} = data
     const result: Array<ReactElement<ListItemProps>> = []
     pages.map((pageKey) => {
@@ -70,7 +65,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
         }
 
         const path = basePath + nameToPath(page.urlPath || page.title)
-        let nested: Array<React.ReactElement<ListItemProps>>|undefined
+        let nested: React.ReactElement<ListItemProps>|undefined
         let rightIcon: React.ReactElement<any>|undefined
         if(page.type === 'servers') {
             nested = serverListItems({servers, basePath: path + '/', players})
@@ -92,6 +87,7 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
                             color: 'white',
                             fontSize: '80%',
                             width: '3em',
+                            height: '1.8em',
                             padding: '0 0.5em',
                         }}>
                             <Icon name="user" style={{marginRight: 5}} size={12}/>
@@ -116,34 +112,22 @@ function pagesToListItems(data: PagesToListItemsProps): Array<ReactElement<ListI
             })
         }
         result.push(
-            <ListItem
-                button
-                key={path}
-                containerElement={
-                    <NavLink
-                        to={path}
-                        activeStyle={{color: '#000', display: 'block'}}
-                    />
-                }
-                leftIcon={<Icon name={page.menuIcon||'bars'} color="inherit" size={24} fixedWidth />}
-                rightIcon={rightIcon}
-                style={{color: '#666'}}
-                initiallyOpen={currentPath.indexOf(path) === 0}
-                open={(currentPath.indexOf(path) === 0 || path==='/servers') ? true : undefined}
-            >
-                <ListItemText inset primary={page.title} />
-            </ListItem>,
+            <MenuItem key={path} path={path}>
+                <Icon name={page.menuIcon || 'bars'} color="#999" size={24} fixedWidth/>
+                <ListItemText primary={page.title} style={{color: 'inherit'}} />
+                {rightIcon}
+            </MenuItem>,
         )
 
         if(nested) {
             result.push(
-                <Collapse in={true} transitionDuration="auto" unmountOnExit>
+                <Collapse component="li" in={true} timeout="auto" unmountOnExit key={path+'#collapse'}>
                     {nested}
                 </Collapse>,
             )
         }
     })
-    return result
+    return (<List>{result}</List>)
 }
 
 interface StateToProps {
