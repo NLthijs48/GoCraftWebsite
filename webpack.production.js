@@ -83,6 +83,7 @@ module.exports = function(env) {
                                 },
                                 pngquant: {
                                     speed: 4,
+                                    quality: '65-80',
                                 },
                             },
                         }
