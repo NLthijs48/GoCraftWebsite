@@ -38,8 +38,9 @@ function ServersSubMenuDisplay({servers, basePath, players}: Props & StateToProp
                                 color: 'white',
                                 fontSize: '80%',
                                 width: '3em',
-                                height: '1.8em',
+                                height: '1.7em',
                                 padding: '0 0.5em',
+                                fontWeight: 'bold',
                             }}>
                                 <Icon name="user" size={12}/>
                                 <Filler/>
