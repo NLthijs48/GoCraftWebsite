@@ -7,14 +7,7 @@ export interface DrawerUpdateOpen {
     reason?: string
 }
 
-export const DRAWER_UPDATE_DOCKED = 'drawer/UPDATE_DOCKED'
-export interface DrawerUpdateDocked {
-    type: 'drawer/UPDATE_DOCKED'
-    to: boolean
-}
-
 // All drawer actions
 export type DrawerAction =
     DrawerUpdateOpen |
-    DrawerUpdateDocked |
     OtherAction

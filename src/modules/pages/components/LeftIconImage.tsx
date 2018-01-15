@@ -10,7 +10,7 @@ export function LeftIconImage({image}: LoadingProps) {
             display: 'flex',
             alignItems: 'center',
             width: 'auto',
-            margin: '0 0 0 12px',
+            margin: '-20px 0 -20px 12px',
         }}>
             <div style={{
                 backgroundImage: 'url('+image+')',

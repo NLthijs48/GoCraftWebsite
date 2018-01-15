@@ -12,7 +12,7 @@ import {ShopItem} from '../model'
 interface ShopItemProps {
     id: number
 }
-export class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps & RouteComponentProps<any>, {}> {
+class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {
         const {shopItem, id} = this.props
 

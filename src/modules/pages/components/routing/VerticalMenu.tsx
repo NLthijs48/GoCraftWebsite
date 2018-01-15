@@ -1,23 +1,12 @@
-import {ListItemText} from 'material-ui'
-import List, {ListItemProps} from 'material-ui/List'
-import Collapse from 'material-ui/transitions/Collapse'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import {Loading} from 'modules/pages/components/Loading'
-import {MenuItem} from 'modules/pages/components/routing/MenuItem'
-import {mapsListItems} from 'modules/pages/components/submenus/MapsSubMenu'
-import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
-import {PlayersState} from 'modules/players/model'
-import {serverListItems} from 'modules/servers/components/ServersSubMenu'
-import {ServersState} from 'modules/servers/model'
-import {VoteSitesState} from 'modules/votesites/model'
-import React, {ReactElement} from 'react'
+import {MenuLevel} from 'modules/pages/components/routing/MenuLevel'
+import {PagesState} from 'modules/pages/model'
+import React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {Filler} from 'utils/Filler'
-import {Icon} from 'utils/Icon'
-import {isAdmin, nameToPath} from 'utils/utils'
 
 type AllMenuProps = DispatchToProps & StateToProps & RouteComponentProps<any>
 class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
@@ -27,12 +16,12 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
     }
 
     public render() {
-        const {pages, servers, players, voteSites} = this.props
+        const {pages} = this.props
         if(pages.isFetching && (!pages || !pages.byId || !pages.rootItems)) {
             return <Loading />
         }
 
-        return pagesToListItems({pages: pages.rootItems, byId: pages.byId, basePath: '/', servers, currentPath: this.props.location.pathname, players, voteSites})
+        return <MenuLevel items={pages.rootItems} basePath="/" currentPath={this.props.location.pathname} />
     }
 
     private handleRequestChange = (event: any, to: any) => {
@@ -43,99 +32,9 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
     }
 }
 
-/**
- * Build list of menu items
- */
-interface PagesToListItemsProps {
-    pages: PageItems
-    byId: Pages
-    basePath: string
-    servers: ServersState
-    currentPath: string
-    players: PlayersState
-    voteSites: VoteSitesState
-}
-function pagesToListItems(data: PagesToListItemsProps): ReactElement<ListItemProps> {
-    const {byId, pages, basePath, servers, currentPath, players, voteSites} = data
-    const result: Array<ReactElement<ListItemProps>> = []
-    pages.map((pageKey) => {
-        const page: Page = byId[pageKey]
-        if(!isAdmin && page.adminOnly) {
-            return
-        }
-
-        const path = basePath + nameToPath(page.urlPath || page.title)
-        let nested: React.ReactElement<ListItemProps>|undefined
-        let rightIcon: React.ReactElement<any>|undefined
-        if(page.type === 'servers') {
-            nested = serverListItems({servers, basePath: path + '/', players})
-            if(players) {
-                const playerCount = Object.keys(players.minecraft) // ['survival', 'kitpvp']
-                    .map((serverKey) => players.minecraft[serverKey].length) // [5, 2]
-                    .reduce((prev, current) => prev + current, 0) // 7
-                + Object.keys(players.ark) // [key]
-                    .map((serverKey) => players.ark[serverKey].length) // [5, 2]
-                    .reduce((prev, current) => prev + current, 0) // 7
-                if(playerCount > 0) {
-                    rightIcon = (
-                        <div style={{
-                            backgroundColor: '#999',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: '1em',
-                            color: 'white',
-                            fontSize: '80%',
-                            width: '3em',
-                            height: '1.8em',
-                            padding: '0 0.5em',
-                        }}>
-                            <Icon name="user" style={{marginRight: 5}} size={12}/>
-                            <Filler />
-                            {playerCount}
-                        </div>
-                    )
-                }
-            }
-        } else if(page.type === 'maps') {
-            nested = mapsListItems({servers, basePath: path + '/'})
-        } else if(page.type === 'vote-sites') {
-            // TODO consider adding vote sites into the menu instead:
-            // - Subtitles and icons can be used for extra info
-            // - Probably not possible to preload the next vote site (maybe simply dispatch on submenu click instead of router link?)
-            // nested = voteSitesToListItems({voteSites, basePath: path + '/'})
-        } else if(page.children && page.children.length) {
-            nested = pagesToListItems({
-                ...data,
-                pages: page.children,
-                basePath: path + '/',
-            })
-        }
-        result.push(
-            <MenuItem key={path} path={path}>
-                <Icon name={page.menuIcon || 'bars'} color="#999" size={24} fixedWidth/>
-                <ListItemText primary={page.title} style={{color: 'inherit'}} />
-                {rightIcon}
-            </MenuItem>,
-        )
-
-        if(nested) {
-            result.push(
-                <Collapse component="li" in={true} timeout="auto" unmountOnExit key={path+'#collapse'}>
-                    {nested}
-                </Collapse>,
-            )
-        }
-    })
-    return (<List>{result}</List>)
-}
-
 interface StateToProps {
     drawer: DrawerState
     pages: PagesState
-    servers: ServersState
-    players: PlayersState
-    voteSites: VoteSitesState
 }
 interface DispatchToProps {
     closeDrawer: () => void
@@ -144,9 +43,6 @@ export const VerticalMenu = withRouter<any>(connect<StateToProps, DispatchToProp
     (state) => ({
         drawer: state.drawer,
         pages: state.pages,
-        servers: state.servers,
-        players: state.players,
-        voteSites: state.voteSites,
     }),
     (dispatch) => ({
         closeDrawer: () => dispatch(updateDrawerOpen(false)),

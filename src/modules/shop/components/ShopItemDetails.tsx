@@ -5,7 +5,7 @@ import {Redirect, RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {ShopItem} from '../model'
 
-export class ShopItemDetailsDisplay extends React.PureComponent<StateToProps & RouteComponentProps<any>, {}> {
+class ShopItemDetailsDisplay extends React.PureComponent<StateToProps & RouteComponentProps<any>, {}> {
     public render() {
         const {shopItem} = this.props
 

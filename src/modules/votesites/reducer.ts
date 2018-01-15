@@ -1,5 +1,4 @@
 import {VoteSiteIds, VoteSites, VoteSitesState, VoteStatus} from 'modules/votesites/model'
-import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
 
@@ -8,16 +7,16 @@ function byId(state: VoteSites = {}, action: t.VoteSitesAction): VoteSites {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
-            const voteSites: VoteSites = {...state}
+            const result: VoteSites = {...state}
             for(const rawVoteSite of action.data) {
-                voteSites[get(rawVoteSite, 'id')] = {
+                result[get(rawVoteSite, 'id')] = {
                     name: get(rawVoteSite, 'title', 'rendered'),
                     vote_url: get(rawVoteSite, 'acf', 'vote_url'),
                     identifiers: get(rawVoteSite, 'acf', 'identifier').split(/, ?/),
                     cooldown: (+get(rawVoteSite, 'acf', 'cooldown')) || 0,
                 }
             }
-            return voteSites
+            return result
         default:
             return state
     }
@@ -49,7 +48,7 @@ function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean 
 }
 
 // Vote status of the user
-function voteStatus(state: VoteStatus = {}, action: t.VoteSitesAction): VoteStatus {
+function voteStatus(state: VoteStatus = {}, voteSitesState: VoteSitesState, action: t.VoteSitesAction): VoteStatus {
     switch(action.type) {
         case t.UPDATE_STATUS:
             return action.status
@@ -58,4 +57,46 @@ function voteStatus(state: VoteStatus = {}, action: t.VoteSitesAction): VoteStat
     }
 }
 
-export const voteSites = combineReducers<VoteSitesState>({byId, items, isFetching, voteStatus})
+// Mix vote information into the sites
+function addVoteInfoToSites(state: VoteSitesState, action: t.VoteSitesAction): VoteSites {
+    switch(action.type) {
+        case t.FETCH_SUCCESS:
+        case t.UPDATE_STATUS:
+            if(state.byId && state.voteStatus) {
+                const result = {...state.byId}
+                const now = (new Date()).getTime()
+                for(const voteSiteId of state.items) {
+                    const voteSite = state.byId[voteSiteId]
+                    let lastVoted = 0
+                    for(const identifier of voteSite.identifiers) {
+                        const siteStatus = state.voteStatus[identifier]
+                        if(siteStatus) {
+                            lastVoted = Math.max(lastVoted, siteStatus.lastVoted)
+                        }
+                    }
+                    result[voteSiteId].lastVoted = lastVoted
+
+                    const cooldown = voteSite.cooldown*60*60*1000
+                    if(lastVoted < (now-cooldown)) {
+                        result[voteSiteId].canVote = true
+                    }
+                }
+                return result
+            }
+            return state.byId
+        default:
+            return state.byId
+    }
+}
+
+export function voteSites(state: VoteSitesState, action: t.VoteSitesAction): VoteSitesState {
+    state = state || {}
+    const result = {
+        isFetching: isFetching(state.isFetching, action),
+        byId: byId(state.byId, action),
+        items: items(state.items, action),
+        voteStatus: voteStatus(state.voteStatus, state, action),
+    }
+    result.byId = addVoteInfoToSites(result, action)
+    return result
+}

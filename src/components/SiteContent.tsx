@@ -67,8 +67,8 @@ class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
 
     private onNavigate(location: Location, action: Action) {
         console.log('NAVIGATION:', action, location)
-        // Close drawer when it is not docked and we are navigating
-        if(this.props.drawer.open && !this.props.drawer.docked) {
+        // Close drawer if it is open
+        if(this.props.drawer.open) {
             this.props.closeDrawer()
         }
 

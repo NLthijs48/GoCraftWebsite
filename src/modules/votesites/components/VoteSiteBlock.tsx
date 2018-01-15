@@ -6,35 +6,29 @@ import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {VoteSite} from '../model'
 
-interface VoteSiteBlockProps {
+interface Props {
     voteSite: VoteSite
 }
-type CombinedVoteSiteBlockProps = VoteSiteBlockProps & RouteComponentProps<any>
-export class NewsItemBlockDisplay extends React.PureComponent<CombinedVoteSiteBlockProps, {}> {
-
-    public render() {
-        const {voteSite} = this.props
-        return (
-            <CardItem style={{
-                margin: 0,
+function NewsItemBlockDisplay({voteSite}: Props & RouteComponentProps<any>) {
+    return (
+        <CardItem style={{
+            margin: 0,
+        }}>
+            <h2>{voteSite.name}</h2>
+            <Filler />
+            <div style={{
+                display: 'flex',
+                alignItems: 'flex-end',
             }}>
-                <h2>{voteSite.name}</h2>
-                <Filler />
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                }}>
-                    <a target="_blank" href={voteSite.vote_url}>
-                        <Button raised>
-                            <Icon name="thumbs-o-up"/>
-                            Vote Now
-                        </Button>
-                    </a>
-                </div>
-            </CardItem>
-        )
-    }
-
+                <a target="_blank" href={voteSite.vote_url}>
+                    <Button raised>
+                        <Icon name="thumbs-o-up"/>
+                        Vote Now
+                    </Button>
+                </a>
+            </div>
+        </CardItem>
+    )
 }
 
-export const VoteSiteBlock = withRouter<CombinedVoteSiteBlockProps>(NewsItemBlockDisplay)
+export const VoteSiteBlock = withRouter<Props & RouteComponentProps<any>>(NewsItemBlockDisplay)

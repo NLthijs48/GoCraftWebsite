@@ -8,11 +8,6 @@ export function drawer(state: DrawerState = {open: false, docked: false}, action
                 ...state,
                 open: action.to,
             }
-        case t.DRAWER_UPDATE_DOCKED:
-            return {
-                ...state,
-                docked: action.to,
-            }
         default:
             return state
     }

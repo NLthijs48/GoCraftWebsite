@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = function(env) {
-    let plugins = [
+    const plugins = [
         // Cleanup 'dist' directory before building new files
         new CleanWebpackPlugin(['dist'], {}),
 

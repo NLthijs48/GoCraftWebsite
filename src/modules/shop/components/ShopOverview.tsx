@@ -7,7 +7,7 @@ import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {Responsive} from 'utils/Responsive'
 
-export class ShopOverviewDisplay extends React.PureComponent<StateToProps, {columns: number}> {
+class ShopOverviewDisplay extends React.PureComponent<StateToProps, {columns: number}> {
 
     public constructor(props: StateToProps) {
         super(props)

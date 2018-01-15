@@ -15,7 +15,7 @@ interface ServerProps {
     server: ServerData
     path: string
 }
-export class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps & RouteComponentProps<any>, {}> {
+class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {
         const {server, path, players} = this.props
 

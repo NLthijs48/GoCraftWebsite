@@ -4,19 +4,20 @@ import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {PlayersState} from 'modules/players/model'
 import {getServerTypeIcon} from 'modules/servers/components/Servers'
 import * as React from 'react'
+import {connect} from 'react-redux'
+import {RouteComponentProps, withRouter} from 'react-router'
+import {AppState} from 'reducer'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {nameToPath} from 'utils/utils'
 import {ServersState} from '../model'
 
-interface ServersListItemProps {
-    servers: ServersState
-    players: PlayersState
+interface Props {
     basePath: string
 }
-export function serverListItems({servers, basePath, players}: ServersListItemProps) {
+function ServersSubMenuDisplay({servers, basePath, players}: Props & StateToProps & RouteComponentProps<any>) {
     return (
-        <List>
+        <List style={{paddingTop: 0}}>
             {servers.data.map((server) => {
                 const path = basePath + nameToPath(server.slug)
                 const playerCount = ({
@@ -28,22 +29,22 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
                         <LeftIconImage image={getServerTypeIcon(server)}/>
                         <ListItemText primary={server.name} style={{color: 'inherit'}}/>
                         {playerCount > 0 &&
-                            <div style={{
-                                backgroundColor: '#BBB',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                borderRadius: '1em',
-                                color: 'white',
-                                fontSize: '80%',
-                                width: '3em',
-                                height: '1.8em',
-                                padding: '0 0.5em',
-                            }}>
-                                <Icon name="user" size={12}/>
-                                <Filler/>
-                                {playerCount}
-                            </div>
+                        <div style={{
+                            backgroundColor: '#BBB',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: '1em',
+                            color: 'white',
+                            fontSize: '80%',
+                            width: '3em',
+                            height: '1.8em',
+                            padding: '0 0.5em',
+                        }}>
+                            <Icon name="user" size={12}/>
+                            <Filler/>
+                            {playerCount}
+                        </div>
                         }
                     </MenuItem>
                 )
@@ -51,3 +52,14 @@ export function serverListItems({servers, basePath, players}: ServersListItemPro
         </List>
     )
 }
+
+interface StateToProps {
+    servers: ServersState
+    players: PlayersState
+}
+export const ServersSubMenu = withRouter<Props & RouteComponentProps<any>>(connect<StateToProps, {}, Props, AppState>(
+    (state) => ({
+        servers: state.servers,
+        players: state.players,
+    }),
+)(ServersSubMenuDisplay))

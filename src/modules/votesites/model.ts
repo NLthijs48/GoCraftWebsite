@@ -6,6 +6,8 @@ export interface VoteSite {
     vote_url: string
     identifiers: string[]
     cooldown: number
+    lastVoted?: number
+    canVote?: boolean
 }
 
 // ID -> VoteSite

@@ -18,7 +18,7 @@ interface NewsItemBlockProps {
     path?: string
 }
 type CombinedNewsItemBlockProps = NewsItemBlockProps & RouteComponentProps<any>
-export class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProps, {vertical: boolean}> {
+class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProps, {vertical: boolean}> {
     public constructor(props: CombinedNewsItemBlockProps) {
         super(props)
         this.state = {vertical: false}

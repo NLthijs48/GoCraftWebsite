@@ -6,7 +6,6 @@ interface Props {
     children: React.ReactNode
     path: string
 }
-
 export function MenuItem({children, path}: Props) {
     return (
         <ListItem
@@ -25,7 +24,7 @@ export function MenuItem({children, path}: Props) {
                     alignItems: 'center',
                     textDecoration: 'none',
                 }}
-                activeStyle={{color: '#000', backgroundColor: '#DDD'}}
+                activeStyle={{backgroundColor: '#DDD'}}
             >
                 {children}
             </NavLink>

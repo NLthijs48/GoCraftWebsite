@@ -2,7 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {AppState} from 'reducer'
 
-export function PageBackgroundDisplay({background}: StateToProps) {
+function PageBackgroundDisplay({background}: StateToProps) {
     return (
         <div style={{
             position: 'absolute',

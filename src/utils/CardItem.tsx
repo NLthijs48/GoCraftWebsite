@@ -7,10 +7,6 @@ interface CardItemProps {
     style?: React.CSSProperties
 }
 export class CardItem extends React.Component<CardItemProps, {}> {
-    public constructor(props: CardItemProps) {
-        super(props)
-    }
-
     public render() {
         const {children, style} = this.props
         return (

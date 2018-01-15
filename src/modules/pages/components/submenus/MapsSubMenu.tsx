@@ -5,16 +5,20 @@ import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {getServerTypeIcon} from 'modules/servers/components/Servers'
 import {ServersState} from 'modules/servers/model'
 import * as React from 'react'
+import {connect} from 'react-redux'
+import {RouteComponentProps, withRouter} from 'react-router'
+import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
 
-interface MapsListItemsProps {
-    servers: ServersState
+interface Props {
     basePath: string
 }
-export function mapsListItems({servers, basePath}: MapsListItemsProps) {
-    return (
-        <List>
-            {servers.data
+class MapsSubMenuDisplay extends React.PureComponent<Props & StateToProps & RouteComponentProps<any>, {}> {
+    public render() {
+        const {servers, basePath} = this.props
+        return (
+            <List style={{paddingTop: 0}}>
+                {servers.data
                 .filter(({dynmapLink}) => dynmapLink)
                 .map((server) => {
                     const path = basePath + nameToPath(server.slug)
@@ -25,7 +29,17 @@ export function mapsListItems({servers, basePath}: MapsListItemsProps) {
                         </MenuItem>
                     )
                 })
-            }
-        </List>
-    )
+                }
+            </List>
+        )
+    }
 }
+
+interface StateToProps {
+    servers: ServersState
+}
+export const MapsSubMenu = withRouter<Props & RouteComponentProps<any>>(connect<StateToProps, {}, Props, AppState>(
+    (state) => ({
+        servers: state.servers,
+    }),
+)(MapsSubMenuDisplay))
