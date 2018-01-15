@@ -21,7 +21,7 @@ function VoteSitesSubMenuDisplay({voteSites, basePath}: Props & StateToProps & R
                 return (
                     <MenuItem key={path} path={path} child>
                         <div style={{paddingLeft: '2em'}}>
-                            {voteSite.canVote && <Icon fixedWidth size={18} name="chevron-right" color="green"/>}
+                            {voteSite.canVote && <Icon fixedWidth size={18} name="arrow-right" color="green"/>}
                             {!voteSite.canVote && !!voteSite.lastVoted && <Icon size={18} fixedWidth name="check"/>}
                         </div>
                         <ListItemText
