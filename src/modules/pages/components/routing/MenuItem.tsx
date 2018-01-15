@@ -18,12 +18,13 @@ export function MenuItem({children, path, child}: Props) {
             <NavLink
                 to={path}
                 style={{
-                    padding: '0.75em 1em',
+                    padding: '0.5em 1em',
                     width: '100%',
                     color: '#666',
                     display: 'flex',
                     alignItems: 'center',
                     textDecoration: 'none',
+                    minHeight: child ? 'auto' :'50px',
                 }}
                 activeStyle={{backgroundColor: child ? '#EEE' : '#DDD'}}
             >
