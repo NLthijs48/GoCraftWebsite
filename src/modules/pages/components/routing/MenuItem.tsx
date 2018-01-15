@@ -5,8 +5,9 @@ import {NavLink} from 'react-router-dom'
 interface Props {
     children: React.ReactNode
     path: string
+    child?: boolean
 }
-export function MenuItem({children, path}: Props) {
+export function MenuItem({children, path, child}: Props) {
     return (
         <ListItem
             button
@@ -24,7 +25,7 @@ export function MenuItem({children, path}: Props) {
                     alignItems: 'center',
                     textDecoration: 'none',
                 }}
-                activeStyle={{backgroundColor: '#DDD'}}
+                activeStyle={{backgroundColor: child ? '#EEE' : '#DDD'}}
             >
                 {children}
             </NavLink>

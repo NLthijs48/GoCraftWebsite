@@ -23,7 +23,7 @@ class MapsSubMenuDisplay extends React.PureComponent<Props & StateToProps & Rout
                 .map((server) => {
                     const path = basePath + nameToPath(server.slug)
                     return (
-                        <MenuItem key={path} path={path}>
+                        <MenuItem key={path} path={path} child>
                             <LeftIconImage image={getServerTypeIcon(server)}/>
                             <ListItemText inset primary={server.name}/>
                         </MenuItem>

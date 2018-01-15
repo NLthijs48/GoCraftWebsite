@@ -25,26 +25,26 @@ function ServersSubMenuDisplay({servers, basePath, players}: Props & StateToProp
                     ark: players.ark.default,
                 }[server.gameType] || []).length
                 return (
-                    <MenuItem key={path} path={path}>
+                    <MenuItem key={path} path={path} child>
                         <LeftIconImage image={getServerTypeIcon(server)}/>
                         <ListItemText primary={server.name} style={{color: 'inherit'}}/>
                         {playerCount > 0 &&
-                        <div style={{
-                            backgroundColor: '#BBB',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: '1em',
-                            color: 'white',
-                            fontSize: '80%',
-                            width: '3em',
-                            height: '1.8em',
-                            padding: '0 0.5em',
-                        }}>
-                            <Icon name="user" size={12}/>
-                            <Filler/>
-                            {playerCount}
-                        </div>
+                            <div style={{
+                                backgroundColor: '#BBB',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: '1em',
+                                color: 'white',
+                                fontSize: '80%',
+                                width: '3em',
+                                height: '1.8em',
+                                padding: '0 0.5em',
+                            }}>
+                                <Icon name="user" size={12}/>
+                                <Filler/>
+                                {playerCount}
+                            </div>
                         }
                     </MenuItem>
                 )

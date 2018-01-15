@@ -17,10 +17,11 @@ interface Props {
     basePath: string
     currentPath: string
     items: PageItems
+    child?: boolean
 }
 
 function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>) {
-    const {items, pages, basePath, currentPath} = props
+    const {items, pages, basePath, currentPath, child} = props
     const result: Array<ReactElement<ListItemProps>> = []
     items.map((pageKey) => {
         const page: Page = pages.byId[pageKey]
@@ -42,13 +43,13 @@ function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>
             // - Probably not possible to preload the next vote site (maybe simply dispatch on submenu click instead of router link?)
             nested = <VoteSitesSubMenu basePath={path + '/'} />
         } else if(page.children && page.children.length) {
-            nested = <MenuLevel {...props} basePath={path + '/'} items={page.children} />
+            nested = <MenuLevel {...props} basePath={path + '/'} items={page.children} child />
         }
 
         const subMenuOpen = currentPath.startsWith(path)
 
         result.push(
-            <MenuItem key={path} path={path}>
+            <MenuItem key={path} path={path} child={child}>
                 <Icon name={page.menuIcon || 'bars'} color="#999" size={24} fixedWidth/>
                 <ListItemText primary={page.title} secondary={secondary} style={{color: 'inherit'}} />
                 {nested && (subMenuOpen ? <Icon name="chevron-up" color="#999" /> : <Icon name="chevron-down" color="#999" />)}
