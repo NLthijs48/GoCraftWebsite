@@ -50,7 +50,7 @@ function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean 
 // Vote status of the user
 function voteStatus(state: VoteStatus = {}, voteSitesState: VoteSitesState, action: t.VoteSitesAction): VoteStatus {
     switch(action.type) {
-        case t.UPDATE_STATUS:
+        case t.STATUS_UPDATE:
             return action.status
         default:
             return state
@@ -61,7 +61,7 @@ function voteStatus(state: VoteStatus = {}, voteSitesState: VoteSitesState, acti
 function addVoteInfoToSites(state: VoteSitesState, action: t.VoteSitesAction): VoteSites {
     switch(action.type) {
         case t.FETCH_SUCCESS:
-        case t.UPDATE_STATUS:
+        case t.STATUS_UPDATE:
             if(state.byId && state.voteStatus) {
                 const result = {...state.byId}
                 const now = (new Date()).getTime()
@@ -87,6 +87,18 @@ function addVoteInfoToSites(state: VoteSitesState, action: t.VoteSitesAction): V
     }
 }
 
+// Vote status of the user
+function selected(state: string|null = null, action: t.VoteSitesAction): string|null {
+    switch(action.type) {
+        case t.SELECT_SITE:
+            return action.site
+        case t.STATUS_UPDATE:
+            return null
+        default:
+            return state
+    }
+}
+
 export function voteSites(state: VoteSitesState, action: t.VoteSitesAction): VoteSitesState {
     state = state || {}
     const result = {
@@ -94,6 +106,7 @@ export function voteSites(state: VoteSitesState, action: t.VoteSitesAction): Vot
         byId: byId(state.byId, action),
         items: items(state.items, action),
         voteStatus: voteStatus(state.voteStatus, state, action),
+        selected: selected(state.selected, action),
     }
     result.byId = addVoteInfoToSites(result, action)
     return result

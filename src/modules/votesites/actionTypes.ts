@@ -20,10 +20,16 @@ interface FetchFailure {
     type: 'voteSites/FETCH_FAILURE',
 }
 
-export const UPDATE_STATUS = 'voteSites/STATUS_UPDATE'
+export const STATUS_UPDATE = 'voteSites/STATUS_UPDATE'
 interface StatusUpdate {
     type: 'voteSites/STATUS_UPDATE'
     status: VoteStatus
+}
+
+export const SELECT_SITE = 'voteSites/SELECT_SITE'
+interface SelectSite {
+    type: 'voteSites/SELECT_SITE'
+    site: string
 }
 
 // All server actions
@@ -32,4 +38,5 @@ export type VoteSitesAction =
     FetchSuccess |
     FetchFailure |
     StatusUpdate |
+    SelectSite |
     OtherAction

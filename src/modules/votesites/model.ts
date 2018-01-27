@@ -28,4 +28,5 @@ export interface VoteSitesState extends RemoteState {
     byId: VoteSites
     items: VoteSiteIds
     voteStatus: VoteStatus
+    selected: string|null
 }
