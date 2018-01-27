@@ -36,6 +36,7 @@ function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch}: Props & StateT
                             primary={voteSite.name}
                             secondary={voteSite.canVote ? 'Vote now!' :
                                 !!voteSite.lastVoted ? <span>Voted <TimeDiff time={voteSite.lastVoted} /></span> : null}
+                            style={{paddingRight: 0, marginBottom: -4}}
                         />
                     </MenuItem>
                 )

@@ -38,6 +38,7 @@ class VoteTool extends React.PureComponent<CombinedNewsListProps, {}> {
             <div style={{
                 width: '100%',
                 height: '100%',
+                backgroundColor: '#EEE',
             }}>
                 {voteSites.items.map((voteSiteId) => {
                     const voteSite = voteSites.byId[voteSiteId]
@@ -59,6 +60,7 @@ class VoteTool extends React.PureComponent<CombinedNewsListProps, {}> {
                                 left: 0,
                                 zIndex: loadOrder[0]===voteSiteId ? 1 : 0,
                                 opacity: loadOrder[0]===voteSiteId ? 1 : 0,
+                                transition: 'opacity 300ms ease-in-out',
                             }}
                         >
                             <WebsiteFrame src={voteSite.vote_url} />
