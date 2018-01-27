@@ -42,7 +42,7 @@ export function getData(path: string): Promise<any> {
  * @returns {string} Converted name
  */
 export function nameToPath(name: string): string {
-    return name.toLowerCase().replace(/[ :[\]()]/, '-')
+    return name.toLowerCase().replace(/[ :[\]()]/g, '-')
 }
 
 export function isLocalhost(): boolean {
