@@ -47,9 +47,11 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
         }, 10)
 
         // TODO: replace this by getting updates from the websocket (and let the server poll)
+        /*
         this.interval = window.setInterval(() => {
             this.props.fetchArkPlayers()
         }, 10*1000)
+        */
     }
 }
 
