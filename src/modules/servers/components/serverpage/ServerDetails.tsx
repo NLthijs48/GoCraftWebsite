@@ -98,14 +98,13 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                             paddingRight: '1em',
                             paddingLeft: '1em',
                         }}>
-                            <div style={{
+                            <h1 style={{
                                 color: '#FFF',
                                 marginBottom: 0,
                                 fontSize: '150%',
-                                fontWeight: 'bold',
                             }}>
                                 {server.name}
-                            </div>
+                            </h1>
 
                             <Filler/>
 

@@ -5,7 +5,6 @@ import * as React from 'react'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {THEME} from 'types'
 import {Icon} from 'utils/Icon'
-import Timer = NodeJS.Timer
 
 interface HomeProps {
     basePath: string
@@ -13,7 +12,7 @@ interface HomeProps {
 class HomeDisplay extends React.PureComponent<HomeProps & RouteComponentProps<any>, {copied: boolean}> {
 
     public state = {copied: false}
-    private resetT: Timer
+    private resetT: number
 
     public componentWillUnmount() {
         clearTimeout(this.resetT)

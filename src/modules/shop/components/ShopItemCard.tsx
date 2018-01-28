@@ -42,11 +42,12 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                         padding: '1em',
                         display: 'flex',
                     }}>
-                        <div style={{
+                        <h3 style={{
                             fontSize: '1.25em',
+                            marginBottom: 0,
                         }}>
                             {shopItem.name}
-                        </div>
+                        </h3>
 
                         <Filler/>
 

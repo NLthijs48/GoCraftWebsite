@@ -56,11 +56,9 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                             color: '#FFF',
                             padding: '1em',
                         }}>
-                            <div style={{
-                                fontSize: '1.25em',
-                            }}>
+                            <h2 style={{marginBottom: 0}}>
                                 {server.name}
-                            </div>
+                            </h2>
                         </div>
                     </div>
 

@@ -18,12 +18,12 @@ export class SimpleFeatureCard extends React.Component<SimpleFeatureProps, {}> {
                     padding: '1em',
                     width: '100%',
                 }}>
-                    <div style={{
-                        fontSize: '1.4em',
-                        fontWeight: 'bold',
+                    <h2 style={{
+                        fontSize: '1.3em',
+                        marginBottom: 0,
                     }}>
                         {feature.title}
-                    </div>
+                    </h2>
 
                     {!!feature.description &&
                         <div style={{
