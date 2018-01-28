@@ -1,9 +1,11 @@
 import Button from 'material-ui/Button'
+import List, {ListItem} from 'material-ui/List'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
+import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
@@ -56,28 +58,32 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                     </div>
                 </div>
 
-                <ul style={{
-                    margin: '1em 0 0 0',
-                    padding: '0 2em',
-                    listStyleType: 'circle',
-                }}>
-                    {!!shopItem.perks && shopItem.perks.map((perk, index) => (
-                        <li key={index} style={{
-                            margin: 0,
-                            marginLeft: perk.sub ? '1.5em' : 0,
-                            padding: 0,
-                        }}>
-                            <div style={{flex: 1}}>
-                                {perk.text}
-                            </div>
-                            {perk.servers.length >= 1 && <div style={{
-                                fontSize: '80%',
+                {!!shopItem.perks &&
+                    <List>
+                        {shopItem.perks.map((perk, index) => (
+                            <ListItem key={index} style={{
+                                marginLeft: perk.sub ? '2em' : 0,
+                                fontSize: perk.sub ? '90%' : undefined,
+                                paddingTop: perk.sub ? '0.05em' : '0.15em',
+                                paddingBottom: perk.sub ? 0 : (shopItem.perks.length>(index+1) && shopItem.perks[index + 1].sub ? 0 : '0.15em'),
+                                alignItems: 'flex-start',
                             }}>
-                                Only on {perk.servers.join(', ')}
-                            </div>}
-                        </li>
-                    ))}
-                </ul>
+                                <Icon name="check" color={THEME.palette.primary.main} style={{marginRight: '0.75em', marginTop: '0.2em'}} />
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <div style={{flex: 1}}>
+                                        {perk.text}
+                                    </div>
+                                    {perk.servers.length >= 1 && <div style={{
+                                        fontSize: '80%',
+                                        color: '#777',
+                                    }}>
+                                        Only on {perk.servers.join(', ')}
+                                    </div>}
+                                </div>
+                            </ListItem>
+                        ))}
+                    </List>
+                }
 
                 <Filler />
 
