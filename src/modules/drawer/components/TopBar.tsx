@@ -5,7 +5,7 @@ import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {THEME} from 'types'
@@ -17,7 +17,7 @@ const logo = require('images/logo.png')
 interface MenuProps {
     source: string
 }
-class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & StateToProps, {}> {
+class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & StateToProps & RouteComponentProps<any>, {}> {
 
     constructor(props: any) {
         super(props)
@@ -30,6 +30,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 backgroundColor: THEME.palette.primary.main,
                 display: 'flex',
                 justifyContent: 'flex-start',
+                alignItems: 'flex-start',
                 zIndex: 11, // Appear above menu bar
                 padding: 0,
                 boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
@@ -58,7 +59,10 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 <Filler />
 
                 <NavLink to="/" style={{height: '100%'}}>
-                    <img src={logo} alt="logo" style={{maxHeight: 75}}/>
+                    <img src={logo} alt="logo" style={{
+                        maxHeight: this.props.location.pathname === '/home' ? 100 : 75,
+                        transition: 'max-height 150ms ease-in-out',
+                    }}/>
                 </NavLink>
 
                 <Filler />

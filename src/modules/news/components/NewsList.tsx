@@ -48,6 +48,14 @@ function getServerOverviewFunction({newsItems, basePath}: CombinedNewsListProps)
     return () => {
         return (
             <CardList>
+                <h2 style={{
+                    color: '#222',
+                    fontSize: '1.4em',
+                    margin: '1em 0 0.5em 0',
+                    textShadow: '0 0 2px rgba(255,255,255,0.3)',
+                }}>
+                    Latest news
+                </h2>
                 {newsItems.items.map((newsItemKey) => {
                     const newsItem: NewsItem = newsItems.byId[newsItemKey]
                     return (

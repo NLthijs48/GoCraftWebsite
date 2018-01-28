@@ -48,7 +48,7 @@ class ShopOverviewDisplay extends React.PureComponent<StateToProps, {columns: nu
                                 padding: '0 1em',
                             }}>
                                 <h2 style={{
-                                    color: '#333',
+                                    color: '#222',
                                     fontSize: '1.4em',
                                     margin: 0,
                                     textShadow: '0 0 2px rgba(255,255,255,0.3)',
