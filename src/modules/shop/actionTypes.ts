@@ -4,10 +4,13 @@ import {OtherAction} from 'types'
 export const FETCH_SUCCESS = 'shopLayout/UPDATE'
 interface FetchSuccess {
     type: 'shopLayout/UPDATE',
-    shopLayout: {
-        status: string,
-        categories: object[],
-        result: object[],
+    categories: {
+        count: number,
+        results: object[],
+    }
+    items: {
+        count: number,
+        results: object[],
     },
 }
 

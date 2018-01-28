@@ -9,19 +9,16 @@ function categoriesById(state: ShopCategories = {}, action: t.ShopLayoutAction):
         case t.FETCH_SUCCESS:
             // Get the shop category details
             const shopCategories: ShopCategories = {...state}
-            for(const rawShopCategory of action.shopLayout.categories) {
+            for(const rawShopCategory of action.categories.results) {
                 const id = get(rawShopCategory, 'id')
                 shopCategories[id] = {
                     name: get(rawShopCategory, 'name'),
-                    iconBlockId: get(rawShopCategory, 'iconid'),
-                    items: [],
+                    description: get(rawShopCategory, 'gui_description'),
+                    iconBlockId: get(rawShopCategory, 'gui_icon'),
+                    items: (get(rawShopCategory, 'items') as object[])
+                        .sort((a, b) => (+get(a, 'order')) - (+get(b, 'order')))
+                        .map((categoryItem) => get(categoryItem, 'id')),
                 }
-            }
-
-            // Add pages to the children array of their parent
-            for(const rawItem of action.shopLayout.result) {
-                const category = get(rawItem, 'categoryid')
-                shopCategories[category].items.push(get(rawItem, 'id'))
             }
             return shopCategories
         default:
@@ -32,31 +29,30 @@ function categoriesById(state: ShopCategories = {}, action: t.ShopLayoutAction):
 function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
-            // Get the properties we need from the WordPress byId
+            // Info from MinecraftMarket
             const shopItems: ShopItems = {...state}
-            for(const rawShopItem of action.shopLayout.result) {
+            for(const rawShopItem of action.items.results) {
                 const id = get(rawShopItem, 'id')
                 shopItems[id] = {
-                    name: get(rawShopItem, 'name'),
-                    buyUrl: get(rawShopItem, 'url'),
-                    price: +get(rawShopItem, 'price'),
-                    currency: get(rawShopItem, 'currency'),
-                    requiredItems: get(rawShopItem, 'required'),
-                    iconBlockId: get(rawShopItem, 'iconid'),
-                    description: get(rawShopItem, 'description'),
                     ...shopItems[id],
+                    name: get(rawShopItem, 'name'),
+                    buyUrl: get(rawShopItem, 'gui_url'),
+                    price: +get(rawShopItem, 'price'),
+                    iconBlockId: get(rawShopItem, 'gui_icon'),
+                    description: get(rawShopItem, 'gui_description'),
                 }
             }
 
             return shopItems
         case t.FETCH_INFO_SUCCESS:
+            // Info from WordPress
             const shopItemsInfo: ShopItems = {...state}
             for(const rawShopInfo of action.data) {
                 const id = get(rawShopInfo, 'acf', 'minecraftmarket_shop_item_number')
                 shopItemsInfo[id] = {
+                    ...shopItemsInfo[id],
                     image: parseImage(800, get(rawShopInfo, 'acf', 'image', 'sizes')),
                     perks: perksReducer(get(rawShopInfo, 'acf', 'perks')),
-                    ...shopItemsInfo[id],
                 }
             }
             return shopItemsInfo
@@ -81,8 +77,8 @@ function perksReducer(rawPerks: any): Perk[] {
 function rootCategories(state: ShopCategoryItems = [], action: t.ShopLayoutAction): ShopCategoryItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
-            return action.shopLayout.categories
-                .sort((a, b) => get(a, 'order') - get(b, 'order'))
+            return action.categories.results
+                .sort((a, b) => (+get(a, 'order')) - (+get(b, 'order')))
                 .map((rawShopCategory) => get(rawShopCategory, 'id'))
         default:
             return state

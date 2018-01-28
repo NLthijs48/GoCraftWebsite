@@ -2,8 +2,6 @@ export interface ShopItem {
     name: string
     buyUrl: string
     price: number
-    currency: string
-    requiredItems: string[]
     iconBlockId: string
     description: string
     image: string
@@ -22,6 +20,7 @@ export interface ShopItems {
 
 export interface ShopCategory {
     name: string
+    description: string
     iconBlockId: string
     items: number[]
 }
