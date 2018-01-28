@@ -1,3 +1,5 @@
+import createMuiTheme from 'material-ui/styles/createMuiTheme'
+
 export interface OtherAction {
     type: '',
 }
@@ -16,29 +18,15 @@ export interface User {
     avatar: string
 }
 
-/* TODO reapply
-export interface ThemeProps {
-    muiTheme?: MuiTheme
-}
-*/
-
-export const THEME = {
+export const THEME = createMuiTheme({
     palette: {
-        primary1Color: '#388e3c',
-        primary2Color: '#66bb6a',
-        accent1Color: '#fb8c00',
-        accent3Color: '#ff9800',
-        primary3Color: '#e0e0e0',
-        textColor: 'rgba(0, 0, 0, 0.9)',
-        secondaryTextColor: 'rgba(0, 0, 0, 0.59)',
-        borderColor: '#bdbdbd',
-        pickerHeaderColor: '#388e3c',
-        clockCircleColor: 'rgba(0, 0, 0, 0.05)',
-    }
-    ,
-    appBar: {
-        height: 50,
+        primary: {
+            light: '#6abf69',
+            main: '#388e3c',
+            dark: '#00600f',
+            contrastText: '#FFF',
+        },
     },
-}
+})
 
 export type UnixDate = number

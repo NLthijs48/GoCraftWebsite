@@ -175,7 +175,7 @@ function NewsTitle({title, to}: {title: string, to?: string}) {
             marginBottom: '0.25em',
             lineHeight: '125%',
             display: 'inline-block',
-            color: THEME.palette.primary1Color,
+            color: THEME.palette.primary.main,
         }}>
             <h2 style={{
                 lineHeight: '125%',

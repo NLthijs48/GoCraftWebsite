@@ -27,7 +27,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
     public render() {
         return (
             <Toolbar style={{
-                backgroundColor: THEME.palette.primary1Color,
+                backgroundColor: THEME.palette.primary.main,
                 display: 'flex',
                 justifyContent: 'flex-start',
                 zIndex: 11, // Appear above menu bar

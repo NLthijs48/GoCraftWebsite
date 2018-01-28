@@ -52,7 +52,7 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
                             left: 0,
                             right: '-1px',
                             height: '56px',
-                            backgroundColor: THEME.palette.primary1Color,
+                            backgroundColor: THEME.palette.primary.main,
                             zIndex: 12, // Higher than <Toolbar>
                         }}/>
                         <Drawer
