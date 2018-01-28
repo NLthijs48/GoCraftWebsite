@@ -5,6 +5,7 @@ import {MapsSubMenu} from 'modules/pages/components/submenus/MapsSubMenu'
 import {Page, PageItems, PagesState} from 'modules/pages/model'
 import {ServersMenuItemInfo} from 'modules/servers/components/ServersMenuItemInfo'
 import {ServersSubMenu} from 'modules/servers/components/ServersSubMenu'
+import {VoteSitesMenuInfo} from 'modules/votesites/components/VoteSitesMenuInfo'
 import {VoteSitesSubMenu} from 'modules/votesites/components/VoteSitesSubMenu'
 import React, {ReactElement} from 'react'
 import {connect} from 'react-redux'
@@ -35,13 +36,11 @@ function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>
         if(page.type === 'servers') {
             nested = <ServersSubMenu basePath={path + '/'} />
             secondary = <ServersMenuItemInfo />
-
         } else if(page.type === 'maps') {
             nested = <MapsSubMenu basePath={path + '/'} />
         } else if(page.type === 'vote-sites') {
-            // - Subtitles and icons can be used for extra info
-            // - Probably not possible to preload the next vote site (maybe simply dispatch on submenu click instead of router link?)
             nested = <VoteSitesSubMenu basePath={path + '/'} />
+            secondary = <VoteSitesMenuInfo />
         } else if(page.children && page.children.length) {
             nested = <MenuLevel {...props} basePath={path + '/'} items={page.children} child />
         }
