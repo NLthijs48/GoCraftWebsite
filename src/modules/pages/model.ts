@@ -30,6 +30,7 @@ export interface HTMLPage extends AbstractPage {
 export interface EmbeddedPage extends AbstractPage {
     type: 'frame'
     url: string
+    embedNewTab?: boolean
 }
 export interface ServersPage extends AbstractPage {
     type: 'servers'

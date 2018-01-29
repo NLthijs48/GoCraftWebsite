@@ -9,7 +9,13 @@ interface NavigatorProps extends React.HTMLProps<HTMLDivElement> {
 export class Navigator extends React.PureComponent<NavigatorProps, {}> {
     public render() {
         const {style, activeStyle, to, onPress, children} = this.props
-        if(to) {
+        if(to && /^https?:\/\//.test(to)) {
+            return (
+                <a href={to} style={style} target="_blank">
+                    {children}
+                </a>
+            )
+        } else if(to) {
             return (
                 <NavLink to={to} style={style} activeStyle={activeStyle}>
                     {children}

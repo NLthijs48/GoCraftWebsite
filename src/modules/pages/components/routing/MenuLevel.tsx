@@ -31,6 +31,7 @@ function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>
         }
 
         const path = basePath + nameToPath(page.urlPath || page.title)
+        let url
         let nested: React.ReactElement<ListItemProps>|undefined
         let secondary: React.ReactNode
         if(page.type === 'servers') {
@@ -41,6 +42,10 @@ function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>
         } else if(page.type === 'vote-sites') {
             nested = <VoteSitesSubMenu basePath={path + '/'} />
             secondary = <VoteSitesMenuInfo />
+        } else if(page.type === 'frame') {
+            if(page.embedNewTab) {
+                url = page.url
+            }
         } else if(page.children && page.children.length) {
             nested = <MenuLevel {...props} basePath={path + '/'} items={page.children} child />
         }
@@ -48,7 +53,7 @@ function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>
         const subMenuOpen = currentPath.startsWith(path)
 
         result.push(
-            <MenuItem key={path} path={path} child={child}>
+            <MenuItem key={path} path={url || path} child={child}>
                 <Icon name={page.menuIcon || 'bars'} color="#999" size={24} fixedWidth/>
                 <ListItemText primary={page.title} secondary={secondary} style={{color: 'inherit'}} />
                 {nested && (subMenuOpen ? <Icon name="chevron-up" color="#999" /> : <Icon name="chevron-down" color="#999" />)}

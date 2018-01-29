@@ -8,13 +8,14 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
-            const pages: Pages = {...state}
+            const newPages: Pages = {...state}
             for(const rawPage of action.data) {
-                pages[get(rawPage, 'id')] = {
+                newPages[get(rawPage, 'id')] = {
                     title: get(rawPage, 'title', 'rendered'),
                     status: get(rawPage, 'status'),
                     type: get(rawPage, 'acf', 'page_type'),
                     url: get(rawPage, 'acf', 'website_link'),
+                    embedNewTab: get(rawPage, 'acf', 'embed_new_tab'),
                     content: get(rawPage, 'acf', 'content'),
                     urlPath: get(rawPage, 'acf', 'url_path'),
                     menuIcon: get(rawPage, 'acf', 'menu_icon'),
@@ -26,10 +27,10 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
             for(const rawPage of action.data) {
                 const parent = get(rawPage, 'parent')
                 if(parent !== 0) {
-                    pages[parent].children.push(get(rawPage, 'id'))
+                    newPages[parent].children.push(get(rawPage, 'id'))
                 }
             }
-            return pages
+            return newPages
         default:
             return state
     }
