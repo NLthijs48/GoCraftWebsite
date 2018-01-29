@@ -125,6 +125,17 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                                 />
                             </div>
 
+                            {preview && // Shadow to fade out content
+                                <div style={{
+                                    position: 'absolute',
+                                    height: 0,
+                                    bottom: 0,
+                                    right: '-4em',
+                                    left: '-4em',
+                                    boxShadow: '0 0 4em 4em white',
+                                }}/>
+                            }
+
                             {preview && // Details button
                                 <Navigator to={details} style={{
                                     position: 'absolute',
@@ -135,17 +146,6 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                                         Details
                                     </Button>
                                 </Navigator>
-                            }
-
-                            {preview && // Shadow to fade out content
-                                <div style={{
-                                    position: 'absolute',
-                                    height: 0,
-                                    bottom: 0,
-                                    right: '-4em',
-                                    left: '-4em',
-                                    boxShadow: '0 0 4em 4em white',
-                                }}/>
                             }
                         </div>
                     </Responsive>

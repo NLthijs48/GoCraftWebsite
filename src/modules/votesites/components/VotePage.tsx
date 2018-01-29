@@ -38,7 +38,6 @@ class VoteTool extends React.PureComponent<CombinedNewsListProps, {}> {
             <div style={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: '#EEE',
             }}>
                 {voteSites.items.map((voteSiteId) => {
                     const voteSite = voteSites.byId[voteSiteId]

@@ -56,7 +56,6 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
             <div className="overflow" style={{
                 width: '100%',
                 height: '100%',
-                background: '#EEE',
             }} ref={(e) => this.scroller = e}>
                 <div style={{
                     backgroundImage: 'url('+server.heroImage+')',
