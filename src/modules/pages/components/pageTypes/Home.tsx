@@ -15,7 +15,7 @@ class HomeDisplay extends React.PureComponent<HomeProps & RouteComponentProps<an
     private resetT: number
 
     public componentWillUnmount() {
-        clearTimeout(this.resetT)
+        window.clearTimeout(this.resetT)
     }
 
     public render() {
@@ -76,7 +76,7 @@ class HomeDisplay extends React.PureComponent<HomeProps & RouteComponentProps<an
         document.execCommand('copy')
         document.body.removeChild(e)
         this.setState({copied: true})
-        this.resetT = setTimeout(() => this.setState({copied: false}), 5000)
+        this.resetT = window.setTimeout(() => this.setState({copied: false}), 5000)
     }
 }
 
