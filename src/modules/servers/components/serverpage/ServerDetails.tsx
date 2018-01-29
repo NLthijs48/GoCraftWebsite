@@ -69,6 +69,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
                     height: '70vh',
                     pointerEvents: 'none',
                     transform: 'translate3d(0,'+(Math.round(scrolled/2))+'px,0)',
+                    WebkitMaskImage: '-webkit-linear-gradient(top, #000 0%, #000 70%, #0003 85%, #0000 100%)',
                 }} />
 
                 <div style={{
