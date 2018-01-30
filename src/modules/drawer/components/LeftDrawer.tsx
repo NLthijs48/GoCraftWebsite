@@ -1,7 +1,6 @@
-import {WithStyles} from 'material-ui'
 import Drawer from 'material-ui/Drawer'
 import Hidden from 'material-ui/Hidden'
-import {Theme} from 'material-ui/styles'
+import {Theme, WithStyles} from 'material-ui/styles'
 import withStyles from 'material-ui/styles/withStyles'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'

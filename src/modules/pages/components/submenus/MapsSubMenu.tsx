@@ -1,5 +1,4 @@
-import {ListItemText} from 'material-ui'
-import List from 'material-ui/List'
+import List, {ListItemText} from 'material-ui/List'
 import {LeftIconImage} from 'modules/pages/components/LeftIconImage'
 import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {getServerTypeIcon} from 'modules/servers/components/Servers'
