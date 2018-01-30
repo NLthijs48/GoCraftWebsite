@@ -37,6 +37,10 @@ module.exports = function(env) {
             sourceMap: true,
         }),
 
+        new webpack.optimize.ModuleConcatenationPlugin(),
+
+        new webpack.NoEmitOnErrorsPlugin(),
+
         // Copy .htaccess file to dist
         new CopyWebpackPlugin([
             {from: '.htaccess'}
