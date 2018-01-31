@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const path = require('path');
 
 module.exports = {
     entry: [
@@ -58,7 +59,8 @@ module.exports = {
                             },
                         },
                     }
-                ]
+                ],
+				include: path.resolve('src')
             },
         ]
     },

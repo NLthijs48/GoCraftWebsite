@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
+const path = require('path');
 
 module.exports = function(env) {
     const plugins = [
@@ -93,7 +94,8 @@ module.exports = function(env) {
                                 },
                             },
                         }
-                    ]
+                    ],
+					include: path.resolve('src')
                 },
             ],
         },
