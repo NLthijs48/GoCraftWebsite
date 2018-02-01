@@ -34,8 +34,9 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 zIndex: 11, // Appear above menu bar
                 padding: 0,
                 boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
-                maxHeight: '56px',
+                height: '56px',
                 minHeight: 0,
+                maxHeight: '56px',
             }}>
                 <Hidden mdUp>
                     <IconButton onClick={this.onMenuIconTap} style={{
