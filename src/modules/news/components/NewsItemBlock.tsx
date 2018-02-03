@@ -80,7 +80,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                                 <NewsInfo>
                                     {newsItem.author.avatar &&
                                     <div style={{
-                                        background: 'url(' + newsItem.author.avatar + ')',
+                                        backgroundImage: 'url(' + newsItem.author.avatar + ')',
                                         backgroundSize: 'contain',
                                         backgroundRepeat: 'no-repeat',
                                         width: '1.5em',
