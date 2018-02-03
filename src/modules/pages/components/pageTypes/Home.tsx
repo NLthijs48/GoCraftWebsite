@@ -1,4 +1,5 @@
 import Button from 'material-ui/Button'
+import Snackbar from 'material-ui/Snackbar'
 import Tooltip from 'material-ui/Tooltip'
 import {NewsList} from 'modules/news/components/NewsList'
 import * as React from 'react'
@@ -48,7 +49,6 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
                             WebkitMaskImage: '-webkit-linear-gradient(top, #000 0%, #000 60%, #0003 80%, #0000 100%)',
                         }}/>
 
-
                         <div style={{
                             zIndex: 1,
                             display: 'flex',
@@ -58,9 +58,9 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
                             <h1 style={{
                                 fontSize: '3em',
                                 textShadow: '4px 2px 1px rgba(10, 10, 10, 0.8)',
-                                marginBottom: '-0.1em',
+                                lineHeight: '100%',
                             }}>
-                                Welcome!
+                                Welcome to our community!
                             </h1>
 
                             <h2 style={{
@@ -75,6 +75,11 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
                                     <Icon name={this.state.copied ? 'check' : 'clone'} style={{marginLeft: '1em'}}/>
                                 </Button>
                             </Tooltip>
+                            <Snackbar
+                                anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                                open={this.state.copied}
+                                message={<span>IP copied, you can paste it in Minecraft now</span>}
+                            />
                         </div>
                     </div>
                 }
