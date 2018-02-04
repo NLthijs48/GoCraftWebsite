@@ -5,6 +5,6 @@ Source of the Go-Craft website, uses WordPress as backend and React+TypeScript a
 Follow these steps to get started:
 - Clone the repository
 - Install yarn
-- `yarn install`
+- `yarn install` in the root directory of this repository
 - `yarn start`
-- `open http://localhost:3000`
+- Open `https://localhost:3000` in your browser

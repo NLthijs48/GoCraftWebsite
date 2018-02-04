@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
     entry: [
         'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:3000', // WebpackDevServer host and port
+        'webpack-dev-server/client?https://localhost:3000', // WebpackDevServer host and port
         'webpack/hot/only-dev-server',
         'index.tsx'
     ],
@@ -15,6 +15,7 @@ module.exports = {
         historyApiFallback: true,
         inline: true,
         hot: true,
+        https: true,
         stats: {
             modules: false,
             chunks: false,

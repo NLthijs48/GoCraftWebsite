@@ -54,7 +54,7 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
             console.error('[Websocket] connect() called while there is still a socket!')
             return
         }
-        this.socket = new WebSocket((USE_LOCAL_WEBSOCKET&&isLocalhost()) ? 'ws://localhost:9192' : 'ws://mc.go-craft.com:9192')
+        this.socket = new WebSocket((USE_LOCAL_WEBSOCKET&&isLocalhost()) ? 'wss://localhost:9192' : 'wss://mc.go-craft.com:9192')
         this.socket.onopen = this.onOpen
         this.socket.onclose = this.onClose
         this.socket.onerror = this.onError

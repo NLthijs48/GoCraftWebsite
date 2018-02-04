@@ -8,7 +8,7 @@ export function fetchArkPlayers() {
             type: t.FETCH_ARK,
         })
 
-        return getData('http://api.go-craft.com/ARK/server-info.php')
+        return getData('https://api.go-craft.com/ARK/server-info.php')
             .then((data) => dispatch({type: t.FETCH_ARK_SUCCESS, data}))
             .catch(() => dispatch({type: t.FETCH_ARK_FAILURE}))
     }
