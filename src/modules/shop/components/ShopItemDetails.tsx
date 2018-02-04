@@ -15,7 +15,8 @@ class ShopItemDetailsDisplay extends React.PureComponent<StateToProps & RouteCom
             return <Redirect to={pathParts.join('/')} />
         }
 
-        return <WebsiteFrame src={shopItem.buyUrl} />
+        // Change bit.ly urls to use https://
+        return <WebsiteFrame src={(shopItem.buyUrl||'').replace('http://', 'https://')} />
     }
 }
 
