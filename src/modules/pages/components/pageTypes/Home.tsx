@@ -14,10 +14,12 @@ interface HomeProps {
 class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteComponentProps<any>, {copied: boolean}> {
 
     public state = {copied: false}
-    private resetT: number
+    private resetT?: number
 
     public componentWillUnmount() {
-        window.clearTimeout(this.resetT)
+        if(this.resetT) {
+            window.clearTimeout(this.resetT)
+        }
     }
 
     public render() {

@@ -12,11 +12,11 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 
     private socket?: WebSocket
     // Scheduled reconnect timer
-    private reconnectScheduled: number
+    private reconnectScheduled?: number
     // Time before attempting reconnect in seconds
     private reconnectTime: number
     // Indicate if connecting should be tried, same as mounted
-    private shouldBeOpen: boolean
+    private shouldBeOpen?: boolean
 
     public constructor(props: DispatchToProps) {
         super(props)
@@ -41,7 +41,9 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
         if(this.socket && this.socket.readyState === 1) {
             this.socket.close(1000, 'unmount')
         }
-        clearTimeout(this.reconnectScheduled)
+        if(this.reconnectScheduled) {
+            clearTimeout(this.reconnectScheduled)
+        }
     }
 
     public render() {
@@ -77,7 +79,9 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
         this.socket = undefined
         if(this.shouldBeOpen) {
             // Schedule reconnect
-            clearTimeout(this.reconnectScheduled)
+            if(this.reconnectScheduled) {
+                clearTimeout(this.reconnectScheduled)
+            }
             this.reconnectScheduled = window.setTimeout(this.connect, this.reconnectTime*1000)
             this.reconnectTime = Math.min(isLocalhost() ? 10 : 60, this.reconnectTime*2)
         }

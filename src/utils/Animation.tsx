@@ -9,7 +9,7 @@ export interface AnimateFromTo {
     to: AnimateTo
     time?: number
 }
-type CalculateAnimateFromTo = (element: HTMLDivElement | null) => AnimateFromTo
+type CalculateAnimateFromTo = (element?: HTMLDivElement | null) => AnimateFromTo
 export interface AnimateProps {
     enter?: AnimateFromTo | CalculateAnimateFromTo
     leave?: AnimateFromTo | CalculateAnimateFromTo
@@ -20,7 +20,7 @@ export interface AnimateProps {
 }
 
 export class Animate extends React.PureComponent<AnimateProps, {}> {
-    private containerE: HTMLDivElement|null
+    private containerE?: HTMLDivElement|null
 
     // Animation at initial render of AnimateContainer
     public componentWillAppear(done: () => void) {

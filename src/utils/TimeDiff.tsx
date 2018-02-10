@@ -6,10 +6,12 @@ interface TimeDiffProps {
 }
 
 export class TimeDiff extends React.PureComponent<TimeDiffProps, {}> {
-    private timer: number
+    private timer?: number
 
     public componentWillUnmount() {
-        clearTimeout(this.timer)
+        if(this.timer) {
+            clearTimeout(this.timer)
+        }
     }
 
     public render() {
@@ -40,7 +42,9 @@ export class TimeDiff extends React.PureComponent<TimeDiffProps, {}> {
         }
 
         // Set timer to automaticlly update the text
-        clearTimeout(this.timer)
+        if(this.timer) {
+            clearTimeout(this.timer)
+        }
         this.timer = window.setTimeout(() => {
             this.forceUpdate()
         }, update * 1000)

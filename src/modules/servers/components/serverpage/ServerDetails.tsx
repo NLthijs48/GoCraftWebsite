@@ -21,7 +21,7 @@ interface ServerProps {
 type AllServerDetailsProps = ServerProps & RouteComponentProps<{}> & StateToProps
 class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {scrolled: number}> {
 
-    private scroller: HTMLElement|null
+    private scroller?: HTMLElement|null
 
     public constructor(props: AllServerDetailsProps) {
         super(props)
@@ -31,17 +31,15 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
     }
 
     public componentDidMount() {
-        if(this.scroller === null) {
-            return
+        if(this.scroller) {
+            this.scroller.addEventListener('scroll', this.onScroll, {passive: true})
         }
-        this.scroller.addEventListener('scroll', this.onScroll, {passive: true})
     }
 
     public componentWillUnmount() {
-        if(this.scroller === null) {
-            return
+        if(this.scroller) {
+            this.scroller.removeEventListener('scroll', this.onScroll)
         }
-        this.scroller.removeEventListener('scroll', this.onScroll)
     }
 
     public render() {
@@ -173,7 +171,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {s
     }
 
     private onScroll() {
-        if(this.scroller === null) {
+        if(!this.scroller) {
             return
         }
         const scrolled = this.scroller.scrollTop

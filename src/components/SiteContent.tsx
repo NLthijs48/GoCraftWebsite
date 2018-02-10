@@ -18,7 +18,7 @@ ReactGA.initialize('UA-72556535-1')
 
 type AllSiteContentProps = StateToProps & DispatchToProps & RouteComponentProps<any>
 class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
-    private unlisten: UnregisterCallback
+    private unlisten?: UnregisterCallback
 
     public constructor(props: AllSiteContentProps) {
         super(props)
@@ -31,7 +31,9 @@ class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
     }
 
     public componentWillUnmount() {
-        this.unlisten()
+        if(this.unlisten) {
+            this.unlisten()
+        }
     }
 
     public render() {

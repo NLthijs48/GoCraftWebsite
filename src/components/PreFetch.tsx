@@ -11,7 +11,6 @@ import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 
 class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToProps, {}> {
-    private interval: number
 
     public componentDidMount() {
         this.doFetching()
@@ -26,10 +25,6 @@ class PreFetchComponent extends React.PureComponent<DispatchToProps & StateToPro
             console.log('New reducer version, fetching all data:', nextProps.reducerVersion)
             this.doFetching()
         }
-    }
-
-    public componentWillUnmount() {
-        clearInterval(this.interval)
     }
 
     private doFetching() {
