@@ -1,4 +1,5 @@
 import List, {ListItemText} from 'material-ui/List'
+import {updateDrawerOpen} from 'modules/drawer/actions'
 import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {VoteSitesState} from 'modules/votesites/model'
 import * as React from 'react'
@@ -12,7 +13,7 @@ import {nameToPath} from 'utils/utils'
 interface Props {
     basePath: string
 }
-function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch}: Props & StateToProps & RouteComponentProps<any> & DispatchProp<any>) {
+function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch, selectSite}: Props & StateToProps & DispatchToProps & RouteComponentProps<any> & DispatchProp<any>) {
     const active = voteSites.selected
         || voteSites.items.filter((voteSiteID) => voteSites.byId[voteSiteID].canVote)[0]
         || voteSites.items[0]
@@ -24,7 +25,7 @@ function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch}: Props & StateT
                 return (
                     <MenuItem
                         key={path}
-                        onPress={() => (dispatch as any)({type: 'voteSites/SELECT_SITE', site: voteSiteId})}
+                        onPress={() => selectSite(voteSiteId)}
                         child
                         active={active===voteSiteId}
                     >
@@ -48,8 +49,17 @@ function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch}: Props & StateT
 interface StateToProps {
     voteSites: VoteSitesState
 }
-export const VoteSitesSubMenu = withRouter<Props & RouteComponentProps<any>>(connect<StateToProps, {}, Props, AppState>(
+interface DispatchToProps {
+    selectSite: (voteSiteId: string) => void
+}
+export const VoteSitesSubMenu = withRouter<Props & RouteComponentProps<any>>(connect<StateToProps, DispatchToProps, Props, AppState>(
     (state) => ({
         voteSites: state.voteSites,
+    }),
+    (dispatch) => ({
+        selectSite: (voteSiteId) => {
+            dispatch(updateDrawerOpen(false))
+            dispatch({type: 'voteSites/SELECT_SITE', site: voteSiteId})
+        },
     }),
 )(VoteSitesSubMenuDisplay))
