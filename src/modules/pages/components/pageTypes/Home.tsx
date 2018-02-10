@@ -72,7 +72,7 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
                             </h2>
 
                             <Tooltip title="Copy">
-                                <Button raised color="primary" onClick={this.copyIP} >
+                                <Button variant="raised" color="primary" onClick={this.copyIP} >
                                     mc.go-craft.com
                                     <Icon name={this.state.copied ? 'check' : 'clone'} style={{marginLeft: '1em'}}/>
                                 </Button>

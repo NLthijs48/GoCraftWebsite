@@ -31,7 +31,7 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
             <div style={{display: 'flex'}}>
                 <Hidden mdUp>
                     <Drawer
-                        type="temporary"
+                        variant="temporary"
                         anchor="left"
                         open={drawer.open}
                         classes={classes}
@@ -55,7 +55,7 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
                             zIndex: 12, // Higher than <Toolbar>
                         }}/>
                         <Drawer
-                            type="permanent"
+                            variant="permanent"
                             open
                             classes={classes}
                             style={{height: '100%', paddingTop: '56px'}}

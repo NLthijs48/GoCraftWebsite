@@ -34,7 +34,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
             <div>
                 {!preview &&
                     <Button
-                        raised
+                        variant="raised"
                         onClick={this.goBack}
                         style={{marginBottom: '1em', backgroundColor: 'white'}}
                     >
@@ -142,7 +142,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                                     bottom: 0,
                                     left: 0,
                                 }}>
-                                    <Button raised color="primary">
+                                    <Button variant="raised" color="primary">
                                         Details
                                     </Button>
                                 </Navigator>

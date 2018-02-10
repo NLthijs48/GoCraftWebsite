@@ -38,7 +38,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "lodash.debounce": "^4.0.8",
-    "material-ui": "1.0.0-beta.30",
+    "material-ui": "1.0.0-beta.33",
     "offline-plugin": "^4.8.4",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",

@@ -102,7 +102,7 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                             width: '100%',
                         }}
                     >
-                        <Button raised color="primary" style={{width: '100%'}}>
+                        <Button variant="raised" color="primary" style={{width: '100%'}}>
                             Buy now
                             <Icon name="shopping-cart" style={{marginLeft: '0.5em'}}/>
                         </Button>
