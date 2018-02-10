@@ -39,7 +39,7 @@ export function configureStore(): {store: Store<AppState|undefined>, persistor: 
     if(module.hot) {
         // Handle hot reducer updates
         module.hot.accept('../reducer', () => {
-            store.replaceReducer(persistReducer(config, require('../reducer').rootReducer))
+            store.replaceReducer(persistReducer(config, require('../reducer').reducers))
             store.dispatch({type: 'REDUCER_UPDATED'})
         })
     }
