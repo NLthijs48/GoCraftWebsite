@@ -19,7 +19,7 @@ export function configureStore(): {store: Store<AppState|undefined>, persistor: 
     const config = {
         key: 'primary',
         storage,
-        blacklist: ['players', 'reducerVersion'],
+        blacklist: ['players', 'reducerVersion', 'drawer'],
         throttle: 300,
     }
 
