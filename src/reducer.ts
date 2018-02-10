@@ -14,7 +14,6 @@ import {ShopLayoutState} from 'modules/shop/model'
 import {shopLayout} from 'modules/shop/reducer'
 import {VoteSitesState} from 'modules/votesites/model'
 import {voteSites} from 'modules/votesites/reducer'
-import {combineReducers} from 'redux'
 
 export interface AppState {
     servers: ServersState
@@ -55,7 +54,7 @@ export const parseImage = (target: number, sizes: {[key: string]: string|{source
     }
 }
 
-export const rootReducer = combineReducers<AppState>({
+export const reducers = {
     servers,
     pages,
     drawer,
@@ -65,4 +64,4 @@ export const rootReducer = combineReducers<AppState>({
     players,
     shopLayout,
     reducerVersion,
-})
+}

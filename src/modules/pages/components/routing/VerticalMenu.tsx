@@ -26,9 +26,7 @@ class MenuDisplay extends React.PureComponent<AllMenuProps, {}> {
 
     private handleRequestChange = (event: any, to: any) => {
         this.props.history.push({pathname: to})
-        if(!this.props.drawer.docked) {
-            this.props.closeDrawer()
-        }
+        this.props.closeDrawer()
     }
 }
 
