@@ -10,10 +10,8 @@ export function PlayersRow({players}: PlayersRowProps) {
     return (
         <div style={{
             display: 'flex',
-            flex: 1,
-            minWidth: 0,
+            width: '100%',
             justifyContent: 'center',
-            zIndex: 1,
         }}>
             {players.length > 0 &&
                 <div style={{
@@ -26,7 +24,7 @@ export function PlayersRow({players}: PlayersRowProps) {
                     fontSize: '170%',
                     marginRight: '0.4em',
                     lineHeight: 1,
-                    filter: 'drop-shadow(0px 0px 2px rgba(0,0,0,0.5))',
+                    filter: 'drop-shadow(1px 1px 0 rgba(10,10,10,0.5))',
                 }}>
                     <Icon name="user" style={{marginRight: '0.4em'}}/>
                     {players.length}
@@ -39,6 +37,7 @@ export function PlayersRow({players}: PlayersRowProps) {
                 display: 'flex',
                 WebkitMaskImage: '-webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2%, rgb(0, 0, 0) 90%, rgba(0, 0, 0, 0) 100%)',
                 paddingLeft: '1em',
+                paddingBottom: '2px', // Prevent cutting off shadows of <Players>s
             }}>
                 {players.map((player) =>
                     <Player key={player.name} player={player} style={{marginRight: '2em', color: '#EEE', fontWeight: 'bold'}} />)

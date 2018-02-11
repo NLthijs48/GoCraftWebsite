@@ -4,7 +4,6 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {CardList} from 'utils/CardList'
 import {nameToPath} from 'utils/utils'
 import {NewsItem, NewsItemsState} from '../model'
 
@@ -37,32 +36,20 @@ class NewsListDisplay extends React.PureComponent<CombinedNewsListProps, {}> {
 function getServerOverviewFunction({newsItems, basePath}: CombinedNewsListProps) {
     return () => {
         return (
-            <CardList>
-                <h2 style={{
-                    color: '#222',
-                    fontSize: '1.4em',
-                    margin: '1em 0 0.5em 0',
-                    textShadow: '0 0 2px rgba(255,255,255,0.3)',
-                }}>
-                    Latest news
-                </h2>
+            <div>
                 {newsItems.items.map((newsItemKey) => {
                     const newsItem: NewsItem = newsItems.byId[newsItemKey]
                     return (
                         <NewsItemBlock preview key={newsItem.slug} newsItem={newsItem} path={basePath}/>
                     )
                 })}
-            </CardList>
+            </div>
         )
     }
 }
 
 function getNewsItemDetailsFunction(newsItem: NewsItem) {
-    return () => (
-        <CardList>
-            <NewsItemBlock newsItem={newsItem}/>
-        </CardList>
-    )
+    return () => <NewsItemBlock newsItem={newsItem}/>
 }
 
 interface StateToProps {
