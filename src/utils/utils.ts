@@ -49,4 +49,4 @@ export function isLocalhost(): boolean {
     return window && window.location && window.location.hostname==='localhost'
 }
 
-export const isAdmin = !!localStorage.getItem('admin')
+export const isAdmin = !!localStorage && !!localStorage.getItem('admin')
