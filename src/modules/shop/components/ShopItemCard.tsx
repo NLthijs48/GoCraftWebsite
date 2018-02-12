@@ -24,37 +24,41 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                 padding: 0,
             }}>
                 <div style={{
-                    width: '100%',
-                    padding: '100% 0 0 0',
-                    backgroundImage: shopItem.image ? 'url('+shopItem.image+')' : '',
-                    backgroundColor: '#888',
-                    backgroundPosition: '50% 50%',
-                    backgroundSize: 'cover',
-                    position: 'relative',
+                    // Firefox needs this extra div, padding-top: 100% in a flex container is inconsistent
                 }}>
                     <div style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        background: 'rgba(0,0,0,0.5)',
-                        color: '#FFF',
-                        padding: '1em',
-                        display: 'flex',
+                        width: '100%',
+                        padding: '100% 0 0 0',
+                        backgroundImage: shopItem.image ? 'url('+shopItem.image+')' : '',
+                        backgroundColor: '#888',
+                        backgroundPosition: '50% 50%',
+                        backgroundSize: 'cover',
+                        position: 'relative',
                     }}>
-                        <h3 style={{
-                            fontSize: '1.25em',
-                            marginBottom: 0,
-                        }}>
-                            {shopItem.name}
-                        </h3>
-
-                        <Filler/>
-
                         <div style={{
-                            fontSize: '1.25em',
+                            position: 'absolute',
+                            bottom: 0,
+                            right: 0,
+                            left: 0,
+                            background: 'rgba(0,0,0,0.5)',
+                            color: '#FFF',
+                            padding: '1em',
+                            display: 'flex',
                         }}>
-                            €{shopItem.price}
+                            <h3 style={{
+                                fontSize: '1.25em',
+                                marginBottom: 0,
+                            }}>
+                                {shopItem.name}
+                            </h3>
+
+                            <Filler/>
+
+                            <div style={{
+                                fontSize: '1.25em',
+                            }}>
+                                €{shopItem.price}
+                            </div>
                         </div>
                     </div>
                 </div>
