@@ -1,9 +1,14 @@
+import '@babel/polyfill'
 import {SiteConfiguration} from 'components/SiteConfiguration'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import Raven from 'raven-js'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import {isLocalhost} from 'utils/utils'
+
+const a = new Promise(() => {
+    // Force Promise polyfill, otherwise it does not work somehow
+})
 
 if(!isLocalhost()) {
     // Sentry setup

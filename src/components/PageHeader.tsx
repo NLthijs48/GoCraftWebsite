@@ -22,6 +22,7 @@ export function PageHeader({image, primary, secondary, children, header, content
                 left: -10,
                 margin: 10,
                 height: '38em',
+                // TODO: use linear-gradient instead, which is way better supported in browsers
                 WebkitMaskImage: '-webkit-linear-gradient(top, #000 0%, #000 60%, #0003 80%, #0000 100%)',
                 zIndex: -1, // Don't go above header content
             }}/>}

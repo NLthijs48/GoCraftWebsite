@@ -10,6 +10,7 @@
   "license": "BSD-3-Clause",
   "homepage": "https://github.com/NLthijs48/GoCraftWebsite",
   "private": true,
+  "browserslist": "last 2 versions, ie 10",
   "repository": {
     "type": "git",
     "url": "https://github.com/NLthijs48/GoCraftWebsite.git"
@@ -24,10 +25,12 @@
     "build-analyze": "webpack --env.target=production --progress --profile --colors --env.analyze --display-error-details"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.39",
     "@types/gsap": "^1.19.1",
     "@types/isomorphic-fetch": "^0.0.34",
     "@types/lodash.debounce": "^4.0.3",
     "@types/ramda": "^0.25.17",
+    "core-js": "2.5.3",
     "css-loader": "^0.28.4",
     "font-awesome": "^4.7.0",
     "font-awesome-webpack": "^0.0.5-beta.2",
