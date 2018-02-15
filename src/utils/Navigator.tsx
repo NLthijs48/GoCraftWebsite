@@ -11,7 +11,7 @@ export class Navigator extends React.PureComponent<NavigatorProps, {}> {
         const {style, activeStyle, to, onPress, children} = this.props
         if(to && /^https?:\/\//.test(to)) {
             return (
-                <a href={to} style={style} target="_blank">
+                <a href={to} style={style} target="_blank" rel="noopener">
                     {children}
                 </a>
             )
