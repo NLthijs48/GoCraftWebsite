@@ -44,7 +44,8 @@ module.exports = function(env) {
 
         // Copy .htaccess file to dist
         new CopyWebpackPlugin([
-            {from: '.htaccess'}
+            {from: '.htaccess'},
+            {from: 'icons/*'}
         ]),
     ];
 
