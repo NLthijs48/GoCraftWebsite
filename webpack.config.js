@@ -105,7 +105,10 @@ module.exports = function (env) {
         new OfflinePlugin({
             externals: [
                 '**/*'
-            ]
+            ],
+            ServiceWorker: {
+                events: true
+            }
         })
     );
     return merged;

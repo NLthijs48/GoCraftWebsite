@@ -19,7 +19,18 @@ if(!isLocalhost()) {
     // ServiceWorker and AppCache setup
     OfflinePluginRuntime.install({
         onUpdateReady: () => {
+            console.log('ServiceWorker update available, applying...')
             OfflinePluginRuntime.applyUpdate()
+        },
+        onUpdating: () => {
+            console.log('ServiceWorker is updating...')
+        },
+        onUpdated: () => {
+            console.log('ServiceWorker has updated, reloading page')
+            window.location.reload()
+        },
+        onUpdateFailed: () => {
+            console.log('ServiceWorker updated failed!')
         },
     })
 }
