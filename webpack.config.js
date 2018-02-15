@@ -1,5 +1,4 @@
 // This config merges common and environment depending configurations
-
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,8 +8,6 @@ const OfflinePlugin = require('offline-plugin');
 // Configuration shared by production and developement
 const commonConfig = {
     output: {
-        filename: 'app.js',
-        sourceMapFilename: 'app.js.map',
         publicPath: '/',
         path: path.resolve('dist')
     },

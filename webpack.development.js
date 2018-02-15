@@ -9,6 +9,10 @@ module.exports = {
         'webpack/hot/only-dev-server',
         'index.tsx'
     ],
+    output: {
+        filename: '[name].js',
+        sourceMapFilename: '[name].js.map',
+    },
     devtool: 'cheap-module-eval-source-map',
     devServer: {
         port: 3000,
