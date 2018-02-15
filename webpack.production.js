@@ -46,23 +46,6 @@ module.exports = function(env) {
         new CopyWebpackPlugin([
             {from: '.htaccess'}
         ]),
-
-        // Ensure module names stay the same
-        new webpack.HashedModuleIdsPlugin(),
-
-        // Chunk with all node_moduels dependencies
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['vendor'],
-            minChunks: function(module){
-                return module.context && module.context.includes("node_modules");
-            }
-        }),
-
-        // Chunk with webpack runtime (ensure hashes stay the same)
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['manifest'],
-            minChunks: Infinity
-        }),
     ];
 
     // Build and generate reports about it

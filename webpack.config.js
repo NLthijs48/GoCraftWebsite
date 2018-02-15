@@ -1,4 +1,5 @@
 // This config merges common and environment depending configurations
+const webpack = require('webpack');
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -64,6 +65,23 @@ const commonConfig = {
             chunksSortMode: 'dependency'
         }),
         new CheckerPlugin(),
+
+        // Ensure module names stay the same
+        new webpack.HashedModuleIdsPlugin(),
+
+        // Chunk with all node_moduels dependencies
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor'],
+            minChunks: function(module){
+                return module.context && module.context.includes("node_modules");
+            }
+        }),
+
+        // Chunk with webpack runtime (ensure hashes stay the same)
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['manifest'],
+            minChunks: Infinity
+        }),
     ]
 };
 
