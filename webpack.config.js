@@ -111,7 +111,8 @@ module.exports = function (env) {
                 '**/*'
             ],
             ServiceWorker: {
-                events: true
+                events: true,
+                navigateFallbackURL: '/' // SPA, so use root as fallback
             }
         })
     );
