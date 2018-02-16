@@ -62,7 +62,11 @@ const commonConfig = {
         // Build index.html (insert bundles into template)
         new HtmlWebpackPlugin({
             template: 'src/index.html',
-            chunksSortMode: 'dependency'
+            chunksSortMode: 'dependency',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            },
         }),
         new CheckerPlugin(),
 
