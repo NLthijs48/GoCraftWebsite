@@ -42,10 +42,11 @@ module.exports = function(env) {
 
         new webpack.NoEmitOnErrorsPlugin(),
 
-        // Copy .htaccess file to dist
+        // Copy static files to dist
         new CopyWebpackPlugin([
             {from: '.htaccess'},
-            {from: 'icons/*'}
+            {from: 'icons/*'},
+            {from: 'fonts/*'}
         ]),
     ];
 
