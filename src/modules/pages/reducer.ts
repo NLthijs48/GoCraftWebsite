@@ -8,9 +8,9 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
-            const newPages: Pages = {...state}
+            const result: Pages = {}
             for(const rawPage of action.data) {
-                newPages[get(rawPage, 'id')] = {
+                result[get(rawPage, 'id')] = {
                     title: get(rawPage, 'title', 'rendered'),
                     status: get(rawPage, 'status'),
                     type: get(rawPage, 'acf', 'page_type'),
@@ -27,10 +27,10 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
             for(const rawPage of action.data) {
                 const parent = get(rawPage, 'parent')
                 if(parent !== 0) {
-                    newPages[parent].children.push(get(rawPage, 'id'))
+                    result[parent].children.push(get(rawPage, 'id'))
                 }
             }
-            return newPages
+            return result
         default:
             return state
     }

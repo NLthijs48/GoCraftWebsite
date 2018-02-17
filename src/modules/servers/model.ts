@@ -32,8 +32,13 @@ export type Feature =
     SimpleFeature |
     SliderFeature
 
-export type ServersData = ServerData[]
+export interface ServersData {
+    [k: number]: ServerData
+}
+
+export type ServerItems = number[]
 
 export interface ServersState extends RemoteState {
-    data: ServersData
+    byId: ServersData
+    list: ServerItems
 }

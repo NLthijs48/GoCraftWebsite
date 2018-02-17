@@ -1,23 +1,24 @@
+import {PageItems} from 'modules/pages/model'
 import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
-import {get} from 'utils/utils'
+import {get, nameToPath} from 'utils/utils'
 import * as t from './actionTypes'
 import {Feature, ServersData, ServersState} from './model'
 
 // Server data reducer
-function data(state: ServersData = [], action: t.ServersAction): ServersData {
+function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress data
-            const servers = []
+            const result: ServersData = {}
             for(const rawServer of action.data) {
                 const slug = get(rawServer, 'slug')
                 if(typeof slug !== 'string') {
                     console.error('Server has no slug:', rawServer)
                     continue
                 }
-                servers.push({
-                    slug,
+                result[get(rawServer, 'id')] = {
+                    slug: nameToPath(slug),
                     name: get(rawServer, 'title', 'rendered'),
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
@@ -29,10 +30,9 @@ function data(state: ServersData = [], action: t.ServersAction): ServersData {
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
                     gameType: get(rawServer, 'acf', 'game_type', 'value'),
                     features: features(get(rawServer, 'acf', 'content')),
-                })
+                }
             }
-            servers.sort((a, b) => a.order-b.order)
-            return servers
+            return result
         default:
             return state
     }
@@ -71,6 +71,20 @@ function features(rawFeatures: any): Feature[] {
     })
 }
 
+// Reduce the servers to a list
+function list(state: PageItems = [], action: t.ServersAction): PageItems {
+    switch(action.type) {
+        case t.FETCH_SUCCESS:
+            return action.data
+            // Sort by order
+            .sort((a: object, b: object) => (get(a, 'menu_order') > get(b, 'menu_order') ? 1 : -1))
+            // Reduce to array of ids
+            .map((rawServer) => get(rawServer, 'id'))
+        default:
+            return state
+    }
+}
+
 // Fetching state reducer
 function isFetching(state: boolean = false, action: t.ServersAction): boolean {
     switch(action.type) {
@@ -84,4 +98,4 @@ function isFetching(state: boolean = false, action: t.ServersAction): boolean {
     }
 }
 
-export const servers = combineReducers<ServersState>({data, isFetching})
+export const servers = combineReducers<ServersState>({byId, list, isFetching})

@@ -55,9 +55,8 @@ function pagesToRoutes(data: PagesToRoutesProps): Array<React.ReactElement<any>>
             <Route
                 location={location}
                 key={path}
-                path={path+(page.children.length>0 ? '' : '/:one?/:two?/:three?')}
+                path={path}
                 render={getPageRenderFunction(page, basePath)}
-                exact={true}
             />,
         )
 

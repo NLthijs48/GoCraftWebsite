@@ -4,7 +4,6 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {nameToPath} from 'utils/utils'
 import {ServerData, ServersState} from '../model'
 import {ServerDetails} from './serverpage/ServerDetails'
 
@@ -25,14 +24,15 @@ class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}
     public render() {
         const {servers, basePath} = this.props
 
-        if(servers.isFetching && !servers.data.length) {
+        if(servers.isFetching && !servers.list.length) {
             return <Loading />
         }
 
         return (
             <Switch>
-                {servers.data.map((server) => {
-                    const path = basePath+'/'+nameToPath(server.slug)
+                {servers.list.map((serverId) => {
+                    const server = servers.byId[serverId]
+                    const path = basePath + '/' + server.slug
                     return <Route key={path} path={path} render={getServerDetailsFunction(server)}/>
                 })}
                 <Route render={getServerOverviewFunction(this.props)}/>

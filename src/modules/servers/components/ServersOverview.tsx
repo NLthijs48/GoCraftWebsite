@@ -1,5 +1,5 @@
 import {ServerCard} from 'modules/servers/components/ServerCard'
-import {ServerData, ServersState} from 'modules/servers/model'
+import {ServersState} from 'modules/servers/model'
 import * as React from 'react'
 import {ContentRect} from 'react-measure'
 import {Responsive} from 'utils/Responsive'
@@ -21,17 +21,17 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
         const {columns} = this.state
         const maxWidth = 100 / columns + '%'
         // [row][column]
-        const renderLayout: ServerData[][] = []
+        const renderLayout: number[][] = []
 
         // Place servers on the grid
-        for(let i=0; i<servers.data.length; i++) {
+        for(let i=0; i<servers.list.length; i++) {
             // Calcuate the position this server should have
             const rowIndex = Math.floor(i/columns)
             const columnIndex = i%columns
             // Get the row
             const row = renderLayout[rowIndex] || []
             // Assign the server
-            row[columnIndex] = servers.data[i]
+            row[columnIndex] = servers.list[i]
             // Place row back
             renderLayout[rowIndex] = row
         }
@@ -45,13 +45,13 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
                             padding: '0 0.5em',
                             // justifyContent: 'center', // Align in the middle?
                         }}>
-                            {rowServers.map((server, columnIndex) => (
+                            {rowServers.map((serverId, columnIndex) => (
                                 <div key={columnIndex} style={{
                                     maxWidth,
                                     padding: '0.5em',
                                     flex: 1,
                                 }}>
-                                    <ServerCard server={server} path={basePath}/>
+                                    <ServerCard server={servers.byId[serverId]} path={basePath}/>
                                 </div>
                             ))}
                         </div>

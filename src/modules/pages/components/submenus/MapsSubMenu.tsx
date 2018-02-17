@@ -7,7 +7,6 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {nameToPath} from 'utils/utils'
 
 interface Props {
     basePath: string
@@ -17,17 +16,18 @@ class MapsSubMenuDisplay extends React.PureComponent<Props & StateToProps & Rout
         const {servers, basePath} = this.props
         return (
             <List style={{paddingTop: 0}}>
-                {servers.data
-                .filter(({dynmapLink}) => dynmapLink)
-                .map((server) => {
-                    const path = basePath + nameToPath(server.slug)
-                    return (
-                        <MenuItem key={path} path={path} child>
-                            <LeftIconImage image={getServerTypeIcon(server)}/>
-                            <ListItemText inset primary={server.name}/>
-                        </MenuItem>
-                    )
-                })
+                {servers.list
+                    .map((serverId) => servers.byId[serverId])
+                    .filter(({dynmapLink}) => dynmapLink)
+                    .map((server) => {
+                        const path = basePath + server.slug
+                        return (
+                            <MenuItem key={path} path={path} child>
+                                <LeftIconImage image={getServerTypeIcon(server)}/>
+                                <ListItemText inset primary={server.name}/>
+                            </MenuItem>
+                        )
+                    })
                 }
             </List>
         )

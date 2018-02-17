@@ -11,7 +11,6 @@ import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
-import {nameToPath} from 'utils/utils'
 import {ServerData} from '../../model'
 
 interface ServerProps {
@@ -39,7 +38,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                 secondary={server.shortDescription}
                 header={<React.Fragment>
                     {server.dynmapLink && <NavLink
-                        to={'/maps/' + nameToPath(server.slug)}
+                        to={'/maps/' + server.slug}
                         style={{
                             marginTop: '2em',
                             display: 'block',
