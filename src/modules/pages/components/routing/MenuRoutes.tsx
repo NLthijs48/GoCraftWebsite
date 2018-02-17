@@ -1,8 +1,9 @@
 import {Location} from 'history'
+import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {Route} from 'react-router'
+import {Route, Switch} from 'react-router'
 import {AppState} from 'reducer'
 import {nameToPath} from 'utils/utils'
 import {MenuItemPage} from './MenuItemPage'
@@ -17,12 +18,15 @@ class MenuRoutesDisplay extends React.PureComponent<MenuRoutesProps & StateToPro
         }
 
         return (
-            <div>{pagesToRoutes({
-                basePath: '/',
-                byId: this.props.pages.byId,
-                location: this.props.location,
-                pages: this.props.pages.rootItems,
-            })}</div>
+            <Switch location={this.props.location}>
+                {pagesToRoutes({
+                    basePath: '/',
+                    byId: this.props.pages.byId,
+                    location: this.props.location,
+                    pages: this.props.pages.rootItems,
+                })}
+                <Route component={NotFound}/>
+            </Switch>
         )
     }
 }
@@ -56,6 +60,19 @@ function pagesToRoutes(data: PagesToRoutesProps): Array<React.ReactElement<any>>
                 exact={true}
             />,
         )
+
+        // Add extra item for home at root
+        if(page.type === 'home') {
+            result.push(
+                <Route
+                    location={location}
+                    key="/"
+                    path="/"
+                    render={getPageRenderFunction(page, '/')}
+                    exact={true}
+                />,
+            )
+        }
 
         // Generate and add child items
         if(page.children.length) {

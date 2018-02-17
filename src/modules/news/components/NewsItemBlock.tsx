@@ -159,9 +159,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
     }
 
     private goBack() {
-        const pathParts = this.props.location.pathname.split('/')
-        pathParts.pop()
-        this.props.history.push({pathname: pathParts.join('/')})
+        this.props.history.push({pathname: '/'})
     }
 
 }

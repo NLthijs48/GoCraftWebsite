@@ -1,6 +1,5 @@
-import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import * as React from 'react'
-import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {AnimateContainer} from 'utils/AnimateContainer'
 import {Animate} from 'utils/Animation'
 import {MenuRoutes} from './MenuRoutes'
@@ -37,25 +36,11 @@ class RoutesComponent extends React.PureComponent<RouteComponentProps<any>, {}> 
                         }}
                         key={location.key}
                     >
-                        <Switch location={location}>
-                            <Route
-                                exact
-                                path="/"
-                                render={this.redirectToHome}
-                            />
-
-                            <MenuRoutes location={location}/>
-
-                            <Route component={NotFound}/>
-                        </Switch>
+                        <MenuRoutes location={location}/>
                     </Animate>
                 </AnimateContainer>
             </div>
         )
-    }
-
-    private redirectToHome() {
-        return <Redirect to="/home"/>
     }
 }
 

@@ -61,7 +61,7 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
 
                 <NavLink to="/" style={{height: '100%'}}>
                     <img src={logo} alt="logo" style={{
-                        maxHeight: this.props.location.pathname === '/home' ? 100 : 75,
+                        maxHeight: this.props.location.pathname === '/' ? 100 : 75,
                         transition: 'max-height 150ms ease-in-out',
                     }}/>
                 </NavLink>

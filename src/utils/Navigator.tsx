@@ -1,4 +1,6 @@
+import {Location} from 'history'
 import * as React from 'react'
+import {match} from 'react-router'
 import {NavLink} from 'react-router-dom'
 
 interface NavigatorProps extends React.HTMLProps<HTMLDivElement> {
@@ -17,7 +19,7 @@ export class Navigator extends React.PureComponent<NavigatorProps, {}> {
             )
         } else if(to) {
             return (
-                <NavLink to={to} style={style} activeStyle={activeStyle}>
+                <NavLink to={to} style={style} exact={to==='/'} activeStyle={activeStyle} isActive={to==='/' ? this.isActive : undefined}>
                     {children}
                 </NavLink>
             )
@@ -28,5 +30,9 @@ export class Navigator extends React.PureComponent<NavigatorProps, {}> {
                 </div>
             )
         }
+    }
+
+    private isActive(matched: match<any>, location: Location) {
+        return location.pathname === '/' || location.pathname.startsWith('/news')
     }
 }

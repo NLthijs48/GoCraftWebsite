@@ -26,7 +26,7 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
     public render() {
         return (
             <PageHeader
-                contentOnly={this.props.location.pathname !== '/home'}
+                contentOnly={this.props.location.pathname !== '/'}
                 primary="Welcome to our community!"
                 secondary="Let's play together, join us now:"
                 image={this.props.background}

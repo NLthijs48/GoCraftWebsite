@@ -30,7 +30,10 @@ function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>
             return
         }
 
-        const path = basePath + nameToPath(page.urlPath || page.title)
+        let path = basePath
+        if(page.type !== 'home') {
+            path += nameToPath(page.urlPath || page.title)
+        }
         let url
         let nested: React.ReactElement<ListItemProps>|undefined
         let secondary: React.ReactNode
