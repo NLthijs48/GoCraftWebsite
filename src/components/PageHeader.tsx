@@ -22,10 +22,17 @@ export function PageHeader({image, primary, secondary, children, header, content
                 left: -10,
                 margin: 10,
                 height: '38em',
-                // TODO: use linear-gradient instead, which is way better supported in browsers
-                WebkitMaskImage: '-webkit-linear-gradient(top, #000 0%, #000 60%, #0003 80%, #0000 100%)',
                 zIndex: -1, // Don't go above header content
-            }}/>}
+            }}>
+                <div style={{ // Fade out the header image into the background
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0,
+                    background: 'linear-gradient(to bottom, rgba(238,238,238,0) 0%, rgba(238,238,238,0) 60%, rgba(238,238,238,0.9) 80%, rgba(238,238,238,1) 100%)',
+                }}/>
+            </div>}
             <div style={{
                 margin: '0 auto',
                 padding: '1em 1em 5em 1em',
