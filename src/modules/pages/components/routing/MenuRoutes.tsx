@@ -1,4 +1,5 @@
 import {Location} from 'history'
+import {Loading} from 'modules/pages/components/Loading'
 import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Page, PageItems, Pages, PagesState} from 'modules/pages/model'
 import * as React from 'react'
@@ -13,8 +14,8 @@ interface MenuRoutesProps {
 }
 class MenuRoutesDisplay extends React.PureComponent<MenuRoutesProps & StateToProps, {}> {
     public render() {
-        if(!this.props.pages) {
-            return null
+        if(!this.props.pages || this.props.pages.isFetching) {
+            return <Loading />
         }
 
         return (
