@@ -5,13 +5,15 @@ import {Icon} from 'utils/Icon'
 
 interface PlayersRowProps {
     players: PlayerInfo[]
+    style: React.CSSProperties
 }
-export function PlayersRow({players}: PlayersRowProps) {
+export function PlayersRow({players, style}: PlayersRowProps) {
     return (
         <div style={{
             display: 'flex',
             width: '100%',
             justifyContent: 'center',
+            ...style,
         }}>
             {players.length > 0 &&
                 <div style={{
@@ -31,9 +33,8 @@ export function PlayersRow({players}: PlayersRowProps) {
                 </div>
             }
 
-            <div style={{
+            <div className="overflow" style={{
                 flex: 1,
-                overflow: 'auto',
                 display: 'flex',
                 WebkitMaskImage: '-webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2%, rgb(0, 0, 0) 90%, rgba(0, 0, 0, 0) 100%)',
                 paddingLeft: '1em',

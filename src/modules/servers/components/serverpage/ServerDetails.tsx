@@ -52,7 +52,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
 
                     <Filler />
 
-                    <PlayersRow players={myPlayers} />
+                    <PlayersRow players={myPlayers} style={{marginTop: '1em'}} />
                 </React.Fragment>
             }>
                 <div style={{
