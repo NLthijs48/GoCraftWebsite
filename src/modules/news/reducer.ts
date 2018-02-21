@@ -2,21 +2,21 @@ import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
-import {NewsItemIds, NewsItems, NewsItemsState} from './model'
+import {Block, NewsItemIds, NewsItems, NewsItemsState} from './model'
 
 // Server data reducer
 function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
-            const newsItems: NewsItems = {...state}
+            const result: NewsItems = {...state}
             for(const rawNewsItem of action.data) {
-                newsItems[get(rawNewsItem, 'id')] = {
+                result[get(rawNewsItem, 'id')] = {
                     title: get(rawNewsItem, 'title', 'rendered'),
                     slug: get(rawNewsItem, 'slug'),
                     date: Date.parse(get(rawNewsItem, 'date')),
                     image: parseImage(800, get(rawNewsItem, 'acf', 'feature_image', 'sizes')),
-                    content: get(rawNewsItem, 'content', 'rendered'),
+                    content: blocks(get(rawNewsItem, 'acf', 'content')),
                     author: {
                         id: get(rawNewsItem, 'author'),
                         name: get(rawNewsItem, '_embedded', 'author', 0, 'name'),
@@ -24,10 +24,38 @@ function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
                     },
                 }
             }
-            return newsItems
+            return result
         default:
             return state
     }
+}
+
+// Parse news item blocks
+function blocks(rawBlocks: any): Block[] {
+    if(!rawBlocks) {
+        return []
+    }
+
+    return rawBlocks.map(({acf_fc_layout: type, ...details}: {acf_fc_layout: string, [key: string]: any}) => {
+        if(!type || !details) {
+            return undefined
+        }
+        switch(type) {
+            case 'text_block':
+                return {
+                    type,
+                    text: details.text,
+                }
+            case 'image_block':
+                return {
+                    type,
+                    image: parseImage(1600, get(details, 'image', 'sizes')),
+                }
+            default:
+                console.error('unknown new item block type:', type, 'details:', details)
+                return undefined
+        }
+    })
 }
 
 // Build array of menu items

@@ -3,7 +3,7 @@ import {PlayerInfo} from 'modules/players/model'
 import * as React from 'react'
 
 interface PlayerProps {
-    player: PlayerInfo
+    player: Partial<PlayerInfo>
     style?: React.CSSProperties
 }
 
@@ -12,7 +12,6 @@ export function Player({player, style}: PlayerProps) {
         <div style={{
             display: 'flex',
             alignItems: 'center',
-            filter: 'drop-shadow(1px 1px 0 rgba(10,10,10,0.5))',
             ...style,
         }}>
             <div style={{
@@ -20,8 +19,8 @@ export function Player({player, style}: PlayerProps) {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'contain',
                 backgroundPosition: '50% 50%',
-                height: 45,
-                width: 42,
+                height: '2.5em',
+                width: '2.4em',
                 flexShrink: 0,
                 position: 'relative',
             }}>
@@ -32,6 +31,7 @@ export function Player({player, style}: PlayerProps) {
                 flex: 1,
                 marginLeft: '0.5em',
                 color: player.name ? '' : '#888',
+                fontWeight: 'bold',
             }}>
                 {player.name||'Connecting...'}
             </div>

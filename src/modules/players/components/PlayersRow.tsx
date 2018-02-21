@@ -39,9 +39,16 @@ export function PlayersRow({players}: PlayersRowProps) {
                 paddingLeft: '1em',
                 paddingBottom: '2px', // Prevent cutting off shadows of <Players>s
             }}>
-                {players.map((player) =>
-                    <Player key={player.name} player={player} style={{marginRight: '2em', color: '#EEE', fontWeight: 'bold'}} />)
-                }
+                {players.map((player) => <Player
+                    key={player.name}
+                    player={player}
+                    style={{
+                        marginRight: '2em',
+                        color: '#EEE',
+                        fontWeight: 'bold',
+                        filter: 'drop-shadow(1px 1px 0 rgba(10,10,10,0.5))',
+                    }}
+                />)}
                 <div style={{minWidth: '1em'}}/>
             </div>
         </div>

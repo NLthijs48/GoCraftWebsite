@@ -1,16 +1,15 @@
 import {RawContent} from 'components/RawContent'
 import Button from 'material-ui/Button'
+import {Player} from 'modules/players/components/Player'
 import * as React from 'react'
-import {ContentRect} from 'react-measure'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
 import {Icon} from 'utils/Icon'
 import {LocalDate} from 'utils/LocalDate'
 import {Navigator} from 'utils/Navigator'
-import {Responsive} from 'utils/Responsive'
 import {nameToPath} from 'utils/utils'
-import {NewsItem} from '../model'
+import {Block, NewsItem} from '../model'
 
 interface NewsItemBlockProps {
     newsItem: NewsItem
@@ -18,17 +17,14 @@ interface NewsItemBlockProps {
     path?: string
 }
 type CombinedNewsItemBlockProps = NewsItemBlockProps & RouteComponentProps<any>
-class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProps, {vertical: boolean}> {
+class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProps, {}> {
     public constructor(props: CombinedNewsItemBlockProps) {
         super(props)
-        this.state = {vertical: false}
         this.goBack = this.goBack.bind(this)
-        this.onResize = this.onResize.bind(this)
     }
 
     public render() {
         const {newsItem, path, preview} = this.props
-        const {vertical} = this.state
         const details = preview ? path + '/' + nameToPath(newsItem.slug) : undefined
         return (
             <div>
@@ -43,119 +39,43 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                     </Button>
                 }
 
-                <CardItem style={{
-                    minHeight: '11em',
-                    overflow: 'hidden',
-                }}>
-                    <Responsive
-                        onResize={this.onResize}
-                        style={{
-                            display: 'flex',
-                            flexDirection: vertical ? 'column' : 'row',
-                        }}
-                    >
-                        <div style={{
-                            flex: 1,
-                            maxWidth: '28em',
-                            minWidth: 0,
-                            marginRight: vertical ? 0 : '1em',
-                            zIndex: 1, // Put above absolute fade out shadow
+                <CardItem>
+                    <Navigator to={details} style={{
+                        marginTop: '-0.25em',
+                        marginBottom: 0,
+                        lineHeight: '125%',
+                        display: 'inline-block',
+                        color: THEME.palette.primary.main,
+                    }}>
+                        <h2 style={{
+                            lineHeight: '125%',
                         }}>
-                            {vertical && <NewsTitle title={newsItem.title} to={details} />}
+                            {newsItem.title}
+                        </h2>
+                    </Navigator>
 
-                            <Navigator to={details} style={{
-                                display: 'block',
-                                width: '100%',
-                                height: '0',
-                                padding: '56% 0 0 0', // 16:9 aspect ratio
-                                backgroundImage: 'url(' + newsItem.image + ')',
-                                backgroundPosition: '50% 50%',
-                                backgroundSize: 'cover',
-                            }}/>
+                    <div style={{
+                        color: '#777',
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginTop: '-0.3em',
+                        marginBottom: '0.5em',
+                    }}>
+                        <LocalDate className="ellipsis" at={newsItem.date}/>
+                    </div>
 
-                            <div style={{
-                                color: '#777',
-                                marginBottom: vertical ? '1em' : 0,
-                            }}>
-                                <NewsInfo>
-                                    {newsItem.author.avatar &&
-                                    <div style={{
-                                        backgroundImage: 'url(' + newsItem.author.avatar + ')',
-                                        backgroundSize: 'contain',
-                                        backgroundRepeat: 'no-repeat',
-                                        width: '1.5em',
-                                        height: '1.5em',
-                                        marginRight: '0.5em',
-                                    }}/>
-                                    }
+                    <NewsBlocks blocks={newsItem.content} details={details} />
 
-                                    <div className="ellipsis" style={{
-                                        flex: 1,
-                                    }}>
-                                        {newsItem.author.name}
-                                    </div>
-                                </NewsInfo>
-
-                                <NewsInfo>
-                                    <Icon name="calendar-o" size="1.5em" style={{
-                                        marginRight: '0.5rem',
-                                        width: '1.5rem',
-                                    }}/>
-                                    <LocalDate className="ellipsis" at={newsItem.date}/>
-                                </NewsInfo>
-                            </div>
-                        </div>
-
-                        <div style={{
-                            flex: 2,
-                            maxWidth: '45em',
-                            minWidth: 0,
-                            position: 'relative', // For content and button alignment
-                        }}>
-                            {!vertical && <NewsTitle title={newsItem.title} to={details} />}
-
-                            <div style={{minHeight: '7em'}}>
-                                <RawContent
-                                    content={newsItem.content}
-                                    style={{
-                                        position: preview ? 'absolute' : 'static', // As preview we don't want it to expand the parent container
-                                        right: 0,
-                                        left: 0,
-                                    }}
-                                />
-                            </div>
-
-                            {preview && // Shadow to fade out content
-                                <div style={{
-                                    position: 'absolute',
-                                    height: 0,
-                                    bottom: 0,
-                                    right: '-4em',
-                                    left: '-4em',
-                                    boxShadow: '0 0 4em 4em white',
-                                }}/>
-                            }
-
-                            {preview && // Details button
-                                <Navigator to={details} style={{
-                                    position: 'absolute',
-                                    bottom: 0,
-                                    left: 0,
-                                }}>
-                                    <Button variant="raised" color="primary">
-                                        Details
-                                    </Button>
-                                </Navigator>
-                            }
-                        </div>
-                    </Responsive>
+                    <div style={{
+                        color: '#777',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}>
+                        <Player player={{name: newsItem.author.name, game: 'minecraft'}}/>
+                    </div>
                 </CardItem>
             </div>
         )
-    }
-
-    private onResize(contentRect: ContentRect) {
-        this.setState({vertical: contentRect.bounds.width < 500})
     }
 
     private goBack() {
@@ -166,34 +86,46 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
 
 export const NewsItemBlock = withRouter<NewsItemBlockProps & RouteComponentProps<any>>(NewsItemBlockDisplay)
 
-function NewsTitle({title, to}: {title: string, to?: string}) {
+function NewsBlocks({blocks, details}: {blocks: Block[], details?: string}) {
     return (
-        <Navigator to={to} style={{
-            marginTop: '-0.25em',
-            marginBottom: '0.25em',
-            lineHeight: '125%',
-            display: 'inline-block',
-            color: THEME.palette.primary.main,
-        }}>
-            <h2 style={{
-                lineHeight: '125%',
-            }}>
-                {title}
-            </h2>
-        </Navigator>
+        <div>
+            {blocks.map((block, index) => <NewsBlock key={index} details={details} block={block} />)}
+        </div>
     )
 }
 
-function NewsInfo({children}: { children: React.ReactNode }) {
-    return (
-        <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            marginTop: '0.5em',
-            marginRight: '1.5em',
-            verticalAlign: 'top',
-        }}>
-            {children}
-        </div>
-    )
+function NewsBlock({block, details}: {block: Block, details?: string}) {
+    if(!block) {
+        return null
+    }
+    switch(block.type) {
+        case 'image_block':
+            return (
+                <div style={{
+                    margin: '0 -1em 1em -1em',
+                }}>
+                    <Navigator to={details} style={{
+                        display: 'block',
+                        width: '100%',
+                        height: '0',
+                        padding: '56% 0 0 0', // 16:9 aspect ratio
+                        backgroundImage: 'url(' + block.image + ')',
+                        backgroundPosition: '50% 50%',
+                        backgroundSize: 'cover',
+                    }}/>
+                </div>
+            )
+        case 'text_block':
+            return (
+                <RawContent
+                    content={block.text}
+                    style={{
+                        marginBottom: '1em',
+                        maxWidth: '38em', // Keep line length readable
+                    }}
+                />
+            )
+        default:
+            return null
+    }
 }

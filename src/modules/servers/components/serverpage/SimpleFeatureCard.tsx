@@ -40,7 +40,7 @@ export class SimpleFeatureCard extends React.Component<SimpleFeatureProps, {}> {
                         width: '100%',
                         backgroundColor: '#888',
                         position: 'relative',
-                        borderTop: '0.5em solid ' + THEME.palette.primary.main,
+                        borderTop: '0.2em solid ' + THEME.palette.primary.main,
                     }}
                 />
             </CardItem>

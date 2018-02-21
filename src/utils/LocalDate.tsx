@@ -15,5 +15,6 @@ export function LocalDate({at, children, ...otherProps}: DateProps) {
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 function formatDate(dateNumber: UnixDate) {
     const date = new Date(dateNumber)
-    return date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear()
+    const year = date.getFullYear()
+    return date.getDate() + ' ' + monthNames[date.getMonth()] + ((new Date()).getFullYear()===year ? '' : ' ' + year)
 }

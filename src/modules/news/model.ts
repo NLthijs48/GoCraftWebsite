@@ -5,10 +5,23 @@ export interface NewsItem {
     title: string
     slug: string
     date: UnixDate
-    content: string
+    content: Block[]
     image: string
     author: User
 }
+
+// Blocks
+export interface ImageBlock {
+    type: 'image_block'
+    image: string
+}
+export interface TextBlock {
+    type: 'text_block'
+    text: string
+}
+export type Block =
+    ImageBlock |
+    TextBlock
 
 // ID -> NewsItem
 export interface NewsItems {

@@ -110,6 +110,12 @@ module.exports = function (env) {
             externals: [
                 '**/*'
             ],
+            excludes: [
+                '**/.*',
+                '**/*.map',
+                '**/*.gz',
+                '**/wp-json/**'
+            ],
             ServiceWorker: {
                 events: true,
                 navigateFallbackURL: '/' // SPA, so use root as fallback
