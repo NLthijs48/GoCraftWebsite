@@ -3,11 +3,11 @@ import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
+import {Navigate} from 'utils/Navigate'
 import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
 
@@ -29,7 +29,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                 height: '100%',
                 padding: 0,
             }}>
-                <NavLink
+                <Navigate
                     to={path+'/'+nameToPath(server.slug)}
                     style={{
                         width: '100%',
@@ -67,7 +67,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                     }}>
                         {server.shortDescription}
                     </div>
-                </NavLink>
+                </Navigate>
 
                 <Filler />
 
@@ -77,8 +77,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                     paddingBottom: '0.4em',
                     minHeight: 42,
                 }}>
-                    {server.dynmapLink &&
-                    <NavLink
+                    {server.dynmapLink && <Navigate
                         style={{textDecoration: 'none'}}
                         to={'/maps/' + nameToPath(server.slug)}
                     >
@@ -86,11 +85,9 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                             <Icon name="map-o" fixedWidth style={{marginRight: '0.5em'}}/>
                             View map
                         </Button>
-                    </NavLink>
-                    }
+                    </Navigate>}
 
-                    {myPlayerCount > 0 &&
-                    <NavLink
+                    {myPlayerCount > 0 && <Navigate
                         style={{textDecoration: 'none'}}
                         to={path+'/'+nameToPath(server.slug)}
                     >
@@ -98,9 +95,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                             <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth style={{marginRight: '0.5em'}}/>
                             {myPlayerCount + ' online'}
                         </Button>
-                    </NavLink>
-
-                    }
+                    </Navigate>}
                 </div>
             </CardItem>
         )

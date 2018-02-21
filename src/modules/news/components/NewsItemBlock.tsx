@@ -7,7 +7,7 @@ import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
 import {Icon} from 'utils/Icon'
 import {LocalDate} from 'utils/LocalDate'
-import {Navigator} from 'utils/Navigator'
+import {Navigate} from 'utils/Navigate'
 import {nameToPath} from 'utils/utils'
 import {Block, NewsItem} from '../model'
 
@@ -40,7 +40,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                 }
 
                 <CardItem>
-                    <Navigator to={details} style={{
+                    <Navigate to={details} style={{
                         marginTop: '-0.25em',
                         marginBottom: 0,
                         lineHeight: '125%',
@@ -52,7 +52,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                         }}>
                             {newsItem.title}
                         </h2>
-                    </Navigator>
+                    </Navigate>
 
                     <div style={{
                         color: '#777',
@@ -104,7 +104,7 @@ function NewsBlock({block, details}: {block: Block, details?: string}) {
                 <div style={{
                     margin: '0 -1em 1em -1em',
                 }}>
-                    <Navigator to={details} style={{
+                    <Navigate to={details} style={{
                         display: 'block',
                         width: '100%',
                         height: '0',

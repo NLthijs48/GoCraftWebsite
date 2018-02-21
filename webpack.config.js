@@ -107,9 +107,10 @@ module.exports = function (env) {
     merged.plugins.push(
         // ServiceWorker and AppCache for offline use (should be last...)
         new OfflinePlugin({
-            externals: [
-                '**/*'
-            ],
+            appShell: '/',
+            updateStrategy: 'changed',
+            autoUpdate: 1000 * 60 * 5,
+            externals: [],
             excludes: [
                 '**/.*',
                 '**/*.map',
@@ -118,7 +119,6 @@ module.exports = function (env) {
             ],
             ServiceWorker: {
                 events: true,
-                navigateFallbackURL: '/' // SPA, so use root as fallback
             }
         })
     );

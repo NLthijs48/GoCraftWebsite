@@ -26,8 +26,8 @@ if(!isLocalhost()) {
             console.log('ServiceWorker is updating...')
         },
         onUpdated: () => {
-            console.log('ServiceWorker has updated, reloading page')
-            window.location.reload()
+            (window as any).swUpdate = true
+            console.log('ServiceWorker has updated, page will reload on navigate')
         },
         onUpdateFailed: () => {
             console.log('ServiceWorker updated failed!')

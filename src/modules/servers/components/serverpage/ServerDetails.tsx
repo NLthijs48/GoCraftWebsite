@@ -7,10 +7,10 @@ import {FeatureCardList} from 'modules/servers/components/serverpage/FeatureCard
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
+import {Navigate} from 'utils/Navigate'
 import {ServerData} from '../../model'
 
 interface ServerProps {
@@ -37,7 +37,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                 primary={server.name}
                 secondary={server.shortDescription}
                 header={<React.Fragment>
-                    {server.dynmapLink && <NavLink
+                    {server.dynmapLink && <Navigate
                         to={'/maps/' + server.slug}
                         style={{
                             marginTop: '2em',
@@ -48,7 +48,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                             <Icon name="map-o" style={{marginRight: '0.5em'}}/>
                             View map
                         </Button>
-                    </NavLink>}
+                    </Navigate>}
 
                     <Filler />
 

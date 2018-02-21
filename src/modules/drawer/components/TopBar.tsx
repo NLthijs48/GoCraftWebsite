@@ -6,11 +6,11 @@ import {DrawerState} from 'modules/drawer/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {THEME} from 'types'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
+import {Navigate} from 'utils/Navigate'
 
 const logo = require('images/logo.png')
 
@@ -59,12 +59,12 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
 
                 <Filler />
 
-                <NavLink to="/" style={{height: '100%'}}>
+                <Navigate to="/" style={{height: '100%'}}>
                     <img src={logo} alt="logo" style={{
                         maxHeight: this.props.location.pathname === '/' ? 100 : 75,
                         transition: 'max-height 150ms ease-in-out',
                     }}/>
-                </NavLink>
+                </Navigate>
 
                 <Filler />
 

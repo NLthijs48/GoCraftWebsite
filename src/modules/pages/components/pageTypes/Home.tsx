@@ -31,7 +31,7 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
                 secondary="Let's play together, join us now:"
                 image={this.props.background}
                 header={<React.Fragment>
-                    <Tooltip title="Copy">
+                    <Tooltip title="Click to copy">
                         <Button variant="raised" color="primary" onClick={this.copyIP} >
                             mc.go-craft.com
                             <Icon name={this.state.copied ? 'check' : 'clone'} style={{marginLeft: '1em'}}/>

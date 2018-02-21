@@ -3,12 +3,12 @@ import List, {ListItem} from 'material-ui/List'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {NavLink} from 'react-router-dom'
 import {AppState} from 'reducer'
 import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
+import {Navigate} from 'utils/Navigate'
 import {ShopItem} from '../model'
 
 interface ShopItemProps {
@@ -100,7 +100,7 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <NavLink
+                    <Navigate
                         to={'/shop/'+id}
                         style={{
                             width: '100%',
@@ -110,7 +110,7 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                             Buy now
                             <Icon name="shopping-cart" style={{marginLeft: '0.5em'}}/>
                         </Button>
-                    </NavLink>
+                    </Navigate>
                 </div>
             </CardItem>
         )
