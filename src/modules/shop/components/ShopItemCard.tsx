@@ -67,8 +67,8 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                     <List>
                         {shopItem.perks.map((perk, index) => (
                             <ListItem key={index} style={{
-                                marginLeft: perk.sub ? '2em' : 0,
                                 fontSize: perk.sub ? '90%' : undefined,
+                                paddingLeft: perk.sub ? '3.1em' : '1em',
                                 paddingTop: perk.sub ? '0.05em' : '0.15em',
                                 paddingBottom: perk.sub ? 0 : (shopItem.perks.length>(index+1) && shopItem.perks[index + 1].sub ? 0 : '0.15em'),
                                 alignItems: 'flex-start',
