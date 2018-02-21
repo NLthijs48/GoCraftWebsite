@@ -14,7 +14,7 @@ interface MenuRoutesProps {
 }
 class MenuRoutesDisplay extends React.PureComponent<MenuRoutesProps & StateToProps, {}> {
     public render() {
-        if(!this.props.pages || this.props.pages.isFetching) {
+        if(this.props.pages.rootItems.length === 0 && this.props.pages.isFetching) {
             return <Loading />
         }
 
