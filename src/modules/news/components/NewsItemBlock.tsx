@@ -89,7 +89,7 @@ export const NewsItemBlock = withRouter<NewsItemBlockProps & RouteComponentProps
 function NewsBlocks({blocks, details}: {blocks: Block[], details?: string}) {
     return (
         <div>
-            {blocks.map((block, index) => <NewsBlock key={index} details={details} block={block} />)}
+            {!!blocks && blocks.map((block, index) => <NewsBlock key={index} details={details} block={block} />)}
         </div>
     )
 }
