@@ -48,10 +48,10 @@ module.exports = {
                     {
                         loader: 'image-webpack-loader',
                         query: {
+                            bypassOnDebug: true,
                             mozjpeg: {
                                 progressive: false,
                                 quality: 75,
-                                bypassOnDebug: true,
                             },
                             gifsicle: {
                                 interlaced: false,
