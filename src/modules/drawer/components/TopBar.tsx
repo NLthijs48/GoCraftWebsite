@@ -69,7 +69,9 @@ class TopBarDisplay extends React.PureComponent<MenuProps & DispatchToProps & St
                 <Filler />
 
                 <Hidden mdUp>
-                    <div style={{width: '2.8em'}} />
+                    <div style={{
+                        width: 56, // Same width as menu icon button
+                    }} />
                 </Hidden>
             </Toolbar>
         )
