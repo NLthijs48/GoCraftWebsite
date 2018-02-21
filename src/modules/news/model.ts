@@ -5,7 +5,7 @@ export interface NewsItem {
     title: string
     slug: string
     date: UnixDate
-    content: Block[]
+    blocks: Block[]
     image: string
     author: User
 }

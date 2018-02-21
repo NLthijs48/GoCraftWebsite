@@ -16,7 +16,7 @@ function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
                     slug: get(rawNewsItem, 'slug'),
                     date: Date.parse(get(rawNewsItem, 'date')),
                     image: parseImage(800, get(rawNewsItem, 'acf', 'feature_image', 'sizes')),
-                    content: blocks(get(rawNewsItem, 'acf', 'content')),
+                    blocks: blocks(get(rawNewsItem, 'acf', 'content')),
                     author: {
                         id: get(rawNewsItem, 'author'),
                         name: get(rawNewsItem, '_embedded', 'author', 0, 'name'),

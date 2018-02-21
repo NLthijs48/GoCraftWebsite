@@ -64,7 +64,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                         <LocalDate className="ellipsis" at={newsItem.date}/>
                     </div>
 
-                    <NewsBlocks blocks={newsItem.content} details={details} />
+                    <NewsBlocks blocks={newsItem.blocks} details={details} />
 
                     <div style={{
                         color: '#777',
