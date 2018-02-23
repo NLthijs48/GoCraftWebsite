@@ -1,4 +1,4 @@
-import {OtherAction, PersistRehydrate} from 'types'
+import {OtherAction} from 'types'
 
 // Start getting news items information
 export const FETCH = 'newsItems/FETCH'
@@ -24,5 +24,4 @@ export type NewsItemsAction =
     Fetch |
     FetchSuccess |
     FetchFailure |
-    PersistRehydrate |
     OtherAction

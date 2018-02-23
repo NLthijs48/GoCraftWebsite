@@ -1,7 +1,6 @@
 import {PageItems} from 'modules/pages/model'
 import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
-import {PERSIST_REHYDRATE} from 'types'
 import {get, nameToPath} from 'utils/utils'
 import * as t from './actionTypes'
 import {Feature, ServersData, ServersState} from './model'
@@ -93,7 +92,6 @@ function isFetching(state: boolean = false, action: t.ServersAction): boolean {
             return true
         case t.FETCH_SUCCESS:
         case t.FETCH_FAILURE:
-        case PERSIST_REHYDRATE:
             return false
         default:
             return state

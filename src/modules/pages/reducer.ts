@@ -1,6 +1,5 @@
 import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
-import {PERSIST_REHYDRATE} from 'types'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
 import {PageItems, Pages, PagesState} from './model'
@@ -61,13 +60,11 @@ function rootItems(state: PageItems = [], action: t.PagesAction): PageItems {
 
 // Fetching state reducer
 function isFetching(state: boolean = false, action: t.PagesAction): boolean {
-    console.log('isFetching of pages:', state, action.type)
     switch(action.type) {
         case t.FETCH:
             return true
         case t.FETCH_SUCCESS:
         case t.FETCH_FAILURE:
-        case PERSIST_REHYDRATE:
             return false
         default:
             return state

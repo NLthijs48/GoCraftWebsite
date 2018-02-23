@@ -1,4 +1,4 @@
-import {OtherAction, PersistRehydrate} from 'types'
+import {OtherAction} from 'types'
 
 // Start getting pages information
 export const FETCH = 'pages/FETCH'
@@ -24,5 +24,4 @@ export type PagesAction =
     Fetch |
     FetchSuccess |
     FetchFailure |
-    PersistRehydrate |
     OtherAction

@@ -1,4 +1,4 @@
-import {OtherAction, PersistRehydrate} from 'types'
+import {OtherAction} from 'types'
 
 // Start getting servers information
 export const FETCH = 'servers/FETCH'
@@ -24,5 +24,4 @@ export type ServersAction =
     Fetch |
     FetchSuccess |
     FetchFailure |
-    PersistRehydrate |
     OtherAction

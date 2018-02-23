@@ -1,5 +1,5 @@
 import {VoteRanking, VoteStatus} from 'modules/voting/model'
-import {OtherAction, PersistRehydrate} from 'types'
+import {OtherAction} from 'types'
 
 // Start getting vote site information
 export const FETCH = 'voting/FETCH'
@@ -46,5 +46,4 @@ export type VoteSitesAction =
     StatusUpdate |
     SelectSite |
     TopUpdate |
-    PersistRehydrate |
     OtherAction
