@@ -12,15 +12,15 @@ import {ServersState} from 'modules/servers/model'
 import {servers} from 'modules/servers/reducer'
 import {ShopLayoutState} from 'modules/shop/model'
 import {shopLayout} from 'modules/shop/reducer'
-import {VoteSitesState} from 'modules/votesites/model'
-import {voteSites} from 'modules/votesites/reducer'
+import {VotingState} from 'modules/voting/model'
+import {voting} from 'modules/voting/reducer'
 
 export interface AppState {
     servers: ServersState
     pages: PagesState
     drawer: DrawerState
     newsItems: NewsItemsState
-    voteSites: VoteSitesState
+    voting: VotingState
     options: OptionsState
     players: PlayersState
     shopLayout: ShopLayoutState
@@ -36,10 +36,11 @@ const reducerVersion = (state: number = 0, action: { type: string }) => {
     }
 }
 
-export const parseImage = (target: number, sizes: {[key: string]: string|{source_url: string}}): string => {
-    if(!sizes) {
+export const parseImage = (target: number, data: {sizes: {[key: string]: string|{source_url: string}}}): string => {
+    if(!data || !data.sizes) {
         return ''
     }
+    const sizes = data.sizes
 
     let pickSize = 50
     while(pickSize < target) {
@@ -47,7 +48,9 @@ export const parseImage = (target: number, sizes: {[key: string]: string|{source
     }
 
     const pickedImage = sizes['x'+pickSize] || sizes.full
-    if(typeof pickedImage === 'string') {
+    if(!pickedImage) {
+        return ''
+    } else if(typeof pickedImage === 'string') {
         return pickedImage
     } else {
         return pickedImage.source_url
@@ -59,7 +62,7 @@ export const reducers = {
     pages,
     drawer,
     newsItems,
-    voteSites,
+    voting,
     options,
     players,
     shopLayout,

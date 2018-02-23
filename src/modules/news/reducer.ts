@@ -15,7 +15,7 @@ function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
                     title: get(rawNewsItem, 'title', 'rendered'),
                     slug: get(rawNewsItem, 'slug'),
                     date: Date.parse(get(rawNewsItem, 'date')),
-                    image: parseImage(800, get(rawNewsItem, 'acf', 'feature_image', 'sizes')),
+                    image: parseImage(800, get(rawNewsItem, 'acf', 'feature_image')),
                     blocks: blocks(get(rawNewsItem, 'acf', 'content')),
                     author: {
                         id: get(rawNewsItem, 'author'),
@@ -49,7 +49,7 @@ function blocks(rawBlocks: any): Block[] {
             case 'image_block':
                 return {
                     type,
-                    image: parseImage(1600, get(details, 'image', 'sizes')),
+                    image: parseImage(1600, get(details, 'image')),
                 }
             default:
                 console.error('unknown new item block type:', type, 'details:', details)

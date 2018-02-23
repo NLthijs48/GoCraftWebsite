@@ -37,6 +37,8 @@ export function PageHeader({image, primary, secondary, children, header, content
                 margin: '0 auto',
                 padding: '1em 1em 5em 1em',
                 maxWidth: 1200,
+                display: 'flex',
+                flexDirection: 'column',
             }}>
                 {!contentOnly && <div style={{
                     minHeight: '23em',

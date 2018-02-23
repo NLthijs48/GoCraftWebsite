@@ -1,3 +1,4 @@
+import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -21,6 +22,11 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
                     menuIcon: get(rawPage, 'acf', 'menu_icon'),
                     adminOnly: get(rawPage, 'acf', 'admin_only'),
                     children: [],
+                    header: {
+                        primary: get(rawPage, 'acf', 'header_primary'),
+                        secondary: get(rawPage, 'acf', 'header_secondary'),
+                        image: parseImage(1600, get(rawPage, 'acf', 'header_image')),
+                    },
                 }
             }
             // Add pages to the children array of their parent

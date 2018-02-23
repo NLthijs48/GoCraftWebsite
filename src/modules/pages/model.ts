@@ -16,6 +16,11 @@ interface AbstractPage {
     menuIcon?: string
     children: number[]
     adminOnly?: boolean
+    header: {
+        primary?: string
+        secondary?: string
+        image?: string,
+    }
 }
 export interface HomePage extends AbstractPage {
     type: 'home',

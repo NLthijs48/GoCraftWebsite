@@ -1,3 +1,3 @@
 export interface OptionsState {
-    background?: string
+    background?: string // Not used anymore
 }

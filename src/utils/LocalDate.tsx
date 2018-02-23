@@ -13,6 +13,10 @@ export function LocalDate({at, children, ...otherProps}: DateProps) {
 }
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+// Month starting at 1
+export function monthName(month: number) {
+    return monthNames[month-1]
+}
 function formatDate(dateNumber: UnixDate) {
     const date = new Date(dateNumber)
     const year = date.getFullYear()

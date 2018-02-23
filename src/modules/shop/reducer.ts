@@ -51,7 +51,7 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
                 const id = get(rawShopInfo, 'acf', 'minecraftmarket_shop_item_number')
                 shopItemsInfo[id] = {
                     ...shopItemsInfo[id],
-                    image: parseImage(800, get(rawShopInfo, 'acf', 'image', 'sizes')),
+                    image: parseImage(800, get(rawShopInfo, 'acf', 'image')),
                     perks: perksReducer(get(rawShopInfo, 'acf', 'perks')),
                 }
             }

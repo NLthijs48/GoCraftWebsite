@@ -1,4 +1,5 @@
-import {VoteSiteIds, VoteSites, VoteSitesState, VoteStatus} from 'modules/votesites/model'
+import {getVoteSiteOrder} from 'modules/voting/actions'
+import {VoteRankings, VoteSiteIds, VoteSites, VoteStatus, VotingState} from 'modules/voting/model'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
 
@@ -48,7 +49,7 @@ function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean 
 }
 
 // Vote status of the user
-function voteStatus(state: VoteStatus = {}, voteSitesState: VoteSitesState, action: t.VoteSitesAction): VoteStatus {
+function voteStatus(state: VoteStatus = {}, voteSitesState: VotingState, action: t.VoteSitesAction): VoteStatus {
     switch(action.type) {
         case t.STATUS_UPDATE:
             return action.status
@@ -58,7 +59,7 @@ function voteStatus(state: VoteStatus = {}, voteSitesState: VoteSitesState, acti
 }
 
 // Mix vote information into the sites
-function addVoteInfoToSites(state: VoteSitesState, action: t.VoteSitesAction): VoteSites {
+function addVoteInfoToSites(state: VotingState, action: t.VoteSitesAction): VoteSites {
     switch(action.type) {
         case t.FETCH_SUCCESS:
         case t.STATUS_UPDATE:
@@ -87,27 +88,59 @@ function addVoteInfoToSites(state: VoteSitesState, action: t.VoteSitesAction): V
     }
 }
 
-// Vote status of the user
-function selected(state: string|null = null, action: t.VoteSitesAction): string|null {
+// Selected voting tab
+export function canVoteCount(state: VotingState) {
+    return state.items.filter((voteSiteId) => !state.byId[voteSiteId].canVote).length
+}
+function selected(prev: VotingState, state: VotingState, action: t.VoteSitesAction): string {
     switch(action.type) {
         case t.SELECT_SITE:
             return action.site
         case t.STATUS_UPDATE:
-            return null
+            // If a site has been marked as voted, switch to next tab
+            const order = getVoteSiteOrder(state, true)
+            const votedCurrent = canVoteCount(prev)
+            const votedNew = canVoteCount(state)
+            if(votedNew < votedCurrent) {
+                return order[1]
+            } else {
+                return order[0]
+            }
+        default:
+            return state.selected || getVoteSiteOrder(state, true)[0]
+    }
+}
+
+// Handle vote rankings
+export function rankingKey(year: number, month: number): string {
+    return year + '-' + (month < 10 ? '0' : '') + month
+}
+function rankings(state: VoteRankings = {}, action: t.VoteSitesAction) {
+    switch(action.type) {
+        case t.TOP_UPDATE:
+            const ranking = action.ranking
+            const key = rankingKey(ranking.year, ranking.month)
+            // TODO merge entries? (need map, and range?)
+            return {
+                ...state,
+                [key]: ranking,
+            }
         default:
             return state
     }
 }
 
-export function voteSites(state: VoteSitesState, action: t.VoteSitesAction): VoteSitesState {
+export function voting(state: VotingState, action: t.VoteSitesAction): VotingState {
     state = state || {}
     const result = {
         isFetching: isFetching(state.isFetching, action),
         byId: byId(state.byId, action),
         items: items(state.items, action),
         voteStatus: voteStatus(state.voteStatus, state, action),
-        selected: selected(state.selected, action),
+        selected: state.selected,
+        rankings: rankings(state.rankings, action),
     }
     result.byId = addVoteInfoToSites(result, action)
+    result.selected = selected(state, result, action)
     return result
 }

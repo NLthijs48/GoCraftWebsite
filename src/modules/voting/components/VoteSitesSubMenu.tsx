@@ -1,7 +1,8 @@
 import List, {ListItemText} from 'material-ui/List'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {MenuItem} from 'modules/pages/components/routing/MenuItem'
-import {VoteSitesState} from 'modules/votesites/model'
+import {selectSite, VOTE_INFO_KEY} from 'modules/voting/actions'
+import {VotingState} from 'modules/voting/model'
 import * as React from 'react'
 import {connect, DispatchProp} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -13,21 +14,34 @@ import {nameToPath} from 'utils/utils'
 interface Props {
     basePath: string
 }
-function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch, selectSite}: Props & StateToProps & DispatchToProps & RouteComponentProps<any> & DispatchProp<any>) {
-    const active = voteSites.selected
-        || voteSites.items.filter((voteSiteID) => voteSites.byId[voteSiteID].canVote)[0]
-        || voteSites.items[0]
+function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch, goToSite}: Props & StateToProps & DispatchToProps & RouteComponentProps<any> & DispatchProp<any>) {
     return (
         <List style={{paddingTop: 0}}>
+            <MenuItem
+                key="info"
+                onPress={() => goToSite(VOTE_INFO_KEY)}
+                child
+                active={voteSites.selected===VOTE_INFO_KEY}
+            >
+                <div style={{paddingLeft: '2em'}}>
+                    <Icon fixedWidth size={18} name="trophy" />
+                </div>
+                <ListItemText
+                    primary="Top 10"
+                    secondary="Prices in 10 days"
+                    style={{paddingRight: 0}}
+                />
+            </MenuItem>
+
             {voteSites.items.map((voteSiteId) => {
                 const voteSite = voteSites.byId[voteSiteId]
                 const path = basePath + nameToPath(voteSite.name)
                 return (
                     <MenuItem
                         key={path}
-                        onPress={() => selectSite(voteSiteId)}
+                        onPress={() => goToSite(voteSiteId)}
                         child
-                        active={active===voteSiteId}
+                        active={voteSites.selected===voteSiteId}
                     >
                         <div style={{paddingLeft: '2em'}}>
                             {voteSite.canVote && <Icon fixedWidth size={18} name="arrow-right" color="green"/>}
@@ -37,7 +51,7 @@ function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch, selectSite}: Pr
                             primary={voteSite.name}
                             secondary={voteSite.canVote ? 'Vote now!' :
                                 !!voteSite.lastVoted ? <span>Voted <TimeDiff time={voteSite.lastVoted} /></span> : null}
-                            style={{paddingRight: 0, marginBottom: -4}}
+                            style={{paddingRight: 0}}
                         />
                     </MenuItem>
                 )
@@ -47,19 +61,19 @@ function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch, selectSite}: Pr
 }
 
 interface StateToProps {
-    voteSites: VoteSitesState
+    voteSites: VotingState
 }
 interface DispatchToProps {
-    selectSite: (voteSiteId: string) => void
+    goToSite: (voteSiteId: string) => void
 }
 export const VoteSitesSubMenu = withRouter<Props & RouteComponentProps<any>>(connect<StateToProps, DispatchToProps, Props, AppState>(
     (state) => ({
-        voteSites: state.voteSites,
+        voteSites: state.voting,
     }),
     (dispatch) => ({
-        selectSite: (voteSiteId) => {
+        goToSite: (voteSiteId) => {
             dispatch(updateDrawerOpen(false))
-            dispatch({type: 'voteSites/SELECT_SITE', site: voteSiteId})
+            dispatch(selectSite(voteSiteId))
         },
     }),
 )(VoteSitesSubMenuDisplay))

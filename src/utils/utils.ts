@@ -19,6 +19,8 @@ const wordPressAPI = 'https://mc.go-craft.com/wordpress/wp-json'
 export function getData(path: string): Promise<any> {
     if(path.substr(0, 4) !== 'http') {
         path = wordPressAPI + path
+        // Cache break (accidentally added Expires header to Wordpress api)
+        path += (path.indexOf('?')!==-1 ? '&': '?')+'v=1'
     }
 
     return new Promise((resolve, reject) => {

@@ -8,7 +8,7 @@ import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Page, PagesState} from 'modules/pages/model'
 import {Servers} from 'modules/servers/components/Servers'
 import {Shop} from 'modules/shop/components/Shop'
-import {VotePage} from 'modules/votesites/components/VotePage'
+import {VotePage} from 'modules/voting/components/VotePage'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -43,17 +43,17 @@ class MenuItemPageDisplay extends React.PureComponent<MenuItemPageProps & StateT
 function renderPage(page: Page, basePath: string): React.ReactElement<any> {
     switch(page.type) {
         case 'home':
-            return <Home basePath={basePath} />
+            return <Home basePath={basePath} page={page} />
         case 'html':
             return <HTML page={page}/>
         case 'maps':
             return <Maps basePath={basePath} />
         case 'frame':
-            return <Embedded page={page}/>
+            return <Embedded page={page} />
         case 'servers':
-            return <Servers basePath={basePath}/>
+            return <Servers basePath={basePath} />
         case 'vote-sites':
-            return <VotePage basePath={basePath} />
+            return <VotePage basePath={basePath} page={page} />
         case 'shop':
             return <Shop basePath={basePath} />
         default:

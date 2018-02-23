@@ -22,10 +22,10 @@ function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
                     name: get(rawServer, 'title', 'rendered'),
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
-                    image: parseImage(800, get(rawServer, 'acf', 'feature_image', 'sizes')),
+                    image: parseImage(800, get(rawServer, 'acf', 'feature_image')),
                     heroImage: get(rawServer, 'acf', 'hero_image', 'url'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
-                    dynmapPreview: parseImage(800, get(rawServer, 'acf', 'dynmap', 'preview', 'sizes')),
+                    dynmapPreview: parseImage(800, get(rawServer, 'acf', 'dynmap', 'preview')),
                     order: get(rawServer, 'menu_order'),
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
                     gameType: get(rawServer, 'acf', 'game_type', 'value'),
@@ -53,7 +53,7 @@ function features(rawFeatures: any): Feature[] {
                     type,
                     title: details.title,
                     description: details.description,
-                    image: parseImage(1600, get(details.image, 'sizes')),
+                    image: parseImage(1600, details.image),
                 }
             case 'slider_feature':
                 return {
@@ -61,7 +61,7 @@ function features(rawFeatures: any): Feature[] {
                     header: details.header,
                     slides: (details.feature_list||[]).map((slide: any) => ({
                         title: get(slide, 'title'),
-                        image: parseImage(1600, get(slide, 'image', 'sizes')),
+                        image: parseImage(1600, get(slide, 'image')),
                     })),
                 }
             default:

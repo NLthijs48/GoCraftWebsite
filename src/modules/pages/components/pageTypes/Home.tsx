@@ -3,6 +3,8 @@ import Button from 'material-ui/Button'
 import Snackbar from 'material-ui/Snackbar'
 import Tooltip from 'material-ui/Tooltip'
 import {NewsList} from 'modules/news/components/NewsList'
+import {Loading} from 'modules/pages/components/Loading'
+import {Page} from 'modules/pages/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -11,6 +13,7 @@ import {Icon} from 'utils/Icon'
 
 interface HomeProps {
     basePath: string
+    page: Page
 }
 class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteComponentProps<any>, {copied: boolean}> {
 
@@ -24,12 +27,16 @@ class HomeDisplay extends React.PureComponent<HomeProps & StateToProps &  RouteC
     }
 
     public render() {
+        if(!this.props.page.header) {
+            return <Loading />
+        }
+
         return (
             <PageHeader
                 contentOnly={this.props.location.pathname !== '/'}
-                primary="Welcome to our community!"
-                secondary="Let's play together, join us now:"
-                image={this.props.background}
+                primary={this.props.page.header.primary}
+                secondary={this.props.page.header.secondary}
+                image={this.props.page.header.image}
                 header={<React.Fragment>
                     <Tooltip title="Click to copy">
                         <Button variant="raised" color="primary" onClick={this.copyIP} >

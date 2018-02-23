@@ -1,52 +1,52 @@
 import {WebsiteFrame} from 'components/WebsiteFrame'
 import {Loading} from 'modules/pages/components/Loading'
+import {Page} from 'modules/pages/model'
+import {getVoteSiteOrder, VOTE_INFO_KEY} from 'modules/voting/actions'
+import {VoteStats} from 'modules/voting/components/VoteStats'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {AppState} from 'reducer'
-import {VoteSitesState} from '../model'
+import {VotingState} from '../model'
 
-interface VoteToolProps {
+interface Props {
     basePath: string
+    page: Page
 }
-type CombinedNewsListProps = VoteToolProps & StateToProps
-class VoteTool extends React.PureComponent<CombinedNewsListProps, {}> {
+class VoteTool extends React.PureComponent<Props & StateToProps, {}> {
 
-    public constructor(props: CombinedNewsListProps) {
-        super(props)
-        this.state = {}
+    private loaded: {[key: string]: boolean} = {}
+
+    public componentWillUnmount() {
+        // Reset loaded, iframes are destroyed
+        this.loaded = {}
     }
 
     public render() {
-        const {voteSites} = this.props
-        if(voteSites.isFetching && (!voteSites.byId || !voteSites.items)) {
+        const {voting} = this.props
+        if(voting.isFetching && (!Object.keys(voting.byId) || !voting.items)) {
             return <Loading />
         }
 
-        if(voteSites.items.length === 0) {
+        if(!voting.items) {
             return <div>No Vote sites</div>
         }
 
         // Determine tab that should be active
-        const loadOrder: string[] = []
-        if(voteSites.selected) {
-            loadOrder.push(voteSites.selected)
-        }
-        loadOrder.push(...voteSites.items.filter((voteSiteID) => voteSites.byId[voteSiteID].canVote))
-        loadOrder.push(...voteSites.items.filter((voteSiteID) => !voteSites.byId[voteSiteID].canVote))
+        const loadOrder: string[] = getVoteSiteOrder(voting, true)
 
         return (
             <div style={{
                 width: '100%',
                 height: '100%',
             }}>
-                {voteSites.items.map((voteSiteId) => {
-                    const voteSite = voteSites.byId[voteSiteId]
-
+                {[VOTE_INFO_KEY].concat(voting.items).map((voteSiteId) => {
                     // Don't render tabs that are not active (prevent loading a bunch of external websites at once)
-                    if(loadOrder.findIndex((value) => value===voteSiteId) > 2) {
+                    if(!this.loaded[voteSiteId] && loadOrder.findIndex((value) => value===voteSiteId) >= 2) {
                         return null
                     }
+                    this.loaded[voteSiteId] = true
 
+                    const voteSite = voting.byId[voteSiteId]
                     return (
                         <div
                             key={voteSiteId}
@@ -62,7 +62,10 @@ class VoteTool extends React.PureComponent<CombinedNewsListProps, {}> {
                                 transition: 'opacity 300ms ease-in-out',
                             }}
                         >
-                            <WebsiteFrame src={voteSite.vote_url} />
+                            {voteSiteId===VOTE_INFO_KEY ?
+                                <VoteStats page={this.props.page} /> :
+                                <WebsiteFrame src={voteSite.vote_url} />
+                            }
                         </div>
                     )
                 })}
@@ -72,10 +75,10 @@ class VoteTool extends React.PureComponent<CombinedNewsListProps, {}> {
 }
 
 interface StateToProps {
-    voteSites: VoteSitesState
+    voting: VotingState
 }
-export const VotePage = connect<StateToProps, {}, VoteToolProps, AppState>(
+export const VotePage = connect<StateToProps, Props, {}, AppState>(
     (state) => ({
-        voteSites: state.voteSites,
+        voting: state.voting,
     }),
 )(VoteTool)
