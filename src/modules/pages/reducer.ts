@@ -61,6 +61,7 @@ function rootItems(state: PageItems = [], action: t.PagesAction): PageItems {
 
 // Fetching state reducer
 function isFetching(state: boolean = false, action: t.PagesAction): boolean {
+    console.log('isFetching of pages:', state, action.type)
     switch(action.type) {
         case t.FETCH:
             return true
