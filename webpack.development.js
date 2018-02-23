@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -70,6 +71,12 @@ module.exports = {
         ]
     },
     plugins: [
+        // Build index.html (insert bundles into template)
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            chunksSortMode: 'dependency',
+        }),
+
         // Setup hot module replacement
         new webpack.HotModuleReplacementPlugin(),
 

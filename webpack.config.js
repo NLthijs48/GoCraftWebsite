@@ -2,7 +2,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const Merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CheckerPlugin} = require('awesome-typescript-loader');
 const OfflinePlugin = require('offline-plugin');
 
@@ -59,15 +58,6 @@ const commonConfig = {
         ]
     },
     plugins: [
-        // Build index.html (insert bundles into template)
-        new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            chunksSortMode: 'dependency',
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true
-            },
-        }),
         new CheckerPlugin(),
 
         // Ensure module names stay the same

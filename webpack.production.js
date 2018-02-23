@@ -3,11 +3,30 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = function(env) {
     const plugins = [
         // Cleanup 'dist' directory before building new files
         new CleanWebpackPlugin(['dist'], {}),
+
+        // Build index.html (insert bundles into template)
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            chunksSortMode: 'dependency',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            },
+        }),
 
         // Compatibility with Webpack 1.0 loaders
         new webpack.LoaderOptionsPlugin({
