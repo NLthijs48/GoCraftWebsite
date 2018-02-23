@@ -7,6 +7,8 @@ RewriteRule ^(.*)$ index.html [NC,L,QSA]
 <ifModule mod_expires.c>
     # Enable expirations
     ExpiresActive On
+    # Default directive
+    ExpiresDefault "access plus 1 year"
     # My favicon
     ExpiresByType image/x-icon "access plus 1 year"
     # Images
@@ -39,6 +41,12 @@ RewriteRule ^(.*)$ index.html [NC,L,QSA]
     </filesMatch>
     <filesMatch "\.(x?html?|php)$">
         Header set Cache-Control "private, max-age=0, must-revalidate"
+    </filesMatch>
+
+    # Disable caching for ServiceWorker
+    <filesMatch "sw.js$">
+        Header set Cache-Control "private, max-age=0, must-revalidate"
+        Header unset Expires
     </filesMatch>
 </ifModule>
 # END Cache-Control Headers

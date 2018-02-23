@@ -97,6 +97,7 @@ module.exports = function (env) {
     merged.plugins.push(
         // ServiceWorker and AppCache for offline use (should be last...)
         new OfflinePlugin({
+            responseStrategy: 'cache-first',
             appShell: '/',
             updateStrategy: 'changed',
             autoUpdate: 1000 * 60 * 5,
