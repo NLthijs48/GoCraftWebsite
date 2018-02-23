@@ -90,7 +90,7 @@ function addVoteInfoToSites(state: VotingState, action: t.VoteSitesAction): Vote
 
 // Selected voting tab
 export function canVoteCount(state: VotingState) {
-    return state.items.filter((voteSiteId) => !state.byId[voteSiteId].canVote).length
+    return state.items.filter((voteSiteId) => state.byId[voteSiteId].canVote).length
 }
 function selected(prev: VotingState, state: VotingState, action: t.VoteSitesAction): string {
     switch(action.type) {
@@ -99,9 +99,9 @@ function selected(prev: VotingState, state: VotingState, action: t.VoteSitesActi
         case t.STATUS_UPDATE:
             // If a site has been marked as voted, switch to next tab
             const order = getVoteSiteOrder(state, true)
-            const votedCurrent = canVoteCount(prev)
-            const votedNew = canVoteCount(state)
-            if(votedNew < votedCurrent) {
+            const canVoteCurrent = canVoteCount(prev)
+            const canVoteNew = canVoteCount(state)
+            if(canVoteNew < canVoteCurrent) {
                 return order[1]
             } else {
                 return order[0]
