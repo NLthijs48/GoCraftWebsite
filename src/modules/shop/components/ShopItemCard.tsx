@@ -101,7 +101,10 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                     alignItems: 'center',
                 }}>
                     <Navigate
-                        to={'/shop/'+id}
+                        to={
+                            (shopItem.buyUrl||'').replace('http://', 'https://')
+                            /* '/shop/'+id Paying in embedded website does not work */
+                        }
                         style={{
                             width: '100%',
                         }}
