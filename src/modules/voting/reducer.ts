@@ -1,5 +1,6 @@
 import {getVoteSiteOrder} from 'modules/voting/actions'
 import {VoteRankings, VoteSiteIds, VoteSites, VoteStatus, VotingState} from 'modules/voting/model'
+import {PERSIST_REHYDRATE} from 'types'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
 
@@ -42,6 +43,7 @@ function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean 
             return true
         case t.FETCH_SUCCESS:
         case t.FETCH_FAILURE:
+        case PERSIST_REHYDRATE:
             return false
         default:
             return state

@@ -10,6 +10,11 @@ export interface RemoteState {
     isFetching: boolean
 }
 
+export const PERSIST_REHYDRATE = 'persist/REHYDRATE'
+export interface PersistRehydrate {
+    type: 'persist/REHYDRATE'
+}
+
 // WordPress user
 export interface User {
     id: number
