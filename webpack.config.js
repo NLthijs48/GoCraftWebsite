@@ -101,7 +101,13 @@ module.exports = function (env) {
             appShell: '/',
             updateStrategy: 'changed',
             autoUpdate: 1000 * 60 * 5,
-            externals: ['**/*'],
+            safeToUseOptionalCaches: true,
+            caches: {
+                main: [':rest:'],
+                additional: [],
+                optional: [':externals:'],
+            },
+            externals: ['**/wp-content/**'],
             excludes: [
                 '**/.*',
                 '**/*.map',
