@@ -107,7 +107,10 @@ module.exports = function (env) {
                 additional: [],
                 optional: [':externals:'],
             },
-            externals: ['**/wp-content/**'],
+            externals: [
+                // Wordpress file uploads (they are immutable)
+                'https://**/wp-content/uploads/**',
+            ],
             excludes: [
                 '**/.*',
                 '**/*.map',
