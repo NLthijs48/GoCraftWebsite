@@ -101,12 +101,13 @@ module.exports = function (env) {
             appShell: '/',
             updateStrategy: 'changed',
             autoUpdate: 1000 * 60 * 5,
-            externals: [],
+            externals: ['**/*'],
             excludes: [
                 '**/.*',
                 '**/*.map',
                 '**/*.gz',
-                '**/wp-json/**'
+                '**/wp-json/**',
+                '**/sw.js'
             ],
             ServiceWorker: {
                 events: true,
