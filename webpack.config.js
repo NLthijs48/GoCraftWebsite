@@ -105,11 +105,13 @@ module.exports = function (env) {
             caches: {
                 main: [':rest:'],
                 additional: [],
-                optional: [':externals:'],
+                optional: [
+                    ':externals:',
+                    'fonts/**' // Only cache the ones the browser loads, not all file types
+                ],
             },
             externals: [
-                // Wordpress file uploads (they are immutable)
-                'https://**/wp-content/uploads/**',
+                'https://**/wp-content/uploads/**', // Wordpress file uploads (they are immutable)
             ],
             excludes: [
                 '**/.*',
