@@ -37,8 +37,12 @@ export interface ServersData {
 }
 
 export type ServerItems = number[]
+export interface ServersBySlug {
+    [k: string]: number
+}
 
 export interface ServersState extends RemoteState {
     byId: ServersData
     list: ServerItems
+    bySlug: ServersBySlug
 }

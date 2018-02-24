@@ -6,6 +6,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
+import {Fade} from 'utils/Fade'
 
 interface MapsProps {
     basePath: string
@@ -25,13 +26,15 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
             [0]
 
         return (
-            <Switch>
-                <Route path={basePath+'/:serverId'} render={this.mapDetails}/>
-                {first!==undefined &&
-                    <Redirect to={basePath + '/' + first.slug} />
-                }
-                <Route component={NotFound}/>
-            </Switch>
+            <Fade id={this.props.location.pathname.split('/')[2] || 'notFound'}>
+                <Switch location={this.props.location}>
+                    <Route path={basePath+'/:serverId'} render={this.mapDetails}/>
+                    {first!==undefined && this.props.match.path === basePath &&
+                        <Redirect to={basePath + '/' + first.slug} />
+                    }
+                    <Route component={NotFound}/>
+                </Switch>
+            </Fade>
         )
     }
 

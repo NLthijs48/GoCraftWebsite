@@ -13,10 +13,7 @@ import {Icon} from 'utils/Icon'
 import {Navigate} from 'utils/Navigate'
 import {ServerData} from '../../model'
 
-interface ServerProps {
-    server: ServerData
-}
-type AllServerDetailsProps = ServerProps & RouteComponentProps<{}> & StateToProps
+type AllServerDetailsProps = RouteComponentProps<any> & StateToProps
 class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}> {
 
     public constructor(props: AllServerDetailsProps) {
@@ -78,10 +75,12 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
 interface StateToProps {
     players: PlayersState
     drawer: DrawerState
+    server: ServerData
 }
-export const ServerDetails = withRouter<ServerProps & RouteComponentProps<any>>(connect<StateToProps, {}, ServerProps, AppState>(
-    (state) => ({
+export const ServerDetails = withRouter<RouteComponentProps<any>>(connect<StateToProps, {}, RouteComponentProps<any>, AppState>(
+    (state, ownProps) => ({
         players: state.players,
         drawer: state.drawer,
+        server: state.servers.byId[state.servers.bySlug[ownProps.match.params.serverId]],
     }),
 )(ServerDetailsDisplay))

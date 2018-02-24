@@ -106,6 +106,24 @@
                 animation: spin 1s linear infinite;
             }
 
+            /* Page transition animation */
+            .fade-appear,
+            .fade-enter {
+                opacity: 0;
+            }
+            .fade-appear-active,
+            .fade-enter-active {
+                transition: opacity .3s linear;
+                opacity: 1;
+            }
+            .fade-exit {
+                transition: opacity .2s linear;
+                opacity: 1;
+            }
+            .fade-exit-active {
+                opacity: 0;
+            }
+
             /* Safari */
             @-webkit-keyframes spin {
                 0% { -webkit-transform: rotate(0deg); }

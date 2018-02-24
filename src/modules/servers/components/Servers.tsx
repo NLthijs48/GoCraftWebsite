@@ -1,9 +1,12 @@
+import {AbsoluteScroller} from 'components/AbsoluteScroller'
 import {Loading} from 'modules/pages/components/Loading'
+import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {ServersOverview} from 'modules/servers/components/ServersOverview'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {Route, RouteComponentProps, Switch, withRouter} from 'react-router'
 import {AppState} from 'reducer'
+import {Fade} from 'utils/Fade'
 import {ServerData, ServersState} from '../model'
 import {ServerDetails} from './serverpage/ServerDetails'
 
@@ -29,29 +32,25 @@ class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}
         }
 
         return (
-            <Switch>
-                {servers.list.map((serverId) => {
-                    const server = servers.byId[serverId]
-                    const path = basePath + '/' + server.slug
-                    return <Route key={path} path={path} render={getServerDetailsFunction(server)}/>
-                })}
-                <Route render={getServerOverviewFunction(this.props)}/>
-            </Switch>
+            <Fade id={this.props.location.pathname.split('/')[2] || 'base'}>
+                <AbsoluteScroller>
+                    <Switch location={this.props.location}>
+                        <Route path={basePath+'/:serverId'} render={this.serverDetails}/>
+                        <Route path={basePath+'/'} exact render={this.serversOverview}/>
+                        <Route component={NotFound}/>
+                    </Switch>
+                </AbsoluteScroller>
+            </Fade>
         )
     }
-}
 
-// Get a render function for the server overview
-function getServerOverviewFunction({servers, basePath}: CombinedServersDisplayProps) {
-    return () => {
-        return (
-            <ServersOverview servers={servers} basePath={basePath} />
-        )
+    private serverDetails = () => {
+        return <ServerDetails />
     }
-}
 
-function getServerDetailsFunction(server: ServerData) {
-    return () => <ServerDetails server={server} />
+    private serversOverview = () => {
+        return <ServersOverview servers={this.props.servers} basePath={this.props.basePath} />
+    }
 }
 
 interface StateToProps {

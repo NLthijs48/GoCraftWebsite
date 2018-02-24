@@ -24,7 +24,6 @@ interface StateToProps {
 }
 export const MapDetails = withRouter<any>(connect<StateToProps, {}, RouteComponentProps<any>, AppState>(
     (state, ownProps) => ({
-        // This is a bit stupid, maybe add state.servers.bySlug?
-        server: state.servers.byId[state.servers.list.find((serverId) => state.servers.byId[serverId].slug===ownProps.match.params.serverId) || -1],
+        server: state.servers.byId[state.servers.bySlug[ownProps.match.params.serverId]],
     }),
 )(MapDetailsDisplay))

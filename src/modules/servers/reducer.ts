@@ -1,9 +1,9 @@
-import {PageItems} from 'modules/pages/model'
+import {ServerItems} from 'modules/servers/model'
 import {parseImage} from 'reducer'
 import {combineReducers} from 'redux'
 import {get, nameToPath} from 'utils/utils'
 import * as t from './actionTypes'
-import {Feature, ServersData, ServersState} from './model'
+import {Feature, ServersBySlug, ServersData, ServersState} from './model'
 
 // Server data reducer
 function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
@@ -72,14 +72,26 @@ function features(rawFeatures: any): Feature[] {
 }
 
 // Reduce the servers to a list
-function list(state: PageItems = [], action: t.ServersAction): PageItems {
+function list(state: ServerItems = [], action: t.ServersAction): ServerItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             return action.data
-            // Sort by order
-            .sort((a: object, b: object) => (get(a, 'menu_order') > get(b, 'menu_order') ? 1 : -1))
-            // Reduce to array of ids
-            .map((rawServer) => get(rawServer, 'id'))
+                // Sort by order
+                .sort((a: object, b: object) => (get(a, 'menu_order') > get(b, 'menu_order') ? 1 : -1))
+                // Reduce to array of ids
+                .map((rawServer) => get(rawServer, 'id'))
+        default:
+            return state
+    }
+}
+
+// Reduce the servers to a list
+function bySlug(state: ServersBySlug = {}, action: t.ServersAction): ServersBySlug {
+    switch(action.type) {
+        case t.FETCH_SUCCESS:
+            const result: ServersBySlug = {}
+            action.data.forEach((rawServer) => result[nameToPath(get(rawServer, 'slug'))] = get(rawServer, 'id'))
+            return result
         default:
             return state
     }
@@ -98,4 +110,4 @@ function isFetching(state: boolean = false, action: t.ServersAction): boolean {
     }
 }
 
-export const servers = combineReducers<ServersState>({byId, list, isFetching})
+export const servers = combineReducers<ServersState>({byId, list, bySlug, isFetching})
