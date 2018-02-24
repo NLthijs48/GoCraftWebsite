@@ -43,7 +43,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         query: {
-                            name: '[path][name].[ext]?[sha512:hash:base36:10]'
+                            name: 'images/[name].[ext]?[sha512:hash:base36:10]'
                         }
                     },
                     {
