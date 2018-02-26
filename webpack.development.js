@@ -15,6 +15,7 @@ module.exports = {
         sourceMapFilename: '[name].js.map',
     },
     devtool: 'cheap-module-eval-source-map',
+    // TODO replace webpack-dev-server with webpack-server: https://github.com/webpack-contrib/webpack-serve
     devServer: {
         port: 3000,
         historyApiFallback: true,

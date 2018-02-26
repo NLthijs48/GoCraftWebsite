@@ -2,6 +2,7 @@ import {Store} from 'react-redux'
 import {AppState, reducers} from 'reducer'
 import {applyMiddleware, createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import immutableState from 'redux-immutable-state-invariant'
 import {createLogger} from 'redux-logger'
 import {createTransform, persistCombineReducers, persistReducer, persistStore} from 'redux-persist'
 import {Persistor} from 'redux-persist/es/types'
@@ -14,6 +15,7 @@ export function configureStore(): {store: Store<AppState|undefined>, persistor: 
 
     if(process.env.NODE_ENV !== 'production') {
         middlewares.push(createLogger({timestamp: false}))
+        middlewares.push(immutableState())
     }
 
     const config = {

@@ -75,10 +75,13 @@ function addVoteInfoToSites(state: VotingState, action: t.VoteSitesAction): Vote
                             lastVoted = Math.max(lastVoted, siteStatus.lastVoted)
                         }
                     }
-                    result[voteSiteId].lastVoted = lastVoted
-
                     const cooldown = voteSite.cooldown*60*60*1000
-                    result[voteSiteId].canVote = lastVoted < (now - cooldown)
+                    const canVote = lastVoted < (now - cooldown)
+                    result[voteSiteId] = {
+                        ...result[voteSiteId],
+                        lastVoted,
+                        canVote,
+                    }
                 }
                 return result
             }
