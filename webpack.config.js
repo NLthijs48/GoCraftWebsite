@@ -93,6 +93,7 @@ module.exports = function (env) {
             autoUpdate: 1000 * 60 * 5,
             safeToUseOptionalCaches: true,
             caches: {
+                // Entries are resolved as globs against all webpack assets
                 main: [':rest:'],
                 additional: [],
                 optional: [
@@ -101,7 +102,8 @@ module.exports = function (env) {
                 ],
             },
             externals: [
-                'https://**/wp-content/uploads/**', // Wordpress file uploads (they are immutable)
+                // These are in Regex format, applying to any urls
+                'https:\/\/.*?\/wp-content\/uploads\/.*', // Wordpress file uploads (they are immutable)
             ],
             excludes: [
                 '**/.*',
