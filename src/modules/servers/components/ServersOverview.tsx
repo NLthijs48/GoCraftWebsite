@@ -1,3 +1,6 @@
+import {PageHeader} from 'components/PageHeader'
+import {Loading} from 'modules/pages/components/Loading'
+import {Page} from 'modules/pages/model'
 import {ServerCard} from 'modules/servers/components/ServerCard'
 import {ServersState} from 'modules/servers/model'
 import * as React from 'react'
@@ -7,6 +10,7 @@ import {Responsive} from 'utils/Responsive'
 interface ServersOverviewProps {
     servers: ServersState
     basePath: string
+    page: Page
 }
 export class ServersOverview extends React.PureComponent<ServersOverviewProps, {columns: number}> {
 
@@ -17,8 +21,13 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
     }
 
     public render() {
-        const {servers, basePath} = this.props
+        const {servers, basePath, page} = this.props
         const {columns} = this.state
+
+        if(!page.header) {
+            return <Loading/>
+        }
+
         const maxWidth = 100 / columns + '%'
         // [row][column]
         const renderLayout: number[][] = []
@@ -37,27 +46,33 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
         }
 
         return (
-            <Responsive onResize={this.onResize} style={{margin: '1.5em 0 0.5em 0'}}>
-                {!columns ? null :
-                    renderLayout.map((rowServers, rowIndex) => (
-                        <div key={rowIndex} style={{
-                            display: 'flex',
-                            padding: '0 0.5em',
-                            // justifyContent: 'center', // Align in the middle?
-                        }}>
-                            {rowServers.map((serverId, columnIndex) => (
-                                <div key={columnIndex} style={{
-                                    maxWidth,
-                                    padding: '0.5em',
-                                    flex: 1,
-                                }}>
-                                    <ServerCard server={servers.byId[serverId]} path={basePath}/>
-                                </div>
-                            ))}
-                        </div>
-                    ))
-                }
-            </Responsive>
+            <PageHeader
+                image={page.header.image}
+                primary={page.header.primary}
+                secondary={page.header.secondary}
+            >
+                <Responsive onResize={this.onResize} style={{margin: '1.5em 0 0.5em 0'}}>
+                    {!columns ? null :
+                        renderLayout.map((rowServers, rowIndex) => (
+                            <div key={rowIndex} style={{
+                                display: 'flex',
+                                padding: '0 0.5em',
+                                // justifyContent: 'center', // Align in the middle?
+                            }}>
+                                {rowServers.map((serverId, columnIndex) => (
+                                    <div key={columnIndex} style={{
+                                        maxWidth,
+                                        padding: '0.5em',
+                                        flex: 1,
+                                    }}>
+                                        <ServerCard server={servers.byId[serverId]} path={basePath}/>
+                                    </div>
+                                ))}
+                            </div>
+                        ))
+                    }
+                </Responsive>
+            </PageHeader>
         )
     }
 

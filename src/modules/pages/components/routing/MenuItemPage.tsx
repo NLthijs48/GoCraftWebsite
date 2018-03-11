@@ -51,7 +51,7 @@ function renderPage(page: Page, basePath: string): React.ReactElement<any> {
         case 'frame':
             return <Embedded page={page} />
         case 'servers':
-            return <Servers basePath={basePath} />
+            return <Servers basePath={basePath} page={page} />
         case 'vote-sites':
             return <VotePage basePath={basePath} page={page} />
         case 'shop':

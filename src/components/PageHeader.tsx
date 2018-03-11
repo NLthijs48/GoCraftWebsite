@@ -5,7 +5,7 @@ interface Props {
     primary?: React.ReactNode
     secondary?: React.ReactNode
     contentOnly?: boolean
-    header: React.ReactNode
+    header?: React.ReactNode
     children: React.ReactNode
 }
 export function PageHeader({image, primary, secondary, children, header, contentOnly}: Props) {

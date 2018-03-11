@@ -1,6 +1,7 @@
 import {AbsoluteScroller} from 'components/AbsoluteScroller'
 import {Loading} from 'modules/pages/components/Loading'
 import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
+import {Page} from 'modules/pages/model'
 import {ServersOverview} from 'modules/servers/components/ServersOverview'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -21,6 +22,7 @@ export function getServerTypeIcon(server: ServerData): string {
 
 interface ServersProps {
     basePath: string
+    page: Page
 }
 type CombinedServersDisplayProps = ServersProps & StateToProps & RouteComponentProps<any>
 class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}> {
@@ -49,7 +51,7 @@ class ServersDisplay extends React.PureComponent<CombinedServersDisplayProps, {}
     }
 
     private serversOverview = () => {
-        return <ServersOverview servers={this.props.servers} basePath={this.props.basePath} />
+        return <ServersOverview servers={this.props.servers} basePath={this.props.basePath} page={this.props.page} />
     }
 }
 
