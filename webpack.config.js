@@ -103,7 +103,7 @@ module.exports = function (env) {
             },
             externals: [
                 // These are in Regex format, applying to any urls
-                'https:\/\/.*?\/wp-content\/uploads\/.*', // Wordpress file uploads (they are immutable)
+                'https:\\/\\/.*?\\/wp-content\\/uploads\\/.*', // Wordpress file uploads (they are immutable)
             ],
             excludes: [
                 '**/.*',
