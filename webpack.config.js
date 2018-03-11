@@ -97,14 +97,12 @@ module.exports = function (env) {
                 main: [':rest:'],
                 additional: [],
                 optional: [
-                    ':externals:',
-                    'fonts/**' // Only cache the ones the browser loads, not all file types
+                    // Only cache the file types the browser loads
+                    'fonts/**',
+                    // Wordpress images
+                    /https:\/\/.*?\/wp-content\/uploads\/.*/,
                 ],
             },
-            externals: [
-                // These are in Regex format, applying to any urls
-                'https:\\/\\/.*?\\/wp-content\\/uploads\\/.*', // Wordpress file uploads (they are immutable)
-            ],
             excludes: [
                 '**/.*',
                 '**/*.map',
