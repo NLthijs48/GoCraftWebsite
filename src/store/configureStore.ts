@@ -1,12 +1,12 @@
+import localforage from 'localforage'
 import {Store} from 'react-redux'
 import {AppState, reducers} from 'reducer'
 import {applyMiddleware, createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import immutableState from 'redux-immutable-state-invariant'
 import {createLogger} from 'redux-logger'
-import {createTransform, persistCombineReducers, persistReducer, persistStore} from 'redux-persist'
+import {createTransform, persistCombineReducers, PersistConfig, persistReducer, persistStore} from 'redux-persist'
 import {Persistor} from 'redux-persist/es/types'
-import storage from 'redux-persist/lib/storage'
 import promise from 'redux-promise'
 import thunk from 'redux-thunk'
 
@@ -18,29 +18,24 @@ export function configureStore(): {store: Store<AppState|undefined>, persistor: 
         middlewares.push(immutableState())
     }
 
-    const config = {
+    const config: PersistConfig = {
         key: 'primary',
-        storage,
+        storage: localforage,
         blacklist: ['players', 'reducerVersion', 'drawer'],
         throttle: 300,
         transforms: [
             createTransform(
                 // Transform state on its way to being serialized and persisted.
-                (inboundState, key) => {
+                (inboundState: any) => {
                     // Remove isFetching
-                    if(typeof inboundState === 'object') {
-                        const {isFetching, ...rest} = inboundState as any
+                    if(typeof inboundState === 'object' && inboundState.isFetching) {
+                        const {isFetching, selected, ...rest} = inboundState as any
                         return rest
                     }
                     return inboundState
                 },
                 // Transform state being rehydrated
-                (outboundState, key) => {
-                    // Remove isFetching
-                    if(typeof outboundState === 'object') {
-                        const {isFetching, ...rest} = outboundState as any
-                        return rest
-                    }
+                (outboundState) => {
                     return outboundState
                 },
             ),

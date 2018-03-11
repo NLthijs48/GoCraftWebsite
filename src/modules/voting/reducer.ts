@@ -49,7 +49,7 @@ function isFetching(state: boolean = false, action: t.VoteSitesAction): boolean 
 }
 
 // Vote status of the user
-function voteStatus(state: VoteStatus = {}, voteSitesState: VotingState, action: t.VoteSitesAction): VoteStatus {
+function voteStatus(state: VoteStatus = {}, action: t.VoteSitesAction): VoteStatus {
     switch(action.type) {
         case t.STATUS_UPDATE:
             return action.status
@@ -133,13 +133,13 @@ function rankings(state: VoteRankings = {}, action: t.VoteSitesAction) {
     }
 }
 
-export function voting(state: VotingState, action: t.VoteSitesAction): VotingState {
-    state = state || {}
+export function voting(currentState: VotingState|void, action: t.VoteSitesAction): VotingState {
+    const state: VotingState = (currentState || {}) as VotingState
     const result = {
         isFetching: isFetching(state.isFetching, action),
         byId: byId(state.byId, action),
         items: items(state.items, action),
-        voteStatus: voteStatus(state.voteStatus, state, action),
+        voteStatus: voteStatus(state.voteStatus, action),
         selected: state.selected,
         rankings: rankings(state.rankings, action),
     }
