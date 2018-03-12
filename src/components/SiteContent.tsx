@@ -1,6 +1,6 @@
 import {PreFetch} from 'components/PreFetch'
 import {Action, Location, UnregisterCallback} from 'history'
-import Reboot from 'material-ui/Reboot'
+import CssBaseline from 'material-ui/CssBaseline'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {LeftDrawer} from 'modules/drawer/components/LeftDrawer'
 import {TopBar} from 'modules/drawer/components/TopBar'
@@ -45,7 +45,7 @@ class SiteContentDisplay extends React.Component<AllSiteContentProps, {}> {
                     flex: 1,
                 }}
             >
-                <Reboot/>
+                <CssBaseline/>
                 <Websocket />
 
                 <LeftDrawer>

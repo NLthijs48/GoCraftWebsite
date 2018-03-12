@@ -33,6 +33,7 @@ export function Icon({name, color, size, style, fixedWidth, onClick}: IconProps)
             style={{
                 fontSize,
                 transition: 'none',
+                overflow: 'visible', // Some FontAwesome icons are wider than 1em
                 ...style,
                 color,
             }}
