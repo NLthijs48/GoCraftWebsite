@@ -1,5 +1,5 @@
 import {ServerItems} from 'modules/servers/model'
-import {parseImage} from 'reducer'
+import {parseImage, parseImageInfo} from 'reducer'
 import {combineReducers} from 'redux'
 import {get, nameToPath} from 'utils/utils'
 import * as t from './actionTypes'
@@ -22,7 +22,7 @@ function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
                     name: get(rawServer, 'title', 'rendered'),
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
-                    image: parseImage(800, get(rawServer, 'acf', 'feature_image')),
+                    image: parseImageInfo(get(rawServer, 'acf', 'feature_image')),
                     heroImage: get(rawServer, 'acf', 'hero_image', 'url'),
                     dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
                     dynmapPreview: parseImage(800, get(rawServer, 'acf', 'dynmap', 'preview')),
@@ -53,7 +53,7 @@ function features(rawFeatures: any): Feature[] {
                     type,
                     title: details.title,
                     description: details.description,
-                    image: parseImage(1600, details.image),
+                    image: parseImageInfo(details.image),
                 }
             case 'slider_feature':
                 return {
@@ -61,7 +61,7 @@ function features(rawFeatures: any): Feature[] {
                     header: details.header,
                     slides: (details.feature_list||[]).map((slide: any) => ({
                         title: get(slide, 'title'),
-                        image: parseImage(1600, get(slide, 'image')),
+                        image: parseImageInfo(get(slide, 'image')),
                     })),
                 }
             default:

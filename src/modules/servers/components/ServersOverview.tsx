@@ -56,8 +56,6 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
                         renderLayout.map((rowServers, rowIndex) => (
                             <div key={rowIndex} style={{
                                 display: 'flex',
-                                padding: '0 0.5em',
-                                // justifyContent: 'center', // Align in the middle?
                             }}>
                                 {rowServers.map((serverId, columnIndex) => (
                                     <div key={columnIndex} style={{

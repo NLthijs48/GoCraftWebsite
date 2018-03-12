@@ -14,6 +14,7 @@ import {ShopLayoutState} from 'modules/shop/model'
 import {shopLayout} from 'modules/shop/reducer'
 import {VotingState} from 'modules/voting/model'
 import {voting} from 'modules/voting/reducer'
+import {ImageInfo} from 'utils/Image'
 
 export interface AppState {
     servers: ServersState
@@ -55,6 +56,39 @@ export const parseImage = (target: number, data: {sizes: {[key: string]: string|
     } else {
         return pickedImage.source_url
     }
+}
+
+export const parseImageInfo = (data: {sizes: {[key: string]: string}}): ImageInfo => {
+    const result: ImageInfo = {options: []}
+
+    if(!data || !data.sizes) {
+        return result
+    }
+
+    // Build options
+    for(const k in data.sizes) {
+        // Only look at x<number> that does not have the width/height
+        if(k[0] !== 'x' || k.indexOf('-width') > 0 || k.indexOf('-height') > 0) {
+            continue
+        }
+
+        // Don't add same url again
+        if(result.options.filter((option) => option.url === data.sizes[k]).length > 0) {
+            continue
+        }
+
+        // Add option (TODO: native Wordpress case)
+        result.options.push({
+            url: data.sizes[k],
+            width: +data.sizes[k + '-width'],
+            height: +data.sizes[k + '-height'],
+        })
+    }
+
+    // Descending sort
+    result.options.sort((a, b) => b.width - a.width)
+
+    return result
 }
 
 export const reducers = {

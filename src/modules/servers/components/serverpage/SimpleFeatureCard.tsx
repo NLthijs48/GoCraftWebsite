@@ -2,6 +2,7 @@ import {SimpleFeature} from 'modules/servers/model'
 import * as React from 'react'
 import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
+import {Image} from 'utils/Image'
 
 interface SimpleFeatureProps {
     feature: SimpleFeature
@@ -34,15 +35,9 @@ export class SimpleFeatureCard extends React.Component<SimpleFeatureProps, {}> {
                     }
                 </div>
 
-                <img
-                    src={feature.image}
-                    style={{
-                        width: '100%',
-                        backgroundColor: '#888',
-                        position: 'relative',
-                        borderTop: '0.2em solid ' + THEME.palette.primary.main,
-                    }}
-                />
+                <Image image={feature.image} maxWidth={1200} style={{
+                    borderTop: '0.2em solid ' + THEME.palette.primary.main,
+                }} />
             </CardItem>
         )
     }

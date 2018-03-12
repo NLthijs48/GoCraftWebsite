@@ -1,4 +1,5 @@
 import {RemoteState} from 'types'
+import {ImageInfo} from 'utils/Image'
 
 // Information about a server
 export interface ServerData {
@@ -6,7 +7,7 @@ export interface ServerData {
     name: string
     shortDescription: string
     longDescription: string
-    image: string
+    image: ImageInfo
     heroImage?: string
     dynmapLink?: string
     dynmapPreview?: string
@@ -21,7 +22,7 @@ export interface SimpleFeature {
     type: 'simple_feature'
     title: string
     description?: string
-    image: string
+    image: ImageInfo
 }
 export interface SliderFeature {
     type: 'slider_feature'

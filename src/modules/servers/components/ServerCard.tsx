@@ -7,6 +7,7 @@ import {AppState} from 'reducer'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
+import {Image} from 'utils/Image'
 import {Navigate} from 'utils/Navigate'
 import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
@@ -39,14 +40,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                         textDecoration: 'none',
                     }}
                 >
-                    <div style={{
-                        width: '100%',
-                        padding: '56% 0 0 0',
-                        backgroundImage: 'url(' + server.image + ')',
-                        backgroundPosition: '50% 50%',
-                        backgroundSize: 'cover',
-                        position: 'relative',
-                    }}>
+                    <Image image={server.image} ratio={16/9} maxWidth={600}>
                         <div style={{
                             position: 'absolute',
                             bottom: 0,
@@ -60,8 +54,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                                 {server.name}
                             </h2>
                         </div>
-                    </div>
-
+                    </Image>
                     <div style={{
                         margin: '1em 1em 0 1em',
                     }}>
