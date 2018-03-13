@@ -15,13 +15,13 @@ export function SiteConfiguration() {
     return (
         <AppContainer>
             <Provider store={store}>
-                <PersistGate loading={<Loading size={80} />} persistor={persistor}>
-                    <Router>
-                        <MuiThemeProvider theme={THEME}>
+                <MuiThemeProvider theme={THEME}>
+                    <PersistGate loading={<Loading size={80} />} persistor={persistor}>
+                        <Router>
                             <SiteContent />
-                        </MuiThemeProvider>
-                    </Router>
-                </PersistGate>
+                        </Router>
+                    </PersistGate>
+                </MuiThemeProvider>
             </Provider>
         </AppContainer>
     )
