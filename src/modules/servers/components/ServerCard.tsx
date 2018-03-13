@@ -40,7 +40,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                         textDecoration: 'none',
                     }}
                 >
-                    <Image image={server.image} ratio={16/9} maxWidth={600}>
+                    <Image image={server.image} ratio={16/9} maxWidth={800}>
                         <div style={{
                             position: 'absolute',
                             bottom: 0,

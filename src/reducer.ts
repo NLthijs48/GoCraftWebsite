@@ -15,6 +15,7 @@ import {shopLayout} from 'modules/shop/reducer'
 import {VotingState} from 'modules/voting/model'
 import {voting} from 'modules/voting/reducer'
 import {ImageInfo} from 'utils/Image'
+import {get} from 'utils/utils'
 
 export interface AppState {
     servers: ServersState
@@ -73,15 +74,27 @@ export const parseImageInfo = (data: {sizes: {[key: string]: string}}): ImageInf
         }
 
         // Don't add same url again
-        if(result.options.filter((option) => option.url === data.sizes[k]).length > 0) {
+        if(result.options.filter((option) => Object.keys(option.url).filter((key) => option.url[key] === data.sizes[k]).length > 0).length > 0) {
             continue
         }
 
         // Add option (TODO: native Wordpress case)
+        let rawUrl = data.sizes[k] // Not always converted, and no way to detect: .replace(/\.png$/, '.jpg') // .png is converted to .jpg
+        let width
+        let height
+        if(typeof rawUrl === 'object') {
+            width = +get(rawUrl, 'width')
+            height = +get(rawUrl, 'height')
+            rawUrl = get(rawUrl, 'source_url')
+        }
         result.options.push({
-            url: data.sizes[k],
-            width: +data.sizes[k + '-width'],
-            height: +data.sizes[k + '-height'],
+            url: {
+                png: /\.png$/.test(rawUrl) ? rawUrl : undefined,
+                jpeg: /\.jpe?g$/.test(rawUrl) ? rawUrl : undefined,
+                webp: rawUrl + '.webp',
+            },
+            width: width || +data.sizes[k + '-width'],
+            height: height || +data.sizes[k + '-height'],
         })
     }
 
