@@ -1,10 +1,12 @@
+import {ImageInfo} from 'utils/Image'
+
 export interface ShopItem {
     name: string
     buyUrl: string
     price: number
     iconBlockId: string
     description: string
-    image: string
+    image: ImageInfo
     perks: Perk[]
 }
 

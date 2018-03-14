@@ -1,5 +1,5 @@
 import {ServerItems} from 'modules/servers/model'
-import {parseImage, parseImageInfo} from 'reducer'
+import {parseImageInfo} from 'reducer'
 import {combineReducers} from 'redux'
 import {get, nameToPath} from 'utils/utils'
 import * as t from './actionTypes'
@@ -25,7 +25,7 @@ function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
                     image: parseImageInfo(get(rawServer, 'acf', 'feature_image')),
                     heroImage: parseImageInfo(get(rawServer, 'acf', 'hero_image')),
                     dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
-                    dynmapPreview: parseImage(800, get(rawServer, 'acf', 'dynmap', 'preview')),
+                    dynmapPreview: parseImageInfo(get(rawServer, 'acf', 'dynmap', 'preview')),
                     order: get(rawServer, 'menu_order'),
                     bungeeID: get(rawServer, 'acf', 'bungee_id'),
                     gameType: get(rawServer, 'acf', 'game_type', 'value'),

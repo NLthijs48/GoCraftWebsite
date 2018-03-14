@@ -10,7 +10,7 @@ export interface ServerData {
     image: ImageInfo
     heroImage?: ImageInfo
     dynmapLink?: string
-    dynmapPreview?: string
+    dynmapPreview?: ImageInfo
     order: number
     gameType: 'minecraft'|'ark'
     bungeeID?: string

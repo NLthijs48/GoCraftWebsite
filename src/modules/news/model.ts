@@ -1,4 +1,5 @@
 import {RemoteState, UnixDate, User} from 'types'
+import {ImageInfo} from 'utils/Image'
 
 // Information about a news item
 export interface NewsItem {
@@ -6,14 +7,14 @@ export interface NewsItem {
     slug: string
     date: UnixDate
     blocks: Block[]
-    image: string
+    image: ImageInfo
     author: User
 }
 
 // Blocks
 export interface ImageBlock {
     type: 'image_block'
-    image: string
+    image: ImageInfo
 }
 export interface TextBlock {
     type: 'text_block'

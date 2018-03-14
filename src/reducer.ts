@@ -38,27 +38,7 @@ const reducerVersion = (state: number = 0, action: { type: string }) => {
     }
 }
 
-export const parseImage = (target: number, data: {sizes: {[key: string]: string|{source_url: string}}}): string => {
-    if(!data || !data.sizes) {
-        return ''
-    }
-    const sizes = data.sizes
-
-    let pickSize = 50
-    while(pickSize < target) {
-        pickSize *= 2
-    }
-
-    const pickedImage = sizes['x'+pickSize] || sizes.full
-    if(!pickedImage) {
-        return ''
-    } else if(typeof pickedImage === 'string') {
-        return pickedImage
-    } else {
-        return pickedImage.source_url
-    }
-}
-
+// Parse WordPress image info into object used with <Image>
 export const parseImageInfo = (data: {sizes: {[key: string]: string}}): ImageInfo => {
     const result: ImageInfo = {options: []}
 
@@ -78,7 +58,6 @@ export const parseImageInfo = (data: {sizes: {[key: string]: string}}): ImageInf
             continue
         }
 
-        // Add option (TODO: native Wordpress case)
         let rawUrl = data.sizes[k] // Not always converted, and no way to detect: .replace(/\.png$/, '.jpg') // .png is converted to .jpg
         let width
         let height

@@ -6,6 +6,7 @@ import {RouteComponentProps, withRouter} from 'react-router'
 import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
 import {Icon} from 'utils/Icon'
+import {Image} from 'utils/Image'
 import {LocalDate} from 'utils/LocalDate'
 import {Navigate} from 'utils/Navigate'
 import {nameToPath} from 'utils/utils'
@@ -104,15 +105,9 @@ function NewsBlock({block, details}: {block: Block, details?: string}) {
                 <div style={{
                     margin: '0 -1em 1em -1em',
                 }}>
-                    <Navigate to={details} style={{
-                        display: 'block',
-                        width: '100%',
-                        height: '0',
-                        padding: '56% 0 0 0', // 16:9 aspect ratio
-                        backgroundImage: 'url(' + block.image + ')',
-                        backgroundPosition: '50% 50%',
-                        backgroundSize: 'cover',
-                    }}/>
+                    <Navigate to={details}>
+                        <Image image={block.image} ratio={16/9} />
+                    </Navigate>
                 </div>
             )
         case 'text_block':

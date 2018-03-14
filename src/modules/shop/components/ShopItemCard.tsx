@@ -8,6 +8,7 @@ import {THEME} from 'types'
 import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
+import {Image} from 'utils/Image'
 import {Navigate} from 'utils/Navigate'
 import {ShopItem} from '../model'
 
@@ -16,52 +17,40 @@ interface ShopItemProps {
 }
 class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {
-        const {shopItem, id} = this.props
+        const {shopItem} = this.props
 
         return (
             <CardItem style={{
                 height: '100%',
                 padding: 0,
             }}>
-                <div style={{
-                    // Firefox needs this extra div, padding-top: 100% in a flex container is inconsistent
-                }}>
+                <Image image={shopItem.image} ratio={1}>
                     <div style={{
-                        width: '100%',
-                        padding: '100% 0 0 0',
-                        backgroundImage: shopItem.image ? 'url('+shopItem.image+')' : '',
-                        backgroundColor: '#888',
-                        backgroundPosition: '50% 50%',
-                        backgroundSize: 'cover',
-                        position: 'relative',
+                        position: 'absolute',
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        background: 'rgba(0,0,0,0.5)',
+                        color: '#FFF',
+                        padding: '1em',
+                        display: 'flex',
                     }}>
-                        <div style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            right: 0,
-                            left: 0,
-                            background: 'rgba(0,0,0,0.5)',
-                            color: '#FFF',
-                            padding: '1em',
-                            display: 'flex',
+                        <h3 style={{
+                            fontSize: '1.25em',
+                            marginBottom: 0,
                         }}>
-                            <h3 style={{
-                                fontSize: '1.25em',
-                                marginBottom: 0,
-                            }}>
-                                {shopItem.name}
-                            </h3>
+                            {shopItem.name}
+                        </h3>
 
-                            <Filler/>
+                        <Filler/>
 
-                            <div style={{
-                                fontSize: '1.25em',
-                            }}>
-                                €{shopItem.price}
-                            </div>
+                        <div style={{
+                            fontSize: '1.25em',
+                        }}>
+                            €{shopItem.price}
                         </div>
                     </div>
-                </div>
+                </Image>
 
                 {!!shopItem.perks &&
                     <List>
