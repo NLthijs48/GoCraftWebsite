@@ -1,7 +1,8 @@
 import * as React from 'react'
+import {Image, ImageInfo} from 'utils/Image'
 
 interface Props {
-    image?: string
+    image?: ImageInfo
     primary?: React.ReactNode
     secondary?: React.ReactNode
     contentOnly?: boolean
@@ -12,18 +13,16 @@ interface Props {
 export function PageHeader({image, primary, secondary, children, header, contentOnly, contentStyle}: Props) {
     return (
         <React.Fragment>
-            {!contentOnly && <div style={{
+            {!contentOnly && !!image && <Image image={image} style={{
                 backgroundColor: 'rgba(255,255,255,0.6)',
-                backgroundImage: 'url('+image+')',
-                backgroundPosition: 'center center',
-                backgroundSize: 'cover',
                 position: 'absolute',
-                top: -10,
-                right: -10,
-                left: -10,
-                margin: 10,
+                top: 0,
+                right: 0,
+                left: 0,
                 height: '38em',
+                width: '100%',
                 zIndex: -1, // Don't go above header content
+                overflow: 'hidden',
             }}>
                 {false && <div style={{ // Fade out the header image into the background
                     position: 'absolute',
@@ -33,7 +32,7 @@ export function PageHeader({image, primary, secondary, children, header, content
                     left: 0,
                     background: 'linear-gradient(to bottom, rgba(238,238,238,0) 0%, rgba(238,238,238,0) 60%, rgba(238,238,238,0.9) 80%, rgba(238,238,238,1) 100%)',
                 }}/>}
-            </div>}
+            </Image>}
             <div style={{
                 margin: '0 auto',
                 padding: '1em 1em 5em 1em',
@@ -43,7 +42,7 @@ export function PageHeader({image, primary, secondary, children, header, content
                 ...contentStyle,
             }}>
                 {!contentOnly && <div style={{
-                    minHeight: '23em',
+                    minHeight: '20em',
                     color: '#FFF',
                     textAlign: 'center',
                     display: 'flex',

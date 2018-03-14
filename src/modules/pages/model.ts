@@ -1,4 +1,5 @@
 import {RemoteState} from 'types'
+import {ImageInfo} from 'utils/Image'
 
 // Information about a page
 export type Page =
@@ -19,7 +20,7 @@ interface AbstractPage {
     header: {
         primary?: string
         secondary?: string
-        image?: string,
+        image?: ImageInfo,
     }
 }
 export interface HomePage extends AbstractPage {

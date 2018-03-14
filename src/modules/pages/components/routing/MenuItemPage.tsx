@@ -55,7 +55,7 @@ function renderPage(page: Page, basePath: string): React.ReactElement<any> {
         case 'vote-sites':
             return <VotePage basePath={basePath} page={page} />
         case 'shop':
-            return <Shop basePath={basePath} />
+            return <Shop basePath={basePath} page={page} />
         default:
             console.error('unknown page type:', page, 'at basePath:', basePath)
             return <NotFound />

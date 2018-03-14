@@ -1,4 +1,4 @@
-import {parseImage} from 'reducer'
+import {parseImageInfo} from 'reducer'
 import {combineReducers} from 'redux'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -25,7 +25,7 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
                     header: {
                         primary: get(rawPage, 'acf', 'header_primary'),
                         secondary: get(rawPage, 'acf', 'header_secondary'),
-                        image: parseImage(1600, get(rawPage, 'acf', 'header_image')),
+                        image: parseImageInfo(get(rawPage, 'acf', 'header_image')),
                     },
                 }
             }

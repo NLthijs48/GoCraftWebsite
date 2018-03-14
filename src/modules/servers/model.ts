@@ -8,7 +8,7 @@ export interface ServerData {
     shortDescription: string
     longDescription: string
     image: ImageInfo
-    heroImage?: string
+    heroImage?: ImageInfo
     dynmapLink?: string
     dynmapPreview?: string
     order: number

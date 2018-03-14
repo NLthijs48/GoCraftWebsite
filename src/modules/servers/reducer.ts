@@ -23,7 +23,7 @@ function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
                     shortDescription: get(rawServer, 'acf', 'description'),
                     longDescription: get(rawServer, 'acf', 'details'),
                     image: parseImageInfo(get(rawServer, 'acf', 'feature_image')),
-                    heroImage: get(rawServer, 'acf', 'hero_image', 'url'),
+                    heroImage: parseImageInfo(get(rawServer, 'acf', 'hero_image')),
                     dynmapLink: get(rawServer, 'acf', 'dynmap', 'link'),
                     dynmapPreview: parseImage(800, get(rawServer, 'acf', 'dynmap', 'preview')),
                     order: get(rawServer, 'menu_order'),

@@ -1,4 +1,5 @@
 import {Loading} from 'modules/pages/components/Loading'
+import {Page} from 'modules/pages/model'
 import {ShopItemDetails} from 'modules/shop/components/ShopItemDetails'
 import {ShopOverview} from 'modules/shop/components/ShopOverview'
 import * as React from 'react'
@@ -9,6 +10,7 @@ import {ShopLayoutState} from '../model'
 
 interface ShopProps {
     basePath: string
+    page: Page
 }
 type CombinedServersDisplayProps = ShopProps & StateToProps & RouteComponentProps<any>
 class ShopDisplay extends React.PureComponent<CombinedServersDisplayProps, {}> {
@@ -27,8 +29,8 @@ class ShopDisplay extends React.PureComponent<CombinedServersDisplayProps, {}> {
         )
     }
 
-    private shopOverview() {
-        return <ShopOverview/>
+    private shopOverview = () => {
+        return <ShopOverview page={this.props.page} />
     }
 
     private shopDetails() {
