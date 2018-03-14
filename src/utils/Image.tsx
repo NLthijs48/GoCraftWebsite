@@ -30,6 +30,9 @@ export function Image({ratio, children, image, fit, maxWidth, style}: Props) {
         ratio = largest.width / largest.height
     }
 
+    // Don't do a ratio box if dimensions are already set, just cover/contain within
+    const noRatio = style && style.width && style.height
+
     // Maximum expected display size
     maxWidth = maxWidth || largest.width
 
@@ -42,8 +45,8 @@ export function Image({ratio, children, image, fit, maxWidth, style}: Props) {
         }}>
             <div style={{
                 width: '100%',
-                height: '0',
-                padding: ratio ? 1/ratio*100+'% 0 0 0' : '',
+                height: noRatio ? '100%' : '0',
+                padding: !noRatio && ratio ? 1/ratio*100+'% 0 0 0' : '',
                 position: 'relative',
                 overflow: 'hidden',
             }}>
