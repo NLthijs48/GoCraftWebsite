@@ -4,7 +4,7 @@ import Tooltip from 'material-ui/Tooltip'
 import * as React from 'react'
 import {Icon} from 'utils/Icon'
 
-export class MinecraftCopyButton extends React.PureComponent<{}, {copied: boolean}> {
+export class MinecraftCopyButton extends React.PureComponent<{short?: boolean}, {copied: boolean}> {
 
     public state = {copied: false}
     private resetT?: number
@@ -20,7 +20,7 @@ export class MinecraftCopyButton extends React.PureComponent<{}, {copied: boolea
             <React.Fragment>
                 <Tooltip title="Click to copy">
                     <Button variant="raised" color="primary" onClick={this.copyIP}>
-                        mc.go-craft.com
+                        Copy {this.props.short ? '' : 'Minecraft '}IP
                         <Icon name={this.state.copied ? 'check' : 'clone'} style={{marginLeft: '1em'}}/>
                     </Button>
                 </Tooltip>

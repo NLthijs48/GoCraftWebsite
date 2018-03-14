@@ -1,6 +1,8 @@
 import {PageHeader} from 'components/PageHeader'
 import {Loading} from 'modules/pages/components/Loading'
 import {Page} from 'modules/pages/model'
+import {ArkJoinButton} from 'modules/servers/components/join/ArkJoinButton'
+import {MinecraftCopyButton} from 'modules/servers/components/join/MinecraftCopyButton'
 import {ServerCard} from 'modules/servers/components/ServerCard'
 import {ServersState} from 'modules/servers/model'
 import * as React from 'react'
@@ -54,6 +56,11 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
                     paddingLeft: 0,
                     paddingRight: 0,
                 }}
+                header={<div style={{display: 'flex'}}>
+                    <MinecraftCopyButton/>
+                    <div style={{marginLeft: '1em'}} />
+                    <ArkJoinButton/>
+                </div>}
             >
                 <Responsive onResize={this.onResize}>
                     {!columns ? null :

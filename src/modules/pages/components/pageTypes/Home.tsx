@@ -2,11 +2,11 @@ import {PageHeader} from 'components/PageHeader'
 import {NewsList} from 'modules/news/components/NewsList'
 import {Loading} from 'modules/pages/components/Loading'
 import {Page} from 'modules/pages/model'
+import {MinecraftCopyButton} from 'modules/servers/components/join/MinecraftCopyButton'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {AppState} from 'reducer'
-import {MinecraftCopyButton} from 'utils/MinecraftCopyButton'
 
 interface HomeProps {
     basePath: string

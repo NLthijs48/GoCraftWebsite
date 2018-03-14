@@ -3,6 +3,8 @@ import Button from 'material-ui/Button'
 import {DrawerState} from 'modules/drawer/model'
 import {PlayersRow} from 'modules/players/components/PlayersRow'
 import {PlayersState} from 'modules/players/model'
+import {ArkJoinButton} from 'modules/servers/components/join/ArkJoinButton'
+import {MinecraftCopyButton} from 'modules/servers/components/join/MinecraftCopyButton'
 import {FeatureCardList} from 'modules/servers/components/serverpage/FeatureCardList'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -34,18 +36,17 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                 primary={server.name}
                 secondary={server.shortDescription}
                 header={<React.Fragment>
-                    {server.dynmapLink && <Navigate
-                        to={'/maps/' + server.slug}
-                        style={{
-                            marginTop: '2em',
-                            display: 'block',
-                        }}
-                    >
-                        <Button variant="raised">
-                            <Icon name="map-o" style={{marginRight: '0.5em'}}/>
-                            View map
-                        </Button>
-                    </Navigate>}
+                    <div style={{display: 'flex'}}>
+                        {server.gameType === 'minecraft' && <MinecraftCopyButton short />}
+                        {server.gameType === 'ark' && <ArkJoinButton short />}
+
+                        {server.dynmapLink && <Navigate to={'/maps/' + server.slug} style={{marginLeft: '1em'}}>
+                            <Button variant="raised">
+                                View map
+                                <Icon name="map-o" style={{marginLeft: '0.5em'}}/>
+                            </Button>
+                        </Navigate>}
+                    </div>
 
                     <Filler />
 
