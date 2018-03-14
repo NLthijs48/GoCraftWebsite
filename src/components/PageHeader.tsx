@@ -53,16 +53,20 @@ export function PageHeader({image, primary, secondary, children, header, content
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    paddingBottom: '1em',
                 }}>
                     <h1 style={{
                         fontSize: '3em',
                         textShadow: '3px 3px 1px rgba(10, 10, 10, 0.8)',
                         lineHeight: '100%',
+                        marginBottom: 0,
                     }}>
                         {primary}
                     </h1>
                     <h2 style={{
                         textShadow: '2px 2px 0 rgba(10, 10, 10, 0.8)',
+                        marginTop: '0.5em',
+                        marginBottom: 0,
                     }}>
                         {secondary}
                     </h2>
