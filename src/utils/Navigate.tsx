@@ -11,7 +11,7 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
 class NavigateDisplay extends React.PureComponent<Props & RouteComponentProps<any>, {}> {
     public render() {
         const {style, activeStyle, to, onPress, children} = this.props
-        if(to && /^https?:\/\//.test(to)) {
+        if(to && /^[a-zA-Z]+:\/\//.test(to)) {
             return (
                 <a href={to} style={style} target="_blank" rel="noopener">
                     {children}
