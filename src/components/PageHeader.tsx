@@ -25,14 +25,14 @@ export function PageHeader({image, primary, secondary, children, header, content
                 zIndex: -1, // Don't go above header content
                 overflow: 'hidden',
             }}>
-                {false && <div style={{ // Fade out the header image into the background
+                <div style={{ // Fade out the header image into the background
                     position: 'absolute',
                     top: 0,
                     right: 0,
                     bottom: 0,
                     left: 0,
                     background: 'linear-gradient(to bottom, rgba(238,238,238,0) 0%, rgba(238,238,238,0) 60%, rgba(238,238,238,0.9) 80%, rgba(238,238,238,1) 100%)',
-                }}/>}
+                }}/>
             </Image>}
 
             {!contentOnly && <div style={{
