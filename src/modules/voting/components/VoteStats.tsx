@@ -49,7 +49,7 @@ class VoteStatsDisplay extends React.PureComponent<Props & StateToProps & Dispat
                     >
                         <Button variant="raised" color="primary">
                             Start voting
-                            <Icon name="arrow-right" style={{marginLeft: '0.5em'}}/>
+                            <Icon name="arrow-right" style={{marginLeft: '1em'}}/>
                         </Button>
                     </Navigate>}
                 </React.Fragment>

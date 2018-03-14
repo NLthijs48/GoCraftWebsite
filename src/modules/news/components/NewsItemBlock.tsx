@@ -35,7 +35,7 @@ class NewsItemBlockDisplay extends React.PureComponent<CombinedNewsItemBlockProp
                         onClick={this.goBack}
                         style={{marginBottom: '1em', backgroundColor: 'white'}}
                     >
-                        <Icon name="chevron-left" style={{paddingRight: '0.5em'}} />
+                        <Icon name="chevron-left" style={{marginRight: '1em'}} />
                         Back
                     </Button>
                 }

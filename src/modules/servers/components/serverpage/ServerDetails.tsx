@@ -43,7 +43,7 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
                         {server.dynmapLink && <Navigate to={'/maps/' + server.slug} style={{marginLeft: '1em'}}>
                             <Button variant="raised">
                                 View map
-                                <Icon name="map-o" style={{marginLeft: '0.5em'}}/>
+                                <Icon name="map-o" style={{marginLeft: '1em'}}/>
                             </Button>
                         </Navigate>}
                     </div>

@@ -75,8 +75,8 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                         to={'/maps/' + nameToPath(server.slug)}
                     >
                         <Button>
-                            View map
                             <Icon name="map-o" fixedWidth style={{marginRight: '1em'}}/>
+                            View map
                         </Button>
                     </Navigate>}
 
@@ -85,7 +85,7 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                         to={path+'/'+nameToPath(server.slug)}
                     >
                         <Button>
-                            <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth style={{marginRight: '1em'}}/>
+                            <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth style={{marginRight: '0.5em'}}/>
                             {myPlayerCount + ' online'}
                         </Button>
                     </Navigate>}
