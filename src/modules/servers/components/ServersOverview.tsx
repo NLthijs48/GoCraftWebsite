@@ -50,12 +50,17 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
                 image={page.header.image}
                 primary={page.header.primary}
                 secondary={page.header.secondary}
+                contentStyle={{
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                }}
             >
-                <Responsive onResize={this.onResize} style={{margin: '1.5em 0 0.5em 0'}}>
+                <Responsive onResize={this.onResize}>
                     {!columns ? null :
                         renderLayout.map((rowServers, rowIndex) => (
                             <div key={rowIndex} style={{
                                 display: 'flex',
+                                padding: '0 0.5em',
                             }}>
                                 {rowServers.map((serverId, columnIndex) => (
                                     <div key={columnIndex} style={{

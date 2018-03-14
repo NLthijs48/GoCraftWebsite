@@ -7,8 +7,9 @@ interface Props {
     contentOnly?: boolean
     header?: React.ReactNode
     children: React.ReactNode
+    contentStyle?: React.CSSProperties
 }
-export function PageHeader({image, primary, secondary, children, header, contentOnly}: Props) {
+export function PageHeader({image, primary, secondary, children, header, contentOnly, contentStyle}: Props) {
     return (
         <React.Fragment>
             {!contentOnly && <div style={{
@@ -39,6 +40,7 @@ export function PageHeader({image, primary, secondary, children, header, content
                 maxWidth: 1200,
                 display: 'flex',
                 flexDirection: 'column',
+                ...contentStyle,
             }}>
                 {!contentOnly && <div style={{
                     minHeight: '23em',
