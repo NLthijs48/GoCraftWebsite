@@ -18,8 +18,8 @@ export function ark(state: ArkPlayers = {}, action: t.PlayersAction): ArkPlayers
     switch(action.type) {
         case t.FETCH_ARK_SUCCESS:
             // Filter players without name that are there for longer than 20 minutes (connecting bug?)
+            // Currently only one server, called 'default'
             return {
-                ...state,
                 default: (get(action.data, 'players')||[]).map((player: object) => ({
                     game: 'ark',
                     name: get(player, 'Name'),

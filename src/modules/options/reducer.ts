@@ -6,10 +6,8 @@ import * as t from './actionTypes'
 export function options(state: OptionsState = {}, action: t.OptionsActions): OptionsState {
     switch(action.type) {
         case t.FETCH_SUCCESS:
-            // Merge the options
             return {
-                ...state,
-                background: get(action.data, 'acf', 'background', 'url') || state.background,
+                background: get(action.data, 'acf', 'background', 'url'),
             }
         default:
             return state

@@ -5,7 +5,6 @@ export function drawer(state: DrawerState = {open: false}, action: t.DrawerActio
     switch(action.type) {
         case t.DRAWER_UPDATE_OPEN:
             return {
-                ...state,
                 open: action.to,
             }
         default:

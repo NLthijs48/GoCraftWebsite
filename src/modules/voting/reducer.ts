@@ -8,7 +8,7 @@ function byId(state: VoteSites = {}, action: t.VoteSitesAction): VoteSites {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the properties we need from the WordPress byId
-            const result: VoteSites = {...state}
+            const result: VoteSites = {}
             for(const rawVoteSite of action.data) {
                 result[get(rawVoteSite, 'id')] = {
                     name: get(rawVoteSite, 'title', 'rendered'),

@@ -63,7 +63,14 @@ function items(state: NewsItemIds = [], action: t.NewsItemsAction): NewsItemIds 
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Order as given by WordPress is sorted correctly, newest first
-            return action.data.map((rawNewsItem) => get(rawNewsItem, 'id'))
+            const result = [...state]
+            action.data.map((rawNewsItem) => get(rawNewsItem, 'id')).forEach((id) => {
+                if(result.findIndex((existingId) => existingId===id) === -1) {
+                    result.push(id)
+                }
+            })
+            // TODO proper order (needs byId state)
+            return result
         default:
             return state
     }

@@ -9,7 +9,10 @@
     "sourceMap": true,
     "jsx": "preserve",
     "strict": true,
+    "pretty": true,
     "allowJs": true,
+    "checkJs": true,
+    "declaration": false,
     "removeComments": true,
     "outDir": "ts-build/"
   },

@@ -89,8 +89,9 @@ class ShopOverviewDisplay extends React.PureComponent<StateToProps, {columns: nu
 interface StateToProps {
     shopLayout: ShopLayoutState
 }
-export const ShopOverview = withRouter<any>(connect<StateToProps, {}, {}, AppState>(
+// TODO get rid of 'as any' (component needs to be stateless...), maybe remove resize stuff and use <GridList>
+export const ShopOverview = withRouter<any>((connect<StateToProps, {}, {}, AppState>(
     (state) => ({
         shopLayout: state.shopLayout,
     }),
-)(ShopOverviewDisplay))
+) as any)(ShopOverviewDisplay))

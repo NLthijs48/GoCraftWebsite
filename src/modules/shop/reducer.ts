@@ -8,7 +8,7 @@ function categoriesById(state: ShopCategories = {}, action: t.ShopLayoutAction):
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Get the shop category details
-            const shopCategories: ShopCategories = {...state}
+            const shopCategories: ShopCategories = {}
             for(const rawShopCategory of action.categories.results) {
                 const id = get(rawShopCategory, 'id')
                 shopCategories[id] = {
@@ -26,6 +26,7 @@ function categoriesById(state: ShopCategories = {}, action: t.ShopLayoutAction):
     }
 }
 
+// Note: This reducer does never get rid of old data
 function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
