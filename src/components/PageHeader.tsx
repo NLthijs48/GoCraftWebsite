@@ -9,8 +9,9 @@ interface Props {
     header?: React.ReactNode
     children: React.ReactNode
     contentStyle?: React.CSSProperties
+    headerStyle?: React.CSSProperties
 }
-export function PageHeader({image, primary, secondary, children, header, contentOnly, contentStyle}: Props) {
+export function PageHeader({image, primary, secondary, children, header, contentOnly, contentStyle, headerStyle}: Props) {
     return (
         <React.Fragment>
             {!contentOnly && !!image && <Image image={image} style={{
@@ -33,6 +34,43 @@ export function PageHeader({image, primary, secondary, children, header, content
                     background: 'linear-gradient(to bottom, rgba(238,238,238,0) 0%, rgba(238,238,238,0) 60%, rgba(238,238,238,0.9) 80%, rgba(238,238,238,1) 100%)',
                 }}/>}
             </Image>}
+
+            {!contentOnly && <div style={{
+                margin: '0 auto',
+                padding: '5em 1em 0em 1em',
+                maxWidth: 1200,
+                minHeight: '20em',
+                color: '#FFF',
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                ...headerStyle,
+            }}>
+                <div style={{
+                    width: '100%',
+                    maxWidth: '40em',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}>
+                    <h1 style={{
+                        fontSize: '3em',
+                        textShadow: '3px 3px 1px rgba(10, 10, 10, 0.8)',
+                        lineHeight: '100%',
+                    }}>
+                        {primary}
+                    </h1>
+                    <h2 style={{
+                        textShadow: '2px 2px 0 rgba(10, 10, 10, 0.8)',
+                    }}>
+                        {secondary}
+                    </h2>
+                </div>
+
+                {header}
+            </div>}
+
             <div style={{
                 margin: '0 auto',
                 padding: '1em 1em 5em 1em',
@@ -41,39 +79,6 @@ export function PageHeader({image, primary, secondary, children, header, content
                 flexDirection: 'column',
                 ...contentStyle,
             }}>
-                {!contentOnly && <div style={{
-                    minHeight: '20em',
-                    color: '#FFF',
-                    textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    padding: '3em 0 1em 0',
-                }}>
-                    <div style={{
-                        width: '100%',
-                        maxWidth: '40em',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}>
-                        <h1 style={{
-                            fontSize: '3em',
-                            textShadow: '3px 3px 1px rgba(10, 10, 10, 0.8)',
-                            lineHeight: '100%',
-                        }}>
-                            {primary}
-                        </h1>
-                        <h2 style={{
-                            textShadow: '2px 2px 0 rgba(10, 10, 10, 0.8)',
-                        }}>
-                            {secondary}
-                        </h2>
-                    </div>
-
-                    {header}
-                </div>}
-
                 {children}
             </div>
         </React.Fragment>
