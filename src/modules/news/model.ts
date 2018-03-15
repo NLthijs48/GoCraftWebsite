@@ -30,8 +30,12 @@ export interface NewsItems {
 }
 
 export type NewsItemIds = string[]
+export interface NewsItemsBySlug {
+    [k: string]: number
+}
 
 export interface NewsItemsState extends RemoteState {
     byId: NewsItems
+    bySlug: NewsItemsBySlug
     items: NewsItemIds
 }

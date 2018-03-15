@@ -49,7 +49,6 @@ export function PageHeader({image, primary, secondary, children, header, content
             }}>
                 <div style={{
                     width: '100%',
-                    maxWidth: '40em',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',

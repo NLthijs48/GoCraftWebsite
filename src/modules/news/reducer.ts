@@ -1,10 +1,9 @@
 import {parseImageInfo} from 'reducer'
 import {combineReducers} from 'redux'
-import {get} from 'utils/utils'
+import {get, nameToPath} from 'utils/utils'
 import * as t from './actionTypes'
-import {Block, NewsItemIds, NewsItems, NewsItemsState} from './model'
+import {Block, NewsItemIds, NewsItems, NewsItemsBySlug, NewsItemsState} from './model'
 
-// Server data reducer
 function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
     switch(action.type) {
         case t.FETCH_SUCCESS:
@@ -15,7 +14,7 @@ function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
                     title: get(rawNewsItem, 'title', 'rendered'),
                     slug: get(rawNewsItem, 'slug'),
                     date: Date.parse(get(rawNewsItem, 'date')),
-                    image: parseImageInfo(get(rawNewsItem, 'acf', 'feature_image')),
+                    image: parseImageInfo(get(rawNewsItem, 'acf', 'image')),
                     blocks: blocks(get(rawNewsItem, 'acf', 'content')),
                     author: {
                         id: get(rawNewsItem, 'author'),
@@ -58,18 +57,21 @@ function blocks(rawBlocks: any): Block[] {
     })
 }
 
-// Build array of menu items
 function items(state: NewsItemIds = [], action: t.NewsItemsAction): NewsItemIds {
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Order as given by WordPress is sorted correctly, newest first
-            const result = [...state]
-            action.data.map((rawNewsItem) => get(rawNewsItem, 'id')).forEach((id) => {
-                if(result.findIndex((existingId) => existingId===id) === -1) {
-                    result.push(id)
-                }
-            })
-            // TODO proper order (needs byId state)
+            return action.data.map((rawNewsItem) => get(rawNewsItem, 'id'))
+        default:
+            return state
+    }
+}
+
+function bySlug(state: NewsItemsBySlug = {}, action: t.NewsItemsAction): NewsItemsBySlug {
+    switch(action.type) {
+        case t.FETCH_SUCCESS:
+            const result: NewsItemsBySlug = {}
+            action.data.forEach((rawNewsItem) => result[nameToPath(get(rawNewsItem, 'slug'))] = get(rawNewsItem, 'id'))
             return result
         default:
             return state
@@ -89,4 +91,4 @@ function isFetching(state: boolean = false, action: t.NewsItemsAction): boolean 
     }
 }
 
-export const newsItems = combineReducers<NewsItemsState>({byId, items, isFetching})
+export const newsItems = combineReducers<NewsItemsState>({byId, bySlug, items, isFetching})

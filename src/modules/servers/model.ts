@@ -44,6 +44,6 @@ export interface ServersBySlug {
 
 export interface ServersState extends RemoteState {
     byId: ServersData
-    list: ServerItems
     bySlug: ServersBySlug
+    list: ServerItems
 }

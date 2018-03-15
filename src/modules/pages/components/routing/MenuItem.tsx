@@ -16,7 +16,7 @@ export function MenuItem({children, path, child, onPress, active}: Props) {
         <ListItem
             button
             style={{
-                padding: 0, // Disable to let <NavLink cover the full area
+                padding: 0, // Disable to let <NavLink> cover the full area
             }}
             {...props}
         >
