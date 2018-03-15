@@ -10,14 +10,20 @@ interface Props {
     active?: boolean
 }
 export function MenuItem({children, path, child, onPress, active}: Props) {
+    // Prevent focus on <ListItem>, the <Navigate> needs the focus
+    const props = {tabIndex: -1}
     return (
         <ListItem
             button
             style={{
                 padding: 0, // Disable to let <NavLink cover the full area
             }}
+            {...props}
         >
-            <Navigate to={path} onPress={onPress} style={{
+            <Navigate
+                to={path}
+                onPress={onPress}
+                style={{
                     padding: '0.5em 1em',
                     width: '100%',
                     color: '#666',
@@ -27,7 +33,7 @@ export function MenuItem({children, path, child, onPress, active}: Props) {
                     minHeight: child ? 'auto' : '50px',
                     backgroundColor: active ? (child ? '#EEE' : '#DDD') : undefined,
                 }}
-                      activeStyle={{backgroundColor: child ? '#EEE' : '#DDD'}}
+                activeStyle={{backgroundColor: child ? '#EEE' : '#DDD'}}
             >
                 {children}
             </Navigate>
