@@ -21,6 +21,7 @@ export class CardItem extends React.Component<CardItemProps, {}> {
                     flexDirection: 'column',
                     width: '100%',
                     height: '100%',
+                    overflow: 'hidden',
                     ...style,
                 }}
             >
