@@ -13,7 +13,7 @@ export class CardItem extends React.Component<CardItemProps, {}> {
             <Card
                 style={{
                     backgroundColor: '#FFF',
-                    borderBottom: '0.2em solid ' + THEME.palette.primary.main,
+                    borderBottom: '0.3em solid ' + THEME.palette.primary.main,
                     padding: '1em',
                     marginBottom: '1em',
                     position: 'relative', // For fade out alignment

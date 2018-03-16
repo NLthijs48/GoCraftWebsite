@@ -2,7 +2,7 @@ import List, {ListItemProps, ListItemText} from 'material-ui/List'
 import Collapse from 'material-ui/transitions/Collapse'
 import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {MapsSubMenu} from 'modules/pages/components/submenus/MapsSubMenu'
-import {Page, PageItems, PagesState} from 'modules/pages/model'
+import {PageItems, PagesState} from 'modules/pages/model'
 import {ServersMenuItemInfo} from 'modules/servers/components/ServersMenuItemInfo'
 import {ServersSubMenu} from 'modules/servers/components/ServersSubMenu'
 import {VoteSitesMenuInfo} from 'modules/voting/components/VoteSitesMenuInfo'
@@ -24,8 +24,7 @@ interface Props {
 function MenuLevelDisplay(props: Props & StateToProps & RouteComponentProps<any>) {
     const {items, pages, basePath, currentPath, child} = props
     const result: Array<ReactElement<ListItemProps>> = []
-    items.map((pageKey) => {
-        const page: Page = pages.byId[pageKey]
+    items.map((pageKey) => pages.byId[pageKey]).map((page) => {
         if(!isAdmin && page.adminOnly) {
             return
         }

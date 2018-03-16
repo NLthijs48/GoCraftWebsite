@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-interface LoadingProps {
+interface Props {
     image: string
+    style?: React.CSSProperties
 }
-export function LeftIconImage({image}: LoadingProps) {
+export function LeftIconImage({image, style}: Props) {
     return (
         <div style={{
             height: '100%',
@@ -11,6 +12,7 @@ export function LeftIconImage({image}: LoadingProps) {
             alignItems: 'center',
             width: 'auto',
             margin: '-20px 0 -20px 12px',
+            ...style,
         }}>
             <div style={{
                 backgroundImage: 'url('+image+')',

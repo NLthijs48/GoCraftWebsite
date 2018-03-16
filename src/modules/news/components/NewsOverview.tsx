@@ -28,10 +28,11 @@ class NewsDisplay extends React.PureComponent<AllProps, {columns: number}> {
             return <Loading />
         }
 
+        const newsEntries = newsItems.items.map((newsItemId) => newsItems.byId[newsItemId])
         const pairsUntil = Math.max(0, (this.state.columns-2)) * 2 + 1
-        const pairs = newsItems.items
+        const pairs = newsEntries
             .slice(1, pairsUntil)
-            .reduce((result: string[][], value, index) => {
+            .reduce((result: NewsItem[][], value, index) => {
                 if(index % 2 === 0) {
                     result.push([value])
                 } else {
@@ -39,7 +40,7 @@ class NewsDisplay extends React.PureComponent<AllProps, {columns: number}> {
                 }
                 return result
             }, [])
-        const itemCount = newsItems.items.length
+        const itemCount = newsEntries.length
 
         // Render first: 2x2
         // Render pairs in 1x2: to fill first row
@@ -51,22 +52,17 @@ class NewsDisplay extends React.PureComponent<AllProps, {columns: number}> {
                 {!this.state.columns ? null :
                     <GridList cellHeight="auto" spacing={16} cols={this.state.columns}>
                         {itemCount > 0 && <GridListTile key="first" cols={maxSize} rows={maxSize}>
-                            <NewsCard newsItem={newsItems.byId[newsItems.items[0]]} basePath={basePath} ratio={16/9-0.04} />
+                            <NewsCard newsItem={newsEntries[0]} basePath={basePath} ratio={16/9-0.04} />
                         </GridListTile>}
 
                         {itemCount > 1 && pairs.map((pair, index) => <GridListTile key={'pair:'+index} cols={1} rows={maxSize}>
-                            <NewsCard key={0} newsItem={newsItems.byId[pair[0]]} basePath={basePath} />
-                            {pair.length > 1 && <NewsCard key={1} style={{marginTop: '1em'}} newsItem={newsItems.byId[pair[1]]} basePath={basePath} />}
+                            <NewsCard key={0} newsItem={pair[0]} basePath={basePath} />
+                            {pair.length > 1 && <NewsCard key={1} style={{marginTop: '1em'}} newsItem={pair[1]} basePath={basePath} />}
                         </GridListTile>)}
 
-                        {newsItems.items.slice(pairsUntil).map((newsItemKey) => {
-                            const newsItem: NewsItem = newsItems.byId[newsItemKey]
-                            return (
-                                <GridListTile key={newsItem.slug} cols={1} rows={1}>
-                                    <NewsCard newsItem={newsItem} basePath={basePath}/>
-                                </GridListTile>
-                            )
-                        })}
+                        {newsEntries.slice(pairsUntil).map((newsItem) => <GridListTile key={newsItem.slug} cols={1} rows={1}>
+                            <NewsCard newsItem={newsItem} basePath={basePath}/>
+                        </GridListTile>)}
                     </GridList>
                 }
             </Responsive>

@@ -18,8 +18,7 @@ interface Props {
 function ServersSubMenuDisplay({servers, basePath, players}: Props & StateToProps & RouteComponentProps<any>) {
     return (
         <List style={{paddingTop: 0}}>
-            {servers.list.map((serverId) => {
-                const server = servers.byId[serverId]
+            {servers.list.map((serverId) => servers.byId[serverId]).map((server) => {
                 const path = basePath + nameToPath(server.slug)
                 const playerCount = ({
                     minecraft: players.minecraft[server.bungeeID || ''],

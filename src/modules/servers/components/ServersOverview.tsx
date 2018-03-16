@@ -47,6 +47,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
             renderLayout[rowIndex] = row
         }
 
+        // TODO replace with <GridList>
         return (
             <PageHeader
                 image={page.header.image}

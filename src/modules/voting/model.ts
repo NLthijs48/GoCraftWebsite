@@ -3,6 +3,7 @@ import {RemoteState} from 'types'
 
 // Information about a vote site
 export interface VoteSite {
+    id: string
     name: string
     vote_url: string
     identifiers: string[]

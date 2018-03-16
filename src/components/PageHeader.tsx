@@ -15,12 +15,11 @@ export function PageHeader({image, primary, secondary, children, header, content
     return (
         <React.Fragment>
             {!contentOnly && !!image && <Image image={image} style={{
-                backgroundColor: 'rgba(255,255,255,0.6)',
                 position: 'absolute',
                 top: 0,
                 right: 0,
                 left: 0,
-                height: '38em',
+                height: '30em',
                 width: '100%',
                 zIndex: -1, // Don't go above header content
                 overflow: 'hidden',

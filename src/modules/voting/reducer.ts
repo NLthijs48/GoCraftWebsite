@@ -10,7 +10,9 @@ function byId(state: VoteSites = {}, action: t.VoteSitesAction): VoteSites {
             // Get the properties we need from the WordPress byId
             const result: VoteSites = {}
             for(const rawVoteSite of action.data) {
-                result[get(rawVoteSite, 'id')] = {
+                const id = get(rawVoteSite, 'id')
+                result[id] = {
+                    id,
                     name: get(rawVoteSite, 'title', 'rendered'),
                     vote_url: get(rawVoteSite, 'acf', 'vote_url'),
                     identifiers: get(rawVoteSite, 'acf', 'identifier').split(/, ?/),

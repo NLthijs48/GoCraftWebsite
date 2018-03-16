@@ -36,7 +36,7 @@ export class SimpleFeatureCard extends React.Component<SimpleFeatureProps, {}> {
                 </div>
 
                 <Image image={feature.image} maxWidth={1200} style={{
-                    borderTop: '0.2em solid ' + THEME.palette.primary.main,
+                    borderTop: '0.3em solid ' + THEME.palette.primary.main,
                 }} />
             </CardItem>
         )

@@ -21,7 +21,8 @@ class MapsDisplay extends React.PureComponent<AllMapsProps, {}> {
             return <Loading />
         }
 
-        const first = servers.list.map((serverId) => servers.byId[serverId])
+        const first = servers.list
+            .map((serverId) => servers.byId[serverId])
             .filter(({dynmapLink}) => dynmapLink)
             [0]
 

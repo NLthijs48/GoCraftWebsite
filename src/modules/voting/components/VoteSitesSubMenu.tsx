@@ -33,15 +33,14 @@ function VoteSitesSubMenuDisplay({voteSites, basePath, dispatch, goToSite}: Prop
                 />
             </MenuItem>
 
-            {voteSites.items.map((voteSiteId) => {
-                const voteSite = voteSites.byId[voteSiteId]
+            {voteSites.items.map((voteSiteId) => voteSites.byId[voteSiteId]).map((voteSite) => {
                 const path = basePath + nameToPath(voteSite.name)
                 return (
                     <MenuItem
                         key={path}
-                        onPress={() => goToSite(voteSiteId)}
+                        onPress={() => goToSite(voteSite.id)}
                         child
-                        active={voteSites.selected===voteSiteId}
+                        active={voteSites.selected===voteSite.id}
                     >
                         <div style={{paddingLeft: '2em'}}>
                             {voteSite.canVote && <Icon fixedWidth size={18} name="arrow-right" color="green"/>}
