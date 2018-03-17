@@ -147,7 +147,6 @@ export function voting(currentState: VotingState|void, action: t.VoteSitesAction
     }
     result.byId = addVoteInfoToSites(result, action)
     result.selected = selected(state, result, action)
-    console.log('selected to:', result.selected)
     // Detect changes
     for(const k in result) {
         if((state as any)[k] !== (result as any)[k]) {
