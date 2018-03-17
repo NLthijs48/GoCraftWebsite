@@ -10,7 +10,9 @@ function byId(state: NewsItems = {}, action: t.NewsItemsAction): NewsItems {
             // Get the properties we need from the WordPress byId
             const result: NewsItems = {...state}
             for(const rawNewsItem of action.data) {
-                result[get(rawNewsItem, 'id')] = {
+                const id = get(rawNewsItem, 'id') + ''
+                result[id] = {
+                    id,
                     title: get(rawNewsItem, 'title', 'rendered'),
                     slug: get(rawNewsItem, 'slug'),
                     date: Date.parse(get(rawNewsItem, 'date')),
@@ -61,7 +63,7 @@ function items(state: NewsItemIds = [], action: t.NewsItemsAction): NewsItemIds 
     switch(action.type) {
         case t.FETCH_SUCCESS:
             // Order as given by WordPress is sorted correctly, newest first
-            return action.data.map((rawNewsItem) => get(rawNewsItem, 'id'))
+            return action.data.map((rawNewsItem) => get(rawNewsItem, 'id') + '')
         default:
             return state
     }
@@ -71,7 +73,7 @@ function bySlug(state: NewsItemsBySlug = {}, action: t.NewsItemsAction): NewsIte
     switch(action.type) {
         case t.FETCH_SUCCESS:
             const result: NewsItemsBySlug = {}
-            action.data.forEach((rawNewsItem) => result[nameToPath(get(rawNewsItem, 'slug'))] = get(rawNewsItem, 'id'))
+            action.data.forEach((rawNewsItem) => result[nameToPath(get(rawNewsItem, 'slug'))] = get(rawNewsItem, 'id')+'')
             return result
         default:
             return state

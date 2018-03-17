@@ -12,12 +12,13 @@ function categoriesById(state: ShopCategories = {}, action: t.ShopLayoutAction):
             for(const rawShopCategory of action.categories.results) {
                 const id = get(rawShopCategory, 'id')
                 shopCategories[id] = {
+                    id,
                     name: get(rawShopCategory, 'name'),
                     description: get(rawShopCategory, 'gui_description'),
                     iconBlockId: get(rawShopCategory, 'gui_icon'),
                     items: (get(rawShopCategory, 'items') as object[])
                         .sort((a, b) => (+get(a, 'order')) - (+get(b, 'order')))
-                        .map((categoryItem) => get(categoryItem, 'id')),
+                        .map((categoryItem) => get(categoryItem, 'id') + ''),
                 }
             }
             return shopCategories
@@ -36,6 +37,7 @@ function itemsById(state: ShopItems = {}, action: t.ShopLayoutAction): ShopItems
                 const id = get(rawShopItem, 'id')
                 shopItems[id] = {
                     ...shopItems[id],
+                    id,
                     name: get(rawShopItem, 'name'),
                     buyUrl: get(rawShopItem, 'gui_url'),
                     price: +get(rawShopItem, 'price'),
@@ -80,7 +82,7 @@ function rootCategories(state: ShopCategoryItems = [], action: t.ShopLayoutActio
         case t.FETCH_SUCCESS:
             return action.categories.results
                 .sort((a, b) => (+get(a, 'order')) - (+get(b, 'order')))
-                .map((rawShopCategory) => get(rawShopCategory, 'id'))
+                .map((rawShopCategory) => get(rawShopCategory, 'id') + '')
         default:
             return state
     }

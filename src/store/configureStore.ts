@@ -26,12 +26,19 @@ export function configureStore(): {store: Store<AppState|undefined>, persistor: 
         transforms: [
             createTransform(
                 // Transform state on its way to being serialized and persisted.
-                (inboundState: any) => {
-                    // Remove isFetching
+                (inboundState: any, key: string) => {
+                    // Remove 'isFetching' from all
                     if(typeof inboundState === 'object' && inboundState.isFetching) {
-                        const {isFetching, selected, ...rest} = inboundState as any
+                        const {isFetching, ...rest} = inboundState as any
                         return rest
                     }
+
+                    // Remove 'selected' from voting
+                    if(key === 'voting' && typeof inboundState === 'object' && inboundState.selected) {
+                        const {selected, ...rest} = inboundState as any
+                        return rest
+                    }
+
                     return inboundState
                 },
                 // Transform state being rehydrated

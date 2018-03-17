@@ -32,7 +32,7 @@ export class ServersOverview extends React.PureComponent<ServersOverviewProps, {
 
         const maxWidth = 100 / columns + '%'
         // [row][column]
-        const renderLayout: number[][] = []
+        const renderLayout: string[][] = []
 
         // Place servers on the grid
         for(let i=0; i<servers.list.length; i++) {

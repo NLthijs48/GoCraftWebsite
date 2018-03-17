@@ -44,7 +44,7 @@ class ShopOverviewDisplay extends React.PureComponent<Props & StateToProps, {col
                         const shopCategory = shopLayout.categoriesById[categoryId]
                         const maxWidth = 100 / columns + '%'
                         // [row][column]
-                        const renderLayout: number[][] = []
+                        const renderLayout: string[][] = []
 
                         // Place items on the grid
                         for(let i = 0; i < shopCategory.items.length; i++) {

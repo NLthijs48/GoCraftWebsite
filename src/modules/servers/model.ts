@@ -3,6 +3,7 @@ import {ImageInfo} from 'utils/Image'
 
 // Information about a server
 export interface ServerData {
+    id: string
     slug: string
     name: string
     shortDescription: string
@@ -34,12 +35,12 @@ export type Feature =
     SliderFeature
 
 export interface ServersData {
-    [k: number]: ServerData
+    [k: string]: ServerData
 }
 
-export type ServerItems = number[]
+export type ServerItems = string[]
 export interface ServersBySlug {
-    [k: string]: number
+    [k: string]: string
 }
 
 export interface ServersState extends RemoteState {

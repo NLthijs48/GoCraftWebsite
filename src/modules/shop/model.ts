@@ -1,6 +1,7 @@
 import {ImageInfo} from 'utils/Image'
 
 export interface ShopItem {
+    id: string
     name: string
     buyUrl: string
     price: number
@@ -17,20 +18,21 @@ export interface Perk {
 }
 
 export interface ShopItems {
-    [key: number]: ShopItem
+    [key: string]: ShopItem
 }
 
 export interface ShopCategory {
+    id: string
     name: string
     description: string
     iconBlockId: string
-    items: number[]
+    items: string[]
 }
 
-export type ShopCategoryItems = number[]
+export type ShopCategoryItems = string[]
 
 export interface ShopCategories {
-    [key: number]: ShopCategory
+    [key: string]: ShopCategory
 }
 
 export interface ShopLayoutState {

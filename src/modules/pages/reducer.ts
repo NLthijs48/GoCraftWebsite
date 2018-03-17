@@ -11,7 +11,9 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
             // Get the properties we need from the WordPress byId
             const result: Pages = {}
             for(const rawPage of action.data) {
-                result[get(rawPage, 'id')] = {
+                const id = get(rawPage, 'id') + ''
+                result[id] = {
+                    id,
                     title: get(rawPage, 'title', 'rendered'),
                     status: get(rawPage, 'status'),
                     type: get(rawPage, 'acf', 'page_type'),
@@ -33,7 +35,7 @@ function byId(state: Pages = {}, action: t.PagesAction): Pages {
             for(const rawPage of action.data) {
                 const parent = get(rawPage, 'parent')
                 if(parent !== 0) {
-                    result[parent].children.push(get(rawPage, 'id'))
+                    result[parent].children.push(get(rawPage, 'id') + '')
                 }
             }
             return result
@@ -52,7 +54,7 @@ function rootItems(state: PageItems = [], action: t.PagesAction): PageItems {
                 // Sort by menu_order
                 .sort((a: object, b: object) => (get(a, 'menu_order') > get(b, 'menu_order') ? 1 : -1))
                 // Reduce to array of ids
-                .map((rawMenuEntry) => get(rawMenuEntry, 'id'))
+                .map((rawMenuEntry) => get(rawMenuEntry, 'id') + '')
         default:
             return state
     }

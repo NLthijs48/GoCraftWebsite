@@ -3,6 +3,7 @@ import {ImageInfo} from 'utils/Image'
 
 // Information about a news item
 export interface NewsItem {
+    id: string
     title: string
     slug: string
     date: UnixDate
@@ -31,7 +32,7 @@ export interface NewsItems {
 
 export type NewsItemIds = string[]
 export interface NewsItemsBySlug {
-    [k: string]: number
+    [k: string]: string
 }
 
 export interface NewsItemsState extends RemoteState {

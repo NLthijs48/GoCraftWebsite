@@ -17,7 +17,9 @@ function byId(state: ServersData = {}, action: t.ServersAction): ServersData {
                     console.error('Server has no slug:', rawServer)
                     continue
                 }
-                result[get(rawServer, 'id')] = {
+                const id = get(rawServer, 'id') + ''
+                result[id] = {
+                    id,
                     slug: nameToPath(slug),
                     name: get(rawServer, 'title', 'rendered'),
                     shortDescription: get(rawServer, 'acf', 'description'),
@@ -79,7 +81,7 @@ function list(state: ServerItems = [], action: t.ServersAction): ServerItems {
                 // Sort by order
                 .sort((a: object, b: object) => (get(a, 'menu_order') > get(b, 'menu_order') ? 1 : -1))
                 // Reduce to array of ids
-                .map((rawServer) => get(rawServer, 'id'))
+                .map((rawServer) => get(rawServer, 'id') + '')
         default:
             return state
     }
@@ -90,7 +92,7 @@ function bySlug(state: ServersBySlug = {}, action: t.ServersAction): ServersBySl
     switch(action.type) {
         case t.FETCH_SUCCESS:
             const result: ServersBySlug = {}
-            action.data.forEach((rawServer) => result[nameToPath(get(rawServer, 'slug'))] = get(rawServer, 'id'))
+            action.data.forEach((rawServer) => result[nameToPath(get(rawServer, 'slug'))] = get(rawServer, 'id') + '')
             return result
         default:
             return state

@@ -1,4 +1,4 @@
-import {getVoteSiteOrder} from 'modules/voting/actions'
+import {getVoteSiteOrder, VOTE_INFO_KEY} from 'modules/voting/actions'
 import {VoteRankings, VoteSiteIds, VoteSites, VoteStatus, VotingState} from 'modules/voting/model'
 import {get} from 'utils/utils'
 import * as t from './actionTypes'
@@ -10,7 +10,7 @@ function byId(state: VoteSites = {}, action: t.VoteSitesAction): VoteSites {
             // Get the properties we need from the WordPress byId
             const result: VoteSites = {}
             for(const rawVoteSite of action.data) {
-                const id = get(rawVoteSite, 'id')
+                const id = get(rawVoteSite, 'id') + ''
                 result[id] = {
                     id,
                     name: get(rawVoteSite, 'title', 'rendered'),
@@ -31,7 +31,7 @@ function items(state: VoteSiteIds = [], action: t.VoteSitesAction): VoteSiteIds 
         case t.FETCH_SUCCESS:
             return action.data
                 .sort((a, b) => get(a, 'menu_order')-get(b, 'menu_order'))
-                .map((rawVoteSite) => ''+get(rawVoteSite, 'id'))
+                .map((rawVoteSite) => ''+get(rawVoteSite, 'id') + '')
         default:
             return state
     }
@@ -112,7 +112,7 @@ function selected(prev: VotingState, state: VotingState, action: t.VoteSitesActi
                 return order[0]
             }
         default:
-            return state.selected || getVoteSiteOrder(state, true)[0]
+            return state.selected || VOTE_INFO_KEY
     }
 }
 
@@ -147,6 +147,7 @@ export function voting(currentState: VotingState|void, action: t.VoteSitesAction
     }
     result.byId = addVoteInfoToSites(result, action)
     result.selected = selected(state, result, action)
+    console.log('selected to:', result.selected)
     // Detect changes
     for(const k in result) {
         if((state as any)[k] !== (result as any)[k]) {

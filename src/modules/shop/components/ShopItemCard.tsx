@@ -13,7 +13,7 @@ import {Navigate} from 'utils/Navigate'
 import {ShopItem} from '../model'
 
 interface ShopItemProps {
-    id: number
+    id: string
 }
 class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToProps & RouteComponentProps<any>, {}> {
     public render() {

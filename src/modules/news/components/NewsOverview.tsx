@@ -77,8 +77,8 @@ class NewsDisplay extends React.PureComponent<AllProps, {columns: number}> {
 interface StateToProps {
     newsItems: NewsItemsState
 }
-export const NewsOverview = withRouter<Props & RouteComponentProps<any>>(connect<StateToProps, {}, Props, AppState>(
+export const NewsOverview = withRouter<Props & RouteComponentProps<any>>((connect<StateToProps, {}, Props, AppState>(
     (state) => ({
         newsItems: state.newsItems,
     }),
-)(NewsDisplay))
+) as any)(NewsDisplay))

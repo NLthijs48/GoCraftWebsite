@@ -11,11 +11,12 @@ export type Page =
     VoteSitesPage |
     ShopPage
 interface AbstractPage {
+    id: string
     title: string
     status: 'publish'
     urlPath?: string
     menuIcon?: string
-    children: number[]
+    children: string[]
     adminOnly?: boolean
     header: {
         primary?: string
@@ -50,10 +51,10 @@ export interface ShopPage extends AbstractPage {
 
 // ID -> Page
 export interface Pages {
-    [k: number]: Page
+    [k: string]: Page
 }
 
-export type PageItems = number[]
+export type PageItems = string[]
 
 export interface PagesState extends RemoteState {
     byId: Pages
