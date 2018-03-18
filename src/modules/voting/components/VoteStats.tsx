@@ -55,9 +55,9 @@ class VoteStatsDisplay extends React.PureComponent<Props & StateToProps & Dispat
                 </React.Fragment>
             }>
                 <CardItem style={{maxWidth: 800, alignSelf: 'center'}}>
-                    <h1>
+                    <h2>
                         Vote Top 10 of {monthName(month)}{year===(new Date()).getUTCFullYear() ? '' : ' '+year}
-                    </h1>
+                    </h2>
                     {!ranking && <div>
                         No ranking available for this month...
                     </div>}

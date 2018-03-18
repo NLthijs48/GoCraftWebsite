@@ -68,8 +68,6 @@ class ShopOverviewDisplay extends React.PureComponent<Props & StateToProps, {col
                                 }}>
                                     <h2 style={{
                                         color: '#222',
-                                        fontSize: '1.4em',
-                                        margin: 0,
                                         textShadow: '0 0 2px rgba(255,255,255,0.3)',
                                     }}>
                                         {shopCategory.name}

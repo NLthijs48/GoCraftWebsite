@@ -9,6 +9,7 @@ import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {Image} from 'utils/Image'
+import {ImageFooter} from 'utils/ImageFooter'
 import {Navigate} from 'utils/Navigate'
 import {ShopItem} from '../model'
 
@@ -25,31 +26,11 @@ class ShopItemCardDisplay extends React.PureComponent<ShopItemProps & StateToPro
                 padding: 0,
             }}>
                 <Image image={shopItem.image} ratio={1}>
-                    <div style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        background: 'rgba(0,0,0,0.5)',
-                        color: '#FFF',
-                        padding: '1em',
-                        display: 'flex',
-                    }}>
-                        <h3 style={{
-                            fontSize: '1.25em',
-                            marginBottom: 0,
-                        }}>
-                            {shopItem.name}
-                        </h3>
-
+                    <ImageFooter style={{display: 'flex'}}>
+                        <h2>{shopItem.name}</h2>
                         <Filler/>
-
-                        <div style={{
-                            fontSize: '1.25em',
-                        }}>
-                            €{shopItem.price}
-                        </div>
-                    </div>
+                        <h2>€{shopItem.price}</h2>
+                    </ImageFooter>
                 </Image>
 
                 {!!shopItem.perks &&

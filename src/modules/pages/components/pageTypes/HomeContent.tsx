@@ -25,18 +25,6 @@ export class HomeContent extends React.PureComponent<Props, {}> {
                 header={<React.Fragment>
                     <MinecraftCopyButton />
                     <Filler />
-                    {false && <div style={{
-                        width: '100%',
-                        marginTop: '3em',
-                        textAlign: 'left',
-                    }}>
-                        <h2 style={{
-                            fontSize: '150%',
-                            marginBottom: 0,
-                        }}>
-                            Servers
-                        </h2>
-                    </div>}
                     <ServersListRow style={{marginTop: '3em'}} />
                 </React.Fragment>}
                 contentStyle={{
@@ -48,9 +36,7 @@ export class HomeContent extends React.PureComponent<Props, {}> {
                     paddingLeft: '1em',
                     marginBottom: '0.5em',
                 }}>
-                    <h2 style={{
-                        marginBottom: 0,
-                    }}>
+                    <h2>
                         News
                     </h2>
                 </div>

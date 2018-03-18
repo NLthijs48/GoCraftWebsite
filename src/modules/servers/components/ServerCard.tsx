@@ -8,6 +8,7 @@ import {CardItem} from 'utils/CardItem'
 import {Filler} from 'utils/Filler'
 import {Icon} from 'utils/Icon'
 import {Image} from 'utils/Image'
+import {ImageFooter} from 'utils/ImageFooter'
 import {Navigate} from 'utils/Navigate'
 import {nameToPath} from 'utils/utils'
 import {ServerData} from '../model'
@@ -41,19 +42,9 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                     }}
                 >
                     <Image image={server.image} ratio={16/9} maxWidth={800}>
-                        <div style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            right: 0,
-                            left: 0,
-                            background: 'rgba(0,0,0,0.5)',
-                            color: '#FFF',
-                            padding: '1em',
-                        }}>
-                            <h2 style={{marginBottom: 0}}>
-                                {server.name}
-                            </h2>
-                        </div>
+                        <ImageFooter>
+                            <h2>{server.name}</h2>
+                        </ImageFooter>
                     </Image>
                     <div style={{
                         margin: '1em 1em 0 1em',

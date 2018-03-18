@@ -76,7 +76,6 @@ export function PageHeader({image, primary, secondary, children, header, content
                     <h2 style={{
                         textShadow: '2px 2px 0 rgba(10, 10, 10, 0.8)',
                         marginTop: '0.5em',
-                        marginBottom: 0,
                     }}>
                         {secondary}
                     </h2>

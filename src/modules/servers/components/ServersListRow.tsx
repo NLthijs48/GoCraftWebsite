@@ -58,7 +58,6 @@ function ServersListRowDisplay({style, servers}: Props & StateToProps) {
                                 textShadow: '1px 1px 1px rgba(10,10,10,0.8)',
                                 opacity: 0.9,
                                 lineHeight: '100%',
-                                marginBottom: 0,
                                 fontSize: '140%',
                             }}>
                                 {server.name}
