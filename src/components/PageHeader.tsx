@@ -30,7 +30,19 @@ export function PageHeader({image, primary, secondary, children, header, content
                     right: 0,
                     bottom: 0,
                     left: 0,
-                    background: 'linear-gradient(to bottom, rgba(238,238,238,0) 0%, rgba(238,238,238,0) 60%, rgba(238,238,238,0.85) 80%, rgba(238,238,238,1) 100%)',
+                    // Manual easing of the transparency curve to make it smoother
+                    // https://css-tricks.com/easing-linear-gradients/
+                    background: 'linear-gradient(' +
+                        'to bottom, ' +
+                        'rgba(238,238,238,0) 0%, ' +
+                        'rgba(238,238,238,0) 50%, ' +
+                        'rgba(238,238,238,0.2) 60%, ' +
+                        'rgba(238,238,238,0.50) 70%, ' +
+                        'rgba(238,238,238,0.75) 80%, ' +
+                        'rgba(238,238,238,0.90) 90%, ' +
+                        'rgba(238,238,238,0.97) 95%, ' +
+                        'rgba(238,238,238,1) 100%' +
+                    ')',
                 }}/>
             </Image>}
 
