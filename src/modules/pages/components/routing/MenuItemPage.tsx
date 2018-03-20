@@ -57,8 +57,7 @@ function renderPage(page: Page, basePath: string): React.ReactElement<any> {
         case 'shop':
             return <Shop basePath={basePath} page={page} />
         default:
-            console.error('unknown page type:', page, 'at basePath:', basePath)
-            return <NotFound />
+            return <NotFound primary={'Unknown page type: '+page.type} secondary="Try refreshing the page" />
     }
 }
 

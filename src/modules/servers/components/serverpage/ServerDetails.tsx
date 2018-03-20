@@ -1,6 +1,7 @@
 import {PageHeader} from 'components/PageHeader'
 import Button from 'material-ui/Button'
 import {DrawerState} from 'modules/drawer/model'
+import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {PlayersRow} from 'modules/players/components/PlayersRow'
 import {PlayersState} from 'modules/players/model'
 import {ArkJoinButton} from 'modules/servers/components/join/ArkJoinButton'
@@ -25,6 +26,16 @@ class ServerDetailsDisplay extends React.PureComponent<AllServerDetailsProps, {}
 
     public render() {
         const {server, players} = this.props
+
+        if(!server) {
+            return (
+                <NotFound
+                    primary={'Server ' + this.props.match.params.serverId + ' not found'}
+                    secondary="Select another server using the menu"
+                />
+            )
+        }
+
         const myPlayers = ({
             minecraft: players.minecraft[server.bungeeID || ''],
             ark: players.ark.default,

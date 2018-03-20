@@ -1,6 +1,7 @@
 import {PageHeader} from 'components/PageHeader'
 import {RawContent} from 'components/RawContent'
 import Button from 'material-ui/Button'
+import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Player} from 'modules/players/components/Player'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -21,6 +22,16 @@ class NewsDetailsDisplay extends React.PureComponent<AllProps, {}> {
 
     public render() {
         const {newsItem} = this.props
+
+        if(!newsItem) {
+            return (
+                <NotFound
+                    primary={'News item ' + this.props.match.params.newsId + ' not found'}
+                    secondary="Go to the home page for the latest news"
+                />
+            )
+        }
+
         return (
             <PageHeader
                 primary={newsItem.title}

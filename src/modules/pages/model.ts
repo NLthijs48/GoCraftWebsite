@@ -9,7 +9,8 @@ export type Page =
     EmbeddedPage |
     ServersPage |
     VoteSitesPage |
-    ShopPage
+    ShopPage |
+    OtherPage
 interface AbstractPage {
     id: string
     title: string
@@ -23,6 +24,9 @@ interface AbstractPage {
         secondary?: string
         image?: ImageInfo,
     }
+}
+interface OtherPage extends AbstractPage {
+    type: '',
 }
 export interface HomePage extends AbstractPage {
     type: 'home',

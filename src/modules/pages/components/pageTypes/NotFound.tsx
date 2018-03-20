@@ -1,21 +1,33 @@
+import Raven from 'raven-js'
 import * as React from 'react'
 
-export function NotFound() {
-    return (
-        <div style={{textAlign: 'center', padding: '1em'}}>
-            <h1 style={{
-                color: '#555',
-                marginTop: '30px',
-            }}>
-                Page not found
-            </h1>
+interface Props {
+    primary?: string
+    secondary?: string
+}
+export class NotFound extends React.PureComponent<Props, {}> {
 
-            <h2 style={{
-                marginTop: '15px',
-                color: '#999',
-            }}>
-                Try going to another page using the menu
-            </h2>
-        </div>
-    )
+    public componentDidMount() {
+        Raven.captureMessage('Page not found', {extra: {primary: this.props.primary, secondary: this.props.secondary}})
+    }
+
+    public render() {
+        return (
+            <div style={{textAlign: 'center', padding: '1em'}}>
+                <h1 style={{
+                    color: '#555',
+                    marginTop: '30px',
+                }}>
+                    {this.props.primary || 'Page not found'}
+                </h1>
+
+                <h2 style={{
+                    marginTop: '15px',
+                    color: '#999',
+                }}>
+                    {this.props.secondary || 'Try going to another page using the menu'}
+                </h2>
+            </div>
+        )
+    }
 }
