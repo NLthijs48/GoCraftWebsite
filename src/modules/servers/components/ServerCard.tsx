@@ -1,4 +1,5 @@
 import Button from 'material-ui/Button'
+import {CardActions} from 'material-ui/Card'
 import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -55,17 +56,15 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
 
                 <Filler />
 
-                <div style={{
-                    marginTop: '-0.6em', // Reduce the room between tagline and actions
-                    paddingLeft: '0',
-                    paddingBottom: '0.4em',
-                    minHeight: 42,
+                <CardActions style={{
+                    paddingLeft: '0.5em',
+                    marginTop: '-0.5em',
                 }}>
                     {server.dynmapLink && <Navigate
-                        style={{textDecoration: 'none'}}
+                        style={{textDecoration: 'none', marginRight: '1em'}}
                         to={'/maps/' + nameToPath(server.slug)}
                     >
-                        <Button>
+                        <Button size="small">
                             <Icon name="map-o" fixedWidth style={{marginRight: '1em'}}/>
                             View map
                         </Button>
@@ -75,12 +74,12 @@ class ServerCardDisplay extends React.PureComponent<ServerProps & StateToProps &
                         style={{textDecoration: 'none'}}
                         to={path+'/'+nameToPath(server.slug)}
                     >
-                        <Button>
+                        <Button size="small">
                             <Icon name={myPlayerCount > 1 ? 'users' : 'user'} fixedWidth style={{marginRight: '0.5em'}}/>
                             {myPlayerCount + ' online'}
                         </Button>
                     </Navigate>}
-                </div>
+                </CardActions>
             </CardItem>
         )
     }
