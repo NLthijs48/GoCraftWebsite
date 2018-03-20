@@ -13,7 +13,15 @@ const a = new Promise(() => {
 if(!isLocalhost()) {
     // Sentry setup
     Raven
-        .config('https://a79017f727aa428e8f44e3763453e505@sentry.io/188788')
+        .config('https://a79017f727aa428e8f44e3763453e505@sentry.io/188788', {
+            dataCallback: (data) => {
+                // Error occured and update is available? Update now
+                if ((window as any).swUpdate) {
+                    (window as any).location.reload()
+                }
+                return data
+            },
+        })
         .install()
 
     // ServiceWorker and AppCache setup
