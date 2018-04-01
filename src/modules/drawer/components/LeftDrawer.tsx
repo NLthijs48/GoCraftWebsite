@@ -2,6 +2,7 @@ import Drawer from 'material-ui/Drawer'
 import Hidden from 'material-ui/Hidden'
 import {Theme, WithStyles} from 'material-ui/styles'
 import withStyles from 'material-ui/styles/withStyles'
+import SwipableDrawer from 'material-ui/SwipeableDrawer'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {DrawerState} from 'modules/drawer/model'
 import * as React from 'react'
@@ -30,18 +31,19 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
         return (
             <div style={{display: 'flex'}}>
                 <Hidden mdUp>
-                    <Drawer
+                    <SwipableDrawer
                         variant="temporary"
                         anchor="left"
                         open={drawer.open}
                         classes={classes}
-                        onClose={this.toggleDrawerSelect}
+                        onClose={this.toggleDrawer(false)}
+                        onOpen={this.toggleDrawer(true)}
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
                         }}
                     >
                         {children}
-                    </Drawer>
+                    </SwipableDrawer>
                 </Hidden>
                 <Hidden smDown implementation="css">
                     <div style={{height: '100%', position: 'relative'}}>
@@ -68,8 +70,8 @@ class LeftDrawerDisplay extends React.PureComponent<LeftDrawerProps & DispatchTo
         )
     }
 
-    private toggleDrawerSelect = () => {
-        this.props.updateOpen(!this.props.drawer.open, 'select')
+    private toggleDrawer = (to: boolean) => () => {
+        this.props.updateOpen(to, 'swipe')
     }
 
 }
