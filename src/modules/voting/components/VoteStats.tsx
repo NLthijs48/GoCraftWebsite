@@ -47,7 +47,7 @@ class VoteStatsDisplay extends React.Component<AllProps, State> {
             .length > 0
         const key = rankingKey(this.state.year, this.state.month)
         const ranking = this.props.voting.rankings[key]
-        const entries = (ranking && ranking.entries && ranking.entries.length>0) ? ranking.entries : [1,2,3,4,5,6,7,8,9,10] as Array<VoteRankingEntry>
+        const entries = (ranking && ranking.entries && ranking.entries.length>0) ? ranking.entries : [1,2,3,4,5,6,7,8,9,10] as any as VoteRankingEntry[]
         return (
             <PageHeader
                 primary={this.props.page.header.primary}
