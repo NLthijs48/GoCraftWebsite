@@ -158,4 +158,4 @@ export const VoteStats = connect<StateToProps, {}, Props, AppState>(
     (state) => ({
         voting: state.voting,
     }),
-)(VoteStatsDisplay)
+)(VoteStatsDisplay as any)
