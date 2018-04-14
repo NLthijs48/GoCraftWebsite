@@ -130,6 +130,12 @@ function rankings(state: VoteRankings = {}, action: t.VoteSitesAction) {
                 ...state,
                 [key]: ranking,
             }
+        case t.FETCH_TOP:
+            const k = rankingKey(action.year, action.month)
+            return {
+                ...state,
+                [k]: {...state[k], isFetching: true},
+            }
         default:
             return state
     }

@@ -5,9 +5,10 @@ import * as React from 'react'
 interface PlayerProps {
     player: Partial<PlayerInfo>
     style?: React.CSSProperties
+    placeholder?: string
 }
 
-export function Player({player, style}: PlayerProps) {
+export function Player({player, style, placeholder}: PlayerProps) {
     return (
         <div style={{
             display: 'flex',
@@ -33,7 +34,7 @@ export function Player({player, style}: PlayerProps) {
                 color: player.name ? '' : '#888',
                 fontWeight: 'bold',
             }}>
-                {player.name||'Connecting...'}
+                {player.name||placeholder||'Connecting...'}
             </div>
         </div>
     )

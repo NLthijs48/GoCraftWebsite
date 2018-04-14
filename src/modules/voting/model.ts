@@ -36,6 +36,8 @@ export interface VoteRanking {
     month: number
     // rank -> VoteRankingEntry
     entries: VoteRankingEntry[]
+    isFetching: boolean
+    updated: number
     // TODO something about the range that is already loaded
 }
 export interface VoteRankingEntry {

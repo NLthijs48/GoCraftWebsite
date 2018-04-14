@@ -7,6 +7,13 @@ interface Fetch {
     type: 'voting/FETCH',
 }
 
+export const FETCH_TOP = 'voting/FETCH_TOP'
+interface FetchTop {
+    type: 'voting/FETCH_TOP'
+    year: number
+    month: number
+}
+
 // Got vote sites information
 export const FETCH_SUCCESS = 'voting/FETCH_SUCCESS'
 interface FetchSuccess {
@@ -41,6 +48,7 @@ interface TopUpdate {
 // All server actions
 export type VoteSitesAction =
     Fetch |
+    FetchTop |
     FetchSuccess |
     FetchFailure |
     StatusUpdate |

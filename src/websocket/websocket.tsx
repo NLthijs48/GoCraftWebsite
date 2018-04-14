@@ -1,13 +1,24 @@
 import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
-import {withRouter} from 'react-router'
 import {AppState} from 'reducer'
 import {isLocalhost} from 'utils/utils'
 import {WebsocketMessage} from 'websocket/model'
 
 const USE_LOCAL_WEBSOCKET = false
+let socketInstance: WebsocketInternal|undefined
 
-// TODO way to send messages
+interface Message {
+    type: string
+    [key: string]: any
+}
+export function sendMessage(message: Message) {
+    if(!socketInstance) {
+        console.log('[Websocket] sendMessage has no socketInstance!')
+        return
+    }
+    socketInstance.send(message)
+}
+
 class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 
     private socket?: WebSocket
@@ -27,16 +38,23 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
         this.onClose = this.onClose.bind(this)
         this.onError = this.onError.bind(this)
         this.onMessage = this.onMessage.bind(this)
+
+        socketInstance = this
     }
 
     public componentDidMount() {
         console.log('[Websocket] mount -> start')
         this.shouldBeOpen = true
         this.connect()
+
+        socketInstance = this
     }
 
     public componentWillUnmount() {
         console.log('[Websocket] unmount -> stop')
+        if(socketInstance === this) {
+            socketInstance = undefined
+        }
         this.shouldBeOpen = false
         if(this.socket && this.socket.readyState === 1) {
             this.socket.close(1000, 'unmount')
@@ -48,6 +66,15 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 
     public render() {
         return null
+    }
+
+    public send(message: Message) {
+        if(!this.socket || this.socket.readyState !== WebSocket.OPEN) {
+            console.error('[Websocket] cannot send message, socket not open:', message)
+            return
+        }
+        console.log('[Websocket] sending message:', message)
+        this.socket.send(JSON.stringify(message))
     }
 
     private connect() {
@@ -113,9 +140,9 @@ class WebsocketInternal extends React.PureComponent<DispatchToProps, {}> {
 interface DispatchToProps {
     dispatch: Dispatch<any>
 }
-export const Websocket = withRouter<any>(connect<{}, DispatchToProps, {}, AppState>(
+export const Websocket = connect<{}, DispatchToProps, {}, AppState>(
     () => ({}),
     (dispatch) => ({
         dispatch,
     }),
-)(WebsocketInternal))
+)(WebsocketInternal)
