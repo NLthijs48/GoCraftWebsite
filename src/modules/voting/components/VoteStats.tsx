@@ -100,9 +100,9 @@ class VoteStatsDisplay extends React.Component<AllProps, State> {
                                         entry = {rank: entry, player: {game: 'minecraft', name: (ranking||{}).isFetching ? undefined : '-'}, votes: '-'} as any
                                     }
                                     return <TableRow hover key={entry.rank}>
-                                        <TableCell numeric padding="none">{entry.rank}</TableCell>
+                                        <TableCell numeric padding="none" style={{width: 40}}>{entry.rank}</TableCell>
                                         <TableCell><Player player={entry.player} placeholder="Loading..." /></TableCell>
-                                        <TableCell numeric>{entry.votes}</TableCell>
+                                        <TableCell numeric style={{width: 100}}>{entry.votes}</TableCell>
                                     </TableRow>
                                 })}
                             </TableBody>
