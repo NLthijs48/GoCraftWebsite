@@ -22,7 +22,7 @@ export class CardItem extends React.Component<CardItemProps, {}> {
                     width: '100%',
                     height: '100%',
                     overflow: 'hidden',
-                    ...style,
+                    ...style as any,
                 }}
             >
                 {children}

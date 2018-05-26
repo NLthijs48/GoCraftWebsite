@@ -21,9 +21,9 @@ class NavigateDisplay extends React.PureComponent<Props & RouteComponentProps<an
             return (
                 <NavLink
                     to={to}
-                    style={style}
+                    style={style as any}
                     exact={to==='/'}
-                    activeStyle={activeStyle}
+                    activeStyle={activeStyle as any}
                     isActive={to==='/' ? this.isActive : undefined}
                     onClick={this.onClick}
                 >
