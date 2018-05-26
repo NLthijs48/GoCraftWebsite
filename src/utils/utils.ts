@@ -15,7 +15,7 @@ export function get(data: any, ...paths: Array<string|number>): any {
     return data
 }
 
-const wordPressAPI = 'https://mc.go-craft.com/wordpress/wp-json'
+const wordPressAPI = 'https://go-craft.com/subdomains/wordpress/wp-json'
 export function getData(path: string): Promise<any> {
     if(path.substr(0, 4) !== 'http') {
         path = wordPressAPI + path

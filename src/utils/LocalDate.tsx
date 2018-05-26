@@ -4,10 +4,11 @@ import {UnixDate} from 'types'
 export interface DateProps extends HTMLProps<HTMLElement> {
     at: UnixDate
     full?: boolean
+    style?: React.CSSProperties
 }
-export function LocalDate({at, children, full, ...otherProps}: DateProps) {
+export function LocalDate({at, children, full, style}: DateProps) {
     return (
-        <div {...otherProps}>
+        <div style={style}>
             {formatDate(at, full)}
         </div>
     )
