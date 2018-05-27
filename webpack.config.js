@@ -108,7 +108,8 @@ module.exports = function (env) {
                 '**/*.map',
                 '**/*.gz',
                 '**/wp-json/**',
-                '**/sw.js'
+                '**/sw.js',
+                '**/subdomains/**',
             ],
             ServiceWorker: {
                 events: true,
