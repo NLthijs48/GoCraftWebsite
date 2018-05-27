@@ -119,7 +119,7 @@ module.exports = function (env) {
                             console.log('SW: not caching because of hostname:', url);
                             return false;
                         }
-                        if(url.pathname && url.pathname.indexOf('/subdomains') === 0) {
+                        if(url.pathname && url.pathname.indexOf('/subdomains') === 0 && url.pathname.indexOf('/subdomains/wordpress/wp-content') !== 0) {
                             console.log('SW: not caching because it is a subdomain:', url);
                             return false;
                         }
