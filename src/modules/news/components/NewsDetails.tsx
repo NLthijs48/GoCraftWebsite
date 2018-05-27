@@ -1,6 +1,6 @@
+import Button from '@material-ui/core/Button'
 import {PageHeader} from 'components/PageHeader'
 import {RawContent} from 'components/RawContent'
-import Button from 'material-ui/Button'
 import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {Player} from 'modules/players/components/Player'
 import * as React from 'react'

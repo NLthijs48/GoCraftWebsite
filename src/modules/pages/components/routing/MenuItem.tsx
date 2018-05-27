@@ -1,4 +1,4 @@
-import {ListItem} from 'material-ui/List'
+import ListItem from '@material-ui/core/ListItem'
 import React from 'react'
 import {Navigate} from 'utils/Navigate'
 

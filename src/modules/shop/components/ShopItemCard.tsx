@@ -1,5 +1,6 @@
-import Button from 'material-ui/Button'
-import List, {ListItem} from 'material-ui/List'
+import Button from '@material-ui/core/Button'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'

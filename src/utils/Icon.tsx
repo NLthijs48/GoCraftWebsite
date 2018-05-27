@@ -1,4 +1,4 @@
-import MaterialIcon from 'material-ui/Icon'
+import MaterialIcon from '@material-ui/core/Icon'
 import * as React from 'react'
 
 export interface IconProps  {

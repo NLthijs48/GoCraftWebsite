@@ -1,5 +1,5 @@
+import Button from '@material-ui/core/Button'
 import {PageHeader} from 'components/PageHeader'
-import Button from 'material-ui/Button'
 import {DrawerState} from 'modules/drawer/model'
 import {NotFound} from 'modules/pages/components/pageTypes/NotFound'
 import {PlayersRow} from 'modules/players/components/PlayersRow'

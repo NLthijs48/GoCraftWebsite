@@ -1,6 +1,6 @@
+import CssBaseline from '@material-ui/core/CssBaseline'
 import {PreFetch} from 'components/PreFetch'
 import {Action, Location, UnregisterCallback} from 'history'
-import CssBaseline from 'material-ui/CssBaseline'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {LeftDrawer} from 'modules/drawer/components/LeftDrawer'
 import {TopBar} from 'modules/drawer/components/TopBar'

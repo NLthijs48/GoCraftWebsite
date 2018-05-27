@@ -1,4 +1,5 @@
-import GridList, {GridListTile} from 'material-ui/GridList'
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
 import {NewsCard} from 'modules/news/components/NewsCard'
 import {Loading} from 'modules/pages/components/Loading'
 import * as React from 'react'

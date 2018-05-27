@@ -1,5 +1,5 @@
-import Button from 'material-ui/Button'
-import {CardActions} from 'material-ui/Card'
+import Button from '@material-ui/core/Button'
+import CardActions from '@material-ui/core/CardActions'
 import {PlayersState} from 'modules/players/model'
 import * as React from 'react'
 import {connect} from 'react-redux'

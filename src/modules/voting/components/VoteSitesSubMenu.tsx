@@ -1,4 +1,5 @@
-import List, {ListItemText} from 'material-ui/List'
+import List from '@material-ui/core/List'
+import ListItemText from '@material-ui/core/ListItemText'
 import {updateDrawerOpen} from 'modules/drawer/actions'
 import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {selectSite, VOTE_INFO_KEY} from 'modules/voting/actions'

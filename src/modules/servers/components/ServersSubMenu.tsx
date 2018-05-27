@@ -1,4 +1,5 @@
-import List, {ListItemText} from 'material-ui/List'
+import List from '@material-ui/core/List'
+import ListItemText from '@material-ui/core/ListItemText'
 import {LeftIconImage} from 'modules/pages/components/LeftIconImage'
 import {MenuItem} from 'modules/pages/components/routing/MenuItem'
 import {PlayersState} from 'modules/players/model'

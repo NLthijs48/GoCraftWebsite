@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.39",
+    "@material-ui/core": "^1.1.0",
     "@types/isomorphic-fetch": "^0.0.34",
     "@types/lodash.debounce": "^4.0.3",
     "@types/ramda": "^0.25.18",
@@ -38,7 +39,6 @@
     "less-loader": "^4.0.5",
     "localforage": "^1.5.7",
     "lodash.debounce": "^4.0.8",
-    "material-ui": "^1.0.0-beta.47",
     "offline-plugin": "^4.8.4",
     "ramda": "^0.25.0",
     "raven-js": "^3.22.3",

@@ -1,5 +1,5 @@
-import Button from 'material-ui/Button'
-import Tooltip from 'material-ui/Tooltip'
+import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
 import * as React from 'react'
 import {Icon} from 'utils/Icon'
 import {Navigate} from 'utils/Navigate'

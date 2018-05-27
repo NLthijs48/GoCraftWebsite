@@ -1,6 +1,6 @@
-import Button from 'material-ui/Button'
-import Snackbar from 'material-ui/Snackbar'
-import Tooltip from 'material-ui/Tooltip'
+import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
+import Tooltip from '@material-ui/core/Tooltip'
 import * as React from 'react'
 import {Icon} from 'utils/Icon'
 

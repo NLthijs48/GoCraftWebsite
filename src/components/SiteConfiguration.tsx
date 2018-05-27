@@ -1,5 +1,5 @@
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import {SiteContent} from 'components/SiteContent'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Loading} from 'modules/pages/components/Loading'
 import Raven from 'raven-js'
 import * as React from 'react'
