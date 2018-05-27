@@ -113,6 +113,19 @@ module.exports = function (env) {
             ],
             ServiceWorker: {
                 events: true,
+                navigationPreload: {
+                    test: (url) => {
+                        if(url.hostname !== 'go-craft.com') {
+                            console.log('SW: not caching because of hostname:', url);
+                            return false;
+                        }
+                        if(url.pathname && url.pathname.indexOf('/subdomains') === 0) {
+                            console.log('SW: not caching because it is a subdomain:', url);
+                            return false;
+                        }
+                        return true;
+                    }
+                }
             }
         })
     );
