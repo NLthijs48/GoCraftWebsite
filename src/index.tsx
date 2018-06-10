@@ -1,6 +1,5 @@
 import '@babel/polyfill'
 import {SiteConfiguration} from 'components/SiteConfiguration'
-import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import Raven from 'raven-js'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
@@ -25,6 +24,7 @@ if(!isLocalhost()) {
         .install()
 
     // ServiceWorker and AppCache setup
+    /* Disabled, need to solve serving on /subdomains
     OfflinePluginRuntime.install({
         onUpdateReady: () => {
             console.log('ServiceWorker update available, applying...')
@@ -40,6 +40,14 @@ if(!isLocalhost()) {
         onUpdateFailed: () => {
             console.log('ServiceWorker updated failed!')
         },
+    })
+    */
+
+    // Remove service worker
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for(const registration of registrations) {
+            registration.unregister()
+        }
     })
 }
 
